@@ -4,9 +4,12 @@
 class SpeedrunManager
 {
 public:
-
+	SpeedrunManager();
 	void SetIsSpeedrun(const bool aIsSpeedrun);
 	bool GetIsSpeedrun();
+
+	bool GetIsUnlocked();
+	void Unlock();
 
 	float GetScore();
 	void SetScore(const float aScore);
@@ -16,8 +19,9 @@ public:
 	std::array<float, 10> GetHighscores();
 
 private:
-	bool myIsSpeedrun;
+	bool myIsSpeedrun = false;
+	bool myIsUnlocked = false;
 	float myCurrentScore;
-	std::array<float, 10> myHighScores = { 1, 3, 4, 56, 99, 7, 8.11, 0, 3, 23444 };
+	std::array<float, 10> myHighScores;
 };
 

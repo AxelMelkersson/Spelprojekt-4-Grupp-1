@@ -88,7 +88,9 @@ void SpeedrunScene::InitHighscores()
 		}
 		else
 		{
-			score = to_string(scores[i]);
+			float deciScore =  floorf(scores[i] * 100) / 100;
+
+			score = to_string(deciScore);
 		}
 
 		text = to_string(i + 1) + ". " + score;

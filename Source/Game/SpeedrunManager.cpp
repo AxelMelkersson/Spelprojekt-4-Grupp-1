@@ -2,6 +2,23 @@
 #include "SpeedrunManager.h"
 #include "DataManager.h"
 
+SpeedrunManager::SpeedrunManager()
+{
+	std::array<float, 10> data = DataManager::GetInstance().GetHighScores();
+
+	for (int i = 0; i < myHighScores.size(); ++i)
+	{
+		if (data[i] > 0.01)
+		{
+			myHighScores[i] = data[i];
+		}
+		else
+		{
+			myHighScores[i] = 0.0f;
+		}
+	}
+}
+
 void SpeedrunManager::SetIsSpeedrun(const bool aIsSpeedrun)
 {
 	myIsSpeedrun = aIsSpeedrun;
@@ -13,6 +30,16 @@ void SpeedrunManager::SetIsSpeedrun(const bool aIsSpeedrun)
 bool SpeedrunManager::GetIsSpeedrun()
 {
 	return myIsSpeedrun;
+}
+
+bool SpeedrunManager::GetIsUnlocked()
+{
+	return myIsUnlocked;
+}
+
+void SpeedrunManager::Unlock()
+{
+	myIsUnlocked = true;
 }
 
 float SpeedrunManager::GetScore()
@@ -32,7 +59,7 @@ void SpeedrunManager::ReportScoreToHighscores()
 {
 	for (int i = 0; i < myHighScores.size(); ++i)
 	{
-		if (myCurrentScore > myHighScores[i])
+		if (myCurrentScore < myHighScores[i] || myHighScores[i] < 0.01)
 		{
 			float temp = myHighScores[i];
 			myHighScores[i] = myCurrentScore;
