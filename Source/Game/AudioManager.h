@@ -15,9 +15,8 @@ class AudioComponent;
 class AudioManager
 {
 public:
-
-	AudioManager();
-	~AudioManager();
+	AudioManager() = default;
+	~AudioManager() = default;
 
 	const static std::unique_ptr<AudioManager>& GetInstance();
 
@@ -56,6 +55,7 @@ public:
 	void RemoveomponentToListen(AudioComponent* aComponent);
 
 private:
+
 	void ComponentUpdate();
 	std::unique_ptr<Tga2D::AudioOut> myAudioOut;
 	std::vector<AudioComponent*> myPlatformComponents;

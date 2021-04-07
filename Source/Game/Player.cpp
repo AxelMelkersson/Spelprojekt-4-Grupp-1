@@ -401,8 +401,6 @@ void Player::Jump()
 	{
 		myPlatformVelocity.y = 0;
 	}
-
-	UnlockLandingSounds();
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
 	v2f calculatedSpring = mySpringVelocity;
 	calculatedSpring.y = calculatedSpring.y;
@@ -500,8 +498,6 @@ void Player::Landed(const int& aOverlapY)
 			Jump();
 		}
 	}
-	//PlayLandingSounds(0);
-	//LandingSoundCheck();
 	myCurrentVelocity.y = 0.0f;
 	myBashAbility->ResetVelocity(false, true);
 	if (!myHasLandedOnSpring)
@@ -562,8 +558,6 @@ void Player::AnimationState()
 
 	if (myCurrentAnimationIndex != 2 && myCurrentAnimationIndex != 3 && myCurrentAnimationIndex != 4 && !myHasLanded)
 	{
-		UnlockLandingSounds();
-
 		if (myIsGliding)
 		{
 			animation->SetAnimation(&myAnimations[12]);
@@ -957,49 +951,39 @@ void Player::PlayLandingSounds(const int& aPlatformIndex)
 		{
 		case 0:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnGrassHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnGrassEasy);
 			break;
 		case 1:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnStoneHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnStoneLight);
 			break;
 		case 2:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandBricksHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandBricksLight);
 			break;
 		case 3:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandWoodHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandWoodLight);
 			break;
 		case 4:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandGravelHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandGravelLight);
 			break;
 		}
 	}
-	else if (myCurrentVelocity.y != 0)
+	else if (myCurrentVelocity.y > 10.0f)
 	{
 		switch (aPlatformIndex)
 		{
 		case 0:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnGrassEasy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnGrassEasy);
 			break;
 		case 1:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnStoneLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnStoneLight);
 			break;
 		case 2:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandBricksLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandBricksLight);
 			break;
 		case 3:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandWoodLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandWoodLight);
 			break;
 		case 4:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandGravelLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandGravelLight);
 			break;
 		}
 	}

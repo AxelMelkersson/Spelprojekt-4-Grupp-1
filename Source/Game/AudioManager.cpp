@@ -14,15 +14,6 @@ static std::unique_ptr<AudioManager> ourInstance = std::make_unique<AudioManager
 
 bool CompareVolumes(AudioComponent* aComponent1, AudioComponent* aComponent2)
 {
-	//assert(aComponent1 != nullptr || aComponent2 != nullptr);
-	//if (aComponent2->myVolume > aComponent1->myVolume)
-	//{
-	//	return false;
-	//}
-	//else
-	//{
-	//	return true;
-	//}
 	return aComponent2->myVolume < aComponent1->myVolume;
 }
 
@@ -31,24 +22,13 @@ const std::unique_ptr<AudioManager>& AudioManager::GetInstance()
 	return ourInstance;
 }
 
-AudioManager::AudioManager()
+void AudioManager::Init()
 {
 	myAudioOut = {};
 	mySFXVolume = 0.2f;
 	myMusicVolume = 0.5f;
 	SetMusicVolume(mySFXVolume);
 	SetSFXVolume(mySFXVolume);
-};
-
-AudioManager::~AudioManager() = default;
-
-
-void AudioManager::Init()
-{
-	//myAudioOut = std::make_unique<Tga2D::AudioOut>();
-	//SetMusicVolume(0.5f);
-	//SetSFXVolume(0.5f);
-	//PlayMusic("Sounds/Music/04 - Pushing Onwards.mp3", 0.025f);
 }
 
 void AudioManager::Update(const float& aDeltaTime)
@@ -59,6 +39,7 @@ void AudioManager::Update(const float& aDeltaTime)
 
 void AudioManager::SetMusicVolume(float aVolume)
 {
+	myMusicVolume = aVolume;
 	for (auto const& [key, val] : myLibrary.myAudioList)
 	{
 		if (myLibrary.myAudioList[key]->GetLayer() == AudioLayer::Music)
@@ -70,6 +51,7 @@ void AudioManager::SetMusicVolume(float aVolume)
 
 void AudioManager::SetSFXVolume(float aVolume)
 {
+	mySFXVolume = aVolume;
 	for (auto const& [key, val] : myLibrary.myAudioList)
 	{
 		if (myLibrary.myAudioList[key]->GetLayer() == AudioLayer::SoundEffect)
