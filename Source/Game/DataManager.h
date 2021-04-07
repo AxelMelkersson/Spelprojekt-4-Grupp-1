@@ -129,6 +129,7 @@ public:
 	const CollectableInfo &GetCollectableInfo(const int anID) const;
 	const unsigned int GetCollectableCount() const;
 	const bool GetBonfireState(const unsigned int anIndex) const;
+	const std::array<float, 10> &GetHighScores() const;
 
 	void ParseCollectableInfo();
 
