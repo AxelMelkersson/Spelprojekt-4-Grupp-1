@@ -3,7 +3,7 @@
     {
       "EffectType": "TestEffect",
 
-      "ZIndex": 30,
+      "ZIndex": 100,
 
       "EffectTypeIndex": 10,
       "SpritePath": "Sprites/Particles/ParticleFog.dds",

@@ -9,6 +9,7 @@
 #include "GameObject.h"
 #include "Platform.h"
 #include "ParticleEffectFactory.h"
+#include "PostMaster.hpp"
 
 typedef EnemyData::EnemyFloatEnum EEnum;
 
@@ -40,6 +41,7 @@ void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)
 
 void EnemyProjectile::Update(const float& aDeltaTime)
 {
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingTrailParticle, GetPosition()));
 	GameObject::Update(aDeltaTime);
 }
 

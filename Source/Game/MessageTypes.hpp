@@ -6,7 +6,9 @@ enum class eMessageType
 	LoadHiddenRoom,
 	LoadMainRoom,
 	PlayerDeath,
+	PlayerLandedParticle,
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
+	EnemyShootingTrailParticle,
 	Vibrate
 };

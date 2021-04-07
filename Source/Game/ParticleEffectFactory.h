@@ -1,10 +1,11 @@
 #pragma once
 #include "GameObject.h"
 #include "ParticleEffect.h"
+#include "Subscriber.hpp"
 
 class Scene;
 
-class ParticleEffectFactory
+class ParticleEffectFactory : public Subscriber
 {
 public:
 	ParticleEffectFactory();
@@ -12,6 +13,8 @@ public:
 	void ReadEffects(Scene* aLevelScene);
 
 	void Init();
+
+	void Notify(const Message& aMessage) override;
 
 	void TestEffect(const v2f aPosition);
 	void TestEffectFollowObject();

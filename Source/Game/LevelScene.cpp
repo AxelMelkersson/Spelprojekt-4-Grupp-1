@@ -28,6 +28,7 @@ LevelScene::LevelScene()
 	myPlayer(nullptr),
 	myBackground(nullptr),
 	myIsSpeedrun(false),
+	myEffectFactory(nullptr),
 	Scene()
 {}
 
@@ -42,6 +43,7 @@ void LevelScene::Load()
 
 	AddBlackScreen();
 
+	myEffectFactory = new ParticleEffectFactory();
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
@@ -51,7 +53,6 @@ void LevelScene::Load()
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
 
-	myEffectFactory = new ParticleEffectFactory();
 	myEffectFactory->ReadEffects(this);
 	myEffectFactory->Init();
 
@@ -97,7 +98,9 @@ void LevelScene::Deactivate()
 }
 
 void LevelScene::Update(const float& aDeltaTime)
-{
+{/*
+	if (myEffectFactory != NULL)
+		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
 	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
 	{

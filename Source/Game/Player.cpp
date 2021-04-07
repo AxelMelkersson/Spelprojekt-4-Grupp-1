@@ -319,6 +319,7 @@ void Player::CheckJump()
 
 			if (myHasLanded && (GetComponent<PhysicsComponent>()->GetVelocityY() == 0.0f || myAirCoyoteTimer > 0))
 			{
+ 				PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
 				Jump();
 			}
 			else if (!myHasDoubleJumped)

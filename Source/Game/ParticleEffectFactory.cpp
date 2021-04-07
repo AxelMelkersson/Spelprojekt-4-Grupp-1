@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "LevelScene.h"
 #include "Player.hpp"
+#include "Subscriber.hpp"
+#include "PostMaster.hpp"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
@@ -19,6 +21,9 @@ ParticleEffectFactory::ParticleEffectFactory()
 
 void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 {
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLandedParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
+
 	myScene = aLevelScene;
 	LevelScene* levelScene = dynamic_cast<LevelScene*>(aLevelScene);
 	Player* player = dynamic_cast<Player*>(levelScene->GetPlayer());
@@ -93,6 +98,28 @@ void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 void ParticleEffectFactory::Init()
 {
 	//SpawnCharacterEffects();
+}
+
+void ParticleEffectFactory::Notify(const Message& aMessage)
+{
+	const v2f position = std::get<v2f>(aMessage.myData);
+
+	switch (aMessage.myMessageType)
+	{
+	case eMessageType::EnemyShootingTrailParticle:
+	{
+		SpawnEffect(position, eParticleEffects::TrailEffect2);
+		break;
+	}
+	case eMessageType::PlayerLandedParticle:
+	{
+		SpawnEffect(position, eParticleEffects::FallEffect);
+		break;
+	}
+	default:
+		break;
+	}
+
 }
 
 
