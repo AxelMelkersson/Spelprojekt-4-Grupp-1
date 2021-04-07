@@ -4,12 +4,19 @@
 
 SpeedrunManager::SpeedrunManager()
 {
-	//DataManager::GetInstance()
+	std::array<float, 10> data = DataManager::GetInstance().GetHighScores();
 
-	//for (int i = 0; i < myHighScores.size(); ++i)
-	//{
-	//	myHighScores[i] = 
-	//}
+	for (int i = 0; i < myHighScores.size(); ++i)
+	{
+		if (data[i] > 0.01)
+		{
+			myHighScores[i] = data[i];
+		}
+		else
+		{
+			myHighScores[i] = 0.0f;
+		}
+	}
 }
 
 void SpeedrunManager::SetIsSpeedrun(const bool aIsSpeedrun)
