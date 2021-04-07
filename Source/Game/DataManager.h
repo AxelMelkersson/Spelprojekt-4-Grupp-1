@@ -127,6 +127,7 @@ public:
 
 	// Get Info
 	const CollectableInfo &GetCollectableInfo(const int anID) const;
+	const CollectableInfo &GetCollectableInfoIndex(const int anID) const;
 	const unsigned int GetCollectableCount() const;
 	const bool GetBonfireState(const unsigned int anIndex) const;
 

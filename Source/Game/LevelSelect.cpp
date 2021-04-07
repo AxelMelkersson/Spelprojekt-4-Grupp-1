@@ -327,6 +327,7 @@ void LevelSelect::InitTexts()
 	{
 		myCollectibleInfo.push_back(std::vector<int>());
 		myCollectibleInfoCollected.push_back(std::vector<int>());
+
 		for (int collectibleDifficulty = 0; collectibleDifficulty < 3; ++collectibleDifficulty)
 		{
 			myCollectibleInfo[bonfire].push_back(0);
@@ -334,63 +335,42 @@ void LevelSelect::InitTexts()
 		}
 	}
 
-	/*
+	myTotalCollectibleInfo.push_back(0);
+	myTotalCollectibleInfo.push_back(0);
+	myTotalCollectibleInfo.push_back(0);
+
+	myTotalCollectibleInfoCollected.push_back(0);
+	myTotalCollectibleInfoCollected.push_back(0);
+	myTotalCollectibleInfoCollected.push_back(0);
+
 	for (int collectible = 0; collectible < collectiblesInfoSize; ++collectible)
 	{
-		CollectableInfo collectibleInfo = dataManager.GetCollectableInfo(collectible);
-		if (collectibleInfo.myDifficulty == 0)
-		{
-			if (collectibleInfo.myCollectedState == true)
-			{
-				++totalEasyCollected;
-			}
+		CollectableInfo collectibleInfo = dataManager.GetCollectableInfoIndex(collectible);
 
-			++totalEasy;
-		}
-
-		if (collectibleInfo.myDifficulty == 1)
-		{
-			if (collectibleInfo.myCollectedState == true)
-			{
-				++totalMediumCollected;
-			}
-
-			++totalMedium;
-		}
-
-		if (collectibleInfo.myDifficulty == 2)
-		{
-			if (collectibleInfo.myCollectedState == true)
-			{
-				++totalHardCollected;
-			}
-
-			++totalHard;
-		}
-
+		++myTotalCollectibleInfo[collectibleInfo.myDifficulty];
 		++myCollectibleInfo[collectibleInfo.myBonfireID][collectibleInfo.myDifficulty];
 
 		if (collectibleInfo.myCollectedState)
 		{
+			++myTotalCollectibleInfoCollected[collectibleInfo.myDifficulty];
 			++myCollectibleInfoCollected[collectibleInfo.myBonfireID][collectibleInfo.myDifficulty];
 		}
 	}
-	*/
 
 	UIText* totalText = new UIText(this);
 	totalText->Init("Total", "Text/Peepo.ttf", EFontSize_48);
 	totalText->SetPosition(v2f(16.0f, 60.0f));
 
 	UIText* totalEasyText = new UIText(this);
-	totalEasyText->Init(std::to_string(totalEasyCollected) + "0/0" + std::to_string(totalEasy), "Text/Peepo.ttf", EFontSize_48);
+	totalEasyText->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize_48);
 	totalEasyText->SetPosition(v2f(160.0f, 60.0f));
 
 	UIText* totalMediumText = new UIText(this);
-	totalMediumText->Init(std::to_string(totalMediumCollected) + "0/0" + std::to_string(totalMedium), "Text/Peepo.ttf", EFontSize_48);
+	totalMediumText->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize_48);
 	totalMediumText->SetPosition(v2f(212.0f, 60.0f));
 
 	UIText* totalHardText = new UIText(this);
-	totalHardText->Init(std::to_string(totalHardCollected) + "0/0" + std::to_string(totalHard), "Text/Peepo.ttf", EFontSize_48);
+	totalHardText->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize_48);
 	totalHardText->SetPosition(v2f(264.0f, 60.0f));
 
 	myLevelCollectibles.push_back(new UIText(this));
@@ -402,15 +382,15 @@ void LevelSelect::InitTexts()
 	myLevelCollectibles[0]->SetPosition(v2f(16.0f, 46.0f));
 	myLevelCollectibles[0]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
-	myLevelCollectibles[1]->Init(std::to_string(myCollectibleInfo[0][0]) + "0/0" + std::to_string(myCollectibleInfoCollected[0][0]), "Text/Peepo.ttf", EFontSize_48);
+	myLevelCollectibles[1]->Init(std::to_string(myCollectibleInfoCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
 	myLevelCollectibles[1]->SetPosition(v2f(160.0f, 46.0f));
 	myLevelCollectibles[1]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
-	myLevelCollectibles[2]->Init(std::to_string(myCollectibleInfo[0][1]) + "0/0" + std::to_string(myCollectibleInfoCollected[0][1]), "Text/Peepo.ttf", EFontSize_48);
+	myLevelCollectibles[2]->Init(std::to_string(myCollectibleInfoCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
 	myLevelCollectibles[2]->SetPosition(v2f(212.0f, 46.0f));
 	myLevelCollectibles[2]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
-	myLevelCollectibles[3]->Init(std::to_string(myCollectibleInfo[0][2]) + "0/0" + std::to_string(myCollectibleInfoCollected[0][2]), "Text/Peepo.ttf", EFontSize_48);
+	myLevelCollectibles[3]->Init(std::to_string(myCollectibleInfoCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
 	myLevelCollectibles[3]->SetPosition(v2f(264.0f, 46.0f));
 	myLevelCollectibles[3]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 }
@@ -419,7 +399,7 @@ void LevelSelect::UpdateLevelCollectibles()
 {
 	myLevelCollectibles[0]->GetComponent<TextComponent>()->SetText("Area " + std::to_string(myLevelIndex + 1));
 
-	myLevelCollectibles[1]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfo[myLevelIndex][0]) + "0/0" + std::to_string(myCollectibleInfoCollected[myLevelIndex][0]));
-	myLevelCollectibles[2]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfo[myLevelIndex][1]) + "0/0" + std::to_string(myCollectibleInfoCollected[myLevelIndex][1]));
-	myLevelCollectibles[3]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfo[myLevelIndex][2]) + "0/0" + std::to_string(myCollectibleInfoCollected[myLevelIndex][2]));
+	myLevelCollectibles[1]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfoCollected[myLevelIndex][0]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][0]));
+	myLevelCollectibles[2]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfoCollected[myLevelIndex][1]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][1]));
+	myLevelCollectibles[3]->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleInfoCollected[myLevelIndex][2]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][2]));
 }

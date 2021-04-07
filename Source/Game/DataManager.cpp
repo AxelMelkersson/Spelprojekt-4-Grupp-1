@@ -201,6 +201,12 @@ const CollectableInfo &DataManager::GetCollectableInfo(const int anID) const
 	}
 	assert((false) && "A Collectible ID not found in DataManager::GetCollectableInfo().");
 }
+
+const CollectableInfo& DataManager::GetCollectableInfoIndex(const int anID) const
+{
+	return myCollectableInfo[anID];
+}
+
 const unsigned int DataManager::GetCollectableCount() const
 {
 	return static_cast<int>(myCollectableInfo.size());
