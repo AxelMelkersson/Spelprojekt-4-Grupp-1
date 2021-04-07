@@ -143,7 +143,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		{
 			//SetAnimation;
 			myWasCollected = true;
-			DataManager::GetInstance().CollectCollectible(myID);
+			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
 		}

@@ -17,12 +17,12 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	GameObject(aLevelScene),
 	myBatch(nullptr)
 {
+	mySpawningInLocalSpace = {};
 	myFollowObject = nullptr;
 	myEffectIsDestroyed = {};
 	myKilledEffect = {};
 	myObjectIsFollowing = {};
 	mySpawnInterval = {};
-	myPlayer = {};
 	myActiveEffect = {};
 	myTimer = {};
 	myLifeTime = {};
@@ -42,19 +42,14 @@ ParticleEffect::~ParticleEffect()
 	GameObject::~GameObject();
 }
 
-void ParticleEffect::Init(ParticleStats aStats, Player * aPlayer)
+void ParticleEffect::Init(ParticleStats aStats)
 {
-	assert(aPlayer != NULL);
-	myPlayer = aPlayer;
 	myStats = aStats;
 	myCreatingSprites = true;
 	myBatch = AddComponent<SpritebatchComponent>();
 	myBatch->SetSpritePath(myStats.mySpritePath);
 	myBatch->SetSamplerFilter(ESamplerFilter_Point);
 	myBatch->Init();
-
-	if (static_cast<eParticleEffects>(myStats.myEffectTypeIndex) == eParticleEffects::RunEffect)
-		myActiveEffect = true;
 
 	SetPosition(GetPosition());
 	SetZIndex(myStats.myZIndex);
@@ -74,10 +69,7 @@ void ParticleEffect::Update(const float& aDeltaTime)
 {
 	if (myActiveEffect)
 	{
-		if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RunEffect))
-			UpdatePlayerEffect(aDeltaTime);
-		else
-			UpdateParticle(aDeltaTime);
+		UpdateParticle(aDeltaTime);
 	}
 }
 
@@ -109,14 +101,6 @@ const void ParticleEffect::UpdateParticle(const float& aDeltaTime)
 
 	CheckIfSpritesAreDead(aDeltaTime);
 	CheckIfEffectIsDead();
-}
-
-const void ParticleEffect::UpdatePlayerEffect(const float& aDeltaTime)
-{
-	if (myPlayer->GetComponent<PhysicsComponent>()->GetVelocityX() > 0 || myPlayer->GetComponent<PhysicsComponent>()->GetVelocityX() < 0)
-	{
-		UpdateParticle(aDeltaTime);
-	}
 }
 
 const void ParticleEffect::CheckWhenToSpawnSprites()
@@ -168,7 +152,7 @@ const void ParticleEffect::SpawnSprite()
 
 	sprite->AddSprite(AddComponent<SpriteComponent>());
 	myBatch->AddSprite(sprite->GetSprite());
-	
+
 	mySprites.push_back(sprite);
 
 	mySpawnInterval = Utils::RandomFloat(myStats.myMinBetweenSpawn, myStats.myMaxBetweenSpawn);
@@ -235,7 +219,7 @@ const void ParticleEffect::CheckActiveStats()
 
 	if (myObjectIsFollowing)
 	{
-		if (!myFollowObject->IsActive() || myFollowObject == NULL)
+		if (myFollowObject->myTransform.myShouldBeDestroyed || !myFollowObject->IsActive())
 		{
 			for (auto sprite : mySprites)
 				sprite->SetInactive();

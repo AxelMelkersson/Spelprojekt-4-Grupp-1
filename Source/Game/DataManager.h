@@ -106,33 +106,41 @@ public:
 	void operator=(const DataManager&) = delete;
 	~DataManager() = default;
 
+	// Data Struct Methods
 	Data& GetDataStruct(const DataEnum aDataEnum);
 	void SetDataStruct(const DataEnum aDataEnum);
 
+	// Level Methods
 	const rapidjson::Document& GetLevel(const unsigned int aLevelIndex, const bool aIsHiddenRoom) const;
 	const int DataManager::GetLevelCount() const;
 
 	// Save Methods
+	void SaveHighScores(const std::array<float, 10> &someHighscores);
 	void SaveBonfireState(const unsigned int anIndex, const bool aState);
-	const bool GetBonfireState(const unsigned int anIndex) const;
+	void SaveCollectedCollectible(const unsigned int anID);
+
+	// Reset Methods
+	void ResetSaveFile();
 	void ResetBonfires();
 	void ResetCollectibles();
+	void ResetHighScores();
 
-	// Get Collectable Info
-	void ParseCollectableInfo();
-	void SetCollectedState();
+	// Get Info
 	const CollectableInfo &GetCollectableInfo(const int anID) const;
+	const unsigned int GetCollectableCount() const;
+	const bool GetBonfireState(const unsigned int anIndex) const;
+	const std::array<float, 10> &GetHighScores() const;
 
-	const int GetCollectableCount();
-
-	void CollectCollectible(const int anID);
-	void ResetSaveFile();
+	void ParseCollectableInfo();
 
 private:
-	//Private Methods
 	DataManager();
-	void ReadFileIntoDocument(std::string aFilePath, rapidjson::Document& anOutDoc);
+
+	// Document Handling methods
+	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
+	void AcceptJsonWriter(const std::string aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
+	void AssignCollectedState();
 
 	//Master Documents
 	rapidjson::Document myMasterDoc;

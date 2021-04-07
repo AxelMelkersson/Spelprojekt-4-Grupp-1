@@ -20,7 +20,7 @@ BashAbility::BashAbility(LevelScene* aLevelScene)
 	myMaxDashDurationTimer = myMaxDashDuration;
 	myDashDuration = 1.0f;
 	myTimer = 0.0f;
-	myTimeScale = 0.0f;
+	myTimeScale = 0.05f;
 	myIsBashing = false;
 	myAcceleration = {};
 	myLMBMousePressed = {};
@@ -49,7 +49,7 @@ void BashAbility::Init()
 	myRetardation = 2.0f;
 	myDashDuration = 0.15f;
 	myMaxDashDuration = 2.0f;
-	myTimeScale = 0.0f;
+	myTimeScale = 0.05f;
 	myRadiusFromDash = true;
 	myDashSpeed = 300.0f;
 	myAspectRatioFactorY = Tga2D::CEngine::GetInstance()->GetWindowSize().x / Tga2D::CEngine::GetInstance()->GetWindowSize().y;
@@ -191,6 +191,7 @@ void BashAbility::DashUse(const float& aDeltaTime)
 
 	myPlayer->SetAnimation(8);
 
+	myPlayer->RedirectVelocities(myUsedDashDirection);
 	myPlayer->ResetVelocity();
 	myPlayer->ReactivateDoubleJump();
 	ResetVelocity(true, true);

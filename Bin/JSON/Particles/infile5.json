@@ -14,7 +14,7 @@
       "EmitterLifeTime": 0.0,
 
       "StartScale": 1.0,
-      "EndScale": 0.0,
+      "EndScale": 1.0,
 
       "RotateSprite": 0.0,
 
@@ -63,7 +63,7 @@
         255.0,
         255.0,
         255.0,
-        1.0
+        0.0
       ],
       "BlendState": "Additive"
     }

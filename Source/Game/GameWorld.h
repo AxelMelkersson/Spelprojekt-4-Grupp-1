@@ -5,6 +5,7 @@
 #include "IntroLogosScene.h"
 #include "WinScene.hpp"
 #include "LevelManager.hpp"
+#include "SpeedrunScene.h"
 
 namespace Utils
 {
@@ -75,6 +76,7 @@ private:
 	LevelSelect myLevelSelect;
 	LevelScene myLevelScene;
 	WinScene myWinScene;
+	SpeedrunScene mySpeedrunScene;
 
 	LevelManager myLevelManager;
 

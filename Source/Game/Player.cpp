@@ -81,6 +81,8 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	mySpringTimer = {};
 
 	myLedgeSoundIndex = {};
+
+	myIsInRangeOfBash = false;
 }
 
 Player::~Player()
@@ -192,6 +194,7 @@ void Player::Update(const float& aDeltaTime)
 	if (myHasDied)
 	{
 		Kill();
+		CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
 		GetComponent<PhysicsComponent>()->SetVelocity(v2f(0.0f, 0.0f));
 		return;
 	}
@@ -213,9 +216,16 @@ void Player::Update(const float& aDeltaTime)
 		{
 			LerpToPosition(myLerpPosition);
 		}
+
+		if (!myIsInRangeOfBash)
+		{
+			CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
+		}
+
+		myIsInRangeOfBash = false;
 	}
 
-	if (CGameWorld::GetInstance()->GetTimer()->GetTimeScale() <= 0)
+	if (CGameWorld::GetInstance()->GetTimer()->GetTimeScale() <= 0.05f)
 	{
 		CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
 		GetComponent<AnimationComponent>()->Update(myTransform, *this);
@@ -301,6 +311,12 @@ void Player::CheckMove(const float& aDeltaTime)
 	{
 		myCurrentVelocity.x = Utils::Lerp(myCurrentVelocity.x, 0.0f, myJsonData->myFloatValueMap[PEnum::Retardation] * aDeltaTime);
 	}
+
+	if (myInputHandler->IsMovingUp() || myInputHandler->IsMovingDown())
+	{
+		myBashAbility->ResetVelocity(true, false);
+		myPlatformVelocity.x = 0.0f;
+	}
 }
 void Player::CheckJump()
 {
@@ -385,8 +401,6 @@ void Player::Jump()
 	{
 		myPlatformVelocity.y = 0;
 	}
-
-	UnlockLandingSounds();
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
 	v2f calculatedSpring = mySpringVelocity;
 	calculatedSpring.y = calculatedSpring.y;
@@ -484,8 +498,6 @@ void Player::Landed(const int& aOverlapY)
 			Jump();
 		}
 	}
-	//PlayLandingSounds(0);
-	//LandingSoundCheck();
 	myCurrentVelocity.y = 0.0f;
 	myBashAbility->ResetVelocity(false, true);
 	if (!myHasLandedOnSpring)
@@ -509,6 +521,15 @@ void Player::ResetVelocity()
 {
 	myCurrentVelocity.x = 0;
 	myCurrentVelocity.y = 0;
+}
+
+void Player::RedirectVelocities(const v2f& aDirection)
+{
+	myPlatformVelocity.x *= aDirection.x;
+	myPlatformVelocity.y *= aDirection.y;
+
+	mySpringVelocity.x *= aDirection.x;
+	mySpringVelocity.y *= aDirection.y;
 }
 
 
@@ -537,8 +558,6 @@ void Player::AnimationState()
 
 	if (myCurrentAnimationIndex != 2 && myCurrentAnimationIndex != 3 && myCurrentAnimationIndex != 4 && !myHasLanded)
 	{
-		UnlockLandingSounds();
-
 		if (myIsGliding)
 		{
 			animation->SetAnimation(&myAnimations[12]);
@@ -740,6 +759,13 @@ void Player::BashCollision(GameObject* aGameObject, BashComponent* aBashComponen
 
 	if (aBashComponent->GetRadius() * aBashComponent->GetRadius() >= (aGameObject->GetPosition() - GetPosition()).LengthSqr())
 	{
+		myIsInRangeOfBash = true;
+
+		if (!myInputHandler->IsDashing() && !myBashAbility->GetIsBashing())
+		{
+			CGameWorld::GetInstance()->GetTimer()->SetTimeScale(0.8f);
+		}
+
 		if (myInputHandler->IsDashing() && !myBashAbility->GetIsBashing())
 		{
 			aGameObject->OnStartBashed();
@@ -925,49 +951,39 @@ void Player::PlayLandingSounds(const int& aPlatformIndex)
 		{
 		case 0:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnGrassHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnGrassEasy);
 			break;
 		case 1:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnStoneHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnStoneLight);
 			break;
 		case 2:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandBricksHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandBricksLight);
 			break;
 		case 3:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandWoodHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandWoodLight);
 			break;
 		case 4:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandGravelHeavy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandGravelLight);
 			break;
 		}
 	}
-	else if (myCurrentVelocity.y != 0)
+	else if (myCurrentVelocity.y > 10.0f)
 	{
 		switch (aPlatformIndex)
 		{
 		case 0:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnGrassEasy);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnGrassEasy);
 			break;
 		case 1:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandOnStoneLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandOnStoneLight);
 			break;
 		case 2:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandBricksLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandBricksLight);
 			break;
 		case 3:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandWoodLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandWoodLight);
 			break;
 		case 4:
 			AudioManager::GetInstance()->PlayAudio(AudioList::LandGravelLight);
-			AudioManager::GetInstance()->LockAudio(AudioList::LandGravelLight);
 			break;
 		}
 	}

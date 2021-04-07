@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "GameWorld.h"
 #include "InputWrapper.h"
+#include "SpeedrunManager.h"
 
 WinScene::WinScene()
 {
@@ -19,6 +20,14 @@ WinScene::~WinScene()
 
 void WinScene::Load()
 {
+	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
+	{
+		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->ReportScoreToHighscores();
+	}
+	else
+	{
+		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->Unlock();
+	}
 	UIObject* winText = new UIObject(this);
 	winText->SetActive(true);
 	winText->Init("Sprites/UI/winScene/win.dds", v2f(64.0f, 16.0f), v2f(160.0f, 90.0f), 201);

@@ -114,11 +114,13 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 		if (!(spriteMin.x <= cameraMax.x && spriteMax.x >= cameraMin.x &&
 			spriteMin.y <= cameraMax.y && spriteMax.y >= cameraMin.y) && !myForceRender)
 		{
+			myShouldRender = false;
 			mySprite->SetShouldRender(false);
 			return;
 		}
 		else
 		{
+			myShouldRender = true;
 			mySprite->SetShouldRender(true);
 		}
 
@@ -357,6 +359,11 @@ SpriteComponent& SpriteComponent::Deactivate()
 	myIsActive = false;
 
 	return *this;
+}
+
+const bool SpriteComponent::GetShouldRender()
+{
+	return myShouldRender;
 }
 
 /* Force Render*/

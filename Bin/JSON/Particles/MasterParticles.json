@@ -1,31 +1,49 @@
 {
   "particlesPath": [
     {
-      "file1": "JSON/Particles/infile0.json"
+      "file0": "JSON/Particles/infile0.json"
     },
     {
-      "file2": "JSON/Particles/infile1.json"
+      "file1": "JSON/Particles/infile1.json"
     },
     {
-      "file3": "JSON/Particles/infile2.json"
+      "file2": "JSON/Particles/infile2.json"
     },
     {
-      "file4": "JSON/Particles/infile3.json"
+      "file3": "JSON/Particles/infile3.json"
     },
     {
-      "file5": "JSON/Particles/infile4.json"
+      "file4": "JSON/Particles/infile4.json"
     },
     {
-      "file6": "JSON/Particles/infile5.json"
+      "file5": "JSON/Particles/infile5.json"
     },
     {
-      "file7": "JSON/Particles/infile6.json"
+      "file6": "JSON/Particles/infile6.json"
     },
     {
-      "file8": "JSON/Particles/infile7.json"
+      "file7": "JSON/Particles/infile7.json"
     },
     {
       "file8": "JSON/Particles/infile8.json"
+    },
+    {
+      "file9": "JSON/Particles/infile9.json"
+    },
+    {
+      "file10": "JSON/Particles/infile10.json"
+    },
+    {
+      "file11": "JSON/Particles/infile11.json"
+    },
+    {
+      "file12": "JSON/Particles/infile12.json"
+    },
+    {
+      "file13": "JSON/Particles/infile13.json"
     }
-  ]
+  ],
+  "TestEffect": {
+    "File": 9
+  }
 }

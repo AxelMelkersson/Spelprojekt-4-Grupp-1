@@ -18,8 +18,8 @@ private:
 	ParticleEffectFactory* myEffectFactory;
 	Animation myAnimation;
 
-	v2f mySpriteSize = { 10.0f, 10.0f };
-	v2f myColliderSize = {10.0f, 10.0f};
+	v2f mySpriteSize;
+	v2f myColliderSize = {3.0f, 3.0f};
 	v2f myDirection;
 
 	EnemyData* myJsonData = new EnemyData();

@@ -527,8 +527,25 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":18,
+         "name":"AudioObjects",
+         "objects":[],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Type",
+                 "type":"int",
+                 "value":50
+                }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":18,
+ "nextlayerid":19,
  "nextobjectid":284,
  "orientation":"orthogonal",
  "renderorder":"right-down",

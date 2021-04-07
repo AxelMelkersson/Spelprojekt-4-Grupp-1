@@ -89,6 +89,8 @@ public:
 	}
 
 protected:
+	friend class ParticleEffect;
+
 	Transform myTransform;
 	std::vector<Component*> myComponents;
 

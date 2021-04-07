@@ -27,6 +27,7 @@ public:
 	v2f myScale = {};
 	v2f myMaxVectorScale = {};
 	v2f myOffset = {};
+	v2f mySize = {};
 
 	v4f myEmitterAngular = {};
 
@@ -34,7 +35,6 @@ public:
 
 	float myTotalTimer = {};
 
-	v2f mySize = {};
 	float myPauseTime = {};
 	float myMinScale = {};
 	float myMaxScale = {};

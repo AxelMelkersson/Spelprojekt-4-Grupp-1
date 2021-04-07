@@ -216,6 +216,7 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UIObject.h" />
+    <ClInclude Include="UIPopUp.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UnstablePlatform.hpp" />
     <ClInclude Include="Utilities.h" />
@@ -300,6 +301,7 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="UIPopUp.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UnstablePlatform.cpp" />
     <ClCompile Include="Utilities.cpp" />
