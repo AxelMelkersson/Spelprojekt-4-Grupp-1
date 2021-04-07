@@ -50,6 +50,8 @@ public:
 
 	void ResetVelocity();
 
+	void RedirectVelocities(const v2f& aDirection);
+
 	const v2f GetPlatformVelocity();
 	void SetPlatformVelocity(const v2f& aPlatformVelocity);
 

@@ -311,6 +311,12 @@ void Player::CheckMove(const float& aDeltaTime)
 	{
 		myCurrentVelocity.x = Utils::Lerp(myCurrentVelocity.x, 0.0f, myJsonData->myFloatValueMap[PEnum::Retardation] * aDeltaTime);
 	}
+
+	if (myInputHandler->IsMovingUp() || myInputHandler->IsMovingDown())
+	{
+		myBashAbility->ResetVelocity(true, false);
+		myPlatformVelocity.x = 0.0f;
+	}
 }
 void Player::CheckJump()
 {
@@ -519,6 +525,15 @@ void Player::ResetVelocity()
 {
 	myCurrentVelocity.x = 0;
 	myCurrentVelocity.y = 0;
+}
+
+void Player::RedirectVelocities(const v2f& aDirection)
+{
+	myPlatformVelocity.x *= aDirection.x;
+	myPlatformVelocity.y *= aDirection.y;
+
+	mySpringVelocity.x *= aDirection.x;
+	mySpringVelocity.y *= aDirection.y;
 }
 
 
