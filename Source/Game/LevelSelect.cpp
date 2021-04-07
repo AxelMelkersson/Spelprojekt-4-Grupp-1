@@ -312,16 +312,15 @@ void LevelSelect::InitCollectibles()
 
 void LevelSelect::InitTexts()
 {
+	myTotalCollectibleInfo.clear();
+	myTotalCollectibleInfoCollected.clear();
+
+	myCollectibleInfo.clear();
+	myCollectibleInfoCollected.clear();
+
 	DataManager& dataManager = DataManager::GetInstance();
 	int collectiblesInfoSize = dataManager.GetCollectableCount();
 
-	int totalEasyCollected = 0;
-	int totalMediumCollected = 0;
-	int totalHardCollected = 0;
-
-	int totalEasy = 0;
-	int totalMedium = 0;
-	int totalHard = 0;
 
 	for (int bonfire = 0; bonfire < 8; ++bonfire)
 	{
