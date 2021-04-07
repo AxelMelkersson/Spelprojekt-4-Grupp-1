@@ -15,6 +15,16 @@ bool SpeedrunManager::GetIsSpeedrun()
 	return myIsSpeedrun;
 }
 
+bool SpeedrunManager::GetIsUnlocked()
+{
+	return myIsUnlocked;
+}
+
+void SpeedrunManager::Unlock()
+{
+	myIsUnlocked = true;
+}
+
 float SpeedrunManager::GetScore()
 {
 	return myCurrentScore;
