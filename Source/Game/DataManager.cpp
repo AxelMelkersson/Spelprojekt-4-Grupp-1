@@ -209,7 +209,15 @@ const bool DataManager::GetBonfireState(const unsigned int anIndex) const
 {
 	return mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].GetBool();
 }
-
+const std::array<float, 10> &DataManager::GetHighScores() const
+{
+	std::array<float, 10> tempArray;
+	for (size_t i = 0; i < mySaveFile["HighScore"].GetArray().Size(); i++)
+	{
+		tempArray[i] = mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].GetFloat();
+	}
+	return tempArray;
+}
 void DataManager::ParseCollectableInfo(){
 	for (const auto& levelDoc : myLevelVector)
 	{

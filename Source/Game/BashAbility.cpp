@@ -191,6 +191,7 @@ void BashAbility::DashUse(const float& aDeltaTime)
 
 	myPlayer->SetAnimation(8);
 
+	myPlayer->RedirectVelocities(myUsedDashDirection);
 	myPlayer->ResetVelocity();
 	myPlayer->ReactivateDoubleJump();
 	ResetVelocity(true, true);
