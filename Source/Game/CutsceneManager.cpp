@@ -14,14 +14,11 @@ CutsceneManager::CutsceneManager()
 
 void CutsceneManager::PlayVideo(CutsceneType aCutsceneType)
 {
-	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun() == false)
-	{
 		myVideo = new Tga2D::CVideo();
 		myVideo->Init("Video/TestVideo.mp4", true);
 		myVideo->Play(false);
 		myVideo->GetSprite()->SetSizeRelativeToScreen({ 16.f / 9.f, 1.f });
 		myIsPlaying = true;
-	}
 }
 
 void CutsceneManager::Update(const float& aDeltaTime)

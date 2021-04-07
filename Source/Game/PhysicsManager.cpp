@@ -180,8 +180,8 @@ void PhysicsManager::OverlapCalculation(GameObject* aObj1, GameObject* aObj2, Ph
 			aObj2Physics->SetVelocityY(0.0f);
 		}
 
-		aObj1->Landed(overlapY1);
 		aObj2->Landed(overlapY2);
+		aObj1->Landed(overlapY1);
 	}
 	else
 	{

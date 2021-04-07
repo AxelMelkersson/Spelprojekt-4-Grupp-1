@@ -41,8 +41,11 @@ void SpeedrunManager::ReportScoreToHighscores()
 	}
 	myCurrentScore = 0;
 
-	// Call
-	// DataManager::GetInstance().SaveHighScores(myHighScores);
-	// When you have a new Highscore to change.
+	DataManager::GetInstance().SaveHighScores(myHighScores);
+}
+
+std::array<float, 10> SpeedrunManager::GetHighscores()
+{
+	return myHighScores;
 }
 

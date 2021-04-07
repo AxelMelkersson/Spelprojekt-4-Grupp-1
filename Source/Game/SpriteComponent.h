@@ -90,6 +90,7 @@ public:
     const bool& IsActive() const;
     SpriteComponent& Activate();
     SpriteComponent& Deactivate();
+    const bool GetShouldRender();
 
     /* Force Render */
     void SetForceRender(const bool& aIsForced);
@@ -118,4 +119,5 @@ private:
     bool myIsActive;
     bool myIsPartOfBatch;
     bool myForceRender;
+    bool myShouldRender;
 };

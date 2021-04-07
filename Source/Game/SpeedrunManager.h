@@ -13,9 +13,11 @@ public:
 	void AddToScore(const float aScore);	
 	void ReportScoreToHighscores();
 
+	std::array<float, 10> GetHighscores();
+
 private:
 	bool myIsSpeedrun;
 	float myCurrentScore;
-	std::array<float, 10> myHighScores = { 1, 3, 4, 56, 99, 7, 8, 3, 3, 23444 };
+	std::array<float, 10> myHighScores = { 1, 3, 4, 56, 99, 7, 8.11, 0, 3, 23444 };
 };
 

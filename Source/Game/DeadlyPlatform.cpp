@@ -24,7 +24,6 @@ void DeadlyPlatform::OnCollision(GameObject* aGameObject)
 	Player* player = dynamic_cast<Player*>(aGameObject);
 	if (player)
 	{
-		myMaterial = 6; // temp
 		if (!player->GetHasDied())
 		{
 			switch (myMaterial)

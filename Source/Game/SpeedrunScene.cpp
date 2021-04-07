@@ -10,7 +10,11 @@
 #include "SpriteComponent.h"
 #include "UIObject.h"
 #include "UIButton.h"
+#include "UIText.h"
+
 #include "SpeedrunManager.h"
+#include "EFontsSizes.hpp"
+#include <assimp\StringUtils.h>
 
 SpeedrunScene::SpeedrunScene()
 {
@@ -64,7 +68,36 @@ void SpeedrunScene::InitObjects()
 	myButtons.push_back(myStartGameBtn.get());
 	myButtons.push_back(myMainMenuBtn.get());
 
+	InitHighscores();
+
 	SetActiveMenu(true);
+}
+
+void SpeedrunScene::InitHighscores()
+{
+	std::array<float, 10> scores = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetHighscores();
+	v2f aPos = { 220.f, 72.f };
+	for (int i = 0; i < myHighscoreList.size(); ++i)
+	{
+		std::string text;
+		std::string score;
+
+		if (scores[i] < 0.01f)
+		{
+			score = "-----";
+		}
+		else
+		{
+			score = to_string(scores[i]);
+		}
+
+		text = to_string(i + 1) + ". " + score;
+		myHighscoreList[i] = std::make_unique<UIText>(this);
+		myHighscoreList[i]->Init(text, "Text/alagard.ttf", EFontSize::EFontSize_48);
+		myHighscoreList[i]->SetPosition(aPos);
+		myHighscoreList[i]->SetZIndex(300);
+		aPos.y += 11.f;
+	}
 }
 
 void SpeedrunScene::Activate()

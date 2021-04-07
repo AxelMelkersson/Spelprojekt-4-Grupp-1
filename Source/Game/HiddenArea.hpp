@@ -21,6 +21,7 @@ private:
 	float myOpacity;
 	float myOpacityChangeSpeed;
 	bool myPlayerCollided;
+	bool myHasBeenFound;
 
 };
 
