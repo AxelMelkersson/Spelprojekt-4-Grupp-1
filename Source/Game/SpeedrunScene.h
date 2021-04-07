@@ -1,8 +1,11 @@
 #pragma once
 #include "Scene.h"
 
+#include <array>
+
 class UIObject;
 class UIButton;
+class UIText;
 class InputWrapper;
 
 class SpeedrunScene : public Scene
@@ -36,6 +39,8 @@ private:
 	std::unique_ptr<UIButton> myStartGameBtn;
 	std::unique_ptr<UIButton> myMainMenuBtn;
 
+	std::array<std::unique_ptr<UIText>, 10> myHighscoreList;
+
 	std::vector<UIButton*> myButtons;
 
 	bool myIsInMenu;
@@ -43,6 +48,7 @@ private:
 	int myMovingIndex;
 
 	void InitObjects();
+	void InitHighscores();
 	void CheckButtonPress();
 	void UpdateObjects(const float& aDeltaTime);
 	void SetActiveMenu(const bool aStateBool);
