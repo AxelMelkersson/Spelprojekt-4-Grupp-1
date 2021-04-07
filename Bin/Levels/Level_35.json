@@ -120,6 +120,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":17,
+         "name":"AudioObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":566,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"52",
+                 "visible":true,
+                 "width":0,
+                 "x":168,
+                 "y":528
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":5,
          "name":"Platforms",
          "objects":[
@@ -2360,8 +2383,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":17,
- "nextobjectid":566,
+ "nextlayerid":18,
+ "nextobjectid":567,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
