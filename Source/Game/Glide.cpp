@@ -14,7 +14,7 @@ Glide::Glide(Scene* aScene)
 	:
 	GameObject(aScene)
 {
-	SetZIndex(500);
+	SetZIndex(97);
 
 	SpriteComponent* sprite = AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/Objects/GlidePowerup.dds");

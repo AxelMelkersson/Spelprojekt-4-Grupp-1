@@ -312,7 +312,7 @@ void Player::CheckMove(const float& aDeltaTime)
 		myCurrentVelocity.x = Utils::Lerp(myCurrentVelocity.x, 0.0f, myJsonData->myFloatValueMap[PEnum::Retardation] * aDeltaTime);
 	}
 
-	if (myInputHandler->IsMovingUp() || myInputHandler->IsMovingDown())
+	if (myInputHandler->IsMovingDown())
 	{
 		myBashAbility->ResetVelocity(true, false);
 		myPlatformVelocity.x = 0.0f;

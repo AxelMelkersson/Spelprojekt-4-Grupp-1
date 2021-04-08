@@ -27,7 +27,7 @@ Enemy::Enemy(Scene* aScene) : GameObject(aScene)
 NormalEnemy::NormalEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
-	this->SetZIndex(400);
+	this->SetZIndex(140);
 	//AudioComponent* audio = AddComponent<AudioComponent>();
 	//audio->AddAudio(AudioList::EnemyNormalIdle);
 	//audio->SetRadius(100);
@@ -36,7 +36,7 @@ NormalEnemy::NormalEnemy(Scene* aScene) : Enemy(aScene)
 ShootingEnemy::ShootingEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
-	this->SetZIndex(400);
+	this->SetZIndex(140);
 	//AudioLibrary::GetInstance().myAudioList[AudioList::ProjectileFly]->Play();
 }
 
