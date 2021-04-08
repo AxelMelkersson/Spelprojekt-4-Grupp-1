@@ -1,50 +1,16 @@
 {
   "FilePathArray": [
     {
-      "Id": 0,
-      "FilePath": "Levels/Level_28.json"
-    },
-    {
-      "Id": 0,
+      "Id": 3,
       "FilePath": "Levels/Level_51.json"
     },
     {
-      "Id": 0,
+      "Id": 4,
       "FilePath": "Levels/Level_53.json"
     },
     {
-      "Id": 0,
-      "FilePath": "Levels/Level_Village2.json"
-    },    {
-      "Id": 0,
-      "FilePath": "Levels/Level_Village3.json"
-    },    {
-      "Id": 0,
-      "FilePath": "Levels/Level_Village4.json"
-    },
-    {
-      "Id": 0,
-      "FilePath": "Levels/Level_00.json"
-    },
-    {
-      "Id": 1,
-      "FilePath": "Levels/Level_01.json"
-    },
-    {
-      "Id": 2,
-      "FilePath": "Levels/Level_02.json"
-    },
-    {
-      "Id": 3,
-      "FilePath": "Levels/Level_03.json"
-    },
-    {
-      "Id": 4,
-      "FilePath": "Levels/Level_04.json"
-    },
-    {
       "Id": 5,
-      "FilePath": "Levels/Level_05.json"
+      "FilePath": "Levels/Level_04.json"
     },
     {
       "Id": 6,
