@@ -34,7 +34,7 @@ public:
 	inline Scene& PushGameObject(GameObject* anObject)
 	{
 		myGameObjects.push_back(anObject);
-		SortGameObjects();
+		//SortGameObjects();
 		return *this;
 	}
 

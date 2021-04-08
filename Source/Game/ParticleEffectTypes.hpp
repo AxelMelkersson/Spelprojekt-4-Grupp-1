@@ -3,18 +3,22 @@
 
 enum class eParticleEffects
 {
-	RunEffect,
+	RainEffectNextScreenParticle,
 	CollectibleEffect,
 	DeathEffect,
-	RainEffectBackground,
-	RainEffectForeground,
+	RainEffectBackgroundParticle,
+	RainEffectForegroundParticle,
 	BulletEffectTrail,
 	BulletEffectHit,
 	FogEffect,
-	FallEffect,
+	PlayerFallLandEffect,
 	TrailEffect2,
-	TestEffect2,
-	TestEffect3,
-	TestEffect4,
-	TestEffect5
+	PlayerBashedPlayerParticle,
+	PlayerBashedSmallParticle,
+	PlayerLedgeRightGrabbedHandParticle,
+	PlayerLedgeRightGrabbedLegParticle,
+	PlayerLedgeLeftGrabbedHandParticle,
+	PlayerLedgeLeftGrabbedLegParticle,
+	VelocityLinesParticles,
+	CollectibleCollectedParticle
 };

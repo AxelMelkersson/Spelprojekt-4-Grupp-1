@@ -1,56 +1,59 @@
 {
   "particle": [
     {
-      "EffectType": "RunEffect",
+      "EffectType": "RainEffectNextScreen",
 
-      "ZIndex": 100,
+      "ZIndex": 50,
 
       "EffectTypeIndex": 0,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleRain.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.04,
+      "EmitterLifeTime": 0.1,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
 
-      "RotateSprite": 0.0,
+      "RotateSprite": 1.0,
 
-      "MinTimeBetweenSpawns": 0.01,
-      "MaxTimeBetweenSpawns": 0.01,
+      "MinTimeBetweenSpawns": 0.005,
+      "MaxTimeBetweenSpawns": 0.005,
 
-      "MinSpeed": 12.0,
-      "MaxSpeed": 5.0,
+      "MinSpeed": 190.0,
+      "MaxSpeed": 210.0,
 
-      "MinParticleAngularVel": -3.0,
-      "MaxParticleAngularVel": 3.0,
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 90.0,
+      "EmitterAngle": 210.0,
 
-      "EmitterWidth": 4.0,
-      "EmitterHeigth": 0.0,
+      "EmitterWidth": 350.0,
+      "EmitterHeigth": 120.0,
 
-      "MinParticleLifeTime": 0.7,
-      "MaxParticleLifeTime": 1.0,
+      "MinParticleLifeTime": 3.0,
+      "MaxParticleLifeTime": 3.0,
+
+      "SpawnLifeTime": 0.0,
+      "SpawnEverySecond": 0.0,
 
       "Offset": [
         {
           "X": 0.0
         },
         {
-          "Y": 7.0
+          "Y": 0.0
         }
       ],
 
-      "LockPosition": true,
+      "LockPosition": false,
 
       "LockedAngular": [
         -1.0,
         -1.0,
         1.0,
-        0.0
+        1.0
       ],
 
       "StartColor": [
@@ -63,7 +66,7 @@
         255.0,
         255.0,
         255.0,
-        0.0
+        1.0
       ],
       "BlendState": "Additive"
     }
