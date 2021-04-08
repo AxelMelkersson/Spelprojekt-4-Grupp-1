@@ -53,8 +53,6 @@ void LevelScene::Load()
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
 
-	myEffectFactory->ReadEffects(this);
-
 	if (myIsSpeedrun)
 	{
 		myTimer = new Timer(this);

@@ -12,9 +12,9 @@ public:
 	ParticleEffectFactory(Scene* aLevelScene);
 	~ParticleEffectFactory();
 
-	void ReadEffects(Scene* aLevelScene);
+	void ReadEffects();
 
-	void Init();
+	void Init() override;
 
 	void Update(const float& aDeltaTime) override;
 
@@ -38,13 +38,14 @@ private:
 	};
 
 	Scene* myScene;
-	Player* myPlayer;
 
 	std::vector<ParticleStats> myEffects;
 	std::vector<SpawnEffects> mySpawningEffects;
 
+	bool myHasAddedSubscribers;
 	int myTestIndex;
 
+	const void AddSubscribers();
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
 
 };

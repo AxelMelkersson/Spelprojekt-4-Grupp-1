@@ -566,10 +566,15 @@ void Player::GrabLedge(const v2f& aLedgeLerpPosition, const v2f& aLedgePosition)
 	if (myTransform.myPosition.x > aLedgePosition.x)
 	{
 		myDirectionX = -1;
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeLeftGrabbedHandParticle, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeLeftGrabbedLegParticle, GetPosition()));
 	}
 	else if (myTransform.myPosition.x < aLedgePosition.x)
 	{
 		myDirectionX = 1;
+
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeRightGrabbedHandParticle, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeRightGrabbedLegParticle, GetPosition()));
 	}
 
 	SetLerpPosition(aLedgeLerpPosition);

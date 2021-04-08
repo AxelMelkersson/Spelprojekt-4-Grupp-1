@@ -15,6 +15,8 @@ enum class eParticleEffects
 	TrailEffect2,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
-	TestEffect4,
-	TestEffect5
+	PlayerLedgeRightGrabbedHandParticle,
+	PlayerLedgeRightGrabbedLegParticle,
+	PlayerLedgeLeftGrabbedHandParticle,
+	PlayerLedgeLeftGrabbedLegParticle
 };
