@@ -17,6 +17,7 @@ public:
 	UIPopUp(Scene* aLevelScene);
 	void InitPopUp();
 	void Update(const float& aDeltaTime);
+	void Activate(ePopUpTypes aType);
 
 
 private:
@@ -34,7 +35,6 @@ private:
 	float myCurrentTime;
 	float myMaxTime;
 
-	void Activate(ePopUpTypes aType);
 	void Deactivate();
 	
 };
