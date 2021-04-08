@@ -140,12 +140,6 @@
                  "height":8,
                  "id":469,
                  "name":"",
-                 "properties":[
-                        {
-                         "name":"Materials",
-                         "type":"int",
-                         "value":2
-                        }],
                  "rotation":0,
                  "type":"2",
                  "visible":true,
@@ -157,12 +151,6 @@
                  "height":8,
                  "id":472,
                  "name":"",
-                 "properties":[
-                        {
-                         "name":"Materials",
-                         "type":"int",
-                         "value":2
-                        }],
                  "rotation":0,
                  "type":"2",
                  "visible":true,
@@ -174,12 +162,6 @@
                  "height":8,
                  "id":473,
                  "name":"",
-                 "properties":[
-                        {
-                         "name":"Materials",
-                         "type":"int",
-                         "value":2
-                        }],
                  "rotation":0,
                  "type":"2",
                  "visible":true,
