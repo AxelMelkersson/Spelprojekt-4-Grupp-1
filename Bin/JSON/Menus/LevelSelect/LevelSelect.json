@@ -16,42 +16,42 @@
 
     {
       "Area": 0,
-      "LevelIndex": 12,
+      "LevelIndex": 13,
       "X": 105.0,
       "Y": 137.0
     },
 
     {
       "Area": 1,
-      "LevelIndex": 18,
+      "LevelIndex": 19,
       "X": 140.0,
       "Y": 121.0
     },
 
     {
       "Area": 1,
-      "LevelIndex": 24,
+      "LevelIndex": 26,
       "X": 171.0,
       "Y": 106.0
     },
 
     {
       "Area": 2,
-      "LevelIndex": 30,
+      "LevelIndex": 35,
       "X": 209.0,
       "Y": 106.0
     },
 
     {
       "Area": 2,
-      "LevelIndex": 36,
+      "LevelIndex": 42,
       "X": 247.0,
       "Y": 106.0
     },
 
     {
       "Area": 2,
-      "LevelIndex": 42,
+      "LevelIndex": 51,
       "X": 286.0,
       "Y": 87.0
     }
