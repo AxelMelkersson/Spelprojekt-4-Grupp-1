@@ -145,16 +145,40 @@ void MainMenuScene::CheckButtonsPress()
 	if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 	{
 		myMovingIndex--;
-		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 		if (myMovingIndex < 0)
 			myMovingIndex = myButtons.size() - 1;
+		if ((myMovingIndex == static_cast<int>(eMainMenuButton::SpeedrunMode) && mySpeedrunModeBtn->GetIsUnlocked() == false))
+		{
+			myMovingIndex--;
+			if (myMovingIndex < 0)
+				myMovingIndex = myButtons.size() - 1;
+		}
+		if ((myMovingIndex == static_cast<int>(eMainMenuButton::LevelSelect) && myLevelSelectBtn->GetIsUnlocked() == false))
+		{
+			myMovingIndex--;
+			if (myMovingIndex < 0)
+				myMovingIndex = myButtons.size() - 1;
+		}
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 	}
 	else if (myInput->GetInput()->GetKeyJustDown(Keys::DOWNARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadDown))
 	{
 		myMovingIndex++;
-		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 		if (myMovingIndex > myButtons.size() - 1)
 			myMovingIndex = 0;
+		if ((myMovingIndex == static_cast<int>(eMainMenuButton::LevelSelect) && myLevelSelectBtn->GetIsUnlocked() == false))
+		{
+			myMovingIndex++;
+			if (myMovingIndex > myButtons.size() - 1)
+				myMovingIndex = 0;
+		}
+		if ((myMovingIndex == static_cast<int>(eMainMenuButton::SpeedrunMode) && mySpeedrunModeBtn->GetIsUnlocked() == false))
+		{
+			myMovingIndex++;
+			if (myMovingIndex > myButtons.size() - 1)
+				myMovingIndex = 0;
+		}
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 	}
 
 	if (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross))
