@@ -38,7 +38,7 @@ void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)
 
 void EnemyProjectile::Update(const float& aDeltaTime)
 {
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingTrailParticle, GetPosition()));
+	//PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingTrailParticle, GetPosition()));
 	GameObject::Update(aDeltaTime);
 }
 
