@@ -43,6 +43,9 @@ private:
 	float myMaxParticleLifeTime = {};
 	float myEmitterLifeTime = {};
 
+	float mySpawnEverySecond = {};
+	float mySpawnLifeTime = {};
+
 	float mySpriteRotation = {};
 
 	v4f myEmitterAngular = {};

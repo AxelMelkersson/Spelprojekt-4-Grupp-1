@@ -6,12 +6,15 @@
 #include "Player.hpp"
 #include "Subscriber.hpp"
 #include "PostMaster.hpp"
+#include "Random.hpp"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
 #include <fstream>
 
-ParticleEffectFactory::ParticleEffectFactory()
+ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
+	:
+	GameObject(aLevelScene)
 {
 	myScene = {};
 	myPlayer = {};
@@ -19,10 +22,23 @@ ParticleEffectFactory::ParticleEffectFactory()
 	myTestIndex = {};
 }
 
+ParticleEffectFactory::~ParticleEffectFactory()
+{
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLandedParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedSmallParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingTrailParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingBulletHit);
+	GameObject::~GameObject();
+}
+
 void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 {
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLandedParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedSmallParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingBulletHit);
 
 	myScene = aLevelScene;
 	LevelScene* levelScene = dynamic_cast<LevelScene*>(aLevelScene);
@@ -75,6 +91,8 @@ void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 			stats.myMaxParticleLifeTime = (*particleStat)["MaxParticleLifeTime"].GetFloat();
 			stats.myEmitterLifeTime = (*particleStat)["EmitterLifeTime"].GetFloat();
 			stats.mySpriteRotation = (*particleStat)["RotateSprite"].GetFloat();
+			stats.mySpawnEverySecond = (*particleStat)["SpawnEverySecond"].GetFloat();
+			stats.mySpawnLifeTime = (*particleStat)["SpawnLifeTime"].GetFloat();
 			stats.myOffset = { (*particleStat)["Offset"][0]["X"].GetFloat(), (*particleStat)["Offset"][1]["Y"].GetFloat() };
 
 			stats.myEmitterAngular = { (*particleStat)["LockedAngular"][0].GetFloat(), (*particleStat)["LockedAngular"][1].GetFloat(), (*particleStat)["LockedAngular"][2].GetFloat(), (*particleStat)["LockedAngular"][3].GetFloat() };
@@ -100,21 +118,61 @@ void ParticleEffectFactory::Init()
 	//SpawnCharacterEffects();
 }
 
+void ParticleEffectFactory::Update(const float& aDeltaTime)
+{
+
+	for (int i = mySpawningEffects.size() - 1; i >= 0; i--)
+	{
+		mySpawningEffects[i].myTimer += aDeltaTime;
+		mySpawningEffects[i].myTotalTimer += aDeltaTime;
+
+		if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
+		{
+			mySpawningEffects[i].myTimer = {};
+
+			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+		}
+
+		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer)
+			mySpawningEffects.erase(mySpawningEffects.begin() + i);
+	}
+}
+
 void ParticleEffectFactory::Notify(const Message& aMessage)
 {
-	const v2f position = std::get<v2f>(aMessage.myData);
-
 	switch (aMessage.myMessageType)
 	{
 	case eMessageType::EnemyShootingTrailParticle:
 	{
+		const v2f position = std::get<v2f>(aMessage.myData);
 		SpawnEffect(position, eParticleEffects::TrailEffect2);
 		break;
 	}
 	case eMessageType::PlayerLandedParticle:
 	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
 		SpawnEffect(position, eParticleEffects::FallEffect);
 		break;
+	}
+	case eMessageType::PlayerBashedPlayerParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::PlayerBashedPlayerParticle);
+		break;
+	}
+	case eMessageType::PlayerBashedSmallParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::PlayerBashedSmallParticle);
+		break;
+	}
+	case eMessageType::EnemyShootingBulletHit:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+		SpawnEffect(position, eParticleEffects::BulletEffectHit);
 	}
 	default:
 		break;
@@ -143,7 +201,18 @@ void ParticleEffectFactory::TestEffectFollowObject()
 	effect->SetIsActive(true);
 }
 
-void ParticleEffectFactory::SpawnEffect(v2f aPosition, const eParticleEffects aEffectType)
+void ParticleEffectFactory::SpawnEffect(GameObject* aGameObject, const eParticleEffects aEffectType)
+{
+	SpawnEffects timerEffect;
+	timerEffect.myGameObject = aGameObject;
+	timerEffect.myEffectType = aEffectType;
+	timerEffect.myTotalSpawnTimer = myEffects[static_cast<int>(aEffectType)].mySpawnLifeTime;
+	timerEffect.mySpawnEverySecond = myEffects[static_cast<int>(aEffectType)].mySpawnEverySecond;
+
+	mySpawningEffects.push_back(timerEffect);
+}
+
+void ParticleEffectFactory::SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType)
 {
 	ParticleEffect* effect = new ParticleEffect(myScene);
 
@@ -216,14 +285,14 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TrailEffect2)]);
 		break;
 	}
-	case eParticleEffects::TestEffect2:
+	case eParticleEffects::PlayerBashedPlayerParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect2)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedPlayerParticle)]);
 		break;
 	}
-	case eParticleEffects::TestEffect3:
+	case eParticleEffects::PlayerBashedSmallParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect3)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedSmallParticle)]);
 		break;
 	}
 	case eParticleEffects::TestEffect4:

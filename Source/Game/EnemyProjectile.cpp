@@ -8,7 +8,6 @@
 #include "Player.hpp"
 #include "GameObject.h"
 #include "Platform.h"
-#include "ParticleEffectFactory.h"
 #include "PostMaster.hpp"
 
 typedef EnemyData::EnemyFloatEnum EEnum;
@@ -26,8 +25,6 @@ EnemyProjectile::EnemyProjectile(Scene* aScene, const v2f& aPosition, const v2f&
 	GameObject::Init();
 
 	LevelScene* levelScene = dynamic_cast<LevelScene*>(aScene);
-	myEffectFactory = &levelScene->GetEffectFactory();
-	myEffectFactory->SpawnEffectFollowObject(this, eParticleEffects::BulletEffectTrail);
 }
 
 void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)
@@ -58,7 +55,7 @@ void EnemyProjectile::OnCollision(GameObject* aGameObject)
 	}
 	if (platform || player)
 	{
-		myEffectFactory->SpawnEffect(GetPosition(), eParticleEffects::BulletEffectHit);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingBulletHit, GetPosition()));
 		this->Destroy();
 	}
 }

@@ -15,7 +15,6 @@ public:
 	void OnCollision(GameObject* aGameObject) override;
 
 private:
-	ParticleEffectFactory* myEffectFactory;
 	Animation myAnimation;
 
 	v2f mySpriteSize = { 10.0f, 10.0f };

@@ -13,8 +13,8 @@ enum class eParticleEffects
 	FogEffect,
 	FallEffect,
 	TrailEffect2,
-	TestEffect2,
-	TestEffect3,
+	PlayerBashedPlayerParticle,
+	PlayerBashedSmallParticle,
 	TestEffect4,
 	TestEffect5
 };

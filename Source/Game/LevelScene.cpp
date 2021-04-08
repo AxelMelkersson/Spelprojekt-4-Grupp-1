@@ -43,7 +43,7 @@ void LevelScene::Load()
 
 	AddBlackScreen();
 
-	myEffectFactory = new ParticleEffectFactory();
+	myEffectFactory = new ParticleEffectFactory(this);
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
@@ -102,7 +102,7 @@ void LevelScene::Update(const float& aDeltaTime)
 	if (myEffectFactory != NULL)
 		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
 	{
 		v2f position = GetPlayer()->GetPosition();
 
@@ -111,7 +111,7 @@ void LevelScene::Update(const float& aDeltaTime)
 	else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
 	{
 		myEffectFactory->TestEffectFollowObject();
-	}
+	}*/
 
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();

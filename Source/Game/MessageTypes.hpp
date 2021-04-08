@@ -7,8 +7,12 @@ enum class eMessageType
 	LoadMainRoom,
 	PlayerDeath,
 	PlayerLandedParticle,
+	PlayerBashedPlayerParticle,
+	PlayerBashedSmallParticle,
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
+	EnemyShootingBulletHit,
+	EnemyShootingBulletParticle,
 	EnemyShootingTrailParticle,
 	Vibrate
 };

@@ -5,6 +5,7 @@
 #include "InputWrapper.h"
 #include "LevelScene.h"
 #include "AudioManager.h"
+#include "PostMaster.hpp"
 #include <iostream>
 
 
@@ -184,6 +185,9 @@ void BashAbility::FreezeTime()
 
 void BashAbility::DashUse(const float& aDeltaTime)
 {
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerBashedPlayerParticle, myPlayer));
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerBashedSmallParticle, myPlayer));
+
 	myUsedDashDirection = myDashDirection;
 
 	myScene->GetCamera().Shake(myDashShakeDuration, myDashShakeIntensity, myDashShakeDropOff);
