@@ -1,16 +1,18 @@
 #include "stdafx.h"
-#include "Door.h"
-#include "Scene.h"
+
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 
-Door::Door(Scene* aLevelScene)
-	:
-	GameObject(aLevelScene),
-	myButton(new Button(aLevelScene))
+#include "Door.h"
+#include "Scene.h"
+#include "Button.h"
+
+Door::Door(Scene* aLevelScene) : GameObject(aLevelScene), myButton(new Button(aLevelScene))
 {
-	myDoorIsOpen = {};
+	myDoorIsOpen = false;
+	myClosedDoorSprite = nullptr;
+	myOpenDoorSprite = nullptr;
 }
 
 void Door::Init(const v2f aPosition)
@@ -42,7 +44,6 @@ void Door::Init(const v2f aPosition)
 
 	myOpenDoorSprite->Deactivate();
 }
-
 void Door::Update(const float& aDeltaTime)
 {
 	if (myButton->GetActiveButton() && !myDoorIsOpen)
@@ -57,9 +58,6 @@ void Door::Update(const float& aDeltaTime)
 
 	GameObject::Update(aDeltaTime);
 }
-
-
-
 
 void Door::AddButton(v2f aPosition)
 {
