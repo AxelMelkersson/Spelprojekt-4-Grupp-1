@@ -11,17 +11,10 @@
 #include "Scene.h"
 #include "Camera.h"
 
-LevelDoor::LevelDoor(Scene* aScene)
-	:
-	GameObject(aScene)
+LevelDoor::LevelDoor(Scene* aScene) : GameObject(aScene)
 {
 	myType = eDoorType::Entry;
 	myWasActivated = false;
-}
-
-LevelDoor::~LevelDoor()
-{
-
 }
 
 void LevelDoor::Init(const eDoorType aDoorType, const v2f& aSize)
@@ -39,7 +32,6 @@ void LevelDoor::Init(const eDoorType aDoorType, const v2f& aSize)
 	collider->SetPosition({ aSize.x / 2.0f, aSize.y / 2.0f });
 	collider->SetSize(aSize);
 }
-
 void LevelDoor::OnCollision(GameObject* aGameObject)
 {
 	if (myWasActivated)
