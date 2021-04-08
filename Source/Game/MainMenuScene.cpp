@@ -112,11 +112,28 @@ void MainMenuScene::InitObjects()
 	myOptions->Init();
 	mySubMenuActive = false;
 
+	std::string playSpritePath;
+	std::string playSpritePathAnim;
+	v2f playPos;
+
+	if (myLevelSelectUnlocked)
+	{
+		playSpritePath = "Sprites/UI/startMenu/UI_StartMenu_Text_Continue_64x16px_Unmarked.dds";
+		playSpritePathAnim = "Sprites/UI/startMenu/UI_StartMenu_Text_Continue_64x16px_Marked.dds";
+		playPos = { 64.f, 16.f };
+	}
+	else
+	{
+		playSpritePath = "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_unmarked.dds";
+		playSpritePathAnim = "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_marked.dds";
+		playPos = { 56.f,16.f };
+	}
+
 	myBackground->Init("Sprites/UI/startMenu/UI_startMenu_Background_320x180px.dds", { 520.f, 265.f }, backgroundPos, 200);
 	myTitleSprite->Init("Sprites/UI/startMenu/UI_startMenu_Title_171x32px.dds", { 270.f, 32.f }, titleSpritePos, 201);
 	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
 
-	myNewGameBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_unmarked.dds", { 56.f,16.f }, newGameBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_marked.dds", 56);
+	myNewGameBtn->Init(playSpritePath, playPos, newGameBtnPos, playSpritePathAnim, playPos.x);
 	myLevelSelectBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Marked_72x16px.dds", 72, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_80x9px_Locked.dds", myLevelSelectUnlocked);
 	mySpeedrunModeBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Unmarked.dds", { 57.f,16.f }, speedrunModeBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Marked.dds", 57, "Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_65x12px_Locked.dds", mySpeedrunUnlocked);
 	myOptionsBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_Option_44x16px_unmarked.dds", { 44.f,16.f }, optionsBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_Option_44x16px_marked.dds", 44);
