@@ -62,7 +62,6 @@ void LevelManager::Update()
 		{
 			myLevelTransition = false;
 			SingleLoadScene(eScenes::LevelScene);
-			myLoadingHiddenRoom = false;
 		}
 	}
 
