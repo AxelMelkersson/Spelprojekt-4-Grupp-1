@@ -25,27 +25,6 @@ void Timer::Init(const v2f aPos)
 	textComponent->Activate();
 	SetZIndex(200);
 }
-
-void Timer::Start(float aStartTime)
-{
-	myIsActive = true;
-	myTime = aStartTime;
-	myStartTime = CGameWorld::GetInstance()->GetTimer()->GetTotalTime();
-	myLastTime = myStartTime;
-	myTotalTime = aStartTime;
-}
-
-void Timer::Paus()
-{
-	myIsActive = false;
-}
-
-void Timer::Stop()
-{
-	myIsActive = false;
-	myTime = 0.0f;
-}
-
 void Timer::Update(const float& aDeltatime)
 {
 	float time = floorf(myTime * 100) / 100;
@@ -56,4 +35,27 @@ void Timer::Update(const float& aDeltatime)
 	myLastTime = myTime;
 
 	GameObject::Update(aDeltatime);
+}
+
+void Timer::Start(float aStartTime)
+{
+	myIsActive = true;
+	myTime = aStartTime;
+	myStartTime = CGameWorld::GetInstance()->GetTimer()->GetTotalTime();
+	myLastTime = myStartTime;
+	myTotalTime = aStartTime;
+}
+void Timer::Paus()
+{
+	myIsActive = false;
+}
+void Timer::Stop()
+{
+	myIsActive = false;
+	myTime = 0.0f;
+}
+
+const float Timer::GetTime() const
+{
+	return myTime;
 }

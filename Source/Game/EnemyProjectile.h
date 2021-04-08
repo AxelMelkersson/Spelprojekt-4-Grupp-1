@@ -3,16 +3,20 @@
 
 class ParticleEffectFactory;
 class GameObject;
+
 class EnemyProjectile : public GameObject
 {
 public:
 	EnemyProjectile(Scene* aScene, const v2f& aPosition, const v2f& aTarget);
 	~EnemyProjectile() = default;
+
+	void Update(const float& aDeltaTime) override;
+
 	void SetDirection(const v2f& aPosition, const v2f& aTarget);
+	void OnCollision(GameObject* aGameObject) override;
+
 	void InitCollider();
 	void InitVisuals();
-	void Update(const float& aDeltaTime) override;
-	void OnCollision(GameObject* aGameObject) override;
 
 private:
 	ParticleEffectFactory* myEffectFactory;
@@ -23,5 +27,5 @@ private:
 	v2f myDirection;
 
 	EnemyData* myJsonData = new EnemyData();
-};
 
+};
