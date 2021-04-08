@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "HiddenArea.hpp"
 #include "Player.hpp"
 
@@ -6,6 +7,7 @@
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+
 #include "AudioManager.h"
 
 #include "Scene.h"
@@ -35,11 +37,6 @@ HiddenArea::HiddenArea(Scene* aLevelScene, const v2f& aPosition, const v2f& aSiz
 	collider->SetSize(aSize);
 }
 
-HiddenArea::~HiddenArea()
-{
-
-}
-
 void HiddenArea::Update(const float& aDeltaTime)
 {
 	if (myPlayerCollided)
@@ -56,7 +53,6 @@ void HiddenArea::SetBatch(SpritebatchComponent* aHiddenSpriteBatch)
 {
 	myHiddenSpriteBatch = aHiddenSpriteBatch;
 }
-
 void HiddenArea::OnCollision(GameObject* aGameObject)
 {
 	Player* player = dynamic_cast<Player*>(aGameObject);

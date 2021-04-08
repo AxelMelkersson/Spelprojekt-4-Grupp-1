@@ -157,7 +157,7 @@ void Player::InitAnimations()
 	spriteGlide->Deactivate();
 
 	myAnimations[0] = Animation(false, false, false, 0, 74, 74, 0.10f, spriteIdle, 16, 16);
-	myAnimations[1] = Animation(false, false, false, 0, 12, 12, 0.075f, spriteRun, 16, 16);
+	myAnimations[1] = Animation(false, false, false, 0, 9, 9, 0.085f, spriteRun, 16, 16);
 	myAnimations[2] = Animation(false, true, false, 0, 6, 6, 0.07f, spriteJump, 16, 16);
 	myAnimations[3] = Animation(false, true, false, 0, 5, 5, 0.09f, spriteDoubleJump, 16, 16);
 	myAnimations[4] = Animation(false, false, false, 0, 4, 4, 0.09f, spriteFall, 16, 16);
