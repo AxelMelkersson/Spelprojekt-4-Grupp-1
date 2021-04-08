@@ -1,40 +1,33 @@
 #include "stdafx.h"
 #include "Button.h"
+
+#include "Player.hpp"
 #include "LevelScene.h"
+#include "Camera.h"
+
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "AnimationComponent.hpp"
+
 #include "AudioManager.h"
-#include "Player.hpp"
-#include "Camera.h"
 
-
-
-Button::Button(Scene* aLevelScene)
-	:
-	GameObject(aLevelScene)
+Button::Button(Scene* aLevelScene) : GameObject(aLevelScene)
 {
-	myHasCollided = {};
-	myButtonActive = {};
-	mySize = {};
+	myHasCollided = false;
+	myButtonActive = false;
+	mySize = { 0, 0 };
 
 	SetZIndex(95);
-}
-
-Button::~Button()
-{
 }
 
 void Button::Init(const v2f myStartingPosition, const v2f myPositionFromStart)
 {
 	InitButton(myStartingPosition, myPositionFromStart);
 }
-
 void Button::Update(const float& aDeltaTime)
 {
 	GameObject::Update(aDeltaTime);
-
 }
 
 void Button::InitButton(const v2f myStartingPosition, const v2f myPositionFromStart)
@@ -83,9 +76,7 @@ void Button::OnCollision(GameObject* aGameObject)
 			AudioManager::GetInstance()->PlayAudio(AudioList::ButtonPress);
 		}
 	}
-
 }
-
 bool Button::GetActiveButton()
 {
 	return myButtonActive;

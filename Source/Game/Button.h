@@ -9,17 +9,13 @@ class LevelScene;
 class Button : GameObject
 {
 public:
-
 	Button(Scene* aLevelScene);
-	~Button();
 
 	void Init(const v2f myStartingPosition, const v2f myPositionFromStart);
-
 	void Update(const float& aDeltaTime) override;
+
 	virtual void OnCollision(GameObject* aGameObject) override;
-
 	bool GetActiveButton();
-
 
 private:
 	Animation myAnimation[2];
@@ -33,4 +29,3 @@ private:
 	void InitButton(const v2f myStartingPosition, const v2f myPositionFromStart);
 
 };
-

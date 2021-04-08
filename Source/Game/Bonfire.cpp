@@ -5,15 +5,14 @@
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
-#include "AudioManager.h"
 
 #include "Player.hpp"
-
 #include "Collectible.hpp"
 
 #include "../External/Headers/CU/Utilities.h"
 
 #include "PostMaster.hpp"
+#include "AudioManager.h"
 #include "DataManager.h"
 
 Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene), myBonfireIndex(anIndex)
@@ -51,10 +50,6 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 	}
-}
-Bonfire::~Bonfire()
-{
-
 }
 
 void Bonfire::OnCollision(GameObject* aGameObject)
