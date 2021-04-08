@@ -14,7 +14,8 @@
 #include "TutorialMenu.h"
 
 OptionsMenu::OptionsMenu(Scene* aLevelScene)
-	: myCamera(aLevelScene->GetCamera())
+	: myCamera(aLevelScene->GetCamera()),
+	myPauseMenu(nullptr)
 {
 	myScene = aLevelScene;
 	myMovingIndex = 0;
@@ -25,6 +26,8 @@ OptionsMenu::OptionsMenu(Scene* aLevelScene)
 	myVFXVol = 0;
 	myMusicStep = 2.0f;
 	myVFXStep = 2.0f;
+
+	myIsOpenedFromPause = false;
 }
 
 void OptionsMenu::Init()
@@ -87,7 +90,16 @@ void OptionsMenu::Init()
 	mySoundBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Unmarked.dds", { 36.0f, 16.0f }, soundPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Marked.dds", 36);
 	myCreditsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Unmarked.dds", { 45.f, 16.f }, creditsPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Marked.dds", 45);
 	myTutorialsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Unmarked.dds", { 48.f, 16.f }, tutorialPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Marked.dds", 48);
-	myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
+	
+	if (myIsOpenedFromPause)
+	{
+		myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
+	}
+	else
+	{
+		myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
+	}
+	
 	myResetBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Unmarked.dds", { 65.f,16.f }, resetPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Marked.dds", 65);
 
 	//Sound
@@ -145,6 +157,7 @@ void OptionsMenu::Update(const float& aDeltaTime)
 		CheckActiveAnimations();
 		CheckIndexPress(aDeltaTime);
 		UpdateUIElements(aDeltaTime);
+		
 		if (myCreditsActive == true)
 		{
 			ActivateCredits();
@@ -171,7 +184,16 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		if (myMovingIndex == static_cast<int>(eOptionsMenu::Back))
 		{
-			CGameWorld::GetInstance()->GetLevelManager().ReloadScene(LevelManager::eScenes::MainMenu);
+			if (myIsOpenedFromPause)
+			{
+				SetActive(false);
+				myPauseMenu->SetActiveMenu(true);
+				myPauseMenu->SkipOneUpdate();
+			}
+			else
+			{
+				CGameWorld::GetInstance()->GetLevelManager().ReloadScene(LevelManager::eScenes::MainMenu);
+			}
 		}
 		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Sound))
 		{
@@ -377,6 +399,7 @@ void OptionsMenu::DeactivateMenu()
 	myVFXDot->SetActive(false);
 	myResolutions->SetActive(false);
 	myScreenSizeDot->SetActive(false);
+	myFireHighlight->SetActive(false);
 }
 
 void OptionsMenu::InitTexts()
@@ -394,6 +417,8 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myVFXDot->UpdateUIObjects(aDeltaTime);
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
+
+	myFireHighlight->UpdateUIObjects(aDeltaTime);
 
 	myCredits->UpdateUIObjects(aDeltaTime);
 
@@ -478,4 +503,10 @@ void OptionsMenu::InactivateHighlight()
 void OptionsMenu::DeactivateTutorial()
 {
 	myTutorial->Deactivate();
+}
+
+void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
+{
+	myIsOpenedFromPause = true;
+	myPauseMenu = aPauseMenu;
 }

@@ -2,8 +2,11 @@
 #include "SpeedrunManager.h"
 #include "DataManager.h"
 
-SpeedrunManager::SpeedrunManager()
+SpeedrunManager::SpeedrunManager() :
+	myIsSpeedrun(false),
+	myCurrentScore(0.f)
 {
+	myIsUnlocked = DataManager::GetInstance().GetBonfireState(7);
 	std::array<float, 10> data = DataManager::GetInstance().GetHighScores();
 
 	for (int i = 0; i < myHighScores.size(); ++i)

@@ -11,7 +11,7 @@ class Scene;
 class SpriteComponent;
 class AudioManager;
 class TutorialMenu;
-
+class PauseMenu;
 
 class OptionsMenu
 {
@@ -37,11 +37,13 @@ public:
 
 	void DeactivateTutorial();
 
+	void SetOpenedFromPauseMenu(PauseMenu* aPauseMenu);
+
 private:
 	Scene* myScene;
 	Camera& myCamera;
 	AudioManager* myAudioManager;
-
+	PauseMenu* myPauseMenu;
 
 	float myMusicVol;
 	float myVFXVol;
@@ -95,6 +97,8 @@ private:
 	bool myTutorialActtive = false;
 	bool mySubMenuActive = false;
 	
+	bool myIsOpenedFromPause;
+
 	void CheckIndexPress(const float& aDeltaTime);
 	void ActivateMenu();
 	void DeactivateMenu();
