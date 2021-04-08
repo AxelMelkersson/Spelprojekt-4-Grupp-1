@@ -32,6 +32,7 @@ LevelScene::LevelScene()
 	myPlayer(nullptr),
 	myBackground(nullptr),
 	myIsSpeedrun(false),
+	myStayBlackTime(0.2f),
 	myEffectFactory(nullptr),
 	Scene()
 {}
@@ -39,8 +40,10 @@ LevelScene::LevelScene()
 void LevelScene::Load()
 {
 	myIsSpeedrun = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun();
+
 	myBlackScreenOpacity = 1.0f;
 	myBlackScreenOpacitySpeed = 4.3f;
+	myStayBlackTime = 0.2f;
 
 	AudioManager::GetInstance()->FadeOut(AudioList::Main_Menu);
 	AudioManager::GetInstance()->Stop(AudioList::MenuAmbience);
@@ -183,6 +186,12 @@ void LevelScene::AddBlackScreen()
 
 void LevelScene::DecreaseBlackScreen()
 {
+	if (myStayBlackTime > 0)
+	{
+		myStayBlackTime -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime();
+		return;
+	}
+
 	myBlackScreen->GetComponent<SpriteComponent>()->SetColor(v4f(1.0f, 1.0f, 1.0f, myBlackScreenOpacity));
 	myBlackScreenOpacity -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime() * myBlackScreenOpacitySpeed;
 
