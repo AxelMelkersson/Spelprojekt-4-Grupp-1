@@ -1,164 +1,85 @@
 {
   "FilePathArray": [
     {
-      "Id": 3,
-      "FilePath": "Levels/Level_51.json"
+      "FilePath": "Levels/Level_01.json"
     },
     {
-      "Id": 4,
-      "FilePath": "Levels/Level_53.json"
+      "FilePath": "Levels/Level_02.json"
     },
     {
-      "Id": 5,
-      "FilePath": "Levels/Level_04.json"
+      "FilePath": "Levels/Level_03.json"
     },
     {
-      "Id": 6,
-      "FilePath": "Levels/Bonfire_02.json"
-    },
-    {
-      "Id": 7,
       "FilePath": "Levels/Level_06.json"
     },
     {
-      "Id": 8,
       "FilePath": "Levels/Level_07.json"
     },
     {
-      "Id": 9,
       "FilePath": "Levels/Level_08.json"
     },
     {
-      "Id": 10,
       "FilePath": "Levels/Level_09.json"
     },
     {
-      "Id": 11,
       "FilePath": "Levels/Level_10.json"
     },
     {
-      "Id": 12,
-      "FilePath": "Levels/Bonfire_03.json"
-    },
-    {
-      "Id": 13,
-      "FilePath": "Levels/Level_11.json"
-    },
-    {
-      "Id": 14,
       "FilePath": "Levels/Level_12.json"
     },
     {
-      "Id": 15,
-      "FilePath": "Levels/Level_13.json"
-    },
-    {
-      "Id": 16,
-      "FilePath": "Levels/Level_18.json"
-    },
-    {
-      "Id": 17,
       "FilePath": "Levels/Level_15.json"
     },
     {
-      "Id": 18,
-      "FilePath": "Levels/Bonfire_04.json"
-    },
-    {
-      "Id": 19,
-      "FilePath": "Levels/Level_21.json"
-    },
-    {
-      "Id": 20,
-      "FilePath": "Levels/Level_23.json"
-    },
-    {
-      "Id": 21,
-      "FilePath": "Levels/Level_33.json"
-    },
-    {
-      "Id": 22,
-      "FilePath": "Levels/Level_35.json"
-    },
-    {
-      "Id": 23,
-      "FilePath": "Levels/Level_20.json"
-    },
-    {
-      "Id": 24,
-      "FilePath": "Levels/Bonfire_05.json"
-    },
-    {
-      "Id": 25,
-      "FilePath": "Levels/Level_26.json"
-    },
-    {
-      "Id": 26,
-      "FilePath": "Levels/Level_27.json"
-    },
-    {
-      "Id": 27,
-      "FilePath": "Levels/Level_28.json"
-    },
-    {
-      "Id": 28,
-      "FilePath": "Levels/Level_14.json"
-    },
-    {
-      "Id": 29,
-      "FilePath": "Levels/Level_25.json"
-    },
-    {
-      "Id": 30,
-      "FilePath": "Levels/Bonfire_06.json"
-    },
-    {
-      "Id": 31,
-      "FilePath": "Levels/Level_16.json"
-    },
-    {
-      "Id": 32,
-      "FilePath": "Levels/Level_22.json"
-    },
-    {
-      "Id": 33,
       "FilePath": "Levels/Level_17.json"
     },
     {
-      "Id": 34,
-      "FilePath": "Levels/Level_29.json"
-    },
-    {
-      "Id": 35,
-      "FilePath": "Levels/Level_30.json"
-    },
-    {
-      "Id": 36,
-      "FilePath": "Levels/Bonfire_07.json"
-    },
-    {
-      "Id": 37,
-      "FilePath": "Levels/Level_31.json"
-    },
-    {
-      "Id": 38,
-      "FilePath": "Levels/Level_32.json"
-    },
-    {
-      "Id": 39,
-      "FilePath": "Levels/Level_24.json"
-    },
-    {
-      "Id": 40,
-      "FilePath": "Levels/Level_34.json"
-    },
-    {
-      "Id": 41,
       "FilePath": "Levels/Level_19.json"
     },
     {
-      "Id": 42,
-      "FilePath": "Levels/Bonfire_08.json"
+      "FilePath": "Levels/Level_20.json"
+    },
+    {
+      "FilePath": "Levels/Level_21.json"
+    },
+    {
+      "FilePath": "Levels/Level_22.json"
+    },
+    {
+      "FilePath": "Levels/Level_23.json"
+    },
+    {
+      "FilePath": "Levels/Level_24.json"
+    },
+    {
+      "FilePath": "Levels/Level_25.json"
+    },
+    {
+      "FilePath": "Levels/Level_27.json"
+    },
+    {
+      "FilePath": "Levels/Level_30.json"
+    },
+    {
+      "FilePath": "Levels/Henke_blockout_1.json"
+    },
+    {
+      "FilePath": "Levels/Henke_blockout_2.json"
+    },
+    {
+      "FilePath": "Levels/Henke_blockout_3.json"
+    },
+    {
+      "FilePath": "Levels/Henke_blockout_4.json"
+    },
+    {
+      "FilePath": "Levels/Henke_blockout_5.json"
+    },
+    {
+      "FilePath": "Levels/Level_18.json"
+    },
+    {
+      "FilePath": "Levels/Level_13.json"
     }
   ]
 }
