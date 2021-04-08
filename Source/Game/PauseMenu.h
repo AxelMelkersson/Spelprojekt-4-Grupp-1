@@ -6,6 +6,9 @@
 #include "Animation.hpp"
 
 #include "UIText.h"
+
+#include "OptionsMenu.h"
+
 class SpriteComponent;
 class InputWrapper;
 class Scene;
@@ -22,12 +25,16 @@ public:
 
 	void SetActiveMenu(const bool aStatement);
 	bool IsPauseActive();
+	bool GetOptionsIsActive();
 	void SelectButton();
+	void SkipOneUpdate();
 
 private:
 	Scene* myScene;
 	Camera& myCamera;
 	Animation myAnimation[1];
+
+	OptionsMenu* myOptionsMenu;
 
 	std::unique_ptr<UIObject> myBackground;
 	std::unique_ptr<UIObject> myBar;
@@ -45,11 +52,14 @@ private:
 
 	std::vector<UIButton*> myButtons;
 
+	std::vector<int> myTotalCollectibleInfo;
+	std::vector<int> myTotalCollectibleInfoCollected;
+
 	std::unique_ptr<UIButton> myContinueBtn;
-	std::unique_ptr<UIButton> myLevelSelectBtn;
+	std::unique_ptr<UIButton> myOptionsBtn;
 	std::unique_ptr<UIButton> myMainMenuBtn;
 
-	std::unique_ptr<UIText> myTitleString;
+	std::unique_ptr<UIObject> myTitleString;
 	std::unique_ptr<UIText> myCollectibleString;
 	std::unique_ptr<UIText> myCollectibleString2;
 	std::unique_ptr<UIText> myCollectibleString3;
@@ -60,6 +70,7 @@ private:
 
 	bool myMenuActive;
 	bool myIsSpeedrun;
+	bool mySkipOneUpdate;
 
 	void CheckIndexPress();
 	void ActivateMenu();

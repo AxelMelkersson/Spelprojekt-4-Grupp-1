@@ -44,6 +44,8 @@ private:
     std::shared_ptr<InputWrapper> myInput;
 
     bool mySubMenuActive = false;
+    bool myLevelSelectUnlocked;
+    bool mySpeedrunUnlocked;
 
     int myMovingIndex;
 

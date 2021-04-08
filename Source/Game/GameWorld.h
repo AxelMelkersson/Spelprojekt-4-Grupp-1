@@ -69,6 +69,7 @@ private:
 	float myDeltaTime;
 	float myTotalTime;
 	static CGameWorld* ourInstance;
+	LevelManager myLevelManager;
 
 	/*** Scenes ***/
 	IntroLogosScene myIntroLogosScene;
@@ -77,7 +78,5 @@ private:
 	LevelScene myLevelScene;
 	WinScene myWinScene;
 	SpeedrunScene mySpeedrunScene;
-
-	LevelManager myLevelManager;
 
 };

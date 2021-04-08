@@ -163,7 +163,7 @@ void LevelScene::Update(const float& aDeltaTime)
 
 	myPauseMenu->Update(aDeltaTime);
 
-	if (myPauseMenu->IsPauseActive() == false)
+	if (myPauseMenu->IsPauseActive() == false && myPauseMenu->GetOptionsIsActive() == false)
 		Scene::Update(aDeltaTime);
 	else if (myIsSpeedrun)
 		myTimer->Update(aDeltaTime);

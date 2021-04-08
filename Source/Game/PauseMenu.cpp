@@ -9,12 +9,14 @@
 #include "Camera.h"
 #include "Game.h"
 #include "SpeedrunManager.h"
+#include "DataManager.h"
 
 #include "AnimationComponent.hpp"
 
 PauseMenu::PauseMenu(Scene* aLevelScene)
 	:
-	myCamera(aLevelScene->GetCamera())
+	myCamera(aLevelScene->GetCamera()),
+	myOptionsMenu(new OptionsMenu(aLevelScene))
 {
 	myScene = aLevelScene;
 	myMovingIndex = {};
@@ -44,34 +46,45 @@ void PauseMenu::InitMenu()
 
 	myContinueBtn = std::make_unique<UIButton>(myScene);
 	v2f continuePos = { 165.f, 105.f };
-	myLevelSelectBtn = std::make_unique<UIButton>(myScene);
-	v2f levelSelectPos = { 165.f, 125.f };
+	myOptionsBtn = std::make_unique<UIButton>(myScene);
+	v2f optionsPos = { 165.f, 125.f };
 	myMainMenuBtn = std::make_unique<UIButton>(myScene);
 	v2f mainMenuPos = { 165.f, 145.f };
-	
+
+	myOptionsMenu->SetOpenedFromPauseMenu(this);
+	myOptionsMenu->Init();
 
 	myBackground->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Bakground_304x164px.dds", {520.f, 265.f}, backgroundPos, 200);
 	myBar->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseBarScreen_241x3px.dds", { 275.0f, 5.f }, barPos, 201);
-	myFire->InitAnimation("Sprites/UI/pauseMenu/UI_Collectible_Soul_Red_16x16px.dds", { 16.0f, 16.0f }, firePos, 201);
-	myFire2->InitAnimation("Sprites/UI/pauseMenu/UI_Collectible_Soul_Yellow_16x16px.dds", { 16.0f, 16.0f }, firePos2, 201);
-	myFire3->InitAnimation("Sprites/UI/pauseMenu/UI_Collectible_Soul_Green_16x16px.dds", { 16.0f, 16.0f }, firePos3, 201);
+	myFire->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 201);
+	myFire2->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos2, 201);
+	myFire3->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos3, 201);
+
+	Animation animation1 = Animation(false, false, false, 0, 7, 7, 0.125f, myFire->GetComponent<SpriteComponent>(), 16, 16);
+	Animation animation2 = Animation(false, false, false, 0, 7, 7, 0.125f, myFire2->GetComponent<SpriteComponent>(), 16, 16);
+	Animation animation3 = Animation(false, false, false, 0, 7, 7, 0.125f, myFire3->GetComponent<SpriteComponent>(), 16, 16);
+
+	myFire->GetComponent<AnimationComponent>()->SetAnimation(&animation1);
+	myFire2->GetComponent<AnimationComponent>()->SetAnimation(&animation2);
+	myFire3->GetComponent<AnimationComponent>()->SetAnimation(&animation3);
+
 	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
 
 	myContinueBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Continue_Unmarked_64x16px.dds", { 64.f,16.f }, continuePos, "Sprites/UI/pauseMenu/UI_PauseMenu_Text_Continue_Marked_64x16px.dds", 64);
-	myLevelSelectBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectPos,"Sprites/UI/pauseMenu/UI_PauseMenu_Text_LevelSelect_Marked_72x16px.dds", 72);
+	myOptionsBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Options_Unmarked_44x16px.dds", { 44.f,16.f }, optionsPos,"Sprites/UI/pauseMenu/UI_PauseMenu_Text_Options_Marked_44x16px.dds", 44);
 	myMainMenuBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, mainMenuPos, "Sprites/UI/pauseMenu/UI_PauseMenu_Text_MainMenu_Marked_64x16px.dds", 64);
 	
 	myButtons.clear();
 
 	InitTexts();
 	myButtons.push_back(myContinueBtn.get());
-	myButtons.push_back(myLevelSelectBtn.get());
+	myButtons.push_back(myOptionsBtn.get());
 	myButtons.push_back(myMainMenuBtn.get());
 }
 
 void PauseMenu::Update(const float& aDeltaTime)
 {
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ESCKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Start))
+	if ((CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ESCKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Start)) && !myOptionsMenu->IsOptionsActive())
 		SetActiveMenu(!IsPauseActive());
 
 	if (myMenuActive)
@@ -79,13 +92,16 @@ void PauseMenu::Update(const float& aDeltaTime)
 	else
 		DeactivateMenu();
 
-	if (myMenuActive)
+	myOptionsMenu->Update(aDeltaTime);
+
+	if (myMenuActive && !mySkipOneUpdate)
 	{
 		UpdateUIElements(aDeltaTime);
 		CheckActiveAnimations();
 		CheckIndexPress();
 	}
 	
+	mySkipOneUpdate = false;
 }
 
 
@@ -99,6 +115,11 @@ bool PauseMenu::IsPauseActive()
 	return myMenuActive;
 }
 
+bool PauseMenu::GetOptionsIsActive()
+{
+	return myOptionsMenu->IsOptionsActive();
+}
+
 void PauseMenu::SelectButton()
 {
 	if (myMovingIndex == 0)
@@ -107,7 +128,9 @@ void PauseMenu::SelectButton()
 	}
 	else if (myMovingIndex == 1)
 	{
-		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelSelect);
+		myOptionsMenu->SetActive(true);
+		SetActiveMenu(false);
+
 #ifndef _RETAIL
 		CGameWorld::GetInstance()->GetLevelManager().ToggleImGui();
 #endif //RETAIL
@@ -148,6 +171,7 @@ void PauseMenu::UpdateUIElements(const float& aDeltaTime)
 	myFire->UpdateUIObjects(aDeltaTime);
 	myFire2->UpdateUIObjects(aDeltaTime);
 	myFire3->UpdateUIObjects(aDeltaTime);
+	myTitleString->UpdateUIObjects(aDeltaTime);
 
 	for (auto button : myButtons)
 		button->UpdateButton(aDeltaTime);
@@ -165,7 +189,7 @@ void PauseMenu::ActivateMenu()
 	myFire2->SetActive(true);
 	myFire3->SetActive(true);
 	myFireHighlight->SetActive(true);
-	myTitleString->Activate();
+	myTitleString->SetActive(true);
 	myCollectibleString->Activate();
 	myCollectibleString2->Activate();
 	myCollectibleString3->Activate();
@@ -198,7 +222,7 @@ void PauseMenu::DeactivateMenu()
 	myFire2->SetActive(false);
 	myFire3->SetActive(false);
 	myFireHighlight->SetActive(false);
-	myTitleString->Deactivate();
+	myTitleString->SetActive(false);
 	myCollectibleString->Deactivate();
 	myCollectibleString2->Deactivate();
 	myCollectibleString3->Deactivate();
@@ -208,16 +232,47 @@ void PauseMenu::DeactivateMenu()
 
 void PauseMenu::InitTexts()
 {
-	myTitleString = std::make_unique<UIText>(myScene);
-	myTitleString->Init("Pause Menu", "Text/alagard.ttf", EFontSize::EFontSize_48);
-	myTitleString->SetPosition({ 155.f, 85.f });
+	myTotalCollectibleInfo.clear();
+	myTotalCollectibleInfoCollected.clear();
+
+	DataManager& dataManager = DataManager::GetInstance();
+	int collectiblesInfoSize = dataManager.GetCollectableCount();
+
+	myTotalCollectibleInfo.push_back(0);
+	myTotalCollectibleInfo.push_back(0);
+	myTotalCollectibleInfo.push_back(0);
+
+	myTotalCollectibleInfoCollected.push_back(0);
+	myTotalCollectibleInfoCollected.push_back(0);
+	myTotalCollectibleInfoCollected.push_back(0);
+
+	for (int collectible = 0; collectible < collectiblesInfoSize; ++collectible)
+	{
+		CollectableInfo collectibleInfo = dataManager.GetCollectableInfoIndex(collectible);
+
+		++myTotalCollectibleInfo[collectibleInfo.myDifficulty];
+
+		if (collectibleInfo.myCollectedState)
+		{
+			++myTotalCollectibleInfoCollected[collectibleInfo.myDifficulty];
+		}
+	}
+
+	myTitleString = std::make_unique<UIObject>(myScene);
+	myTitleString->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseTitleScreen_125x16px.dds", v2f(128.0f, 16.0f), { 155.f, 65.f }, 201);
+
 	myCollectibleString = std::make_unique<UIText>(myScene);
-	myCollectibleString->Init("00/00", "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
 	myCollectibleString->SetPosition({ 50.0f, 25.0f });
 	myCollectibleString2 = std::make_unique<UIText>(myScene);
-	myCollectibleString2->Init("00/00", "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString2->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
 	myCollectibleString2->SetPosition({ 125.0f, 25.0f });
 	myCollectibleString3 = std::make_unique<UIText>(myScene);
-	myCollectibleString3->Init("00/00", "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString3->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
 	myCollectibleString3->SetPosition({ 205.0f, 25.0f });
+}
+
+void PauseMenu::SkipOneUpdate()
+{
+	mySkipOneUpdate = true;
 }
