@@ -48,6 +48,7 @@ void MainMenuScene::Activate()
 {
 	Scene::Activate();
 
+	myOptions->DeactivateCredits();
 	myOptions->DeactivateTutorial();
 }
 

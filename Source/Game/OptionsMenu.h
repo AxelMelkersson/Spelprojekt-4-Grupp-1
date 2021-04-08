@@ -12,6 +12,7 @@ class SpriteComponent;
 class AudioManager;
 class TutorialMenu;
 class PauseMenu;
+class CreditsMenu;
 
 class OptionsMenu
 {
@@ -36,6 +37,7 @@ public:
 	bool IsOptionsActive();
 
 	void DeactivateTutorial();
+	void DeactivateCredits();
 
 	void SetOpenedFromPauseMenu(PauseMenu* aPauseMenu);
 
@@ -67,7 +69,7 @@ private:
 	std::unique_ptr<UIObject> myScreenSizeDot;
 
 	//Credits
-	std::unique_ptr<UIObject> myCredits;
+	CreditsMenu* myCreditsMenu;
 
 	//Tutorial
 	TutorialMenu* myTutorial;
@@ -106,7 +108,6 @@ private:
 	void UpdateUIElements(const float& aDeltaTime);
 	void CheckActiveAnimations();
 	void UpdateSoundSettings();
-	void ActivateCredits();
 	void InactivateHighlight();
 	
 

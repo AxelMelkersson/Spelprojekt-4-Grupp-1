@@ -430,7 +430,7 @@ void Player::Jump()
 void Player::DoubleJump()
 {
 	myPlatformVelocity.y = 0;
-	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
+	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerDoubleJump);
 	myCurrentVelocity.y = -myJsonData->myFloatValueMap[PEnum::Double_Jump_Velocity] + myPlatformVelocity.y - mySpringVelocity.y;
 	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[3]);
 
