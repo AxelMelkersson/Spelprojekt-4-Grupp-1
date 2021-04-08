@@ -3,11 +3,11 @@
 
 enum class eParticleEffects
 {
-	RunEffect,
+	RainEffectNextScreenParticle,
 	CollectibleEffect,
 	DeathEffect,
-	RainEffectBackground,
-	RainEffectForeground,
+	RainEffectBackgroundParticle,
+	RainEffectForegroundParticle,
 	BulletEffectTrail,
 	BulletEffectHit,
 	FogEffect,
@@ -18,5 +18,7 @@ enum class eParticleEffects
 	PlayerLedgeRightGrabbedHandParticle,
 	PlayerLedgeRightGrabbedLegParticle,
 	PlayerLedgeLeftGrabbedHandParticle,
-	PlayerLedgeLeftGrabbedLegParticle
+	PlayerLedgeLeftGrabbedLegParticle,
+	VelocityLinesParticles,
+	CollectibleCollectedParticle
 };

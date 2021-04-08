@@ -21,6 +21,7 @@
 #include "PostMaster.hpp"
 
 #include "BashableObject.hpp"
+#include "CameraStaticDistance.hpp"
 
 #include "SpriteComponent.h"
 
@@ -67,6 +68,12 @@ void LevelScene::Load()
 	}
 
 	Scene::Load();
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
+
+	if (Distance::myRainActive)
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
 }
 
 void LevelScene::Unload()

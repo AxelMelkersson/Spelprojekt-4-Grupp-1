@@ -672,6 +672,7 @@ void Player::EndLerp()
 
 void Player::ActivateSpringForce(float aSpringVelocity, const float aRetardation, const bool aShouldResetVelocity)
 {
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::VelocityLinesParticle, this));
 	ReactivateDoubleJump();
 	myHasLanded = false;
 	myActiveSpringJump = true;

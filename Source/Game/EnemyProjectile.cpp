@@ -55,7 +55,7 @@ void EnemyProjectile::OnCollision(GameObject* aGameObject)
 	}
 	if (platform || player)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingBulletHit, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingBulletHitParticle, GetPosition()));
 		this->Destroy();
 	}
 }
