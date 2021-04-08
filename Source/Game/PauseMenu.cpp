@@ -21,6 +21,12 @@ PauseMenu::PauseMenu(Scene* aLevelScene)
 	myScene = aLevelScene;
 	myMovingIndex = {};
 	myMenuActive = {};
+
+	mySkipOneUpdate = false;
+
+	myIsSpeedrun = false;
+
+	Subscribe(eMessageType::KilledFocus);
 }
 
 void PauseMenu::InitMenu()
@@ -275,4 +281,12 @@ void PauseMenu::InitTexts()
 void PauseMenu::SkipOneUpdate()
 {
 	mySkipOneUpdate = true;
+}
+
+void PauseMenu::Notify(const Message& aMessage)
+{
+	if (aMessage.myMessageType == eMessageType::KilledFocus)
+	{
+		SetActiveMenu(true);
+	}
 }

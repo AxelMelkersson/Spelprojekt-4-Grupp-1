@@ -9,12 +9,14 @@
 
 #include "OptionsMenu.h"
 
+#include "Subscriber.hpp"
+
 class SpriteComponent;
 class InputWrapper;
 class Scene;
 class Animation;
 
-class PauseMenu
+class PauseMenu : Subscriber
 {
 public:
 	PauseMenu(Scene* aLevelScene);
@@ -28,6 +30,8 @@ public:
 	bool GetOptionsIsActive();
 	void SelectButton();
 	void SkipOneUpdate();
+
+	void Notify(const Message& aMessage) override;
 
 private:
 	Scene* myScene;
