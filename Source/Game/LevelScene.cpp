@@ -21,6 +21,7 @@
 #include "PostMaster.hpp"
 
 #include "BashableObject.hpp"
+#include "CameraStaticDistance.hpp"
 
 #include "SpriteComponent.h"
 
@@ -31,14 +32,18 @@ LevelScene::LevelScene()
 	myPlayer(nullptr),
 	myBackground(nullptr),
 	myIsSpeedrun(false),
+	myStayBlackTime(0.2f),
+	myEffectFactory(nullptr),
 	Scene()
 {}
 
 void LevelScene::Load()
 {
 	myIsSpeedrun = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun();
+
 	myBlackScreenOpacity = 1.0f;
 	myBlackScreenOpacitySpeed = 4.3f;
+	myStayBlackTime = 0.2f;
 
 	AudioManager::GetInstance()->FadeOut(AudioList::Main_Menu);
 	AudioManager::GetInstance()->Stop(AudioList::MenuAmbience);
@@ -48,6 +53,7 @@ void LevelScene::Load()
 
 	AddBlackScreen();
 
+	myEffectFactory = new ParticleEffectFactory(this);
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
@@ -57,10 +63,6 @@ void LevelScene::Load()
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
 
-	myEffectFactory = new ParticleEffectFactory();
-	myEffectFactory->ReadEffects(this);
-	myEffectFactory->Init();
-
 	if (myIsSpeedrun)
 	{
 		myTimer = new Timer(this);
@@ -69,6 +71,12 @@ void LevelScene::Load()
 	}
 
 	Scene::Load();
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
+
 }
 
 void LevelScene::Unload()
@@ -107,9 +115,11 @@ void LevelScene::Deactivate()
 }
 
 void LevelScene::Update(const float& aDeltaTime)
-{
+{/*
+	if (myEffectFactory != NULL)
+		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
 	{
 		v2f position = GetPlayer()->GetPosition();
 
@@ -118,7 +128,7 @@ void LevelScene::Update(const float& aDeltaTime)
 	else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
 	{
 		myEffectFactory->TestEffectFollowObject();
-	}
+	}*/
 
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();
@@ -176,6 +186,12 @@ void LevelScene::AddBlackScreen()
 
 void LevelScene::DecreaseBlackScreen()
 {
+	if (myStayBlackTime > 0)
+	{
+		myStayBlackTime -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime();
+		return;
+	}
+
 	myBlackScreen->GetComponent<SpriteComponent>()->SetColor(v4f(1.0f, 1.0f, 1.0f, myBlackScreenOpacity));
 	myBlackScreenOpacity -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime() * myBlackScreenOpacitySpeed;
 
