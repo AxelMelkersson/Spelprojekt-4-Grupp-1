@@ -42,9 +42,6 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 	mySpawnPosition = aPosition;
 	myTargetPosition = aPosition;
 
-	myWasCollected = DataManager::GetInstance().GetCollectableInfo(myID).myCollectedState;
-	myWasTurnedIn = DataManager::GetInstance().GetCollectableInfo(myID).myCollectedState;
-
 	myTimeOffset = Utils::RandomFloat(0.0f, 6.0f);
 	myType = aType;
 
