@@ -20,6 +20,8 @@
 
 #include "PostMaster.hpp"
 
+#include "BashableObject.hpp"
+
 #include "SpriteComponent.h"
 
 #include "Glide.hpp"

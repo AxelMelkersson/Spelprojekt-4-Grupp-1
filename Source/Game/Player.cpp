@@ -525,11 +525,11 @@ void Player::ResetVelocity()
 
 void Player::RedirectVelocities(const v2f& aDirection)
 {
-	myPlatformVelocity.x *= aDirection.x;
-	myPlatformVelocity.y *= aDirection.y;
+	myPlatformVelocity.x = Utils::Abs(myPlatformVelocity.x) * aDirection.x;
+	myPlatformVelocity.y = Utils::Abs(myPlatformVelocity.y) * aDirection.y;
 
-	mySpringVelocity.x *= aDirection.x;
-	mySpringVelocity.y *= aDirection.y;
+	mySpringVelocity.x = Utils::Abs(mySpringVelocity.x) * aDirection.x;
+	mySpringVelocity.y = Utils::Abs(mySpringVelocity.y) * aDirection.y;
 }
 
 
@@ -667,9 +667,10 @@ void Player::ActivateSpringForce(float aSpringVelocity, const float aRetardation
 	mySpringVelocity.y = aSpringVelocity;
 	mySpringVelocityRetardation = aRetardation;
 
+	myCurrentVelocity.y = 0;
+
 	if (aShouldResetVelocity)
 	{
-		myCurrentVelocity.y = {};
 		myBashAbility->ResetVelocity(false, true);
 	}
 }
