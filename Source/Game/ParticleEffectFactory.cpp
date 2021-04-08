@@ -205,6 +205,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		const v2f position = std::get<v2f>(aMessage.myData);
 
 		SpawnEffect(position, eParticleEffects::BulletEffectHit);
+		break;
 	}
 	case eMessageType::VelocityLinesParticle:
 	{
@@ -218,6 +219,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
 
 		SpawnEffectFollowObject(gameobjectToFollow, eParticleEffects::CollectibleCollectedParticle);
+		break;
 	}
 	case eMessageType::RainEffectBackgroundParticle:
 	{
@@ -231,6 +233,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		const v2f position = std::get<v2f>(aMessage.myData);
 
 		SpawnEffect(position, eParticleEffects::RainEffectForegroundParticle);
+		break;
 	}
 	case eMessageType::RainEffectNextScreenParticle:
 	{
@@ -238,6 +241,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		position.y = 90.f;
 
 		SpawnEffect(position, eParticleEffects::RainEffectNextScreenParticle);
+		break;
 	}
 	default:
 	{
