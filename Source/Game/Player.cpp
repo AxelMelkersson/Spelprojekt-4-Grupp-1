@@ -667,9 +667,10 @@ void Player::ActivateSpringForce(float aSpringVelocity, const float aRetardation
 	mySpringVelocity.y = aSpringVelocity;
 	mySpringVelocityRetardation = aRetardation;
 
+	myCurrentVelocity.y = 0;
+
 	if (aShouldResetVelocity)
 	{
-		myCurrentVelocity.y = {};
 		myBashAbility->ResetVelocity(false, true);
 	}
 }
