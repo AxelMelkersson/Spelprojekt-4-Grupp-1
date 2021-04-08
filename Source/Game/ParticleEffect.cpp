@@ -59,7 +59,7 @@ void ParticleEffect::Init(ParticleStats aStats)
 
 	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
 	{
-		Distance::myRainActive = true;
+		Distance::myActiveRain = true;
 
 		v2f bounds = myScene->GetCamera().GetBoundSize();
 
