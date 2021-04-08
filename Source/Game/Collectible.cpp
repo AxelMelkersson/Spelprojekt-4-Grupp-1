@@ -73,6 +73,12 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 	spritePickup->SetSize(v2f(16.0f, 16.0f));
 	spritePickup->Deactivate();
 
+	if (DataManager::GetInstance().GetCollectableInfo(myID).myCollectedState)
+	{
+		spriteIdle->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
+		spritePickup->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
+	}
+
 	myAnimations[0] = Animation(false, false, false, 0, 7, 7, 0.14f, spriteIdle, 16, 16);
 	myAnimations[1] = Animation(false, true, false, 0, 8, 8, 0.09f, spritePickup, 16, 16);
 
