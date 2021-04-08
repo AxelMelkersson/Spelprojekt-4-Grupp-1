@@ -19,8 +19,8 @@ public:
 	std::array<float, 10> GetHighscores();
 
 private:
-	bool myIsSpeedrun = false;
-	bool myIsUnlocked = false;
+	bool myIsSpeedrun;
+	bool myIsUnlocked;
 	float myCurrentScore;
 	std::array<float, 10> myHighScores;
 };
