@@ -19,7 +19,6 @@ public:
 	void InitVisuals();
 
 private:
-	ParticleEffectFactory* myEffectFactory;
 	Animation myAnimation;
 
 	v2f mySpriteSize;
