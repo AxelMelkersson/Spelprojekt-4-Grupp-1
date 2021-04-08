@@ -136,7 +136,7 @@
                  "y":136
                 }, 
                 {
-                 "height":16,
+                 "height":8,
                  "id":274,
                  "name":"D\u00f6dlig",
                  "properties":[
@@ -942,9 +942,9 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"BonfireID",
+         "name":"Area",
          "type":"int",
-         "value":6
+         "value":2
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
