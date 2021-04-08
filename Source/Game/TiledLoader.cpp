@@ -239,13 +239,13 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 
 		if (!myLoadsFromLevelSelect)
 		{
-			if (someData[i].myPosition.x < 0.0f && lastDoorType == 1)
+			if (someData[i].myPosition.x < 0.0f && lastDoorType == 1 && someData[i].myType != 2)
 			{
 				doorOffset.x = 24.0f + someData[i].mySize.x;
 				doorOffset.y = someData[i].mySize.y - 8.0f;
 				doorFound = true;
 			}
-			else if (someData[i].myPosition.x > roomSize.x && lastDoorType == 0)
+			else if (someData[i].myPosition.x > roomSize.x && lastDoorType == 0 && someData[i].myType != 2)
 			{
 				doorOffset.x = -24.0f;
 				doorOffset.y = someData[i].mySize.y - 8.0f;
