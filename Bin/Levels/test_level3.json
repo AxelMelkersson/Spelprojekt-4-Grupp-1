@@ -588,30 +588,7 @@
          "draworder":"topdown",
          "id":8,
          "name":"Enemies",
-         "objects":[
-                {
-                 "height":0,
-                 "id":150,
-                 "name":"",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"Speed",
-                         "type":"float",
-                         "value":10
-                        }, 
-                        {
-                         "name":"Waypoints",
-                         "type":"string",
-                         "value":"-3 0 "
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":0,
-                 "x":320,
-                 "y":24
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
