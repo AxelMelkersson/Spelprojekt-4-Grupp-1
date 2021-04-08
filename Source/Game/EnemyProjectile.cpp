@@ -24,7 +24,7 @@ EnemyProjectile::EnemyProjectile(Scene* aScene, const v2f& aPosition, const v2f&
 	SetDirection(aPosition, aTarget);
 	GameObject::Init();
 
-	LevelScene* levelScene = dynamic_cast<LevelScene*>(aScene);
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyBulletTrailEmitter, this));
 }
 
 void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)

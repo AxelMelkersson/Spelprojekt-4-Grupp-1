@@ -3,7 +3,7 @@
     {
       "EffectType": "BulletEffectHit",
 
-      "ZIndex": 30,
+      "ZIndex": 140,
 
       "EffectTypeIndex": 6,
       "SpritePath": "Sprites/Particles/Particle1.dds",

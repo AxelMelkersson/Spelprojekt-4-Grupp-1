@@ -36,6 +36,7 @@ ParticleEffectFactory::~ParticleEffectFactory()
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLandedParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedSmallParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyBulletTrailEmitter);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingTrailParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
 	GameObject::~GameObject();
@@ -207,6 +208,19 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::BulletEffectHit);
 		break;
 	}
+	case eMessageType::EnemyBulletTrailEmitter:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffectFollowObject(gameobjectToFollow, eParticleEffects::BulletEffectTrail);
+		break;
+	}
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BulletEffectHit);
+		break;
+	}
 	case eMessageType::VelocityLinesParticle:
 	{
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
@@ -321,6 +335,7 @@ const void ParticleEffectFactory::AddSubscribers()
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedSmallParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyBulletTrailEmitter);
 	myHasAddedSubscribers = true;
 }
 

@@ -29,14 +29,14 @@
 
       "EmitterAngle": 90.0,
 
-      "EmitterWidth": 2.0,
+      "EmitterWidth": 3.5,
       "EmitterHeigth": 0.0,
 
       "MinParticleLifeTime": 0.6,
-      "MaxParticleLifeTime": 1.0,
+      "MaxParticleLifeTime": 0.6,
 
-      "SpawnLifeTime": 0.12,
-      "SpawnEverySecond": 0.02,
+      "SpawnLifeTime": 0.15,
+      "SpawnEverySecond": 0.012,
 
       "Offset": [
         {

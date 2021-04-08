@@ -1,9 +1,9 @@
 {
   "particle": [
     {
-      "EffectType": "BulletEffectTrail2",
+      "EffectType": "BulletEffectTrail",
 
-      "ZIndex": 399,
+      "ZIndex": 139,
 
       "EffectTypeIndex": 9,
       "SpritePath": "Sprites/Particles/Particle1.dds",
@@ -32,8 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 1.0,
-      "MaxParticleLifeTime": 1.0,
+      "MinParticleLifeTime": 0.15,
+      "MaxParticleLifeTime": 0.15,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,

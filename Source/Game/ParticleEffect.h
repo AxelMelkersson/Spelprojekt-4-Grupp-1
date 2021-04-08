@@ -43,6 +43,7 @@ private:
 
 	int myZIndex; 
 
+	bool mySetZIndex;
 	bool mySpawningInLocalSpace;
 	bool myKilledEffect;
 	bool myObjectIsFollowing;

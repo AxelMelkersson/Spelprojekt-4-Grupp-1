@@ -16,7 +16,7 @@ enum class eMessageType
 	PlayerLedgeLeftGrabbedHandParticle,
 	PlayerLedgeLeftGrabbedLegParticle,
 	EnemyShootingBulletHitParticle,
-	EnemyShootingBulletParticle,
+	EnemyBulletTrailEmitter,
 	EnemyShootingTrailParticle,
 	RainEffectForegroundParticle,
 	RainEffectBackgroundParticle,

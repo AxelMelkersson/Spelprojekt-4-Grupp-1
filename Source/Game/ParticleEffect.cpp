@@ -32,6 +32,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myAddedPauseTimer = {};
 	myZIndex = {};
 	myInitBatching = {};
+	mySetZIndex = {};
 }
 
 ParticleEffect::~ParticleEffect()
@@ -52,7 +53,6 @@ void ParticleEffect::Init(ParticleStats aStats)
 	myBatch->Init();
 
 	SetPosition(GetPosition());
-	SetZIndex(myStats.myZIndex);
 	SetPivot({ 0.5f, 0.5f });
 	Activate();
 
@@ -76,6 +76,12 @@ void ParticleEffect::Render()
 
 void ParticleEffect::Update(const float& aDeltaTime)
 {
+	if (!mySetZIndex)
+	{
+		SetZIndex(myStats.myZIndex);
+		mySetZIndex = true;
+	}
+
 	if (myActiveEffect)
 	{
 		UpdateParticle(aDeltaTime);
