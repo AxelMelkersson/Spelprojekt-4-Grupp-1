@@ -59,7 +59,7 @@ private:
 	int myMovingIndex;
 
 	bool myMenuActive;
-
+	bool myIsSpeedrun;
 
 	void CheckIndexPress();
 	void ActivateMenu();

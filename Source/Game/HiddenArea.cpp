@@ -6,6 +6,7 @@
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "AudioManager.h"
 
 #include "Scene.h"
 
@@ -17,7 +18,8 @@ HiddenArea::HiddenArea(Scene* aLevelScene, const v2f& aPosition, const v2f& aSiz
 	myPlayerCollided(false),
 	myHiddenSpriteBatch(nullptr),
 	myOpacity(1.0f),
-	myOpacityChangeSpeed(3.0f)
+	myOpacityChangeSpeed(3.0f),
+	myHasBeenFound(false)
 {
 	SetZIndex(130);
 	SetPosition(aPosition);
@@ -61,5 +63,10 @@ void HiddenArea::OnCollision(GameObject* aGameObject)
 	if (player)
 	{
 		myPlayerCollided = true;
+		if (!myHasBeenFound)
+		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::HiddenRoomUnlock);
+			myHasBeenFound = true;
+		}
 	}
 }

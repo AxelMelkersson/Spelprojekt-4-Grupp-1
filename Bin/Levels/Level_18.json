@@ -509,6 +509,17 @@
                  "id":549,
                  "name":"",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":200
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -693,8 +704,25 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":18,
+         "name":"AudioObjects",
+         "objects":[],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Type",
+                 "type":"int",
+                 "value":50
+                }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":18,
+ "nextlayerid":19,
  "nextobjectid":578,
  "orientation":"orthogonal",
  "renderorder":"right-down",

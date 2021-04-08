@@ -108,7 +108,7 @@ bool AudioClip::Fade(const float& aDeltaTime)
 	{
 		if (myVolume > 0)
 		{
-			myVolume -= aDeltaTime / 20.0f;
+			myVolume -= aDeltaTime / 10.0f;
 			myAudio->SetVolume(myVolume);
 		}
 		else
@@ -120,9 +120,10 @@ bool AudioClip::Fade(const float& aDeltaTime)
 	}
 	else
 	{
+		PlayIfAvailable();
 		if (myVolume < GetVolPercentage(AudioManager::GetInstance()->GetMusicVolume()))
 		{
-			myVolume += aDeltaTime / 2.0f;
+			myVolume += aDeltaTime / 5.0f;
 			myAudio->SetVolume(myVolume);
 		}
 		else
@@ -138,6 +139,11 @@ void AudioClip::SetFade(const bool& aFade, const bool& aOut)
 {
 	myIsFading = aFade;
 	myIsFadingOut = aOut;
+}
+
+const bool AudioClip::GetIsFading()
+{
+	return myIsFading;
 }
 
 AudioLayer AudioClip::GetLayer()

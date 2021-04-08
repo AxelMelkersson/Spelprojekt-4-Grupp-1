@@ -368,6 +368,7 @@
     <ClInclude Include="EffectSprite.h">
       <Filter>Game Objects\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="UIPopUp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -609,5 +610,6 @@
     <ClCompile Include="EffectSprite.cpp">
       <Filter>Game Objects\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="UIPopUp.cpp" />
   </ItemGroup>
 </Project>

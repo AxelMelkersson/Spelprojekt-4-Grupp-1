@@ -27,7 +27,7 @@ Enemy::Enemy(Scene* aScene) : GameObject(aScene)
 NormalEnemy::NormalEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
-	this->SetZIndex(400);
+	this->SetZIndex(140);
 	//AudioComponent* audio = AddComponent<AudioComponent>();
 	//audio->AddAudio(AudioList::EnemyNormalIdle);
 	//audio->SetRadius(100);
@@ -36,7 +36,7 @@ NormalEnemy::NormalEnemy(Scene* aScene) : Enemy(aScene)
 ShootingEnemy::ShootingEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
-	this->SetZIndex(400);
+	this->SetZIndex(140);
 	//AudioLibrary::GetInstance().myAudioList[AudioList::ProjectileFly]->Play();
 }
 
@@ -111,8 +111,7 @@ void ShootingEnemy::Update(const float& aDeltaTime)
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[0]);
 	}
 
-	v2f lengthToPlayer = dynamic_cast<LevelScene*>(this->myScene)->GetPlayer()->GetPosition() - this->GetPosition();
-	if (lengthToPlayer.Length() <= myJsonData->myFloatValueMap[EEnum::FireRadius])
+	if (GetComponent<SpriteComponent>()->GetShouldRender())
 	{
 		myShotTimer -= aDeltaTime;
 		if (myShotTimer <= 0)
@@ -121,7 +120,6 @@ void ShootingEnemy::Update(const float& aDeltaTime)
 			Shoot();
 		}
 	}
-
 #ifdef _DEBUG
 	ImGuiUpdate();
 #endif // _DEBUG

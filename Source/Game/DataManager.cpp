@@ -1,11 +1,275 @@
 #include "stdafx.h"
 #include "DataManager.h"
+#include <array>
 #include <fstream>
 #include <sstream>
 #include <cassert>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
 
+void DataManager::SetDataStruct(const DataEnum aDataEnum)
+{
+	rapidjson::Document tempDoc;
+	std::string tempDataPath;
+
+	switch (aDataEnum)
+	{
+	case DataEnum::player:
+	{
+		tempDataPath = myMasterDoc["PlayerData"].GetString();
+		ReadFileIntoDocument(tempDataPath, tempDoc);
+
+		for (size_t i = 0; i < static_cast<size_t>(PlayerData::PlayerFloatEnum::Player_FloatEnum_Size); i++)
+		{
+			PlayerData::PlayerFloatEnum enumValue = static_cast<PlayerData::PlayerFloatEnum>(i);
+			tempDoc[myPlayerData.myFloatNameMap[enumValue].data()].SetFloat(myPlayerData.myFloatValueMap[enumValue]);
+		}
+	}
+	break;
+	case DataEnum::enemy:
+	{
+		tempDataPath = myMasterDoc["EnemyData"].GetString();
+		ReadFileIntoDocument(tempDataPath, tempDoc);
+
+		for (size_t i = 0; i < static_cast<size_t>(EnemyData::EnemyFloatEnum::Enemy_FloatEnum_Size); i++)
+		{
+			EnemyData::EnemyFloatEnum enumValue = static_cast<EnemyData::EnemyFloatEnum>(i);
+			tempDoc[myEnemyData.myFloatNameMap[enumValue].data()].SetFloat(myEnemyData.myFloatValueMap[enumValue]);
+		}
+	}
+	break;
+	default:
+		assert((false) && "Invalid Enum given to DataManager::SetDataStruct().");
+		break;
+	}
+
+	AcceptJsonWriter(tempDataPath);
+}
+Data& DataManager::GetDataStruct(const DataEnum aDataEnum)
+{
+	switch (aDataEnum)
+	{
+	case DataEnum::player:
+	{
+		return myPlayerData;
+	}
+	break;
+	case DataEnum::enemy:
+	{
+		return myEnemyData;
+	}
+	break;
+	default:
+	{
+		assert((false) && "Invalid Enum given to DataManager::GetDataStruct().");
+		return Data();
+	}
+	break;
+	}
+}
+
+const rapidjson::Document& DataManager::GetLevel(const unsigned int aLevelIndex, const bool aIsHiddenRoom) const
+{
+	if (aIsHiddenRoom)
+	{
+		if (myHiddenRooms.find(static_cast<int>(aLevelIndex)) != myHiddenRooms.end())
+		{
+			return myHiddenRooms.at(static_cast<int>(aLevelIndex));
+		}
+	}
+
+	if (aLevelIndex < 0 || aLevelIndex >= myLevelVector.size())
+	{
+		return myLevelVector[0];
+	}
+
+	return myLevelVector[aLevelIndex];
+}
+const int DataManager::GetLevelCount() const
+{
+	return static_cast<int>(myLevelVector.size());
+}
+
+PlayerData::PlayerData()
+{
+	for (size_t i = 0; i < static_cast<size_t>(PlayerData::PlayerFloatEnum::Player_FloatEnum_Size); i++)
+	{
+		myFloatValueMap[static_cast<PlayerData::PlayerFloatEnum>(i)] = 0.0f;
+	}
+}
+EnemyData::EnemyData()
+{
+	for (size_t i = 0; i < static_cast<size_t>(EnemyData::EnemyFloatEnum::Enemy_FloatEnum_Size); i++)
+	{
+		myFloatValueMap[static_cast<EnemyData::EnemyFloatEnum>(i)] = 0.0f;
+	}
+}
+
+void DataManager::SaveHighScores(const std::array<float, 10> &someHighscores)
+{
+	for (size_t i = 0; i < someHighscores.size(); i++)
+	{
+		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(someHighscores[i]);
+	}
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState)
+{
+	assert((mySaveFile["Bonfires"].IsArray()) && "Bonfires is not Array.");
+	assert((mySaveFile["Bonfires"][anIndex]["Bonfire"].IsObject()) && "Bonfire is not Object.");
+	assert((mySaveFile["Bonfires"][anIndex]["Bonfire"]["IsActive"].IsBool()) && "IsActive is not Boolean.");
+
+	mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].SetBool(aState);
+
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+void DataManager::SaveCollectedCollectible(const unsigned int anID)
+{
+	for (size_t i = 0; i < myCollectableInfo.size(); i++)
+	{
+		if (mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["ID"].GetInt() == anID)
+		{
+			mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].SetBool(true);
+		}
+	}
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+
+void DataManager::ResetSaveFile()
+{
+	ResetCollectibles();
+	ResetBonfires();
+}
+void DataManager::ResetBonfires()
+{
+	for (size_t i = 0; i < mySaveFile["Bonfires"].GetArray().Size(); i++)
+	{
+		mySaveFile["Bonfires"].GetArray()[i]["Bonfire"]["IsActive"].SetBool(false);
+	}
+}
+void DataManager::ResetCollectibles()
+{
+	// Clears Array
+	mySaveFile["Collectibles"].GetArray().Clear();
+
+	// Assigns Value and Pushes Objects.
+	for (size_t i = 0; i < myCollectableInfo.size(); i++)
+	{
+		rapidjson::Document::AllocatorType& allocator = mySaveFile.GetAllocator();
+		rapidjson::Value jsonObject(rapidjson::Type::kObjectType);
+
+		rapidjson::Value collectible(rapidjson::Type::kObjectType);
+		jsonObject.AddMember("Collectible", collectible, allocator);
+
+		rapidjson::Value ID(rapidjson::Type::kNumberType);
+		ID.SetInt(myCollectableInfo[i].myID);
+		jsonObject["Collectible"].AddMember("ID", ID, allocator);
+
+		rapidjson::Value bonfireID(rapidjson::Type::kNumberType);
+		bonfireID.SetInt(myCollectableInfo[i].myBonfireID);
+		jsonObject["Collectible"].AddMember("BonfireID", bonfireID, allocator);
+
+		rapidjson::Value state(rapidjson::Type::kFalseType);
+		jsonObject["Collectible"].AddMember("BeenCollected", state, allocator);
+
+		rapidjson::Value difficulty(rapidjson::Type::kNumberType);
+		difficulty.SetInt(myCollectableInfo[i].myDifficulty);
+		jsonObject["Collectible"].AddMember("Difficulty", difficulty, allocator);
+
+		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
+	}
+
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+void DataManager::ResetHighScores()
+{
+	for (size_t i = 0; i < mySaveFile["HighScore"].GetArray().Size(); i++)
+	{
+		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(0);
+	}
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+
+const CollectableInfo &DataManager::GetCollectableInfo(const int anID) const
+{
+	for (size_t i = 0; i < myCollectableInfo.size(); i++)
+	{
+		if (mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["ID"].GetInt() == anID)
+		{
+			return myCollectableInfo[i];
+		}
+	}
+	assert((false) && "A Collectible ID not found in DataManager::GetCollectableInfo().");
+}
+
+const CollectableInfo& DataManager::GetCollectableInfoIndex(const int anID) const
+{
+	return myCollectableInfo[anID];
+}
+
+const unsigned int DataManager::GetCollectableCount() const
+{
+	return static_cast<int>(myCollectableInfo.size());
+}
+const bool DataManager::GetBonfireState(const unsigned int anIndex) const
+{
+	return mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].GetBool();
+}
+const std::array<float, 10> &DataManager::GetHighScores() const
+{
+	std::array<float, 10> tempArray;
+	for (size_t i = 0; i < mySaveFile["HighScore"].GetArray().Size(); i++)
+	{
+		tempArray[i] = mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].GetFloat();
+	}
+	return tempArray;
+}
+void DataManager::ParseCollectableInfo(){
+	for (const auto& levelDoc : myLevelVector)
+	{
+		if (levelDoc.IsObject())
+		{
+			for (auto layer = levelDoc["layers"].Begin(); layer != levelDoc["layers"].End(); ++layer)
+			{
+				std::string name = (*layer)["name"].GetString();
+
+				if (name == "Collectables" && (*layer).HasMember("objects"))
+				{
+					for (auto object = (*layer)["objects"].Begin(); object != (*layer)["objects"].End(); ++object)
+					{
+						CollectableInfo info;
+						std::string type = (*object)["type"].GetString();
+						std::stringstream degree(type);
+						degree >> info.myDifficulty;
+						
+						if ((*object).HasMember("properties"))
+						{
+							for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
+							{
+								if (std::string((*property)["name"].GetString()).compare("BonfireID") == 0)
+								{
+									info.myBonfireID = (*property)["value"].GetInt();
+								}
+								if (std::string((*property)["name"].GetString()).compare("ID") == 0)
+								{
+									info.myID = (*property)["value"].GetInt();
+								}
+							}
+							myCollectableInfo.push_back(info);
+						}
+					}
+				}
+			}
+		}
+	}
+
+#ifndef _RETAIL
+	ResetSaveFile();
+#endif // !_RETAIL
+	AssignCollectedState();
+}
+
+// Private Methos
 DataManager::DataManager()
 {
 	//Assign MasterDoc & SaveFile
@@ -45,89 +309,7 @@ DataManager::DataManager()
 	AssignValues(DataEnum::enemy, enemyDoc);
 }
 
-void DataManager::SetDataStruct(const DataEnum aDataEnum)
-{
-	rapidjson::Document tempDoc;
-	std::string tempDataPath;
-
-	switch (aDataEnum)
-	{
-	case DataEnum::player:
-	{
-		tempDataPath = myMasterDoc["PlayerData"].GetString();
-		ReadFileIntoDocument(tempDataPath, tempDoc);
-
-		for (size_t i = 0; i < static_cast<size_t>(PlayerData::PlayerFloatEnum::Player_FloatEnum_Size); i++)
-		{
-			PlayerData::PlayerFloatEnum enumValue = static_cast<PlayerData::PlayerFloatEnum>(i);
-			tempDoc[myPlayerData.myFloatNameMap[enumValue].data()].SetFloat(myPlayerData.myFloatValueMap[enumValue]);
-		}
-	}
-	break;
-	case DataEnum::enemy:
-	{
-		tempDataPath = myMasterDoc["EnemyData"].GetString();
-		ReadFileIntoDocument(tempDataPath, tempDoc);
-
-		for (size_t i = 0; i < static_cast<size_t>(EnemyData::EnemyFloatEnum::Enemy_FloatEnum_Size); i++)
-		{
-			EnemyData::EnemyFloatEnum enumValue = static_cast<EnemyData::EnemyFloatEnum>(i);
-			tempDoc[myEnemyData.myFloatNameMap[enumValue].data()].SetFloat(myEnemyData.myFloatValueMap[enumValue]);
-		}
-	}
-	break;
-	default:
-		assert((false) && "Invalid Enum given to DataManager::SetDataStruct().");
-		break;
-	}
-
-	//Accepterar Input till Json filen.
-	std::ofstream ofs{ tempDataPath };
-	rapidjson::OStreamWrapper osw{ ofs };
-	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
-	tempDoc.Accept(writer);
-}
-Data& DataManager::GetDataStruct(const DataEnum aDataEnum)
-{
-	switch (aDataEnum)
-	{
-	case DataEnum::player:
-	{
-		return myPlayerData;
-	}
-	break;
-	case DataEnum::enemy:
-	{
-		return myEnemyData;
-	}
-	break;
-	default:
-	{
-		assert((false) && "Invalid Enum given to DataManager::GetDataStruct().");
-		return Data();
-	}
-	break;
-	}
-}
-const rapidjson::Document& DataManager::GetLevel(const unsigned int aLevelIndex, const bool aIsHiddenRoom) const
-{
-	if (aIsHiddenRoom)
-	{
-		if (myHiddenRooms.find(static_cast<int>(aLevelIndex)) != myHiddenRooms.end())
-		{
-			return myHiddenRooms.at(static_cast<int>(aLevelIndex));
-		}
-	}
-
-	if (aLevelIndex < 0 || aLevelIndex >= myLevelVector.size())
-	{
-		return myLevelVector[0];
-	}
-
-	return myLevelVector[aLevelIndex];
-}
-
-void DataManager::ReadFileIntoDocument(std::string aFilePath, rapidjson::Document& anOutDoc)
+void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc)
 {
 	std::ifstream dataFile(aFilePath);
 	std::ostringstream outStringStream;
@@ -136,24 +318,13 @@ void DataManager::ReadFileIntoDocument(std::string aFilePath, rapidjson::Documen
 	anOutDoc.Parse(outString.c_str());
 	dataFile.close();
 }
-
-// Constructors är bara här för att undvika varningar.
-PlayerData::PlayerData()
+void DataManager::AcceptJsonWriter(const std::string aDataPath) const
 {
-	for (size_t i = 0; i < static_cast<size_t>(PlayerData::PlayerFloatEnum::Player_FloatEnum_Size); i++)
-	{
-		myFloatValueMap[static_cast<PlayerData::PlayerFloatEnum>(i)] = 0.0f;
-	}
+	std::ofstream ofs{ aDataPath };
+	rapidjson::OStreamWrapper osw{ ofs };
+	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
+	mySaveFile.Accept(writer);
 }
-EnemyData::EnemyData()
-{
-	for (size_t i = 0; i < static_cast<size_t>(EnemyData::EnemyFloatEnum::Enemy_FloatEnum_Size); i++)
-	{
-		myFloatValueMap[static_cast<EnemyData::EnemyFloatEnum>(i)] = 0.0f;
-	}
-}
-
-// Assign Method
 void DataManager::AssignValues(const DataEnum anEnum, const rapidjson::Document &aDoc)
 {
 	switch (anEnum)
@@ -225,166 +396,10 @@ void DataManager::AssignValues(const DataEnum anEnum, const rapidjson::Document 
 		break;
 	}
 }
-
-const int DataManager::GetLevelCount() const
-{
-	return static_cast<int>(myLevelVector.size());
-}
-
-void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState)
-{
-	assert((mySaveFile["Bonfires"].IsArray()) && "Bonfires is not Array.");
-	assert((mySaveFile["Bonfires"][anIndex]["Bonfire"].IsObject()) && "Bonfire is not Object.");
-	assert((mySaveFile["Bonfires"][anIndex]["Bonfire"]["IsActive"].IsBool()) && "IsActive is not Boolean.");
-
-	std::string dataPath = "JSON/SaveFile.json";
-
-	mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].SetBool(aState);
-
-	std::ofstream ofs{ dataPath };
-	rapidjson::OStreamWrapper osw{ ofs };
-	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
-	mySaveFile.Accept(writer);
-}
-const bool DataManager::GetBonfireState(const unsigned int anIndex) const
-{
-	return mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].GetBool();
-}
-
-void DataManager::ResetSaveFile()
-{
-	ResetCollectibles();
-	ResetBonfires();
-}
-void DataManager::ResetBonfires()
-{
-	for (size_t i = 0; i < mySaveFile["Bonfires"].GetArray().Size(); i++)
-	{
-		mySaveFile["Bonfires"].GetArray()[i]["Bonfire"]["IsActive"].SetBool(false);
-	}
-}
-void DataManager::ResetCollectibles()
-{
-	// Clears Array
-	mySaveFile["Collectibles"].GetArray().Clear();
-
-	// Assigns Value and Pushes Objects.
-	for (size_t i = 0; i < myCollectableInfo.size(); i++)
-	{
-		rapidjson::Document::AllocatorType& allocator = mySaveFile.GetAllocator();
-		rapidjson::Value jsonObject(rapidjson::Type::kObjectType);
-
-		rapidjson::Value collectible(rapidjson::Type::kObjectType);
-		jsonObject.AddMember("Collectible", collectible, allocator);
-
-		rapidjson::Value ID(rapidjson::Type::kNumberType);
-		ID.SetInt(myCollectableInfo[i].myID);
-		jsonObject["Collectible"].AddMember("ID", ID, allocator);
-
-		rapidjson::Value bonfireID(rapidjson::Type::kNumberType);
-		bonfireID.SetInt(myCollectableInfo[i].myBonfireID);
-		jsonObject["Collectible"].AddMember("BonfireID", bonfireID, allocator);
-
-		rapidjson::Value state(rapidjson::Type::kFalseType);
-		jsonObject["Collectible"].AddMember("BeenCollected", state, allocator);
-
-		rapidjson::Value difficulty(rapidjson::Type::kNumberType);
-		difficulty.SetInt(myCollectableInfo[i].myDifficulty);
-		jsonObject["Collectible"].AddMember("Difficulty", difficulty, allocator);
-
-		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
-	}
-
-	// Accepts Writer.
-	std::string dataPath = "JSON/SaveFile.json";
-	std::ofstream ofs{ dataPath };
-	rapidjson::OStreamWrapper osw{ ofs };
-	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
-	mySaveFile.Accept(writer);
-}
-
-void DataManager::CollectCollectible(const int anID)
-{
-	for (size_t i = 0; i < myCollectableInfo.size(); i++)
-	{
-		if (mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["ID"].GetInt() == anID)
-		{
-			mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].SetBool(true);
-		}
-	}
-
-	// Accepts Writer.
-	std::string dataPath = "JSON/SaveFile.json";
-	std::ofstream ofs{ dataPath };
-	rapidjson::OStreamWrapper osw{ ofs };
-	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
-	mySaveFile.Accept(writer);
-}
-void DataManager::SetCollectedState()
+void DataManager::AssignCollectedState()
 {
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
 	}
-}
-const CollectableInfo &DataManager::GetCollectableInfo(const int anID) const
-{
-	for (size_t i = 0; i < myCollectableInfo.size(); i++)
-	{
-		if (mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["ID"].GetInt() == anID)
-		{
-			return myCollectableInfo[i];
-		}
-	}
-	assert((false) && "A Collectible ID not found in DataManager::GetCollectableInfo().");
-}
-
-const int DataManager::GetCollectableCount()
-{
-	return static_cast<int>(myCollectableInfo.size());
-}
-
-void DataManager::ParseCollectableInfo(){
-	for (const auto& levelDoc : myLevelVector)
-	{
-		if (levelDoc.IsObject())
-		{
-			for (auto layer = levelDoc["layers"].Begin(); layer != levelDoc["layers"].End(); ++layer)
-			{
-				std::string name = (*layer)["name"].GetString();
-
-				if (name == "Collectables" && (*layer).HasMember("objects"))
-				{
-					for (auto object = (*layer)["objects"].Begin(); object != (*layer)["objects"].End(); ++object)
-					{
-						CollectableInfo info;
-						std::string type = (*object)["type"].GetString();
-						std::stringstream degree(type);
-						degree >> info.myDifficulty;
-						
-						if ((*object).HasMember("properties"))
-						{
-							for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
-							{
-								if (std::string((*property)["name"].GetString()).compare("BonfireID") == 0)
-								{
-									info.myBonfireID = (*property)["value"].GetInt();
-								}
-								if (std::string((*property)["name"].GetString()).compare("ID") == 0)
-								{
-									info.myID = (*property)["value"].GetInt();
-								}
-							}
-							myCollectableInfo.push_back(info);
-						}
-					}
-				}
-			}
-		}
-	}
-
-#ifndef _RETAIL
-	ResetSaveFile();
-#endif // !_RETAIL
-	SetCollectedState();
 }

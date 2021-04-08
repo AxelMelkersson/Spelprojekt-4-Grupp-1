@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Game.h"
+#include "SpeedrunManager.h"
 
 #include "AnimationComponent.hpp"
 
@@ -22,6 +23,8 @@ PauseMenu::PauseMenu(Scene* aLevelScene)
 
 void PauseMenu::InitMenu()
 {
+	myIsSpeedrun = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun();
+
 	v2f referenceSize = Config::ourReferenceSize;
 
 	myInput = CGameWorld::GetInstance()->Input();

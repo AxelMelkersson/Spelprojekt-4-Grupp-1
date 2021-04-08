@@ -33,6 +33,9 @@ private:
 	std::vector<int> myAreaIndexes;
 	std::vector<int> myLevelIndexes;
 
+	std::vector<int> myTotalCollectibleInfo;
+	std::vector<int> myTotalCollectibleInfoCollected;
+
 	std::vector<std::vector<int>> myCollectibleInfo;
 	std::vector<std::vector<int>> myCollectibleInfoCollected;
 

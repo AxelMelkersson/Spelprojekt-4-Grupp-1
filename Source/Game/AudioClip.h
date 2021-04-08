@@ -30,8 +30,8 @@ public:
 	void UnLock();
 
 	bool Fade(const float& aDeltaTime);
-
 	void SetFade(const bool& aFade, const bool& aOut);
+	const bool GetIsFading();
 
 	AudioLayer GetLayer();
 

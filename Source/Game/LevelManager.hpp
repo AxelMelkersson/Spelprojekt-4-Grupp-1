@@ -22,6 +22,7 @@ public:
 		LevelScene,
 		IntroLogos,
 		WinScene,
+		SpeedrunScene,
 		//PauseMenu,
 		Count
 	};
@@ -29,7 +30,7 @@ public:
 	LevelManager();
 	~LevelManager();
 
-	void Init(Scene* aMainMenuScene, Scene* aLevelSelect, Scene* aLevelScene, Scene* anIntroLogosScene, Scene* aWinScene);
+	void Init(Scene* aMainMenuScene, Scene* aLevelSelect, Scene* aLevelScene, Scene* anIntroLogosScene, Scene* aWinScene, Scene* aSpeedrunScene);
 
 	void Update();
 

@@ -22,7 +22,7 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myTarget(nullptr),
 	mySpeed(1.0f),
 	myIdleMovementSpeed(5.0f),
-	myIdleMovementDistance(25.0f),
+	myIdleMovementDistance(8.0f),
 	myMinRadiusFromTarget(25.0f),
 	myTimeOffset(0.0f),
 	myType(eCollectibleType::Easy),
@@ -143,7 +143,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		{
 			//SetAnimation;
 			myWasCollected = true;
-			DataManager::GetInstance().CollectCollectible(myID);
+			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
 		}

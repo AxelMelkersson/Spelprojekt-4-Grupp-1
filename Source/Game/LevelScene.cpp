@@ -14,10 +14,13 @@
 
 #include "LevelManager.hpp"
 #include "SpeedrunManager.h"
+#include "AudioManager.h"
 
 #include "Game.h"
 
 #include "PostMaster.hpp"
+
+#include "BashableObject.hpp"
 
 #include "SpriteComponent.h"
 
@@ -37,6 +40,9 @@ void LevelScene::Load()
 	myIsSpeedrun = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun();
 	myBlackScreenOpacity = 1.0f;
 	myBlackScreenOpacitySpeed = 4.3f;
+
+	AudioManager::GetInstance()->FadeOut(AudioList::Main_Menu);
+	AudioManager::GetInstance()->Stop(AudioList::MenuAmbience);
 
 	myReachedFullOpacity = true;
 	myIsTransitioning = false;
@@ -65,6 +71,10 @@ void LevelScene::Load()
 
 void LevelScene::Unload()
 {
+	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
+	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
+	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
+
 	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
 	{
 		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetScore(myTimer->GetTime());
