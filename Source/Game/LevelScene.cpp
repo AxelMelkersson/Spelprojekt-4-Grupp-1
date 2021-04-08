@@ -56,11 +56,6 @@ void LevelScene::Load()
 	myEffectFactory = new ParticleEffectFactory(this);
 	myPlayer = new Player(this);
 
-	Jesus* jesus = new Jesus(this);
-	jesus->Init(v2f(100.0f, 0.0f));
-	jesus->InitAnimations();
-	jesus->SetTarget(myPlayer);
-
 	myBackground = new Background(this);
 
 	CGameWorld::GetInstance()->GetLevelManager().LoadLevel(this, myPlayer);
