@@ -944,7 +944,7 @@
         {
          "name":"Area",
          "type":"int",
-         "value":2
+         "value":0
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
