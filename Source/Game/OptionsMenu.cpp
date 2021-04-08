@@ -93,7 +93,7 @@ void OptionsMenu::Init()
 	
 	if (myIsOpenedFromPause)
 	{
-		myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
+		myBackBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Back_29x16px_Unmarked.dds", { 29.f,16.f }, backPos, "Sprites/UI/pauseMenu/UI_PauseMenu_Text_Back_29x16px_Marked.dds", 29);
 	}
 	else
 	{
@@ -418,7 +418,7 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
-	myFireHighlight->UpdateUIObjects(aDeltaTime);
+	myFireHighlight->Update(aDeltaTime);
 
 	myCredits->UpdateUIObjects(aDeltaTime);
 
