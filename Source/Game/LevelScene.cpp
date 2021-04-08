@@ -67,15 +67,13 @@ void LevelScene::Load()
 		myTimer->Start(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetScore());
 	}
 
+	Scene::Load();
+
 	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
 	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
 
-	if (Distance::myActiveRain)
-	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
-	}
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
 
-	Scene::Load();
 }
 
 void LevelScene::Unload()

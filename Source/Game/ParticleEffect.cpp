@@ -10,7 +10,6 @@
 #include "Random.hpp"
 #include "SpriteComponent.h"
 #include "SpritebatchComponent.h"
-#include "CameraStaticDistance.hpp"
 
 ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:
@@ -59,7 +58,6 @@ void ParticleEffect::Init(ParticleStats aStats)
 
 	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
 	{
-		Distance::myActiveRain = true;
 
 		v2f bounds = myScene->GetCamera().GetBoundSize();
 
