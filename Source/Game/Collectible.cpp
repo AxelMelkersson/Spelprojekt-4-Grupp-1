@@ -7,6 +7,7 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "AudioManager.h"
+#include "PostMaster.hpp"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -146,6 +147,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticle, GetPosition()));
 		}
 	}
 }

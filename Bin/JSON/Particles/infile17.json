@@ -11,7 +11,7 @@
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.04,
+      "EmitterLifeTime": 0.1,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
@@ -21,16 +21,16 @@
       "MinTimeBetweenSpawns": 0.01,
       "MaxTimeBetweenSpawns": 0.01,
 
-      "MinSpeed": 15.0,
+      "MinSpeed": 50.0,
       "MaxSpeed": 10.0,
 
-      "MinParticleAngularVel": 0.0,
-      "MaxParticleAngularVel": 0.0,
+      "MinParticleAngularVel": -1.0,
+      "MaxParticleAngularVel": 1.0,
 
       "EmitterAngle": 270.0,
 
       "EmitterWidth": 2.0,
-      "EmitterHeigth": 0.0,
+      "EmitterHeigth": 2.0,
 
       "MinParticleLifeTime": 0.2,
       "MaxParticleLifeTime": 0.5,
@@ -40,19 +40,19 @@
 
       "Offset": [
         {
-          "X": 3.0
+          "X": 0.0
         },
         {
-          "Y": 4.0
+          "Y": 0.0
         }
       ],
 
-      "LockPosition": false,
+      "LockPosition": true,
 
       "LockedAngular": [
         -1.0,
-        0.0,
-        0.0,
+        -1.0,
+        1.0,
         1.0
       ],
 

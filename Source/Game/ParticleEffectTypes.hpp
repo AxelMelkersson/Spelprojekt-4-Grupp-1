@@ -20,5 +20,6 @@ enum class eParticleEffects
 	PlayerLedgeLeftGrabbedHandParticle,
 	PlayerLedgeLeftGrabbedLegParticle,
 	VelocityLinesParticles,
-	CollectibleCollectedParticle
+	CollectibleCollectedParticle,
+	ShrineWakeUpParticle
 };

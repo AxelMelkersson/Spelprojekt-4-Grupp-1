@@ -24,6 +24,7 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::ShrineWakeUpParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectBackgroundParticle);
@@ -230,9 +231,9 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	}
 	case eMessageType::CollectibleCollectedParticle:
 	{
-		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+		const v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffectFollowObject(gameobjectToFollow, eParticleEffects::CollectibleCollectedParticle);
+		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticle);
 		break;
 	}
 	case eMessageType::RainEffectBackgroundParticle:
@@ -255,6 +256,14 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		position.y = 90.f;
 
 		SpawnEffect(position, eParticleEffects::RainEffectNextScreenParticle);
+		break;
+	}
+	case eMessageType::ShrineWakeUpParticle:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+		position.y = 90.f;
+
+		SpawnEffect(position, eParticleEffects::ShrineWakeUpParticle);
 		break;
 	}
 	default:
@@ -321,6 +330,7 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::ShrineWakeUpParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectBackgroundParticle);
