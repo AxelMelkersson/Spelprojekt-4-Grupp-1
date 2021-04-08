@@ -11,7 +11,7 @@ enum class eParticleEffects
 	BulletEffectTrail,
 	BulletEffectHit,
 	FogEffect,
-	FallEffect,
+	PlayerFallLandEffect,
 	TrailEffect2,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,

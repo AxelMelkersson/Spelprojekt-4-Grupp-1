@@ -152,7 +152,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	{
 		const v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::FallEffect);
+		SpawnEffect(position, eParticleEffects::PlayerFallLandEffect);
 		break;
 	}
 	case eMessageType::PlayerBashedPlayerParticle:
@@ -275,9 +275,9 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::FogEffect)]);
 		break;
 	}
-	case eParticleEffects::FallEffect:
+	case eParticleEffects::PlayerFallLandEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::FallEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerFallLandEffect)]);
 		break;
 	}
 	case eParticleEffects::TrailEffect2:

@@ -3,7 +3,7 @@
     {
       "EffectType": "PlayerBashedSmallParticle",
 
-      "ZIndex": 30,
+      "ZIndex": 100,
 
       "EffectTypeIndex": 11,
       "SpritePath": "Sprites/Particles/Particle1.dds",
@@ -36,7 +36,7 @@
       "MaxParticleLifeTime": 1.0,
 
       "SpawnLifeTime": 0.5,
-      "SpawnEverySecond": 0.01,
+      "SpawnEverySecond": 0.05,
 
       "Offset": [
         {

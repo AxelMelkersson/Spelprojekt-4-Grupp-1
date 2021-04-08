@@ -72,6 +72,7 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myGrabbedLedge = false;
 	myIsLerpingToPosition = false;
 	myIsGliding = false;
+	myCheckParticleLanding = true;
 
 	myGlideFactor = 0.14f;
 
@@ -188,6 +189,8 @@ void Player::InitCollider()
 void Player::Update(const float& aDeltaTime)
 {
 	GameObject::Update(aDeltaTime);
+
+	CheckParticleLanding();
 
 	if (myHasDied)
 	{
@@ -319,7 +322,6 @@ void Player::CheckJump()
 
 			if (myHasLanded && (GetComponent<PhysicsComponent>()->GetVelocityY() == 0.0f || myAirCoyoteTimer > 0))
 			{
- 				PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
 				Jump();
 			}
 			else if (!myHasDoubleJumped)
@@ -388,6 +390,7 @@ void Player::Jump()
 	}
 
 	UnlockLandingSounds();
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
 	v2f calculatedSpring = mySpringVelocity;
 	calculatedSpring.y = calculatedSpring.y;
@@ -1022,3 +1025,15 @@ void Player::ImGuiUpdate()
 	ImGui::End();
 }
 #endif // DEBUG
+
+const void Player::CheckParticleLanding()
+{
+	if (myHasLanded && !myCheckParticleLanding && !myWillJumpWhenFalling)
+	{
+		myCheckParticleLanding = true;
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
+	}
+
+	if (!myHasLanded)
+		myCheckParticleLanding = false;
+}

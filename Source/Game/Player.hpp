@@ -140,7 +140,11 @@ private:
 	bool myHasDied;
 	bool myIsOnPlatform;
 	bool myIsGliding;
+	bool myCheckParticleLanding;
 
 	PlayerData* myJsonData = new PlayerData();
+
+	const void CheckParticleLanding();
+
 };
 
