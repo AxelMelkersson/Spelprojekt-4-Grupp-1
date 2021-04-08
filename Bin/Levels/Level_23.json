@@ -809,6 +809,11 @@
          "name":"Area",
          "type":"int",
          "value":0
+        }, 
+        {
+         "name":"ID",
+         "type":"int",
+         "value":201
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
