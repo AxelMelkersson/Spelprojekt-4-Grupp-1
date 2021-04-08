@@ -307,6 +307,10 @@ DataManager::DataManager()
 	ReadFileIntoDocument(enemyDataPath, enemyDoc);
 	//Assign Enemy Values
 	AssignValues(DataEnum::enemy, enemyDoc);
+
+#ifndef _RETAIL
+	ResetSaveFile();
+#endif // !_RETAIL
 }
 
 void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc)
