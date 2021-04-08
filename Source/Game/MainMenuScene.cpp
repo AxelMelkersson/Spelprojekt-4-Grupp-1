@@ -7,6 +7,7 @@
 
 #include "LevelManager.hpp"
 #include "SpeedrunManager.h"
+#include "DataManager.h"
 #include "InputWrapper.h"
 
 #include "CutsceneManager.h"
@@ -23,6 +24,10 @@ MainMenuScene::MainMenuScene()
 
 void MainMenuScene::Load()
 {
+
+	myLevelSelectUnlocked = DataManager::GetInstance().GetBonfireState(0);
+	mySpeedrunUnlocked = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsUnlocked();
+
 	myButtons.clear();
 	myMovingIndex = {};
 
@@ -36,6 +41,7 @@ void MainMenuScene::Load()
 	InitObjects();
 
 	Scene::Load();
+
 }
 
 void MainMenuScene::Activate()
@@ -111,8 +117,8 @@ void MainMenuScene::InitObjects()
 	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
 
 	myNewGameBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_unmarked.dds", { 56.f,16.f }, newGameBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_marked.dds", 56);
-	myLevelSelectBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Marked_72x16px.dds", 72);
-	mySpeedrunModeBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Unmarked.dds", { 57.f,16.f }, speedrunModeBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Marked.dds", 57);
+	myLevelSelectBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Marked_72x16px.dds", 72, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_80x9px_Locked.dds", myLevelSelectUnlocked);
+	mySpeedrunModeBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Unmarked.dds", { 57.f,16.f }, speedrunModeBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_57x16px_Marked.dds", 57, "Sprites/UI/startMenu/UI_StartMenu_Text_Speedrun_65x12px_Locked.dds", mySpeedrunUnlocked);
 	myOptionsBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_Option_44x16px_unmarked.dds", { 44.f,16.f }, optionsBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_Option_44x16px_marked.dds", 44);
 	myExitGameBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_QuitGame_56x16px_Unmarked.dds", { 56.f,16.f }, exitGameBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_QuitGame_56x16px_Marked.dds", 56);
 	
@@ -165,7 +171,7 @@ void MainMenuScene::CheckButtonsPress()
 			mySubMenuActive = true;
 			SetActiveMenu(false);
 		}
-		else if (myMovingIndex == static_cast<int>(eMainMenuButton::LevelSelect))
+		else if (myMovingIndex == static_cast<int>(eMainMenuButton::LevelSelect) && myLevelSelectBtn->GetIsUnlocked())
 		{
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelSelect);
 
@@ -173,7 +179,7 @@ void MainMenuScene::CheckButtonsPress()
 			CGameWorld::GetInstance()->GetLevelManager().ToggleImGui();
 #endif //RETAIL
 		}
-		else if (myMovingIndex == static_cast<int>(eMainMenuButton::SpeedrunMode))
+		else if (myMovingIndex == static_cast<int>(eMainMenuButton::SpeedrunMode) && mySpeedrunModeBtn->GetIsUnlocked())
 		{
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::SpeedrunScene);
 			//CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsSpeedrun(true);
