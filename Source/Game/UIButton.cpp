@@ -32,6 +32,7 @@ void UIButton::Init(const std::string aPathString, const v2f aSize, const v2f aP
 	if (myIsUnlocked == false)
 	{
 		sprite->SetSpritePath(aLockedPathString);
+		myPosition.x += 1;
 	}
 	else
 	{

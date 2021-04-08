@@ -108,20 +108,32 @@
          "name":"Platforms",
          "objects":[
                 {
-                 "height":152,
+                 "height":8,
                  "id":109,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":40,
+                 "width":21,
                  "x":288,
                  "y":32
                 }, 
                 {
-                 "height":128,
+                 "height":8,
                  "id":112,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -141,20 +153,26 @@
                  "y":120
                 }, 
                 {
-                 "height":56,
+                 "height":64,
                  "id":114,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":8,
-                 "x":352,
-                 "y":128
+                 "width":56,
+                 "x":424,
+                 "y":120
                 }, 
                 {
-                 "height":112,
+                 "height":8,
                  "id":115,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -163,20 +181,26 @@
                  "y":72
                 }, 
                 {
-                 "height":88,
+                 "height":80,
                  "id":116,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":8,
-                 "x":264,
-                 "y":96
+                 "width":8.10126582278481,
+                 "x":263.949367088608,
+                 "y":104
                 }, 
                 {
-                 "height":64,
+                 "height":8,
                  "id":117,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -188,6 +212,12 @@
                  "height":48,
                  "id":118,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -218,9 +248,15 @@
                  "y":80
                 }, 
                 {
-                 "height":144,
+                 "height":8,
                  "id":121,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -295,13 +331,19 @@
                  "y":-24
                 }, 
                 {
-                 "height":72,
+                 "height":8,
                  "id":130,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":80,
+                 "width":32,
                  "x":424,
                  "y":112
                 }, 
@@ -331,6 +373,12 @@
                  "height":52,
                  "id":136,
                  "name":"D\u00f6dlig",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -342,6 +390,12 @@
                  "height":19.9999999999998,
                  "id":138,
                  "name":"D\u00f6dlig",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -353,6 +407,12 @@
                  "height":3.99999999999977,
                  "id":139,
                  "name":"D\u00f6dlig",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -364,6 +424,12 @@
                  "height":4,
                  "id":142,
                  "name":"D\u00f6dlig",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -419,12 +485,153 @@
                  "height":1,
                  "id":174,
                  "name":"D\u00f6dlig",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
                  "width":352,
                  "x":72,
                  "y":184
+                }, 
+                {
+                 "height":136,
+                 "id":175,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":0,
+                 "y":48
+                }, 
+                {
+                 "height":56,
+                 "id":176,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":256,
+                 "y":128
+                }, 
+                {
+                 "height":8,
+                 "id":177,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8.10127,
+                 "x":264,
+                 "y":96
+                }, 
+                {
+                 "height":104,
+                 "id":178,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":16,
+                 "x":272,
+                 "y":80
+                }, 
+                {
+                 "height":8,
+                 "id":180,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":19,
+                 "x":309,
+                 "y":32
+                }, 
+                {
+                 "height":144,
+                 "id":181,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":288,
+                 "y":40
+                }, 
+                {
+                 "height":120,
+                 "id":182,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":16,
+                 "x":328,
+                 "y":64
+                }, 
+                {
+                 "height":56,
+                 "id":183,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":352,
+                 "y":128
+                }, 
+                {
+                 "height":8,
+                 "id":184,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":456,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -715,7 +922,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":175,
+ "nextobjectid":185,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

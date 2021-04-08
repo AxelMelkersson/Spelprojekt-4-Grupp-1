@@ -1445,6 +1445,17 @@
                  "id":364,
                  "name":"",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"Area",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":226
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -1457,6 +1468,17 @@
                  "id":365,
                  "name":"",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"Area",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":225
+                        }],
                  "rotation":0,
                  "type":"1",
                  "visible":true,
@@ -1477,7 +1499,7 @@
                  "value":13
                 }],
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

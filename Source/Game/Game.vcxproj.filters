@@ -369,6 +369,7 @@
       <Filter>Game Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="UIPopUp.h" />
+    <ClInclude Include="CreditsMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -611,5 +612,6 @@
       <Filter>Game Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="UIPopUp.cpp" />
+    <ClCompile Include="CreditsMenu.cpp" />
   </ItemGroup>
 </Project>

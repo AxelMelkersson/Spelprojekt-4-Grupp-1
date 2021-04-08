@@ -158,7 +158,7 @@
                  "y":-68
                 }, 
                 {
-                 "height":24,
+                 "height":8,
                  "id":521,
                  "name":"",
                  "properties":[
@@ -186,7 +186,7 @@
                  "y":176
                 }, 
                 {
-                 "height":32,
+                 "height":8,
                  "id":523,
                  "name":"",
                  "properties":[
@@ -327,11 +327,6 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
                          "name":"Speed",
                          "type":"float",
                          "value":50
@@ -392,6 +387,28 @@
                  "width":56,
                  "x":216,
                  "y":-70
+                }, 
+                {
+                 "height":16,
+                 "id":541,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":64,
+                 "x":0,
+                 "y":168
+                }, 
+                {
+                 "height":24,
+                 "id":542,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":67,
+                 "x":432,
+                 "y":160
                 }],
          "opacity":1,
          "properties":[
@@ -609,7 +626,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":541,
+ "nextobjectid":543,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

@@ -1,0 +1,75 @@
+{
+  "particle": [
+    {
+      "EffectType": "VelocityLinesParticles",
+
+      "ZIndex": 102,
+
+      "EffectTypeIndex": 16,
+      "SpritePath": "Sprites/Particles/Particle1.dds",
+
+      "PauseTimer": 0.0,
+      "PauseSeconds": 0.0,
+
+      "EmitterLifeTime": 0.01,
+
+      "StartScale": 1.0,
+      "EndScale": 1.0,
+
+      "RotateSprite": 0.0,
+
+      "MinTimeBetweenSpawns": 0.01,
+      "MaxTimeBetweenSpawns": 0.01,
+
+      "MinSpeed": 3.0,
+      "MaxSpeed": 1.0,
+
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
+
+      "EmitterAngle": 90.0,
+
+      "EmitterWidth": 2.0,
+      "EmitterHeigth": 0.0,
+
+      "MinParticleLifeTime": 0.6,
+      "MaxParticleLifeTime": 1.0,
+
+      "SpawnLifeTime": 0.12,
+      "SpawnEverySecond": 0.02,
+
+      "Offset": [
+        {
+          "X": 0.0
+        },
+        {
+          "Y": 0.0
+        }
+      ],
+
+      "LockPosition": true,
+
+      "LockedAngular": [
+        -1.0,
+        -1.0,
+        1.0,
+        0.0
+      ],
+
+      "StartColor": [
+        255.0,
+        255.0,
+        255.0,
+        1.0
+      ],
+      "EndColor": [
+        255.0,
+        255.0,
+        255.0,
+        0.0
+      ],
+      "BlendState": "Additive"
+    }
+  ]
+
+}

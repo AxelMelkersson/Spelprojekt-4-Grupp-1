@@ -8,6 +8,7 @@
 #include "AudioManager.h"
 
 #include "Player.hpp"
+#include "LevelScene.h"
 
 UnstablePlatform::UnstablePlatform(Scene* aLevelScene)
 	:
@@ -19,6 +20,7 @@ UnstablePlatform::UnstablePlatform(Scene* aLevelScene)
 	myIsDeactivated(false)
 {
 	SetZIndex(94);
+	myMaterial = 1;
 }
 
 void UnstablePlatform::Update(const float& aDeltaTime)
@@ -65,9 +67,9 @@ void UnstablePlatform::OnCollision(GameObject* aGameObject)
 			return;
 		}
 
+		player->PlayFootSteps(myMaterial);
 		if (!myCollidedWithPlayer && !myIsDeactivated && aGameObject->GetPositionY() < myTransform.myPosition.y)
 		{
-			player->PlayFootSteps(myMaterial);
 			player->SetPlatformVelocity(v2f(0.0f, 0.0f));
 
 			AudioManager::GetInstance()->PlayAudio(AudioList::WeakPlatform);
@@ -81,6 +83,7 @@ void UnstablePlatform::Landed(const int& aOverlapY)
 {
 	if (aOverlapY >= 0)
 	{
+		dynamic_cast<Player*>(dynamic_cast<LevelScene*>(this->myScene)->GetPlayer())->PlayLandingSounds(myMaterial);
 		myPlayerIsOnTop = true;
 	}
 }

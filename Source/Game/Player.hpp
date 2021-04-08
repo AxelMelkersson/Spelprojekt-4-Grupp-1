@@ -143,7 +143,11 @@ private:
 	bool myIsOnPlatform;
 	bool myIsGliding;
 	bool myIsInRangeOfBash;
+	bool myCheckParticleLanding;
 
 	PlayerData* myJsonData = new PlayerData();
+
+	const void CheckParticleLanding();
+
 };
 

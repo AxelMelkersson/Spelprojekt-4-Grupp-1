@@ -4,28 +4,45 @@
 #include "Scene.h"
 #include "LevelScene.h"
 #include "Player.hpp"
+#include "Subscriber.hpp"
+#include "PostMaster.hpp"
+#include "Random.hpp"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
 #include <fstream>
 
-ParticleEffectFactory::ParticleEffectFactory()
-{
-	myScene = {};
-	myPlayer = {};
-	myEffects = {};
-	myTestIndex = {};
-}
-
-void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
+ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
+	:
+	GameObject(aLevelScene)
 {
 	myScene = aLevelScene;
-	LevelScene* levelScene = dynamic_cast<LevelScene*>(aLevelScene);
-	Player* player = dynamic_cast<Player*>(levelScene->GetPlayer());
-	myPlayer = player;
+	myEffects = {};
+	myTestIndex = {};
+	myHasAddedSubscribers = false;
+}
 
-	assert(player != NULL);
+ParticleEffectFactory::~ParticleEffectFactory()
+{
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectForegroundParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectBackgroundParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::VelocityLinesParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeRightGrabbedLegParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeRightGrabbedHandParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLandedParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedSmallParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingTrailParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
+	GameObject::~GameObject();
+}
 
+void ParticleEffectFactory::ReadEffects()
+{
 	int index = {};
 	std::ifstream effectObjectFile("JSON/Particles/MasterParticles.json");
 	rapidjson::IStreamWrapper effectObjectStream(effectObjectFile);
@@ -70,6 +87,8 @@ void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 			stats.myMaxParticleLifeTime = (*particleStat)["MaxParticleLifeTime"].GetFloat();
 			stats.myEmitterLifeTime = (*particleStat)["EmitterLifeTime"].GetFloat();
 			stats.mySpriteRotation = (*particleStat)["RotateSprite"].GetFloat();
+			stats.mySpawnEverySecond = (*particleStat)["SpawnEverySecond"].GetFloat();
+			stats.mySpawnLifeTime = (*particleStat)["SpawnLifeTime"].GetFloat();
 			stats.myOffset = { (*particleStat)["Offset"][0]["X"].GetFloat(), (*particleStat)["Offset"][1]["Y"].GetFloat() };
 
 			stats.myEmitterAngular = { (*particleStat)["LockedAngular"][0].GetFloat(), (*particleStat)["LockedAngular"][1].GetFloat(), (*particleStat)["LockedAngular"][2].GetFloat(), (*particleStat)["LockedAngular"][3].GetFloat() };
@@ -92,7 +111,144 @@ void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 
 void ParticleEffectFactory::Init()
 {
-	//SpawnCharacterEffects();
+	ReadEffects();
+	GameObject::Init();
+}
+
+void ParticleEffectFactory::Update(const float& aDeltaTime)
+{
+	if (!myHasAddedSubscribers)
+	{
+		AddSubscribers();
+	}
+
+
+	for (int i = mySpawningEffects.size() - 1; i >= 0; i--)
+	{
+		mySpawningEffects[i].myTimer += aDeltaTime;
+		mySpawningEffects[i].myTotalTimer += aDeltaTime;
+
+		if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
+		{
+			mySpawningEffects[i].myTimer = {};
+
+			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+		}
+
+		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer)
+			mySpawningEffects.erase(mySpawningEffects.begin() + i);
+	}
+}
+
+void ParticleEffectFactory::Notify(const Message& aMessage)
+{
+	switch (aMessage.myMessageType)
+	{
+	case eMessageType::EnemyShootingTrailParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::TrailEffect2);
+		break;
+	}
+	case eMessageType::PlayerLandedParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::PlayerFallLandEffect);
+		break;
+	}
+	case eMessageType::PlayerLedgeRightGrabbedHandParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::PlayerLedgeRightGrabbedHandParticle);
+		break;
+	}
+	case eMessageType::PlayerLedgeRightGrabbedLegParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::PlayerLedgeRightGrabbedLegParticle);
+		break;
+	}
+	case eMessageType::PlayerLedgeLeftGrabbedHandParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::PlayerLedgeLeftGrabbedHandParticle);
+		break;
+	}
+	case eMessageType::PlayerLedgeLeftGrabbedLegParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::PlayerLedgeLeftGrabbedLegParticle);
+		break;
+	}
+	case eMessageType::PlayerBashedPlayerParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::PlayerBashedPlayerParticle);
+		break;
+	}
+	case eMessageType::PlayerBashedSmallParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::PlayerBashedSmallParticle);
+		break;
+	}
+	case eMessageType::EnemyShootingBulletHitParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BulletEffectHit);
+		break;
+	}
+	case eMessageType::VelocityLinesParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::VelocityLinesParticles);
+		break;
+	}
+	case eMessageType::CollectibleCollectedParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffectFollowObject(gameobjectToFollow, eParticleEffects::CollectibleCollectedParticle);
+		break;
+	}
+	case eMessageType::RainEffectBackgroundParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::RainEffectBackgroundParticle);
+		break;
+	}
+	case eMessageType::RainEffectForegroundParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::RainEffectForegroundParticle);
+		break;
+	}
+	case eMessageType::RainEffectNextScreenParticle:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+		position.y = 90.f;
+
+		SpawnEffect(position, eParticleEffects::RainEffectNextScreenParticle);
+		break;
+	}
+	default:
+	{
+		break;
+	}
+	}
+
 }
 
 
@@ -108,15 +264,28 @@ void ParticleEffectFactory::TestEffect(const v2f aPosition)
 
 void ParticleEffectFactory::TestEffectFollowObject()
 {
+	LevelScene* levelScene = dynamic_cast<LevelScene*>(myScene);
+
 	ParticleEffect* effect = new ParticleEffect(myScene);
 
 	SetEffect(*effect, static_cast<eParticleEffects>(myTestIndex));
 
-	effect->SetFollowObject(*myPlayer);
+	effect->SetFollowObject(*levelScene->GetPlayer());
 	effect->SetIsActive(true);
 }
 
-void ParticleEffectFactory::SpawnEffect(v2f aPosition, const eParticleEffects aEffectType)
+void ParticleEffectFactory::SpawnEffect(GameObject* aGameObject, const eParticleEffects aEffectType)
+{
+	SpawnEffects timerEffect;
+	timerEffect.myGameObject = aGameObject;
+	timerEffect.myEffectType = aEffectType;
+	timerEffect.myTotalSpawnTimer = myEffects[static_cast<int>(aEffectType)].mySpawnLifeTime;
+	timerEffect.mySpawnEverySecond = myEffects[static_cast<int>(aEffectType)].mySpawnEverySecond;
+
+	mySpawningEffects.push_back(timerEffect);
+}
+
+void ParticleEffectFactory::SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType)
 {
 	ParticleEffect* effect = new ParticleEffect(myScene);
 
@@ -136,11 +305,30 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 	effect->SetIsActive(true);
 }
 
+const void ParticleEffectFactory::AddSubscribers()
+{
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectForegroundParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectBackgroundParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::VelocityLinesParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeRightGrabbedLegParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeRightGrabbedHandParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLandedParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedSmallParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
+	myHasAddedSubscribers = true;
+}
+
 void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType)
 {
 	switch (aEffectType)
 	{
-	case eParticleEffects::RunEffect:
+	case eParticleEffects::RainEffectNextScreenParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
@@ -155,13 +343,13 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::DeathEffect)]);
 		break;
 	}
-	case eParticleEffects::RainEffectBackground:
+	case eParticleEffects::RainEffectBackgroundParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectBackground)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectBackgroundParticle)]);
 		break;
-	}case eParticleEffects::RainEffectForeground:
+	}case eParticleEffects::RainEffectForegroundParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectForeground)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectForegroundParticle)]);
 		break;
 	}
 	case eParticleEffects::BulletEffectTrail:
@@ -179,9 +367,9 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::FogEffect)]);
 		break;
 	}
-	case eParticleEffects::FallEffect:
+	case eParticleEffects::PlayerFallLandEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::FallEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerFallLandEffect)]);
 		break;
 	}
 	case eParticleEffects::TrailEffect2:
@@ -189,33 +377,45 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TrailEffect2)]);
 		break;
 	}
-	case eParticleEffects::TestEffect2:
+	case eParticleEffects::PlayerBashedPlayerParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect2)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedPlayerParticle)]);
 		break;
 	}
-	case eParticleEffects::TestEffect3:
+	case eParticleEffects::PlayerBashedSmallParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect3)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedSmallParticle)]);
 		break;
 	}
-	case eParticleEffects::TestEffect4:
+	case eParticleEffects::PlayerLedgeRightGrabbedHandParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect4)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeRightGrabbedHandParticle)]);
 		break;
 	}
-	case eParticleEffects::TestEffect5:
+	case eParticleEffects::PlayerLedgeRightGrabbedLegParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TestEffect5)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeRightGrabbedLegParticle)]);
+		break;
+	}
+	case eParticleEffects::PlayerLedgeLeftGrabbedHandParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeLeftGrabbedHandParticle)]);
+		break;
+	}
+	case eParticleEffects::PlayerLedgeLeftGrabbedLegParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeLeftGrabbedLegParticle)]);
+		break;
+	}
+	case eParticleEffects::VelocityLinesParticles:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::VelocityLinesParticles)]);
+		break;
+	}
+	case eParticleEffects::CollectibleCollectedParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticle)]);
 		break;
 	}
 	}
-}
-
-
-void ParticleEffectFactory::SpawnCharacterEffects()
-{
-	ParticleEffect* effect = new ParticleEffect(myScene);
-	effect->Init(myEffects[static_cast<int>(eParticleEffects::RunEffect)]);
-	effect->SetIsActive(true);
 }

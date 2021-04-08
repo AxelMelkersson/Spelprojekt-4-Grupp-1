@@ -153,6 +153,7 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="CreditsMenu.h" />
     <ClInclude Include="CutsceneManager.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DeadlyPlatform.hpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="CreditsMenu.cpp" />
     <ClCompile Include="CutsceneManager.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DeadlyPlatform.cpp" />

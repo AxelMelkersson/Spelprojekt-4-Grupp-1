@@ -1,20 +1,19 @@
 #include "stdafx.h"
 #include "Collectible.hpp"
+
 #include "Player.hpp"
+#include "Bonfire.hpp"
 
 #include "SpriteComponent.h"
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
-#include "AudioManager.h"
 
 #include "../External/Headers/CU/Utilities.h"
 
 #include "GameWorld.h"
-
+#include "AudioManager.h"
 #include "Random.hpp"
-
-#include "Bonfire.hpp"
 
 Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsigned int aBonfireID)
 	:
@@ -33,10 +32,6 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 {
 	Subscribe(eMessageType::PlayerSafeLanded);
 	Subscribe(eMessageType::PlayerDeath);
-}
-Collectible::~Collectible()
-{
-
 }
 
 void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
@@ -99,7 +94,6 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 
 	GameObject::Init();
 }
-
 void Collectible::Update(const float& aDeltaTime)
 {
 	constexpr float tau = 6.283185307f;
@@ -141,7 +135,6 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		Player* player = dynamic_cast<Player*>(aGameObject);
 		if (player)
 		{
-			//SetAnimation;
 			myWasCollected = true;
 			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
@@ -149,7 +142,6 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		}
 	}
 }
-
 void Collectible::Reset()
 {
 	myTarget = nullptr;
@@ -157,7 +149,6 @@ void Collectible::Reset()
 	SetPosition(mySpawnPosition);
 	myTargetPosition = mySpawnPosition;
 }
-
 void Collectible::TurnIn()
 {
 	if (!myWasTurnedIn)

@@ -12,6 +12,7 @@
 #include "AnimationComponent.hpp"
 
 #include "TutorialMenu.h"
+#include "CreditsMenu.h"
 
 OptionsMenu::OptionsMenu(Scene* aLevelScene)
 	: myCamera(aLevelScene->GetCamera()),
@@ -55,8 +56,8 @@ void OptionsMenu::Init()
 	myBGDot = std::make_unique<UIObject>(myScene);
 	myVFXDot = std::make_unique<UIObject>(myScene);
 
-	myCredits = std::make_unique<UIObject>(myScene);
 	myTutorial = new TutorialMenu(myScene);
+	myCreditsMenu = new CreditsMenu(myScene);
 
 	myResolutions = std::make_unique<UIObject>(myScene);
 	my720pHgh = std::make_unique<UIObject>(myScene);
@@ -110,7 +111,8 @@ void OptionsMenu::Init()
 	myVFXDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_SettingsMark_3x3px.dds", { 3.f, 3.f }, SFXDot, 204);
 
 	//Credits
-	myCredits->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Background.dds", { 100.f, 100.f }, creditScreenPos, 205);
+	myCreditsMenu->SetPosition(v2f(8.0f, 8.0f));
+	myCreditsMenu->SetZIndex(205);
 
 	//Tutorial
 	myTutorial->SetPosition(v2f(8.0f, 8.0f));
@@ -151,17 +153,21 @@ void OptionsMenu::Update(const float& aDeltaTime)
 		myTutorial->Deactivate();
 	}
 
+	if (myCreditsActive)
+	{
+		myCreditsMenu->Activate();
+	}
+	else
+	{
+		myCreditsMenu->Deactivate();
+	}
+
 	if (myMenuAcitve)
 	{
 		ActivateMenu();
 		CheckActiveAnimations();
 		CheckIndexPress(aDeltaTime);
 		UpdateUIElements(aDeltaTime);
-		
-		if (myCreditsActive == true)
-		{
-			ActivateCredits();
-		}
 	}
 	else
 		DeactivateMenu();
@@ -224,11 +230,16 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Credits))
 		{
 			if (!myCreditsActive)
+			{
 				myCreditsActive = true;
+				myCreditsMenu->Activate();
+				DeactivateMenu();
+			}
 			else
 			{
+				myCreditsMenu->Deactivate();
+				ActivateMenu();
 				myCreditsActive = false;
-				myCredits->SetActive(false);
 			}
 		}
 		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Tutorial))
@@ -340,7 +351,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myScreenMovingIndex = 0;
 		}
 	}
-	else if (mySoundSettingsActive == false && myScreenSettingsActive == false && myCreditsActive == false && myTutorialActtive == false)
+	else if (mySoundSettingsActive == false && myScreenSettingsActive == false && myCreditsActive == false && myTutorialActtive == false && !myCreditsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -360,7 +371,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 void OptionsMenu::ActivateMenu()
 {
-	if (myTutorialActtive)
+	if (myTutorialActtive || myCreditsActive)
 	{
 		return;
 	}
@@ -419,8 +430,6 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
 	myFireHighlight->Update(aDeltaTime);
-
-	myCredits->UpdateUIObjects(aDeltaTime);
 
 	for (auto button : myButtons)
 		button->UpdateButton(true);
@@ -486,11 +495,6 @@ void OptionsMenu::UpdateSoundSettings()
 	myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 }
 
-void OptionsMenu::ActivateCredits()
-{
-	myCredits->SetActive(true);
-}
-
 void OptionsMenu::InactivateHighlight()
 {
 	myFireHighlight->SetActive(false);
@@ -503,6 +507,11 @@ void OptionsMenu::InactivateHighlight()
 void OptionsMenu::DeactivateTutorial()
 {
 	myTutorial->Deactivate();
+}
+
+void OptionsMenu::DeactivateCredits()
+{
+	myCreditsMenu->Deactivate();
 }
 
 void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
