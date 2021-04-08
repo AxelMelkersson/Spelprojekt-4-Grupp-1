@@ -46,7 +46,6 @@ private:
 	int myTestIndex;
 
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
-	void SpawnCharacterEffects();
 
 };
 

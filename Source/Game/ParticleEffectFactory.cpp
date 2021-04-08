@@ -115,7 +115,6 @@ void ParticleEffectFactory::ReadEffects(Scene* aLevelScene)
 
 void ParticleEffectFactory::Init()
 {
-	//SpawnCharacterEffects();
 }
 
 void ParticleEffectFactory::Update(const float& aDeltaTime)
@@ -145,6 +144,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	case eMessageType::EnemyShootingTrailParticle:
 	{
 		const v2f position = std::get<v2f>(aMessage.myData);
+
 		SpawnEffect(position, eParticleEffects::TrailEffect2);
 		break;
 	}
@@ -172,10 +172,13 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	case eMessageType::EnemyShootingBulletHit:
 	{
 		const v2f position = std::get<v2f>(aMessage.myData);
+
 		SpawnEffect(position, eParticleEffects::BulletEffectHit);
 	}
 	default:
+	{
 		break;
+	}
 	}
 
 }
@@ -306,12 +309,4 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		break;
 	}
 	}
-}
-
-
-void ParticleEffectFactory::SpawnCharacterEffects()
-{
-	ParticleEffect* effect = new ParticleEffect(myScene);
-	effect->Init(myEffects[static_cast<int>(eParticleEffects::RunEffect)]);
-	effect->SetIsActive(true);
 }

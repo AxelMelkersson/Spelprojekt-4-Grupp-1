@@ -54,7 +54,6 @@ void LevelScene::Load()
 	myPauseMenu->InitMenu();
 
 	myEffectFactory->ReadEffects(this);
-	myEffectFactory->Init();
 
 	if (myIsSpeedrun)
 	{
