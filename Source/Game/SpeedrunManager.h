@@ -18,6 +18,8 @@ public:
 
 	std::array<float, 10> GetHighscores();
 
+	std::string GetTimeOutput(float aTime) const;
+
 private:
 	bool myIsSpeedrun;
 	bool myIsUnlocked;

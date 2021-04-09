@@ -30,5 +30,6 @@ enum class eMessageType
 	BonfireIdleParticle,
 	UnstablePlatformParticle,
 
+	KilledFocus,
 	Vibrate
 };

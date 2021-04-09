@@ -1,12 +1,15 @@
 #include "stdafx.h"
+#include "GameObject.h"
+
 #include "LevelScene.h"
 #include "EnemyProjectile.h"
+
 #include "SpriteComponent.h"
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+
 #include "Player.hpp"
-#include "GameObject.h"
 #include "Platform.h"
 #include "PostMaster.hpp"
 
