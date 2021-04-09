@@ -43,6 +43,7 @@ public:
 
 	void SetZIndex(const int aZIndex);
 	const int GetZIndex();
+	const bool GetShouldBeDestroyed();
 
 	virtual void Landed(const int& aOverlapY) { aOverlapY; }
 	virtual void SideCollision(const int& aOverlapX) { aOverlapX; }
@@ -89,8 +90,6 @@ public:
 	}
 
 protected:
-	friend class ParticleEffect;
-
 	Transform myTransform;
 	std::vector<Component*> myComponents;
 

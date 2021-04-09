@@ -23,6 +23,7 @@ enum class eMessageType
 	RainEffectNextScreenParticle,
 	VelocityLinesParticle,
 	CollectibleCollectedParticle,
+	CollectibleTrailEffect,
 	BonfireWakeupTopParticle,
 	BonfireWakeupExplosionParticle,
 	UnstablePlatformParticle,

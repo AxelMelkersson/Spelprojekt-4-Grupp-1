@@ -235,7 +235,7 @@ const void ParticleEffect::CheckActiveStats()
 
 	if (myObjectIsFollowing)
 	{
-		if (myFollowObject->myTransform.myShouldBeDestroyed || !myFollowObject->IsActive())
+		if (myFollowObject->GetShouldBeDestroyed() || !myFollowObject->IsActive())
 		{
 			for (auto sprite : mySprites)
 				sprite->SetInactive();

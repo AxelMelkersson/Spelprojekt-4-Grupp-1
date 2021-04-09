@@ -4,7 +4,7 @@
 enum class eParticleEffects
 {
 	RainEffectNextScreenParticle,
-	CollectibleEffect,
+	CollectibleTrailEffect,
 	DeathEffect,
 	RainEffectBackgroundParticle,
 	RainEffectForegroundParticle,

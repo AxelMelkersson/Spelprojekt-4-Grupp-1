@@ -147,7 +147,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticle, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffect, this));
 		}
 	}
 }
@@ -169,6 +169,7 @@ void Collectible::TurnIn()
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticle, GetPosition()));
 		Destroy();
 	}
 }

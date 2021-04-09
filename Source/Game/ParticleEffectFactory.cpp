@@ -25,6 +25,7 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupTopParticle);
@@ -133,6 +134,7 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 		mySpawningEffects[i].myTimer += aDeltaTime;
 		mySpawningEffects[i].myTotalTimer += aDeltaTime;
 
+
 		if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
 		{
 			mySpawningEffects[i].myTimer = {};
@@ -140,8 +142,17 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
 		}
 
-		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer)
+		if (!mySpawningEffects[i].myGameObject->IsActive() || mySpawningEffects[i].myGameObject->GetShouldBeDestroyed())
+		{
 			mySpawningEffects.erase(mySpawningEffects.begin() + i);
+			break;
+		}
+
+		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer)
+		{
+			mySpawningEffects.erase(mySpawningEffects.begin() + i);
+			break;
+		}
 	}
 }
 
@@ -237,6 +248,13 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		const v2f position = std::get<v2f>(aMessage.myData);
 
 		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticle);
+		break;
+	}
+	case eMessageType::CollectibleTrailEffect:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::CollectibleTrailEffect);
 		break;
 	}
 	case eMessageType::RainEffectBackgroundParticle:
@@ -351,6 +369,7 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupTopParticle);
@@ -381,9 +400,14 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
-	case eParticleEffects::CollectibleEffect:
+	case eParticleEffects::CollectibleTrailEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffect)]);
+		break;
+	}
+	case eParticleEffects::CollectibleCollectedParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticle)]);
 		break;
 	}
 	case eParticleEffects::DeathEffect:
@@ -458,11 +482,6 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 	case eParticleEffects::VelocityLinesParticles:
 	{
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::VelocityLinesParticles)]);
-		break;
-	}
-	case eParticleEffects::CollectibleCollectedParticle:
-	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticle)]);
 		break;
 	}
 	case eParticleEffects::BonfireWakeupTopParticle:

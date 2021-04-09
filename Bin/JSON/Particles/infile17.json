@@ -3,7 +3,7 @@
     {
       "EffectType": "CollectibleCollectedParticle",
 
-      "ZIndex": 102,
+      "ZIndex": 128,
 
       "EffectTypeIndex": 17,
       "SpritePath": "Sprites/Particles/Particle1.dds",
