@@ -57,14 +57,14 @@ void ParticleEffect::Init(ParticleStats aStats)
 	SetPivot({ 0.5f, 0.5f });
 	Activate();
 
-	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
+	/*if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
 	{
 
 		v2f bounds = myScene->GetCamera().GetBoundSize();
 
 		myStats.myEmitterWidth = myStats.myEmitterWidth + bounds.x * 1.5f;
 		myStats.myOffset = { myStats.myOffset.x, myStats.myOffset.y + -bounds.y };
-	}
+	}*/
 }
 
 void ParticleEffect::Render()
@@ -275,10 +275,10 @@ const void ParticleEffect::SetFollowObject(GameObject& aFollowObject)
 
 const void ParticleEffect::SetWidth(const float anXSize)
 {
-	myStats.myEmitterWidth = anXSize * 0.5f;
+	myStats.myEmitterWidth = myStats.myEmitterWidth + anXSize;
 }
 
 const void ParticleEffect::SetOffset(const float aOffset)
 {
-	myStats.myOffset = {aOffset * 0.5f, myStats.myOffset.y};
+	myStats.myOffset = {aOffset, myStats.myOffset.y};
 }

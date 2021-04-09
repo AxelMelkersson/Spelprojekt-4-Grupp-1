@@ -42,11 +42,12 @@ private:
 	std::vector<ParticleStats> myEffects;
 	std::vector<SpawnEffects> mySpawningEffects;
 
-	bool myHasAddedSubscribers;
+	bool myStartup;
 	int myTestIndex;
 
 	const void AddSubscribers();
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
+	const void StartRainEffects();
 
 };
 

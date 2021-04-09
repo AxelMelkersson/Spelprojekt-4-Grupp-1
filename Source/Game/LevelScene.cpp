@@ -71,12 +71,6 @@ void LevelScene::Load()
 	}
 
 	Scene::Load();
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
-
 }
 
 void LevelScene::Unload()

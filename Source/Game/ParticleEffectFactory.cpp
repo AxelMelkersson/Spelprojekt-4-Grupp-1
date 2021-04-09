@@ -20,7 +20,7 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myScene = aLevelScene;
 	myEffects = {};
 	myTestIndex = {};
-	myHasAddedSubscribers = false;
+	myStartup = false;
 }
 
 ParticleEffectFactory::~ParticleEffectFactory()
@@ -48,7 +48,12 @@ ParticleEffectFactory::~ParticleEffectFactory()
 }
 
 void ParticleEffectFactory::ReadEffects()
-{
+{/*
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));*/
+
 	int index = {};
 	std::ifstream effectObjectFile("JSON/Particles/MasterParticles.json");
 	rapidjson::IStreamWrapper effectObjectStream(effectObjectFile);
@@ -123,9 +128,11 @@ void ParticleEffectFactory::Init()
 
 void ParticleEffectFactory::Update(const float& aDeltaTime)
 {
-	if (!myHasAddedSubscribers)
+	if (!myStartup)
 	{
 		AddSubscribers();
+		StartRainEffects();
+		myStartup = true;
 	}
 
 
@@ -299,8 +306,8 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		v2f position = gameobjectToFollow->GetPosition();
 
 		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstablePlatformParticle);
-		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth());
-		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth());
+		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
 		break;
 	}
 	default:
@@ -388,7 +395,6 @@ const void ParticleEffectFactory::AddSubscribers()
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyBulletTrailEmitter);
-	myHasAddedSubscribers = true;
 }
 
 void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType)
@@ -500,4 +506,18 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		break;
 	}
 	}
+}
+
+const void ParticleEffectFactory::StartRainEffects()
+{
+	Camera& cam = myScene->GetCamera();
+	v2f boundaries = cam.GetBoundSize();
+
+	ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
+	ParticleEffect* rainForeground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectForegroundParticle);
+	ParticleEffect* rainNextScreen = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::RainEffectNextScreenParticle);
+
+	rainBackground->SetWidth(boundaries.x);
+	rainForeground->SetWidth(boundaries.x);
+	rainNextScreen->SetWidth(boundaries.x);
 }

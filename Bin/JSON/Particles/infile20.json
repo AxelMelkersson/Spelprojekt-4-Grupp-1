@@ -29,7 +29,7 @@
 
       "EmitterAngle": 270.0,
 
-      "EmitterWidth": 12.0,
+      "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
       "MinParticleLifeTime": 0.8,
