@@ -62,9 +62,12 @@
     },
     {
       "file20": "JSON/Particles/infile20.json"
+    },
+    {
+      "file21": "JSON/Particles/infile21.json"
     }
   ],
   "TestEffect": {
-    "File": 1
+    "File": 20
   }
 }

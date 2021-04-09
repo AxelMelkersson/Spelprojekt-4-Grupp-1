@@ -8,6 +8,7 @@ enum class eMessageType
 	PlayerDeath,
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
+
 	PlayerLandedParticle,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
@@ -26,6 +27,8 @@ enum class eMessageType
 	CollectibleTrailEffect,
 	BonfireWakeupTopParticle,
 	BonfireWakeupExplosionParticle,
+	BonfireIdleParticle,
 	UnstablePlatformParticle,
+
 	Vibrate
 };

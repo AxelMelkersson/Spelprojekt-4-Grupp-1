@@ -23,6 +23,7 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	myCollectibleIndex = 0;
 	myTurnInDistance = 50.0f;
 	myTurnInSpeed = 50.0f;
+	myActivateParticle = false;
 
 	myHasBeenActivated = DataManager::GetInstance().GetBonfireState(anIndex);
 
@@ -50,6 +51,19 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 	}
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
+}
+
+void Bonfire::Update(const float& aDeltaTime)
+{
+	if (!myActivateParticle)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
+		myActivateParticle = true;
+	}
+
+	GameObject::Update(aDeltaTime);
 }
 
 void Bonfire::OnCollision(GameObject* aGameObject)

@@ -23,5 +23,6 @@ enum class eParticleEffects
 	CollectibleCollectedParticle,
 	BonfireWakeupTopParticle,
 	BonfireWakeupExplosionParticle,
+	BonfireIdleParticle,
 	UnstablePlatformParticle
 };

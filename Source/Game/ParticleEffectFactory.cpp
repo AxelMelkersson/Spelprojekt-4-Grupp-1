@@ -27,6 +27,7 @@ ParticleEffectFactory::~ParticleEffectFactory()
 {
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::UnstablePlatformParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireIdleParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
@@ -300,6 +301,13 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticle);
 		break;
 	}
+	case eMessageType::BonfireIdleParticle:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireIdleParticle);
+		break;
+	}
 	case eMessageType::UnstablePlatformParticle:
 	{
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
@@ -378,6 +386,7 @@ const void ParticleEffectFactory::AddSubscribers()
 {
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::UnstablePlatformParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireIdleParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
@@ -498,6 +507,11 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 	case eParticleEffects::BonfireWakeupExplosionParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupExplosionParticle)]);
+		break;
+	}
+	case eParticleEffects::BonfireIdleParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireIdleParticle)]);
 		break;
 	}
 	case eParticleEffects::UnstablePlatformParticle:
