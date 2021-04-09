@@ -5,15 +5,14 @@ class Timer : public GameObject
 {
 public:
 	Timer(Scene* aLevelScene);
-
 	void Init(const v2f aPos);
-	void Update(const float& aDeltatime) override;
 
 	void Start(float aStartTime = 0.0);
 	void Paus();
 	void Stop();
+	float GetTime() const { return myTime; }
 
-	const float GetTime() const;
+	void Update(const float& aDeltatime) override;
 
 private:
 	bool myIsActive;
@@ -21,5 +20,5 @@ private:
 	float myStartTime;
 	float myLastTime;
 	float myTotalTime;
-
 };
+

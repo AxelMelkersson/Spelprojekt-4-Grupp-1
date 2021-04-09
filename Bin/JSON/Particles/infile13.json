@@ -1,9 +1,9 @@
 {
   "particle": [
     {
-      "EffectType": "PlayerLedgeRightGrabbedLegParticle",
+      "EffectType": "TestEffect",
 
-      "ZIndex": 102,
+      "ZIndex": 30,
 
       "EffectTypeIndex": 13,
       "SpritePath": "Sprites/Particles/Particle1.dds",
@@ -11,48 +11,45 @@
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.04,
+      "EmitterLifeTime": 0.0,
 
-      "StartScale": 1.0,
-      "EndScale": 1.0,
+      "StartScale": 0.7,
+      "EndScale": 0.8,
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.01,
-      "MaxTimeBetweenSpawns": 0.01,
+      "MinTimeBetweenSpawns": 0.1,
+      "MaxTimeBetweenSpawns": 0.2,
 
-      "MinSpeed": 15.0,
-      "MaxSpeed": 10.0,
+      "MinSpeed": 5.0,
+      "MaxSpeed": 5.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 270.0,
+      "EmitterAngle": 0.0,
 
-      "EmitterWidth": 2.0,
+      "EmitterWidth": 200.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 0.2,
-      "MaxParticleLifeTime": 0.5,
-
-      "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.0,
+      "MinParticleLifeTime": 8.0,
+      "MaxParticleLifeTime": 10.0,
 
       "Offset": [
         {
-          "X": 3.0
+          "X": 0.0
         },
         {
-          "Y": 4.0
+          "Y": 0.0
         }
       ],
 
-      "LockPosition": false,
+      "LockPosition": true,
 
       "LockedAngular": [
         -1.0,
-        0.0,
-        0.0,
+        -1.0,
+        1.0,
         1.0
       ],
 
@@ -66,7 +63,7 @@
         255.0,
         255.0,
         255.0,
-        0.0
+        1.0
       ],
       "BlendState": "Additive"
     }

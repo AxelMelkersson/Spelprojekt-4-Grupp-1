@@ -21,12 +21,16 @@ public:
 	};
 
 	Collectible(Scene* aLevelScene, const unsigned int anID, const unsigned int aBonfireID);
+	~Collectible();
 
 	void Init(const v2f& aPosition, eCollectibleType aType);
+
 	void Update(const float& aDeltaTime) override;
 
 	void OnCollision(GameObject* aGameObject) override;
+
 	void Reset();
+
 	void TurnIn();
 
 	void Notify(const Message& aMessage) override;
@@ -54,5 +58,5 @@ private:
 
 	const unsigned int myID;
 	const unsigned int myBonfireID;
-
 };
+

@@ -33,7 +33,6 @@ private:
 
 	GameObject* myFollowObject;
 	SpritebatchComponent* myBatch;
-	Scene* myScene;
 	ParticleStats myStats;
 
 	float mySpawnInterval;

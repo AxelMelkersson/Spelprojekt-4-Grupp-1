@@ -9,8 +9,10 @@ class Bonfire : public GameObject
 {
 public:
 	Bonfire(Scene* aScene, const unsigned int anIndex);
+	~Bonfire();
 
 	void OnCollision(GameObject* aGameObject) override;
+
 	const unsigned int GetBonfireIndex() const;
 
 private:
@@ -24,3 +26,4 @@ private:
 	bool myHasBeenActivated;
 
 };
+

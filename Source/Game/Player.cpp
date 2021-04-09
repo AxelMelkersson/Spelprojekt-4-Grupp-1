@@ -72,7 +72,6 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myGrabbedLedge = false;
 	myIsLerpingToPosition = false;
 	myIsGliding = false;
-	myCheckParticleLanding = true;
 
 	myGlideFactor = 0.14f;
 
@@ -158,7 +157,7 @@ void Player::InitAnimations()
 	spriteGlide->Deactivate();
 
 	myAnimations[0] = Animation(false, false, false, 0, 74, 74, 0.10f, spriteIdle, 16, 16);
-	myAnimations[1] = Animation(false, false, false, 0, 9, 9, 0.085f, spriteRun, 16, 16);
+	myAnimations[1] = Animation(false, false, false, 0, 12, 12, 0.075f, spriteRun, 16, 16);
 	myAnimations[2] = Animation(false, true, false, 0, 6, 6, 0.07f, spriteJump, 16, 16);
 	myAnimations[3] = Animation(false, true, false, 0, 5, 5, 0.09f, spriteDoubleJump, 16, 16);
 	myAnimations[4] = Animation(false, false, false, 0, 4, 4, 0.09f, spriteFall, 16, 16);
@@ -191,8 +190,6 @@ void Player::InitCollider()
 void Player::Update(const float& aDeltaTime)
 {
 	GameObject::Update(aDeltaTime);
-
-	CheckParticleLanding();
 
 	if (myHasDied)
 	{
@@ -404,9 +401,6 @@ void Player::Jump()
 	{
 		myPlatformVelocity.y = 0;
 	}
-
-	UnlockLandingSounds();
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
 	v2f calculatedSpring = mySpringVelocity;
 	calculatedSpring.y = calculatedSpring.y;
@@ -430,7 +424,7 @@ void Player::Jump()
 void Player::DoubleJump()
 {
 	myPlatformVelocity.y = 0;
-	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerDoubleJump);
+	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJump);
 	myCurrentVelocity.y = -myJsonData->myFloatValueMap[PEnum::Double_Jump_Velocity] + myPlatformVelocity.y - mySpringVelocity.y;
 	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[3]);
 
@@ -587,16 +581,10 @@ void Player::GrabLedge(const v2f& aLedgeLerpPosition, const v2f& aLedgePosition)
 	if (myTransform.myPosition.x > aLedgePosition.x)
 	{
 		myDirectionX = -1;
-
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeLeftGrabbedHandParticle, GetPosition()));
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeLeftGrabbedLegParticle, GetPosition()));
 	}
 	else if (myTransform.myPosition.x < aLedgePosition.x)
 	{
 		myDirectionX = 1;
-
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeRightGrabbedHandParticle, GetPosition()));
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLedgeRightGrabbedLegParticle, GetPosition()));
 	}
 
 	SetLerpPosition(aLedgeLerpPosition);
@@ -672,7 +660,6 @@ void Player::EndLerp()
 
 void Player::ActivateSpringForce(float aSpringVelocity, const float aRetardation, const bool aShouldResetVelocity)
 {
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::VelocityLinesParticle, this));
 	ReactivateDoubleJump();
 	myHasLanded = false;
 	myActiveSpringJump = true;
@@ -721,6 +708,7 @@ void Player::Kill()
 			}
 		}
 
+		Respawn();
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerDeath, 0));
 		CGameWorld::GetInstance()->GetLevelManager().ReloadScene(LevelManager::eScenes::LevelScene);
 	}
@@ -1050,15 +1038,3 @@ void Player::ImGuiUpdate()
 	ImGui::End();
 }
 #endif // DEBUG
-
-const void Player::CheckParticleLanding()
-{
-	if (myHasLanded && !myCheckParticleLanding && !myWillJumpWhenFalling)
-	{
-		myCheckParticleLanding = true;
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerLandedParticle, GetPosition()));
-	}
-
-	if (!myHasLanded)
-		myCheckParticleLanding = false;
-}

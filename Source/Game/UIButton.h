@@ -13,7 +13,7 @@ public:
 	UIButton(Scene* aLevelScene);
 	~UIButton();
 
-	void Init(const std::string aPathString, const v2f aSize, const v2f aPosition, const std::string aAnimationPathString, const int aBoundX, const std::string aLockedPathString = "", bool aIsUnlocked = true);
+	void Init(const std::string aPathString, const v2f aSize, const v2f aPosition, const std::string aAnimationPathString, const int aBoundX);
 
 	void Update(const float& aDeltaTime) override;
 	void UpdateButton(const float& aDeltaTime);
@@ -23,7 +23,6 @@ public:
 	void SetActive(const bool aActiveState);
 
 	void SetHighlightOffset(const v2f& aOffset);
-	bool GetIsUnlocked() const;
 
 private:
 	Camera& myCamera;
@@ -32,7 +31,6 @@ private:
 
 	bool myBtnHighlighted;
 	bool myIsActive;
-	bool myIsUnlocked;
 
 	v4f myOriginalColor;
 	v4f myHighlightedColor;

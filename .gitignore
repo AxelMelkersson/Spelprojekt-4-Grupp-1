@@ -43,4 +43,3 @@ Bin/DLL_Fix/ucrtbased.dll
 Bin/DLL_Fix/vcruntime140_1d.dll
 Bin/DLL_Fix/vcruntime140d.dll
 Bin/msvcp140d.dll
-Bin/JSON/SaveFile.json

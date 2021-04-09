@@ -103,7 +103,8 @@ void Jesus::Update(const float& aDeltaTime)
 	{
 		if (GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce() && GetComponent<AnimationComponent>()->GetIsDisplayedOnce())
 		{
-			dynamic_cast<Player*>(myTarget)->Kill();
+			Reset();
+			dynamic_cast<Player*>(myTarget)->Respawn();
 		}
 	}
 	else

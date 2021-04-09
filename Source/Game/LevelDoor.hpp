@@ -14,12 +14,15 @@ public:
 	};
 
 	LevelDoor(Scene* aScene);
+	~LevelDoor();
 
 	void Init(const eDoorType aDoorType, const v2f& aSize);
+
 	void OnCollision(GameObject* aGameObject) override;
 
 private:
 	eDoorType myType;
-	bool myWasActivated;
 
+	bool myWasActivated;
 };
+

@@ -1,42 +1,39 @@
 {
   "particle": [
     {
-      "EffectType": "PlayerBashedPlayerParticle",
+      "EffectType": "TestEffect",
 
-      "ZIndex": 100,
+      "ZIndex": 30,
 
       "EffectTypeIndex": 10,
-      "SpritePath": "Sprites/Particles/ParticleGlowCollectible2.dds",
+      "SpritePath": "Sprites/Particles/ParticleFog.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.1,
+      "EmitterLifeTime": 0.0,
 
-      "StartScale": 1.0,
-      "EndScale": 1.0,
+      "StartScale": 0.7,
+      "EndScale": 0.8,
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.99,
-      "MaxTimeBetweenSpawns": 0.99,
+      "MinTimeBetweenSpawns": 0.1,
+      "MaxTimeBetweenSpawns": 0.2,
 
-      "MinSpeed": 0.0,
-      "MaxSpeed": 0.0,
+      "MinSpeed": 5.0,
+      "MaxSpeed": 5.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 0.0,
 
-      "EmitterWidth": 0.0,
+      "EmitterWidth": 200.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 1.0,
-      "MaxParticleLifeTime": 1.0,
-
-      "SpawnLifeTime": 0.4,
-      "SpawnEverySecond": 0.12,
+      "MinParticleLifeTime": 8.0,
+      "MaxParticleLifeTime": 10.0,
 
       "Offset": [
         {
@@ -66,7 +63,7 @@
         255.0,
         255.0,
         255.0,
-        0.0
+        1.0
       ],
       "BlendState": "Additive"
     }

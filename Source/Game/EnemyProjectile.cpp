@@ -1,17 +1,14 @@
 #include "stdafx.h"
-#include "GameObject.h"
-
 #include "LevelScene.h"
 #include "EnemyProjectile.h"
-
 #include "SpriteComponent.h"
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
-
 #include "Player.hpp"
+#include "GameObject.h"
 #include "Platform.h"
-#include "PostMaster.hpp"
+#include "ParticleEffectFactory.h"
 
 typedef EnemyData::EnemyFloatEnum EEnum;
 
@@ -28,6 +25,8 @@ EnemyProjectile::EnemyProjectile(Scene* aScene, const v2f& aPosition, const v2f&
 	GameObject::Init();
 
 	LevelScene* levelScene = dynamic_cast<LevelScene*>(aScene);
+	myEffectFactory = &levelScene->GetEffectFactory();
+	myEffectFactory->SpawnEffectFollowObject(this, eParticleEffects::BulletEffectTrail);
 }
 
 void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)
@@ -41,7 +40,6 @@ void EnemyProjectile::SetDirection(const v2f& aPosition, const v2f& aTarget)
 
 void EnemyProjectile::Update(const float& aDeltaTime)
 {
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingTrailParticle, GetPosition()));
 	GameObject::Update(aDeltaTime);
 }
 
@@ -58,7 +56,7 @@ void EnemyProjectile::OnCollision(GameObject* aGameObject)
 	}
 	if (platform || player)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyShootingBulletHitParticle, GetPosition()));
+		myEffectFactory->SpawnEffect(GetPosition(), eParticleEffects::BulletEffectHit);
 		this->Destroy();
 	}
 }

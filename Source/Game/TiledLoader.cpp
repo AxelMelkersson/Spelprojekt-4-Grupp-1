@@ -239,24 +239,28 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 
 		if (!myLoadsFromLevelSelect)
 		{
-			if (someData[i].myType == 0 && lastDoorType == 1)
+			if (someData[i].myPosition.x < 0.0f && lastDoorType == 1)
 			{
-				doorOffset = GetDoorOffset(someData[i].myPosition, roomSize, someData[i].mySize);
+				doorOffset.x = 24.0f + someData[i].mySize.x;
+				doorOffset.y = someData[i].mySize.y - 8.0f;
 				doorFound = true;
 			}
-			else if (someData[i].myType == 1 && lastDoorType == 0)
+			else if (someData[i].myPosition.x > roomSize.x && lastDoorType == 0)
 			{
-				doorOffset = GetDoorOffset(someData[i].myPosition, roomSize, someData[i].mySize);
+				doorOffset.x = -24.0f;
+				doorOffset.y = someData[i].mySize.y - 8.0f;
 				doorFound = true;
 			}
-			else if (someData[i].myType == 2 && lastDoorType == 3)
+			else if (someData[i].myPosition.y < 0.0f && lastDoorType == 3)
 			{
-				doorOffset = GetDoorOffset(someData[i].myPosition, roomSize, someData[i].mySize);
+				doorOffset.x = 24.0f;
+				doorOffset.y = 40.0f;
 				doorFound = true;
 			}
-			else if (someData[i].myType == 3 && lastDoorType == 2)
+			else if (someData[i].myPosition.y > roomSize.y && lastDoorType == 2)
 			{
-				doorOffset = GetDoorOffset(someData[i].myPosition, roomSize, someData[i].mySize);
+				doorOffset.x = 24.0f;
+				doorOffset.y = -48.0f;
 				doorFound = true;
 			}
 		}
@@ -271,36 +275,6 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 		door->SetPosition(someData[i].myPosition);
 	}
 }
-
-const v2f TiledLoader::GetDoorOffset(const v2f& aDoorPosition, const v2f& aRoomSize, const v2f& aDoorSize)
-{
-	v2f doorOffset;
-
-	if (aDoorPosition.x < 0.0f)
-	{
-		doorOffset.x = 24.0f + aDoorSize.x;
-		doorOffset.y = aDoorSize.y - 8.0f;
-	}
-	else if (aDoorPosition.x > aRoomSize.x)
-	{
-		doorOffset.x = -24.0f;
-		doorOffset.y = aDoorSize.y - 8.0f;
-	}
-	else if (aDoorPosition.y < 0.0f)
-	{
-		doorOffset.x = 24.0f;
-		doorOffset.y = 40.0f;
-	}
-	else if (aDoorPosition.y > aRoomSize.y)
-	{
-		doorOffset.x = 24.0f;
-		doorOffset.y = -48.0f;
-	}
-
-	return doorOffset;
-}
-
-
 void TiledLoader::ParseEnemies(const std::vector<LoadData> someData, Scene* aScene)
 {
 	EnemyFactory enemyFactory;

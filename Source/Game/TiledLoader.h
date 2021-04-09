@@ -53,8 +53,6 @@ private:
 	void ParseButtons(const std::vector<LoadData> someData, Scene*);
 	void ParseJesus(const std::vector<LoadData> someData, Scene* aScene, GameObject* aPlayer);
 
-	const v2f GetDoorOffset(const v2f& aDoorPosition, const v2f& aRoomSize, const v2f& aDoorSize);
-
 	void SetBatchForHiddenRooms(SpritebatchComponent* aBatch, std::vector<HiddenArea*>& aHiddenRoomsData);
 
 	std::vector<v2f> GetWaypointPositions(const std::string somePositions, v2f aSpawnPos);

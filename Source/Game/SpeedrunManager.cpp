@@ -1,13 +1,9 @@
 #include "stdafx.h"
 #include "SpeedrunManager.h"
 #include "DataManager.h"
-#include <assimp\StringUtils.h>
 
-SpeedrunManager::SpeedrunManager() :
-	myIsSpeedrun(false),
-	myCurrentScore(0.f)
+SpeedrunManager::SpeedrunManager()
 {
-	myIsUnlocked = DataManager::GetInstance().GetBonfireState(7);
 	std::array<float, 10> data = DataManager::GetInstance().GetHighScores();
 
 	for (int i = 0; i < myHighScores.size(); ++i)
@@ -78,34 +74,5 @@ void SpeedrunManager::ReportScoreToHighscores()
 std::array<float, 10> SpeedrunManager::GetHighscores()
 {
 	return myHighScores;
-}
-
-std::string SpeedrunManager::GetTimeOutput(float aTime) const
-{
-	int intMin = aTime / 60;
-	float floatSec = floorf((aTime - 60 * static_cast<float>(intMin)) * 100) / 100;
-	std::string printTime;
-	std::string min;
-	std::string sec;
-
-	if (intMin < 10)
-	{
-		min = "0" + to_string(intMin);
-	}
-	else
-	{
-		min = to_string(intMin);
-	}
-	if (floatSec < 10)
-	{
-		sec = "0" + to_string(floatSec);
-	}
-	else
-	{
-		sec = to_string(floatSec);
-	}
-	printTime = min + "." + sec;
-
-	return printTime;
 }
 

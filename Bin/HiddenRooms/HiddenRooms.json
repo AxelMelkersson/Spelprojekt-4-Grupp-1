@@ -1,15 +1,15 @@
 {
   "HiddenRooms": [
     {
-      "LevelIndex": 10,
-      "FilePath": "Levels/HiddenRoom_01.json"
+      "LevelIndex": 0,
+      "FilePath": "Levels/HiddenRoom_03.json"
     },
     {
-      "LevelIndex": 15,
-      "FilePath": "Levels/HiddenRoom_02.json"
+      "LevelIndex": 1,
+      "FilePath": "Levels/HiddenRoom_03.json"
     },
     {
-      "LevelIndex": 48,
+      "LevelIndex": 2,
       "FilePath": "Levels/HiddenRoom_03.json"
     }
   ]

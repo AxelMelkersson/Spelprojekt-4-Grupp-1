@@ -11,12 +11,12 @@
 #include "SpriteComponent.h"
 #include "SpritebatchComponent.h"
 
+
 ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:
 	GameObject(aLevelScene),
 	myBatch(nullptr)
-{ 
-	myScene = aLevelScene;
+{
 	mySpawningInLocalSpace = {};
 	myFollowObject = nullptr;
 	myEffectIsDestroyed = {};
@@ -55,15 +55,6 @@ void ParticleEffect::Init(ParticleStats aStats)
 	SetZIndex(myStats.myZIndex);
 	SetPivot({ 0.5f, 0.5f });
 	Activate();
-
-	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
-	{
-
-		v2f bounds = myScene->GetCamera().GetBoundSize();
-
-		myStats.myEmitterWidth = myStats.myEmitterWidth + bounds.x * 1.5f;
-		myStats.myOffset = { myStats.myOffset.x, myStats.myOffset.y + -bounds.y };
-	}
 }
 
 void ParticleEffect::Render()

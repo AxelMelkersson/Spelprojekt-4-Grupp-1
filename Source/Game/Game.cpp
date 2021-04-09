@@ -70,7 +70,6 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_KILLFOCUS:
 	{
 		myTimer->SetTimeScale(0.0f);
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::KilledFocus, 0));
 		break;
 	}
 

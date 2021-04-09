@@ -11,8 +11,7 @@ class Scene;
 class SpriteComponent;
 class AudioManager;
 class TutorialMenu;
-class PauseMenu;
-class CreditsMenu;
+
 
 class OptionsMenu
 {
@@ -37,15 +36,12 @@ public:
 	bool IsOptionsActive();
 
 	void DeactivateTutorial();
-	void DeactivateCredits();
-
-	void SetOpenedFromPauseMenu(PauseMenu* aPauseMenu);
 
 private:
 	Scene* myScene;
 	Camera& myCamera;
 	AudioManager* myAudioManager;
-	PauseMenu* myPauseMenu;
+
 
 	float myMusicVol;
 	float myVFXVol;
@@ -69,7 +65,7 @@ private:
 	std::unique_ptr<UIObject> myScreenSizeDot;
 
 	//Credits
-	CreditsMenu* myCreditsMenu;
+	std::unique_ptr<UIObject> myCredits;
 
 	//Tutorial
 	TutorialMenu* myTutorial;
@@ -99,8 +95,6 @@ private:
 	bool myTutorialActtive = false;
 	bool mySubMenuActive = false;
 	
-	bool myIsOpenedFromPause;
-
 	void CheckIndexPress(const float& aDeltaTime);
 	void ActivateMenu();
 	void DeactivateMenu();
@@ -108,6 +102,7 @@ private:
 	void UpdateUIElements(const float& aDeltaTime);
 	void CheckActiveAnimations();
 	void UpdateSoundSettings();
+	void ActivateCredits();
 	void InactivateHighlight();
 	
 

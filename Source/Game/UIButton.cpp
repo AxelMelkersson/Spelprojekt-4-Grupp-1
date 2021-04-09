@@ -15,29 +15,19 @@ UIButton::UIButton(Scene* aLevelScene)
 {
 	myBtnHighlighted = {};
 	myIsActive = {};
-	myIsUnlocked = false;
 }
 
 UIButton::~UIButton()
 {
 }
 
-void UIButton::Init(const std::string aPathString, const v2f aSize, const v2f aPosition, const std::string aAnimationPathString, const int aBoundX, const std::string aLockedPathString, bool aIsUnlocked)
+void UIButton::Init(const std::string aPathString, const v2f aSize, const v2f aPosition, const std::string aAnimationPathString, const int aBoundX)
 {
-	myIsUnlocked = aIsUnlocked;
 	SetZIndex(202);
 	myPosition = aPosition;
 
 	SpriteComponent* sprite = AddComponent<SpriteComponent>();
-	if (myIsUnlocked == false)
-	{
-		sprite->SetSpritePath(aLockedPathString);
-		myPosition.x += 1;
-	}
-	else
-	{
-		sprite->SetSpritePath(aPathString);
-	}
+	sprite->SetSpritePath(aPathString);
 
 	mySprite = AddComponent<SpriteComponent>();
 	mySprite->SetSpritePath(aAnimationPathString);
@@ -63,7 +53,7 @@ void UIButton::UpdateButton(const float& aDeltaTime)
 {
 	SetPosition(myCamera.GetPosition() + myPosition);
 
-	if (myBtnHighlighted && myIsUnlocked)
+	if (myBtnHighlighted)
 	{
 		mySprite->Activate();
 		GameObject::Update(aDeltaTime);
@@ -92,9 +82,4 @@ void UIButton::SetActive(const bool aActiveState)
 void UIButton::SetHighlightOffset(const v2f& aOffset)
 {
 	mySprite->SetRelativePosition(aOffset);
-}
-
-bool UIButton::GetIsUnlocked() const
-{
-	return myIsUnlocked;
 }

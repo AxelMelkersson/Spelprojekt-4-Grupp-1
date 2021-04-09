@@ -1,7 +1,7 @@
 {
   "particle": [
     {
-      "EffectType": "RainEffectForeground",
+      "EffectType": "RainEffect2",
 
       "ZIndex": 199,
 
@@ -18,32 +18,29 @@
 
       "RotateSprite": 1.0,
 
-      "MinTimeBetweenSpawns": 0.05,
-      "MaxTimeBetweenSpawns": 0.15,
+      "MinTimeBetweenSpawns": 0.2,
+      "MaxTimeBetweenSpawns": 0.05,
 
-      "MinSpeed": 190.0,
-      "MaxSpeed": 210.0,
+      "MinSpeed": 100.0,
+      "MaxSpeed": 150.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 210.0,
 
-      "EmitterWidth": 0.0,
+      "EmitterWidth": 400.0,
       "EmitterHeigth": 0.0,
 
       "MinParticleLifeTime": 3.0,
       "MaxParticleLifeTime": 3.0,
-
-      "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.0,
 
       "Offset": [
         {
           "X": 0.0
         },
         {
-          "Y": 0.0
+          "Y": -150.0
         }
       ],
 

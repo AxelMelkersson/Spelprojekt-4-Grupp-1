@@ -35,9 +35,6 @@
       "MinParticleLifeTime": 0.5,
       "MaxParticleLifeTime": 1.0,
 
-      "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.0,
-
       "Offset": [
         {
           "X": 0.0

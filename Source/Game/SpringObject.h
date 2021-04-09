@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Animation.hpp"
 
+class Player;
+
 class SpringObject : public GameObject
 {
 public:
@@ -28,5 +30,5 @@ private:
 	void InitSprings(const v2f aPosition);
 	void CreateGroundSpring();
 	void LoadJson();
-
+	//void ImGuiUpdate();
 };

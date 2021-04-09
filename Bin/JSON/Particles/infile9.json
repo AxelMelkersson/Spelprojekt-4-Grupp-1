@@ -3,7 +3,7 @@
     {
       "EffectType": "BulletEffectTrail2",
 
-      "ZIndex": 399,
+      "ZIndex": 30,
 
       "EffectTypeIndex": 9,
       "SpritePath": "Sprites/Particles/Particle1.dds",
@@ -11,18 +11,18 @@
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 1.0,
+      "EmitterLifeTime": 0.07,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 5.0,
-      "MaxTimeBetweenSpawns": 5.0,
+      "MinTimeBetweenSpawns": 0.01,
+      "MaxTimeBetweenSpawns": 0.01,
 
-      "MinSpeed": 1.0,
-      "MaxSpeed": 1.0,
+      "MinSpeed": 0.0,
+      "MaxSpeed": 0.0,
 
       "MinParticleAngularVel": -5.0,
       "MaxParticleAngularVel": 5.0,
@@ -32,11 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 1.0,
-      "MaxParticleLifeTime": 1.0,
-
-      "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.0,
+      "MinParticleLifeTime": 0.1,
+      "MaxParticleLifeTime": 0.1,
 
       "Offset": [
         {
