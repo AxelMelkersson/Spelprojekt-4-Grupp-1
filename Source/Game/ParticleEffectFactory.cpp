@@ -25,6 +25,12 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleEasy);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleMedium);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleHard);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectEasy);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectMedium);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectHard);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireIdleParticle);
@@ -33,7 +39,6 @@ ParticleEffectFactory::~ParticleEffectFactory()
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectBackgroundParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::VelocityLinesParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
@@ -49,12 +54,7 @@ ParticleEffectFactory::~ParticleEffectFactory()
 }
 
 void ParticleEffectFactory::ReadEffects()
-{/*
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));*/
-
+{
 	int index = {};
 	std::ifstream effectObjectFile("JSON/Particles/MasterParticles.json");
 	rapidjson::IStreamWrapper effectObjectStream(effectObjectFile);
@@ -251,11 +251,46 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(gameobjectToFollow, eParticleEffects::VelocityLinesParticles);
 		break;
 	}
-	case eMessageType::CollectibleCollectedParticle:
+	case eMessageType::CollectibleCollectedParticleEasy:
 	{
 		const v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticle);
+		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticleEasy);
+		break;
+	}
+	case eMessageType::CollectibleCollectedParticleMedium:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticleMedium);
+		break;
+	}
+	case eMessageType::CollectibleCollectedParticleHard:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::CollectibleCollectedParticleHard);
+		break;
+	}
+	case eMessageType::CollectibleTrailEffectEasy:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::CollectibleTrailEffectEasy);
+		break;
+	}
+	case eMessageType::CollectibleTrailEffectMedium:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::CollectibleTrailEffectMedium);
+		break;
+	}
+	case eMessageType::CollectibleTrailEffectHard:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::CollectibleTrailEffectHard);
 		break;
 	}
 	case eMessageType::CollectibleTrailEffect:
@@ -384,6 +419,12 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleEasy);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleMedium);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleHard);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectEasy);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectMedium);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectHard);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffect);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireIdleParticle);
@@ -392,7 +433,6 @@ const void ParticleEffectFactory::AddSubscribers()
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectBackgroundParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::VelocityLinesParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
@@ -420,9 +460,34 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffect)]);
 		break;
 	}
-	case eParticleEffects::CollectibleCollectedParticle:
+	case eParticleEffects::CollectibleCollectedParticleEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleEasy)]);
+		break;
+	}
+	case eParticleEffects::CollectibleCollectedParticleMedium:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleMedium)]);
+		break;
+	}
+	case eParticleEffects::CollectibleCollectedParticleHard:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleHard)]);
+		break;
+	}
+	case eParticleEffects::CollectibleTrailEffectEasy:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectEasy)]);
+		break;
+	}
+	case eParticleEffects::CollectibleTrailEffectMedium:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectMedium)]);
+		break;
+	}
+	case eParticleEffects::CollectibleTrailEffectHard:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectHard)]);
 		break;
 	}
 	case eParticleEffects::DeathEffect:

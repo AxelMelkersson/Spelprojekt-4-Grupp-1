@@ -1,53 +1,53 @@
 {
   "particle": [
     {
-      "EffectType": "UnstablePlatformParticle",
+      "EffectType": "CollectibleCollectedParticleEasy",
 
-      "ZIndex": 95,
+      "ZIndex": 128,
 
       "EffectTypeIndex": 21,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleCollectible3Variant2.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.45,
+      "EmitterLifeTime": 0.1,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
 
-      "RotateSprite": 0.5,
+      "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.2,
-      "MaxTimeBetweenSpawns": 0.2,
+      "MinTimeBetweenSpawns": 0.01,
+      "MaxTimeBetweenSpawns": 0.01,
 
-      "MinSpeed": 3.0,
-      "MaxSpeed": 6.0,
+      "MinSpeed": 20.0,
+      "MaxSpeed": 10.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 270.0,
 
-      "EmitterWidth": 0.0,
-      "EmitterHeigth": 0.0,
+      "EmitterWidth": 2.0,
+      "EmitterHeigth": 2.0,
 
-      "MinParticleLifeTime": 0.8,
-      "MaxParticleLifeTime": 1.1,
+      "MinParticleLifeTime": 1.5,
+      "MaxParticleLifeTime": 2.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,
 
       "Offset": [
         {
-          "X": 12.0
+          "X": 0.0
         },
         {
-          "Y": 7.0
+          "Y": 0.0
         }
       ],
 
-      "LockPosition": false,
+      "LockPosition": true,
 
       "LockedAngular": [
         -1.0,

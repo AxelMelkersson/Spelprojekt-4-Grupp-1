@@ -6,12 +6,12 @@
       "ZIndex": 102,
 
       "EffectTypeIndex": 16,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleJump.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.01,
+      "EmitterLifeTime": 0.002,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
@@ -29,14 +29,14 @@
 
       "EmitterAngle": 90.0,
 
-      "EmitterWidth": 3.5,
+      "EmitterWidth": 2.0,
       "EmitterHeigth": 0.0,
 
       "MinParticleLifeTime": 0.6,
       "MaxParticleLifeTime": 0.6,
 
       "SpawnLifeTime": 0.15,
-      "SpawnEverySecond": 0.012,
+      "SpawnEverySecond": 0.006,
 
       "Offset": [
         {

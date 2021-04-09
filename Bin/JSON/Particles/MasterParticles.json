@@ -65,6 +65,21 @@
     },
     {
       "file21": "JSON/Particles/infile21.json"
+    },
+    {
+      "file22": "JSON/Particles/infile22.json"
+    },
+    {
+      "file23": "JSON/Particles/infile23.json"
+    },
+    {
+      "file24": "JSON/Particles/infile24.json"
+    },
+    {
+      "file25": "JSON/Particles/infile25.json"
+    },
+    {
+      "file26": "JSON/Particles/infile26.json"
     }
   ],
   "TestEffect": {

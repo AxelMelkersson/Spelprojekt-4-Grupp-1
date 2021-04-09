@@ -6,7 +6,7 @@
       "ZIndex": 102,
 
       "EffectTypeIndex": 8,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleJump.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -18,8 +18,8 @@
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.01,
-      "MaxTimeBetweenSpawns": 0.01,
+      "MinTimeBetweenSpawns": 0.012,
+      "MaxTimeBetweenSpawns": 0.012,
 
       "MinSpeed": 15.0,
       "MaxSpeed": 10.0,
@@ -47,7 +47,7 @@
         }
       ],
 
-      "LockPosition": false,
+      "LockPosition": true,
 
       "LockedAngular": [
         -1.0,

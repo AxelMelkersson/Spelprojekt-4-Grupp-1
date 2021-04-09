@@ -6,7 +6,7 @@
       "ZIndex": 90,
 
       "EffectTypeIndex": 19,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleCollectible3Variant2.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
