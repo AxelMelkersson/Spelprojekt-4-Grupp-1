@@ -16,6 +16,9 @@
 
 #include "Game.h"
 
+#include "SpriteComponent.h"
+#include "AnimationComponent.hpp"
+
 
 MainMenuScene::MainMenuScene()
 {
@@ -101,7 +104,7 @@ void MainMenuScene::InitObjects()
 	myExitGameBtn = std::make_unique<UIButton>(this);
 
 	v2f backgroundPos = { 0.f, 0.f };
-	v2f titleSpritePos = { 105.f, 25.f };
+	v2f titleSpritePos = { 101.f, 16.f };
 	
 	v2f newGameBtnPos = {210.f, 80.f};
 	v2f levelSelectBtnPos = { 210.f, 100.f };
@@ -131,7 +134,7 @@ void MainMenuScene::InitObjects()
 	}
 
 	myBackground->Init("Sprites/UI/startMenu/UI_startMenu_Background_320x180px.dds", { 520.f, 265.f }, backgroundPos, 200);
-	myTitleSprite->Init("Sprites/UI/startMenu/UI_startMenu_Title_171x32px.dds", { 270.f, 32.f }, titleSpritePos, 201);
+	myTitleSprite->Init("Sprites/UI/startMenu/UI_startMenu_logotype_A_192x64px.dds", { 192.0f, 64.0f }, titleSpritePos, 201);
 	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
 
 	myNewGameBtn->Init(playSpritePath, playPos, newGameBtnPos, playSpritePathAnim, playPos.x);
@@ -142,6 +145,8 @@ void MainMenuScene::InitObjects()
 	
 	SetActiveMenu(true);
 	SetBackgroundActive(true);
+
+	InitLogoAnimations();
 
 	myButtons.push_back(myNewGameBtn.get());
 	myButtons.push_back(myLevelSelectBtn.get());
@@ -154,6 +159,7 @@ void MainMenuScene::UpdateObjects(const float& aDeltaTime)
 {
 	myBackground->UpdateUIObjects(aDeltaTime);
 	myTitleSprite->UpdateUIObjects(aDeltaTime);
+	LogoAnimation();
 
 	CheckActiveAnimations();
 }
@@ -267,5 +273,63 @@ void MainMenuScene::CheckActiveAnimations()
 		{
 			myButtons[i]->SetIsHighlightActive(false);
 		}
+	}
+}
+
+void MainMenuScene::InitLogoAnimations()
+{
+	myLogoTypeTimes[0] = 20;
+	myLogoTypeTimes[1] = 3;
+	myLogoTypeTimes[2] = 5;
+	myLogoTypeTimes[3] = 1;
+
+	myLogoAnimationIndex = 0;
+
+	myCurrentLogoTypeTimes = 0;
+
+	SpriteComponent* animationSprite1 = myTitleSprite->AddComponent<SpriteComponent>();
+	SpriteComponent* animationSprite3 = myTitleSprite->AddComponent<SpriteComponent>();
+
+	animationSprite1->SetSpritePath("Sprites/UI/startMenu/UI_startMenu_logotype_B_192x64px.dds");
+	animationSprite3->SetSpritePath("Sprites/UI/startMenu/UI_startMenu_logotype_C_192x64px.dds");
+
+	animationSprite1->SetSize(v2f(192.0f, 64.0f));
+	animationSprite3->SetSize(v2f(192.0f, 64.0f));
+
+	animationSprite1->Deactivate();
+	animationSprite3->Deactivate();
+
+	myLogoAnimations[0] = Animation(false, true, false, 0, 1, 1, 0.125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
+	myLogoAnimations[1] = Animation(false, true, false, 0, 8, 8, 0.125f, animationSprite1, 192, 64);
+	myLogoAnimations[2] = Animation(false, true, false, 0, 1, 1, 0.125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
+	myLogoAnimations[3] = Animation(false, true, false, 0, 12, 12, 0.125f, animationSprite3, 192, 64);
+
+	AnimationComponent* titleAnimation = myTitleSprite->AddComponent<AnimationComponent>();
+	titleAnimation->SetSprite(myTitleSprite->GetComponent<SpriteComponent>());
+
+	titleAnimation->SetAnimation(&myLogoAnimations[0]);
+}
+
+void MainMenuScene::LogoAnimation()
+{
+	AnimationComponent* titleAnimation = myTitleSprite->GetComponent<AnimationComponent>();
+
+	if (titleAnimation->GetHasBeenDisplayedOnce())
+	{
+		++myCurrentLogoTypeTimes;
+		titleAnimation->SetAnimation(&myLogoAnimations[myLogoAnimationIndex]);
+	}
+
+	if (myCurrentLogoTypeTimes >= myLogoTypeTimes[myLogoAnimationIndex])
+	{
+		myCurrentLogoTypeTimes = 0;
+		++myLogoAnimationIndex;
+
+		if (myLogoAnimationIndex >= 4)
+		{
+			myLogoAnimationIndex = 0;
+		}
+
+		titleAnimation->SetAnimation(&myLogoAnimations[myLogoAnimationIndex]);
 	}
 }
