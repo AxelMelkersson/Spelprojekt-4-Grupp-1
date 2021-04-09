@@ -156,6 +156,7 @@ void Collectible::TurnIn()
 {
 	if (!myWasTurnedIn)
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleDown);
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 	}
