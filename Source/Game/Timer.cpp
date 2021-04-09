@@ -5,6 +5,7 @@
 #include "TextComponent.h"
 #include <assimp\StringUtils.h>
 #include "SpeedrunManager.h"
+#include "SpriteComponent.h"
 
 Timer::Timer(Scene* aLevelScene)
 	:
@@ -18,13 +19,17 @@ Timer::Timer(Scene* aLevelScene)
 
 void Timer::Init(const v2f aPos)
 {
+	SpriteComponent* spriteComponent = AddComponent<SpriteComponent>();
+	spriteComponent->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
+	spriteComponent->SetRelativePosition({ 34, 10});
+	spriteComponent->SetSize(v2f(54.0f, 12.0f));
+
 	TextComponent* textComponent = AddComponent<TextComponent>();
 	textComponent->CreateText("Text/alagard.ttf", EFontSize::EFontSize_36, 0);
 	textComponent->SetRelativePosition(aPos.x, aPos.y);
-	int time = myTime;
-	textComponent->SetText(to_string(time));
 	textComponent->Activate();
 	SetZIndex(200);
+
 }
 void Timer::Update(const float& aDeltatime)
 {

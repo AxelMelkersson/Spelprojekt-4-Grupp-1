@@ -66,7 +66,7 @@ void LevelScene::Load()
 	if (myIsSpeedrun)
 	{
 		myTimer = new Timer(this);
-		myTimer->Init({ 10, 10 });
+		myTimer->Init({ 10, 13 });
 		myTimer->Start(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetScore());
 	}
 
