@@ -157,7 +157,7 @@ void LevelScene::Update(const float& aDeltaTime)
 		return;
 	}
 
-	myBlackScreen->SetPosition(GetCamera().GetPosition());
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	if (myReachedFullOpacity)
 	{
@@ -177,11 +177,13 @@ void LevelScene::AddBlackScreen()
 	myBlackScreen = new GameObject(this);
 	myBlackScreen->SetZIndex(1000);
 
-	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX() - 500.0f, myPlayer->GetPositionY() - 250.0f));
+	myBlackScreen->SetPivot(v2f(0.5f, 0.5f));
+
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	SpriteComponent* sprite = myBlackScreen->AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/BlackScreen.dds");
-	sprite->SetSize(v2f(1280.0f, 720.0f));
+	sprite->SetSize(v2f(10000.0f, 10000.0f));
 }
 
 void LevelScene::DecreaseBlackScreen()
