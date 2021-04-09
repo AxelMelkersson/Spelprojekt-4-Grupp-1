@@ -51,14 +51,14 @@ void LevelScene::Load()
 	myReachedFullOpacity = true;
 	myIsTransitioning = false;
 
-	AddBlackScreen();
-
 	myEffectFactory = new ParticleEffectFactory(this);
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
 
 	CGameWorld::GetInstance()->GetLevelManager().LoadLevel(this, myPlayer);
+
+	AddBlackScreen();
 
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
@@ -177,11 +177,11 @@ void LevelScene::AddBlackScreen()
 	myBlackScreen = new GameObject(this);
 	myBlackScreen->SetZIndex(1000);
 
-	myBlackScreen->SetPosition(v2f(160.0f, 92.0f));
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX() - 500.0f, myPlayer->GetPositionY() - 250.0f));
 
 	SpriteComponent* sprite = myBlackScreen->AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/BlackScreen.dds");
-	sprite->SetSize(v2f(640.0f, 368.0f));
+	sprite->SetSize(v2f(1280.0f, 720.0f));
 }
 
 void LevelScene::DecreaseBlackScreen()
