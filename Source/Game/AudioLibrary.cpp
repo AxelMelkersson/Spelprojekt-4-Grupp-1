@@ -24,6 +24,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::LeaveLedge,      new AudioClip("Sounds/Effects/LeaveLedge.wav",       false, 0.1f, 1,    AudioLayer::SoundEffect));
 
 	myAudioList.insert_or_assign(AudioList::MenuMove,        new AudioClip("Sounds/Effects/MenuMove.wav",         false, 0.2f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::MenuBack,        new AudioClip("Sounds/Effects/MenuBack.wav",         false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::MenuSelect,      new AudioClip("Sounds/Effects/MenuSelect.wav",       false, 0.2f, 1,    AudioLayer::SoundEffect));
 
 	myAudioList.insert_or_assign(AudioList::WalkGravelRight, new AudioClip("Sounds/Effects/Step_Gravel_Right.wav",false, 0.4f, 1,    AudioLayer::SoundEffect));

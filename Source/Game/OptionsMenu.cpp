@@ -190,6 +190,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		if (myMovingIndex == static_cast<int>(eOptionsMenu::Back))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 			if (myIsOpenedFromPause)
 			{
 				SetActive(false);
@@ -214,6 +215,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				mySoundSettingsActive = false;
 				myBGHighlight->SetActive(false);
 				myVFXHighlight->SetActive(false);
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 			}
 		}
 		else if (myMovingIndex == static_cast<int>(eOptionsMenu::ScreenSize))
@@ -224,6 +226,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			else
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 				myScreenSettingsActive = false;
 			}
 		}
@@ -237,6 +240,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			else
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 				myCreditsMenu->Deactivate();
 				ActivateMenu();
 				myCreditsActive = false;
@@ -252,6 +256,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			else
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 				myTutorialActtive = false;
 				ActivateMenu();
 				myTutorial->Deactivate();
@@ -260,6 +265,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	}
 	else if ((myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)) && myScreenSettingsActive == true)
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 		if (myScreenMovingIndex == 0)
 		{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
@@ -291,12 +297,14 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			mySoundMovingIndex--;
 			if (mySoundMovingIndex < 0)
 				mySoundMovingIndex = mySoundObjects.size() - 1;
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::DOWNARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadDown))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			mySoundMovingIndex++;
 			if (mySoundMovingIndex > mySoundObjects.size() - 1)
 				mySoundMovingIndex = 0;
@@ -304,7 +312,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
-
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
 			{
 				myMusicVol += 0.05f;
@@ -320,6 +328,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
 			{
 				myMusicVol -= 0.05f;
@@ -340,12 +349,14 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myScreenMovingIndex--;
 			if (myScreenMovingIndex < 0)
 				myScreenMovingIndex = myResolutionObj.size() - 1;
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myScreenMovingIndex++;
 			if (myScreenMovingIndex > myResolutionObj.size() - 1)
 				myScreenMovingIndex = 0;
@@ -355,12 +366,14 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myMovingIndex--;
 			if (myMovingIndex < 0)
 				myMovingIndex = myButtons.size() - 1;
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::DOWNARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadDown))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myMovingIndex++;
 			if (myMovingIndex > myButtons.size() - 1)
 				myMovingIndex = 0;

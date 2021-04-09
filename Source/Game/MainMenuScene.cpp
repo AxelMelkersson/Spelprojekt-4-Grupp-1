@@ -36,7 +36,6 @@ void MainMenuScene::Load()
 
 	CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsSpeedrun(false);
 	myInput = CGameWorld::GetInstance()->Input();
-	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->PlayIfAvailable(AudioList::MenuAmbience);
 	AudioManager::GetInstance()->PlayIfAvailable(AudioList::Main_Menu);
 	AudioManager::GetInstance()->FadeIn(AudioList::Main_Menu);
