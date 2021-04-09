@@ -69,6 +69,8 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 			myHasBeenActivated = true;
 			AudioManager::GetInstance()->PlayAudio(AudioList::BonfireActivated);
 			DataManager::GetInstance().SaveBonfireState(myBonfireIndex, myHasBeenActivated);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticle, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticle, GetPosition()));
 		}
 	}
 }

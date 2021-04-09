@@ -10,6 +10,7 @@
 #include "Random.hpp"
 #include "SpriteComponent.h"
 #include "SpritebatchComponent.h"
+#include "PostMaster.hpp"
 
 ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:

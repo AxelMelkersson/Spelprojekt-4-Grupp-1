@@ -12,7 +12,7 @@ enum class eParticleEffects
 	BulletEffectHit,
 	FogEffect,
 	PlayerFallLandEffect,
-	TrailEffect2,
+	BulletEffectTrail2,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
 	PlayerLedgeRightGrabbedHandParticle,
@@ -21,5 +21,6 @@ enum class eParticleEffects
 	PlayerLedgeLeftGrabbedLegParticle,
 	VelocityLinesParticles,
 	CollectibleCollectedParticle,
-	ShrineWakeUpParticle
+	BonfireWakeupTopParticle,
+	BonfireWakeupExplosionParticle
 };

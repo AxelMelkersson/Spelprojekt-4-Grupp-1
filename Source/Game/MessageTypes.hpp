@@ -23,6 +23,7 @@ enum class eMessageType
 	RainEffectNextScreenParticle,
 	VelocityLinesParticle,
 	CollectibleCollectedParticle,
-	ShrineWakeUpParticle,
+	BonfireWakeupTopParticle,
+	BonfireWakeupExplosionParticle,
 	Vibrate
 };

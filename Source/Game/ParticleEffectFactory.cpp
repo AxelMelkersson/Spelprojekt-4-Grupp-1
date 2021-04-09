@@ -24,7 +24,8 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::ShrineWakeUpParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectBackgroundParticle);
@@ -150,7 +151,7 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	{
 		const v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::TrailEffect2);
+		SpawnEffect(position, eParticleEffects::BulletEffectTrail2);
 		break;
 	}
 	case eMessageType::PlayerLandedParticle:
@@ -258,11 +259,18 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::RainEffectNextScreenParticle);
 		break;
 	}
-	case eMessageType::ShrineWakeUpParticle:
+	case eMessageType::BonfireWakeupTopParticle:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::ShrineWakeUpParticle);
+		SpawnEffect(position, eParticleEffects::BonfireWakeupTopParticle);
+		break;
+	}
+	case eMessageType::BonfireWakeupExplosionParticle:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticle);
 		break;
 	}
 	default:
@@ -329,7 +337,8 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::ShrineWakeUpParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectForegroundParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectBackgroundParticle);
@@ -396,9 +405,9 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerFallLandEffect)]);
 		break;
 	}
-	case eParticleEffects::TrailEffect2:
+	case eParticleEffects::BulletEffectTrail2:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::TrailEffect2)]);
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BulletEffectTrail2)]);
 		break;
 	}
 	case eParticleEffects::PlayerBashedPlayerParticle:
@@ -439,6 +448,16 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 	case eParticleEffects::CollectibleCollectedParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticle)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupTopParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupTopParticle)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupExplosionParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupExplosionParticle)]);
 		break;
 	}
 	}
