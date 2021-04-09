@@ -49,7 +49,7 @@ void Platform::Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& aPositi
 void Platform::Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& aPosition, const bool& aIsOneway, const int& aMaterialIndex)
 {
 	myMaterial = aMaterialIndex;
-	Init(aSize, aSpriteSize, aPosition, aIsOneway);
+	Platform::Init(aSize, aSpriteSize, aPosition, aIsOneway);
 }
 
 void Platform::Update(const float& aDeltaTime)
