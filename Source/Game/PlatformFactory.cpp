@@ -126,9 +126,9 @@ DestructiblePlatform* PlatformFactory::CreateDestructiblePlatform(Scene* aLevelS
 	return destructiblePlatform;
 }
 
-DeadlyPlatform* PlatformFactory::CreateDeadlyPlatform(Scene* aLevelScene, const v2f& aPosition, const v2f& aCollisionSize, const v2f& aSpriteSize)
+DeadlyPlatform* PlatformFactory::CreateDeadlyPlatform(Scene* aLevelScene, const v2f& aPosition, const v2f& aCollisionSize, const v2f& aSpriteSize, const int& aMaterial)
 {
 	DeadlyPlatform* deadlyPlatform = new DeadlyPlatform(aLevelScene);
-	deadlyPlatform->Init(aCollisionSize, aSpriteSize, aPosition, false);
+	deadlyPlatform->Init(aCollisionSize, aSpriteSize, aPosition, false, aMaterial);
 	return deadlyPlatform;
 }

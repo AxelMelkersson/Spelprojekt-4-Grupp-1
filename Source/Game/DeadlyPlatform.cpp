@@ -19,6 +19,13 @@ void DeadlyPlatform::Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& a
 	GetComponent<PhysicsComponent>()->SetCanCollide(false);
 }
 
+void DeadlyPlatform::Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& aPosition, const bool& aIsOneway, const int& aMaterial)
+{
+	Platform::Init(aSize, aSpriteSize, aPosition, aIsOneway, aMaterial);
+
+	GetComponent<PhysicsComponent>()->SetCanCollide(false);
+}
+
 void DeadlyPlatform::OnCollision(GameObject* aGameObject)
 {
 	Player* player = dynamic_cast<Player*>(aGameObject);
