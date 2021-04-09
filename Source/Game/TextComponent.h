@@ -26,6 +26,8 @@ public:
     void SetRelativePositionY(const float aY);
     void SetFontSize(EFontSize aFontSize);
 
+    float GetWidth();
+
     const bool& IsActive() const;
     TextComponent& Activate();
     TextComponent& Deactivate();

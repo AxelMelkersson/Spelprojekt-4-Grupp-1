@@ -102,6 +102,11 @@ void TextComponent::SetFontSize(EFontSize aFontSize)
 	myText->SetFontSize(aFontSize);
 }
 
+float TextComponent::GetWidth()
+{
+	return myText->GetWidth();
+}
+
 void TextComponent::UpdateTransform(Transform& aTransform, GameObject& aGameObject)
 {
 	v2f referenceSize = Config::ourReferenceSize;
