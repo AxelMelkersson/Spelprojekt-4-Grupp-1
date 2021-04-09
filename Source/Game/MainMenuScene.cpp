@@ -208,6 +208,11 @@ void MainMenuScene::CheckButtonsPress()
 	{
 		if (myMovingIndex == static_cast<int>(eMainMenuButton::StartGame))
 		{
+			if (!DataManager::GetInstance().GetBonfireState(0))
+			{
+				CGameWorld::GetInstance()->GetLevelManager().UsedLevelSelect();
+			}
+
 			//CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
