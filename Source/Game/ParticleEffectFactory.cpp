@@ -7,6 +7,7 @@
 #include "Subscriber.hpp"
 #include "PostMaster.hpp"
 #include "Random.hpp"
+#include "ColliderComponent.h"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
@@ -276,9 +277,12 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	}
 	case eMessageType::UnstablePlatformParticle:
 	{
-		v2f position = std::get<v2f>(aMessage.myData);
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+		v2f position = gameobjectToFollow->GetPosition();
 
-		SpawnEffect(position, eParticleEffects::UnstablePlatformParticle);
+		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstablePlatformParticle);
+		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth());
+		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth());
 		break;
 	}
 	default:
@@ -323,7 +327,7 @@ void ParticleEffectFactory::SpawnEffect(GameObject* aGameObject, const eParticle
 	mySpawningEffects.push_back(timerEffect);
 }
 
-void ParticleEffectFactory::SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType)
+ParticleEffect* ParticleEffectFactory::SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType)
 {
 	ParticleEffect* effect = new ParticleEffect(myScene);
 
@@ -331,6 +335,8 @@ void ParticleEffectFactory::SpawnEffect(const v2f aPosition, const eParticleEffe
 
 	effect->SetPosition(aPosition);
 	effect->SetIsActive(true);
+
+	return effect;
 }
 
 void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const eParticleEffects aEffectType)

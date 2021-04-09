@@ -272,3 +272,13 @@ const void ParticleEffect::SetFollowObject(GameObject& aFollowObject)
 	myFollowObject = &aFollowObject;
 	myObjectIsFollowing = true;
 }
+
+const void ParticleEffect::SetWidth(const float anXSize)
+{
+	myStats.myEmitterWidth = anXSize * 0.5f;
+}
+
+const void ParticleEffect::SetOffset(const float aOffset)
+{
+	myStats.myOffset = {aOffset * 0.5f, myStats.myOffset.y};
+}

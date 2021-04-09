@@ -23,7 +23,7 @@ public:
 	void TestEffect(const v2f aPosition);
 	void TestEffectFollowObject();
 	void SpawnEffect(GameObject* aGameObject, const eParticleEffects aEffectType);
-	void SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType);
+	ParticleEffect* SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType);
 	void SpawnEffectFollowObject(GameObject* aObject, const eParticleEffects aEffectType);
 
 private:
