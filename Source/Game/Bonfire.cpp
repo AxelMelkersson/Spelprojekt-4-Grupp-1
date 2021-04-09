@@ -51,8 +51,6 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 	}
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
 }
 
 void Bonfire::Update(const float& aDeltaTime)
@@ -85,6 +83,7 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 			DataManager::GetInstance().SaveBonfireState(myBonfireIndex, myHasBeenActivated);
 			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticle, GetPosition()));
 			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticle, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
 		}
 	}
 }
