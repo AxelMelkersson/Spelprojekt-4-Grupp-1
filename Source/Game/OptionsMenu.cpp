@@ -142,8 +142,6 @@ void OptionsMenu::Init()
 	myResolutionObj.push_back(my720pHgh.get());
 	myResolutionObj.push_back(my1080pHgh.get());
 	myResolutionObj.push_back(my4KHgh.get());
-
-	InitTexts();
 }
 void OptionsMenu::Update(const float& aDeltaTime)
 {

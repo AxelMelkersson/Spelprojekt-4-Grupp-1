@@ -1,8 +1,6 @@
 #pragma once
-
 #include <string>
 #include <memory>
-#include <assert.h>
 #include "AudioLibrary.h"
 
 namespace Tga2D
@@ -44,8 +42,6 @@ public:
 
 	void Stop(AudioList aSound);
 
-	//bool IsPlaying(const std::string& anAudioPath);
-
 	void StopAllSounds(bool anAndMusic = false);
 
 	void LockAudio(AudioList anAudio);
@@ -55,8 +51,9 @@ public:
 	void RemoveomponentToListen(AudioComponent* aComponent);
 
 private:
-
 	void ComponentUpdate();
+	void StopCurrentMusic();
+
 	std::unique_ptr<Tga2D::AudioOut> myAudioOut;
 	std::vector<AudioComponent*> myPlatformComponents;
 	std::vector<AudioComponent*> myEnemyComponents;
@@ -64,7 +61,6 @@ private:
 	float myMusicVolume = 1;
 	float mySFXVolume = 1;
 
-	void StopCurrentMusic();
-
 	AudioLibrary myLibrary = AudioLibrary();
+
 };
