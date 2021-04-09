@@ -1,22 +1,25 @@
 #include "stdafx.h"
-#include "LevelScene.h"
 #include "SpringObject.h"
+
+#include "LevelScene.h"
+#include "AudioManager.h"
+
 #include "SpriteComponent.h"
 #include "AnimationComponent.hpp"
 #include "ColliderComponent.h"
 #include "PhysicsComponent.h"
+
 #include "Player.hpp"
 #include "Game.h"
 #include "rapidjson/istreamwrapper.h"
-#include "AudioManager.h"
-#include <iostream>
 
 SpringObject::SpringObject(Scene* aLevelScene) : GameObject(aLevelScene)
 {
-	mySpringActive = {};
-	myRetardation = {};
-	myVelocityForce = {};
-	myTimer = {};
+	mySpringActive = false;;
+	myRetardation = 0.0f;
+	myVelocityForce = 0.0f;
+	myTimer = 0.0f;
+	mySpringTimerCooldown = 0.0f;
 
 	SetZIndex(94);
 }
@@ -31,7 +34,6 @@ void SpringObject::Update(const float& aDeltaTime)
 {
 	myTimer += aDeltaTime;
 
-
 	if (mySpringActive)
 	{
 		GameObject::Update(aDeltaTime);
@@ -41,7 +43,6 @@ void SpringObject::Update(const float& aDeltaTime)
 			mySpringActive = false;
 		}
 	}
-
 }
 
 void SpringObject::OnCollision(GameObject* aGameObject)
@@ -85,9 +86,7 @@ void SpringObject::InitSprings(const v2f aPosition)
 	ColliderComponent* collider = AddComponent<ColliderComponent>();
 	collider->SetSize({ mySize.x, mySize.y * 0.01f });
 	collider->SetPosition({ 0.f, -mySize.y * 0.2f });
-
 }
-
 void SpringObject::CreateGroundSpring()
 {
 	SpriteComponent* sprite = AddComponent<SpriteComponent>();
@@ -98,9 +97,7 @@ void SpringObject::CreateGroundSpring()
 	animation->SetSprite(sprite);
 	myAnimation = Animation(false, false, false, 0, 4, 4, 0.06f, sprite, 16, 16);
 	animation->SetAnimation(&myAnimation);
-
 }
-
 void SpringObject::LoadJson()
 {
 	std::ifstream springObjectFile("JSON/SpringObject.json");
@@ -114,15 +111,3 @@ void SpringObject::LoadJson()
 
 	springObjectFile.close();
 }
-
-//#ifdef _DEBUG
-//void SpringObject::ImGuiUpdate()
-//{
-//	ImGui::Begin("Spring", &myIsActive, ImGuiWindowFlags_AlwaysAutoResize);
-//
-//	ImGui::SliderFloat("Spring Velocity Force", &myVelocityForce, 0.0f, 2000.0f);
-//	ImGui::SliderFloat("Spring Velocity Retardation", &myRetardation, 0.0f, 5.0f);
-//
-//	ImGui::End();
-//}
-//#endif // _DEBUG

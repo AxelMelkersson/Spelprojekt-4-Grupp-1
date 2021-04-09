@@ -1,14 +1,17 @@
 #include "stdafx.h"
+#include "Enemy.h"
+#include "EnemyProjectile.h"
+
+#include "Player.hpp"
 #include "LevelScene.h"
+
 #include "SpriteComponent.h"
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
-#include "Player.hpp"
-#include "EnemyProjectile.h"
-#include "Enemy.h"
 #include "WaypointComponent.hpp"
 #include "AudioComponent.h"
+
 #include "AudioManager.h"
 #ifdef _DEBUG
 #include "imgui.h"
@@ -28,16 +31,11 @@ NormalEnemy::NormalEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
 	this->SetZIndex(140);
-	//AudioComponent* audio = AddComponent<AudioComponent>();
-	//audio->AddAudio(AudioList::EnemyNormalIdle);
-	//audio->SetRadius(100);
-	//audio->PlayAudio();
 }
 ShootingEnemy::ShootingEnemy(Scene* aScene) : Enemy(aScene)
 {
 	InitAnimation();
 	this->SetZIndex(140);
-	//AudioLibrary::GetInstance().myAudioList[AudioList::ProjectileFly]->Play();
 }
 
 void Enemy::InitEnemy(const std::vector<v2f>& someWayPoints, const float& aSpeed)
@@ -59,7 +57,6 @@ void Enemy::InitEnemy(const std::vector<v2f>& someWayPoints, const float& aSpeed
 	{
 		this->SetPosition(someWayPoints[0]);
 	}
-	//InitAnimations();
 	InitCollider();
 }
 void Enemy::InitCollider()
@@ -68,8 +65,6 @@ void Enemy::InitCollider()
 	physics->SetCanCollide(false);
 	physics->SetIsStatic(false);
 	physics->SetApplyGravity(false);
-
-	//physics->CreateColliderFromSprite(GetComponent<SpriteComponent>(), this);
 }
 void NormalEnemy::InitCollider()
 {

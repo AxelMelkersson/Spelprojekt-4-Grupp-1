@@ -21,6 +21,7 @@
 #include "PostMaster.hpp"
 
 #include "BashableObject.hpp"
+#include "CameraStaticDistance.hpp"
 
 #include "SpriteComponent.h"
 
@@ -31,14 +32,18 @@ LevelScene::LevelScene()
 	myPlayer(nullptr),
 	myBackground(nullptr),
 	myIsSpeedrun(false),
+	myStayBlackTime(0.2f),
+	myEffectFactory(nullptr),
 	Scene()
 {}
 
 void LevelScene::Load()
 {
 	myIsSpeedrun = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun();
+
 	myBlackScreenOpacity = 1.0f;
 	myBlackScreenOpacitySpeed = 4.3f;
+	myStayBlackTime = 0.2f;
 
 	AudioManager::GetInstance()->FadeOut(AudioList::Main_Menu);
 	AudioManager::GetInstance()->Stop(AudioList::MenuAmbience);
@@ -46,10 +51,14 @@ void LevelScene::Load()
 	myReachedFullOpacity = true;
 	myIsTransitioning = false;
 
+
 	AddBlackScreen();
 
 	myPopUp = new UIPopUp(this);
 	myPopUp->InitPopUp();
+
+
+	myEffectFactory = new ParticleEffectFactory(this);
 
 	myPlayer = new Player(this);
 
@@ -57,25 +66,30 @@ void LevelScene::Load()
 
 	CGameWorld::GetInstance()->GetLevelManager().LoadLevel(this, myPlayer);
 
+	AddBlackScreen();
+
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
-
-	myEffectFactory = new ParticleEffectFactory();
-	myEffectFactory->ReadEffects(this);
-	myEffectFactory->Init();
 
 	if (myIsSpeedrun)
 	{
 		myTimer = new Timer(this);
-		myTimer->Init({ 10, 10 });
+		myTimer->Init({ 10, 13 });
 		myTimer->Start(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetScore());
 	}
 
 	Scene::Load();
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
+
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
+
 }
 
 void LevelScene::Unload()
 {
+	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
@@ -110,9 +124,11 @@ void LevelScene::Deactivate()
 }
 
 void LevelScene::Update(const float& aDeltaTime)
-{
+{/*
+	if (myEffectFactory != NULL)
+		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
 	{
 		v2f position = GetPlayer()->GetPosition();
 
@@ -121,7 +137,7 @@ void LevelScene::Update(const float& aDeltaTime)
 	else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
 	{
 		myEffectFactory->TestEffectFollowObject();
-	}
+	}*/
 
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();
@@ -159,7 +175,7 @@ void LevelScene::Update(const float& aDeltaTime)
 
 	myPauseMenu->Update(aDeltaTime);
 
-	if (myPauseMenu->IsPauseActive() == false)
+	if (myPauseMenu->IsPauseActive() == false && myPauseMenu->GetOptionsIsActive() == false)
 		Scene::Update(aDeltaTime);
 	else if (myIsSpeedrun)
 		myTimer->Update(aDeltaTime);
@@ -172,15 +188,21 @@ void LevelScene::AddBlackScreen()
 	myBlackScreen = new GameObject(this);
 	myBlackScreen->SetZIndex(1000);
 
-	myBlackScreen->SetPosition(v2f(160.0f, 92.0f));
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX() - 500.0f, myPlayer->GetPositionY() - 250.0f));
 
 	SpriteComponent* sprite = myBlackScreen->AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/BlackScreen.dds");
-	sprite->SetSize(v2f(640.0f, 368.0f));
+	sprite->SetSize(v2f(1280.0f, 720.0f));
 }
 
 void LevelScene::DecreaseBlackScreen()
 {
+	if (myStayBlackTime > 0)
+	{
+		myStayBlackTime -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime();
+		return;
+	}
+
 	myBlackScreen->GetComponent<SpriteComponent>()->SetColor(v4f(1.0f, 1.0f, 1.0f, myBlackScreenOpacity));
 	myBlackScreenOpacity -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime() * myBlackScreenOpacitySpeed;
 

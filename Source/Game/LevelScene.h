@@ -47,6 +47,7 @@ private:
 
     float myBlackScreenOpacity;
     float myBlackScreenOpacitySpeed;
+    float myStayBlackTime;
 
     bool myReachedFullOpacity;
     bool myIsTransitioning;

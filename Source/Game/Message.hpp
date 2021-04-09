@@ -3,6 +3,7 @@
 #include <string>
 #include <variant>
 #include "../External/Headers/CU/Vector2.hpp"
+#include "GameObject.h"
 
 struct Message
 {
@@ -30,10 +31,17 @@ struct Message
 		myData = aPosition;
 	}
 
+	Message(const eMessageType& aMessageType, GameObject* aGameObject)
+	{
+		myMessageType = aMessageType;
+		myEffectObject = aGameObject;
+	}
+
 	~Message() = default;
 
 	eMessageType myMessageType;
 
 	std::variant<int, float, std::string, v2f> myData;
+	GameObject* myEffectObject = nullptr;
 };
 

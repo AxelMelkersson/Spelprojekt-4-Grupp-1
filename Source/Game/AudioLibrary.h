@@ -10,7 +10,7 @@ enum class AudioList
 	GrabLedge, GrabLedge2, LeaveLedge,
 	ButtonPress,
 	SpikeDeath, SpikeHit, ThornDeath, FallDeath, EnemyDeath,
-	ProjectileFly, HiddenRoomUnlock,
+	MenuBack, HiddenRoomUnlock,
 	WeakPlatform, MovingPlatform,
 	WalkGravelRight, WalkGravelLeft, WalkGrassRight, WalkGrassLeft, WalkStoneRight, WalkStoneLeft, WalkWoodLeft, WalkWoodRight, WalkBrickLeft, WalkBrickRight,
 	LandOnGrassHeavy, LandOnGrassEasy, LandOnStoneHeavy, LandOnStoneLight, LandBricksHeavy, LandBricksLight, LandWoodHeavy, LandWoodLight, LandGravelHeavy, LandGravelLight,
