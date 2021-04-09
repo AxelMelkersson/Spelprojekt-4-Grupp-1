@@ -8,6 +8,8 @@
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "AudioManager.h"
+#include "PostMaster.hpp"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -142,6 +144,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
+			ActivateTrailEffect();
 		}
 	}
 }
@@ -162,6 +165,7 @@ void Collectible::TurnIn()
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
+		ActivateCollectedEffect();
 		Destroy();
 	}
 }
@@ -191,4 +195,36 @@ void Collectible::ImGuiUpdate()
 	ImGui::InputFloat("Idle Movement Distance", &myIdleMovementDistance, 0.0f, 200.0f);
 
 	ImGui::End();
+}
+
+const void Collectible::ActivateTrailEffect()
+{
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectEasy, this));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectMedium, this));
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectHard, this));
+	}
+}
+
+const void Collectible::ActivateCollectedEffect()
+{
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleEasy, GetPosition()));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleMedium, GetPosition()));
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleHard, GetPosition()));
+	}
 }

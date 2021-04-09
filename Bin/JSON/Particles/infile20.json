@@ -1,12 +1,12 @@
 {
   "particle": [
     {
-      "EffectType": "RainEffectForeground",
+      "EffectType": "BonfireIdleParticle",
 
-      "ZIndex": 199,
+      "ZIndex": 90,
 
-      "EffectTypeIndex": 4,
-      "SpritePath": "Sprites/Particles/ParticleRain.dds",
+      "EffectTypeIndex": 20,
+      "SpritePath": "Sprites/Particles/ParticleCollectible3Variant2.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -16,34 +16,34 @@
       "StartScale": 1.0,
       "EndScale": 1.0,
 
-      "RotateSprite": 1.0,
+      "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.05,
-      "MaxTimeBetweenSpawns": 0.15,
+      "MinTimeBetweenSpawns": 0.2,
+      "MaxTimeBetweenSpawns": 0.2,
 
-      "MinSpeed": 190.0,
-      "MaxSpeed": 210.0,
+      "MinSpeed": 3.0,
+      "MaxSpeed": 6.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 210.0,
+      "EmitterAngle": 90.0,
 
-      "EmitterWidth": 0.0,
+      "EmitterWidth": 12.0,
       "EmitterHeigth": 0.0,
 
       "MinParticleLifeTime": 3.0,
-      "MaxParticleLifeTime": 3.0,
+      "MaxParticleLifeTime": 3.5,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,
 
       "Offset": [
         {
-          "X": 50.0
+          "X": 0.0
         },
         {
-          "Y": -90.0
+          "Y": -25.0
         }
       ],
 
@@ -66,7 +66,7 @@
         255.0,
         255.0,
         255.0,
-        1.0
+        0.0
       ],
       "BlendState": "Additive"
     }

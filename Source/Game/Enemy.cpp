@@ -13,6 +13,8 @@
 #include "AudioComponent.h"
 
 #include "AudioManager.h"
+#include "PostMaster.hpp"
+
 #ifdef _DEBUG
 #include "imgui.h"
 #endif // DEBUG

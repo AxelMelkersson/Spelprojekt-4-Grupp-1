@@ -23,6 +23,7 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	myCollectibleIndex = 0;
 	myTurnInDistance = 50.0f;
 	myTurnInSpeed = 50.0f;
+	myActivateParticle = false;
 
 	myHasBeenActivated = DataManager::GetInstance().GetBonfireState(anIndex);
 
@@ -52,6 +53,17 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	}
 }
 
+void Bonfire::Update(const float& aDeltaTime)
+{
+	if (!myActivateParticle)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
+		myActivateParticle = true;
+	}
+
+	GameObject::Update(aDeltaTime);
+}
+
 void Bonfire::OnCollision(GameObject* aGameObject)
 {
 	Player* player = dynamic_cast<Player*>(aGameObject);
@@ -69,6 +81,8 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 			myHasBeenActivated = true;
 			AudioManager::GetInstance()->PlayAudio(AudioList::BonfireActivated);
 			DataManager::GetInstance().SaveBonfireState(myBonfireIndex, myHasBeenActivated);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticle, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticle, GetPosition()));
 		}
 	}
 }

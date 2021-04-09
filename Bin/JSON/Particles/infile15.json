@@ -6,7 +6,7 @@
       "ZIndex": 102,
 
       "EffectTypeIndex": 15,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleRubble.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
