@@ -23,6 +23,8 @@ public:
 	const void SetIsActive(const bool aActiveState);
 	const void SetEffect(ParticleStats aEffect);
 	const void SetFollowObject(GameObject& aFollowObject);
+	const void SetWidth(const float anXSize);
+	const void SetOffset(const float aOffset);
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
@@ -43,6 +45,7 @@ private:
 
 	int myZIndex; 
 
+	bool mySetZIndex;
 	bool mySpawningInLocalSpace;
 	bool myKilledEffect;
 	bool myObjectIsFollowing;

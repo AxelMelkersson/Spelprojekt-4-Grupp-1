@@ -4,6 +4,7 @@
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "PostMaster.hpp"
 
 #include "AudioManager.h"
 
@@ -72,6 +73,7 @@ void UnstablePlatform::OnCollision(GameObject* aGameObject)
 		{
 			player->SetPlatformVelocity(v2f(0.0f, 0.0f));
 
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::UnstablePlatformParticle, this));
 			AudioManager::GetInstance()->PlayAudio(AudioList::WeakPlatform);
 			myCollidedWithPlayer = true;
 			myTimer = myDestroyTime;
