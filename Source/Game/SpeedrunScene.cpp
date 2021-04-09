@@ -84,16 +84,16 @@ void SpeedrunScene::InitHighscores()
 
 		if (scores[i] < 0.01f)
 		{
-			score = "-----";
+			score = "--.--.--";
 		}
 		else
 		{
-			float deciScore =  floorf(scores[i] * 100) / 100;
+			//float deciScore =  floorf(scores[i] * 100) / 100;
 
-			score = to_string(deciScore);
+			score = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetTimeOutput(scores[i]);  //to_string(deciScore);
 		}
 
-		text = to_string(i + 1) + ". " + score;
+		text = to_string(i + 1) + ".  " + score;
 		myHighscoreList[i] = std::make_unique<UIText>(this);
 		myHighscoreList[i]->Init(text, "Text/alagard.ttf", EFontSize::EFontSize_48);
 		myHighscoreList[i]->SetPosition(aPos);

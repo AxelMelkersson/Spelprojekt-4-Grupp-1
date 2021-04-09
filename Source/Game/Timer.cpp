@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 #include "TextComponent.h"
 #include <assimp\StringUtils.h>
+#include "SpeedrunManager.h"
 
 Timer::Timer(Scene* aLevelScene)
 	:
@@ -27,9 +28,7 @@ void Timer::Init(const v2f aPos)
 }
 void Timer::Update(const float& aDeltatime)
 {
-	float time = floorf(myTime * 100) / 100;
-
-	GetComponent<TextComponent>()->SetText(to_string(time));
+	GetComponent<TextComponent>()->SetText(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetTimeOutput(myTime));
 
 	myTime += CGameWorld::GetInstance()->GetTimer()->GetTotalTime() - myLastTime - myStartTime + myTotalTime;
 	myLastTime = myTime;
@@ -59,3 +58,4 @@ const float Timer::GetTime() const
 {
 	return myTime;
 }
+
