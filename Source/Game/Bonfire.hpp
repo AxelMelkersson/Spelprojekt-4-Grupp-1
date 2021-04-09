@@ -1,9 +1,11 @@
 #pragma once
 #include "GameObject.h"
 #include "Animation.hpp"
+#include <memory>
 
 class Scene;
 class Collectible;
+class SpeechBubble;
 
 class Bonfire : public GameObject
 {
@@ -22,5 +24,5 @@ private:
 	const int myBonfireIndex;
 
 	bool myHasBeenActivated;
-
+	std::unique_ptr<SpeechBubble> mySpeechBubble;
 };

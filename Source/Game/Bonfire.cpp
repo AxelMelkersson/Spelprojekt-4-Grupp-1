@@ -8,6 +8,7 @@
 
 #include "Player.hpp"
 #include "Collectible.hpp"
+#include "SpeechBubble.h"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -50,6 +51,9 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 	}
+
+	mySpeechBubble = std::make_unique<SpeechBubble>(this); //FElet
+	mySpeechBubble->Init({ "hej" });
 }
 
 void Bonfire::OnCollision(GameObject* aGameObject)
