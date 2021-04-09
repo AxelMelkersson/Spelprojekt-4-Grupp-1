@@ -617,8 +617,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":233,
-                 "y":228
+                 "x":232,
+                 "y":216
                 }, 
                 {
                  "height":0,
@@ -641,8 +641,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":357,
-                 "y":224
+                 "x":360,
+                 "y":216
                 }],
          "opacity":1,
          "type":"objectgroup",
