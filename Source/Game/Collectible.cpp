@@ -11,6 +11,7 @@
 #include "../External/Headers/CU/Utilities.h"
 
 #include "GameWorld.h"
+#include "PostMaster.hpp"
 
 #include "Random.hpp"
 
@@ -164,6 +165,8 @@ void Collectible::TurnIn()
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
+		CheckPopUpMessages();
+		
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
@@ -196,4 +199,22 @@ void Collectible::ImGuiUpdate()
 	ImGui::InputFloat("Idle Movement Distance", &myIdleMovementDistance, 0.0f, 200.0f);
 
 	ImGui::End();
+}
+
+void Collectible::CheckPopUpMessages()
+{
+	v2f position = {};
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, position));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, position));
+
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+	}
 }

@@ -48,6 +48,9 @@ void LevelScene::Load()
 
 	AddBlackScreen();
 
+	myPopUp = new UIPopUp(this);
+	myPopUp->InitPopUp();
+
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
@@ -160,6 +163,8 @@ void LevelScene::Update(const float& aDeltaTime)
 		Scene::Update(aDeltaTime);
 	else if (myIsSpeedrun)
 		myTimer->Update(aDeltaTime);
+
+	myPopUp->Update(aDeltaTime);
 }
 
 void LevelScene::AddBlackScreen()

@@ -36,6 +36,8 @@ public:
 	void Notify(const Message& aMessage) override;
 
 	void ImGuiUpdate();
+	
+	void CheckPopUpMessages();
 
 private:
 	Animation myAnimations[2];

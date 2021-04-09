@@ -8,5 +8,8 @@ enum class eMessageType
 	PlayerDeath,
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
-	Vibrate
+	Vibrate,
+	PopUpMessageE,
+	PopUpMessageM,
+	PopUpMessageH
 };
