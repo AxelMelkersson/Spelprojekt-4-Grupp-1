@@ -5,19 +5,21 @@ class AudioClip;
 enum class AudioList
 {
 	PlayerJump, PlayerDoubleJump, PlayerDeath, PlayerRespawn, PlayerHover, PlayerJumpPad,
-	EnemyNormalIdle, EnemyShootingIdle, EnemyShooting,
+	EnemyNormalIdle, MenuStart, EnemyShooting,
 	MenuMove, MenuSelect, MenuAmbience,
 	GrabLedge, GrabLedge2, LeaveLedge,
 	ButtonPress,
 	SpikeDeath, SpikeHit, ThornDeath, FallDeath, EnemyDeath,
-	ProjectileFly, HiddenRoomUnlock,
+	MenuBack, HiddenRoomUnlock,
 	WeakPlatform, MovingPlatform,
 	WalkGravelRight, WalkGravelLeft, WalkGrassRight, WalkGrassLeft, WalkStoneRight, WalkStoneLeft, WalkWoodLeft, WalkWoodRight, WalkBrickLeft, WalkBrickRight,
 	LandOnGrassHeavy, LandOnGrassEasy, LandOnStoneHeavy, LandOnStoneLight, LandBricksHeavy, LandBricksLight, LandWoodHeavy, LandWoodLight, LandGravelHeavy, LandGravelLight,
 	BashCharge, BashRelease,
 	CollectableV1, BonfireActivated,
 
-	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme 
+	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme,
+
+	CollectibleDown
 };
 
 enum class AudioLayer
