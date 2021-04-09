@@ -27,6 +27,8 @@ PauseMenu::PauseMenu(Scene* aLevelScene)
 
 	myIsSpeedrun = false;
 
+	myIsOutOfFocus = false;
+
 	Subscribe(eMessageType::KilledFocus);
 }
 
@@ -115,6 +117,11 @@ void PauseMenu::Update(const float& aDeltaTime)
 void PauseMenu::SetActiveMenu(const bool aStatement)
 {
 	myMenuActive = aStatement;
+
+	if (myMenuActive && !myIsOutOfFocus)
+	{
+		UpdateCollectibleInfo(false);
+	}
 }
 
 bool PauseMenu::IsPauseActive()
@@ -243,6 +250,26 @@ void PauseMenu::DeactivateMenu()
 
 void PauseMenu::InitTexts()
 {
+	UpdateCollectibleInfo(true);
+
+	myTitleString = std::make_unique<UIObject>(myScene);
+	myTitleString->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseTitleScreen_125x16px.dds", v2f(128.0f, 16.0f), { 155.f, 65.f }, 201);
+
+	myCollectibleString = new UIText(myScene);
+	myCollectibleString->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString->SetPosition({ 50.0f, 25.0f });
+
+	myCollectibleString2 = new UIText(myScene);
+	myCollectibleString2->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString2->SetPosition({ 125.0f, 25.0f });
+
+	myCollectibleString3 = new UIText(myScene);
+	myCollectibleString3->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
+	myCollectibleString3->SetPosition({ 205.0f, 25.0f });
+}
+
+void PauseMenu::UpdateCollectibleInfo(const bool aIniting)
+{
 	myTotalCollectibleInfo.clear();
 	myTotalCollectibleInfoCollected.clear();
 
@@ -269,18 +296,12 @@ void PauseMenu::InitTexts()
 		}
 	}
 
-	myTitleString = std::make_unique<UIObject>(myScene);
-	myTitleString->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseTitleScreen_125x16px.dds", v2f(128.0f, 16.0f), { 155.f, 65.f }, 201);
-
-	myCollectibleString = std::make_unique<UIText>(myScene);
-	myCollectibleString->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString->SetPosition({ 50.0f, 25.0f });
-	myCollectibleString2 = std::make_unique<UIText>(myScene);
-	myCollectibleString2->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString2->SetPosition({ 125.0f, 25.0f });
-	myCollectibleString3 = std::make_unique<UIText>(myScene);
-	myCollectibleString3->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString3->SetPosition({ 205.0f, 25.0f });
+	if (!aIniting)
+	{
+		myCollectibleString->SetText(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]));
+		myCollectibleString2->SetText(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]));
+		myCollectibleString3->SetText(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]));
+	}
 }
 
 void PauseMenu::SkipOneUpdate()
@@ -292,6 +313,12 @@ void PauseMenu::Notify(const Message& aMessage)
 {
 	if (aMessage.myMessageType == eMessageType::KilledFocus)
 	{
+		myIsOutOfFocus = true;
 		SetActiveMenu(true);
+	}
+	else if (aMessage.myMessageType == eMessageType::SetFocus)
+	{
+		myIsOutOfFocus = false;
+		UpdateCollectibleInfo(false);
 	}
 }
