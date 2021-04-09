@@ -25,5 +25,6 @@ enum class eMessageType
 	CollectibleCollectedParticle,
 	BonfireWakeupTopParticle,
 	BonfireWakeupExplosionParticle,
+	UnstablePlatformParticle,
 	Vibrate
 };

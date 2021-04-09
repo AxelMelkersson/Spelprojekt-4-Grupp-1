@@ -24,6 +24,7 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
+	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
@@ -273,6 +274,13 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticle);
 		break;
 	}
+	case eMessageType::UnstablePlatformParticle:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::UnstablePlatformParticle);
+		break;
+	}
 	default:
 	{
 		break;
@@ -337,6 +345,7 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
+	PostMaster::GetInstance().AddSubcriber(this, eMessageType::UnstablePlatformParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupTopParticle);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
@@ -458,6 +467,11 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 	case eParticleEffects::BonfireWakeupExplosionParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupExplosionParticle)]);
+		break;
+	}
+	case eParticleEffects::UnstablePlatformParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::UnstablePlatformParticle)]);
 		break;
 	}
 	}

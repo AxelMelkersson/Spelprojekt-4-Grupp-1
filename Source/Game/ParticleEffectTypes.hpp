@@ -22,5 +22,6 @@ enum class eParticleEffects
 	VelocityLinesParticles,
 	CollectibleCollectedParticle,
 	BonfireWakeupTopParticle,
-	BonfireWakeupExplosionParticle
+	BonfireWakeupExplosionParticle,
+	UnstablePlatformParticle
 };

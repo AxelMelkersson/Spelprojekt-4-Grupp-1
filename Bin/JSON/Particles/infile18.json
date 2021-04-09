@@ -3,7 +3,7 @@
     {
       "EffectType": "BonfireWakeupTopParticle",
 
-      "ZIndex": 60,
+      "ZIndex": 90,
 
       "EffectTypeIndex": 18,
       "SpritePath": "Sprites/Particles/Particle1.dds",
