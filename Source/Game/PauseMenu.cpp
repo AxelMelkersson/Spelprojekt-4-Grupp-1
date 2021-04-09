@@ -10,6 +10,7 @@
 #include "Game.h"
 #include "SpeedrunManager.h"
 #include "DataManager.h"
+#include "AudioManager.h"
 
 #include "AnimationComponent.hpp"
 
@@ -130,10 +131,12 @@ void PauseMenu::SelectButton()
 {
 	if (myMovingIndex == 0)
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 		SetActiveMenu(false);
 	}
 	else if (myMovingIndex == 1)
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 		myOptionsMenu->SetActive(true);
 		SetActiveMenu(false);
 
@@ -150,12 +153,14 @@ void PauseMenu::CheckIndexPress()
 {
 	if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 		myMovingIndex--;
 		if (myMovingIndex < 0)
 			myMovingIndex = myButtons.size() - 1;
 	}
 	else if (myInput->GetInput()->GetKeyJustDown(Keys::DOWNARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadDown))
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 		myMovingIndex++;
 		if (myMovingIndex > myButtons.size() - 1)
 			myMovingIndex = 0;

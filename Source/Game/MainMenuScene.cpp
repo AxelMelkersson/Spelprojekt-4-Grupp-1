@@ -206,20 +206,22 @@ void MainMenuScene::CheckButtonsPress()
 
 	if (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross))
 	{
-		AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 		if (myMovingIndex == static_cast<int>(eMainMenuButton::StartGame))
 		{
 			//CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
 		}
 		else if (myMovingIndex == static_cast<int>(eMainMenuButton::Options))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 			myOptions->SetActive(true);
 			mySubMenuActive = true;
 			SetActiveMenu(false);
 		}
 		else if (myMovingIndex == static_cast<int>(eMainMenuButton::LevelSelect) && myLevelSelectBtn->GetIsUnlocked())
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelSelect);
 
 #ifndef _RETAIL
@@ -228,6 +230,7 @@ void MainMenuScene::CheckButtonsPress()
 		}
 		else if (myMovingIndex == static_cast<int>(eMainMenuButton::SpeedrunMode) && mySpeedrunModeBtn->GetIsUnlocked())
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::SpeedrunScene);
 			//CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsSpeedrun(true);
 			//CGameWorld::GetInstance()->GetLevelManager().SetLevelIndex(0);

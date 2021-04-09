@@ -4,9 +4,10 @@
 
 AudioLibrary::AudioLibrary()
 {
-	myAudioList.insert_or_assign(AudioList::BashRelease,     new AudioClip("Sounds/Effects/PushfromBash.wav",             false, 0.4f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::BashRelease,     new AudioClip("Sounds/Effects/PushfromBash.wav",     false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BonfireActivated,new AudioClip("Sounds/Effects/BonfireActivated.wav", false, 0.2f, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::CollectableV1,   new AudioClip("Sounds/Effects/Collectible_V1.wav",   false, 0.2f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::CollectibleDown, new AudioClip("Sounds/Effects/CollectibleDown.wav",  false, 0.1f, 0.5f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::CollectableV1,   new AudioClip("Sounds/Effects/Collectible.wav",      false, 0.2f, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerRespawn,   new AudioClip("Sounds/Effects/Respawn.wav",          false, 0.07, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerHover,     new AudioClip("Sounds/Effects/HoverAbility.wav",     true,  0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerJumpPad,   new AudioClip("Sounds/Effects/spring.wav",           false, 0.4f, 1,    AudioLayer::SoundEffect));
@@ -25,6 +26,7 @@ AudioLibrary::AudioLibrary()
 
 	myAudioList.insert_or_assign(AudioList::MenuMove,        new AudioClip("Sounds/Effects/MenuMove.wav",         false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::MenuBack,        new AudioClip("Sounds/Effects/MenuBack.wav",         false, 0.2f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::MenuStart,       new AudioClip("Sounds/Effects/MenuStart.wav",        false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::MenuSelect,      new AudioClip("Sounds/Effects/MenuSelect.wav",       false, 0.2f, 1,    AudioLayer::SoundEffect));
 
 	myAudioList.insert_or_assign(AudioList::WalkGravelRight, new AudioClip("Sounds/Effects/Step_Gravel_Right.wav",false, 0.4f, 1,    AudioLayer::SoundEffect));
@@ -38,7 +40,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::WalkStoneRight,  new AudioClip("Sounds/Effects/Step_Stone_Right.wav", false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WalkStoneLeft,   new AudioClip("Sounds/Effects/Step_Stone_Left.wav",  false, 0.4f, 1,    AudioLayer::SoundEffect));
 
-	myAudioList.insert_or_assign(AudioList::LandOnGrassEasy, new AudioClip("Sounds/Effects/LandGrassLight.wav",   false, 0.3f, 1,   AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandOnGrassEasy, new AudioClip("Sounds/Effects/LandGrassLight.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandOnGrassHeavy,new AudioClip("Sounds/Effects/LandGrassHeavy.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandOnStoneLight,new AudioClip("Sounds/Effects/LandStoneLight.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandOnStoneHeavy,new AudioClip("Sounds/Effects/LandStoneHeavy.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
@@ -53,7 +55,7 @@ AudioLibrary::AudioLibrary()
 
 	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom.wav",       false, 0.1f, 0.15f,AudioLayer::SoundEffect));
 
-	myAudioList.insert_or_assign(AudioList::BashCharge,      new AudioClip("Sounds/Effects/Bash.wav",     false, 0.4f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::BashCharge,      new AudioClip("Sounds/Effects/Bash.wav",             false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerDoubleJump,new AudioClip("Sounds/Effects/DoubleJump.wav",       false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerJump,      new AudioClip("Sounds/Effects/Jump.wav",             false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WeakPlatform,    new AudioClip("Sounds/Effects/Temporaryplatform.wav",false, 0.2f, 0.2f, AudioLayer::SoundEffect));

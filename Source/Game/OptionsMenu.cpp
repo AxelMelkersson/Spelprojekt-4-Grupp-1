@@ -206,6 +206,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 			if (!mySoundSettingsActive)
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 				mySoundSettingsActive = true;
 				mySubMenuActive = true;
 
@@ -222,6 +223,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 			if (!myScreenSettingsActive)
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 				myScreenSettingsActive = true;
 			}
 			else
@@ -234,6 +236,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 			if (!myCreditsActive)
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 				myCreditsActive = true;
 				myCreditsMenu->Activate();
 				DeactivateMenu();
@@ -250,6 +253,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 			if (!myTutorialActtive)
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 				myTutorialActtive = true;
 				DeactivateMenu();
 				myTutorial->Activate();
