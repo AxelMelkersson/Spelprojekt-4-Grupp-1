@@ -261,7 +261,6 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 	case eMessageType::ShrineWakeUpParticle:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
-		position.y = 90.f;
 
 		SpawnEffect(position, eParticleEffects::ShrineWakeUpParticle);
 		break;
