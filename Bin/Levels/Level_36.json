@@ -104,7 +104,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -121,7 +121,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
