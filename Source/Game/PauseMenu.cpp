@@ -120,7 +120,7 @@ void PauseMenu::SetActiveMenu(const bool aStatement)
 
 	if (myMenuActive && !myIsOutOfFocus)
 	{
-		UpdateCollectibleInfo(false);
+		//UpdateCollectibleInfo(false);
 	}
 }
 
@@ -319,6 +319,6 @@ void PauseMenu::Notify(const Message& aMessage)
 	else if (aMessage.myMessageType == eMessageType::SetFocus)
 	{
 		myIsOutOfFocus = false;
-		UpdateCollectibleInfo(false);
+		//UpdateCollectibleInfo(false);
 	}
 }
