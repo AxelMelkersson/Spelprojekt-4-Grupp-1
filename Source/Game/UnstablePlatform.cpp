@@ -96,14 +96,14 @@ void UnstablePlatform::Landed(const int& aOverlapY)
 void UnstablePlatform::SetSpriteToDisable(SpriteComponent* aSprite)
 {
 	mySpriteToDisable = aSprite;
+	mySpriteToDisable->Activate();
+	mySpriteToDisable->SetSpriteRectPixel(0, 0, mySpriteToDisable->GetSizeX(), 16);
 
 	myAnimations[0] = Animation(false, true, false, 0, 11, 1, 0.1f, mySpriteToDisable, mySpriteToDisable->GetSizeX(), 16);
 	myAnimations[1] = Animation(true, true, false, 10, 11, 1, 0.1f, mySpriteToDisable, mySpriteToDisable->GetSizeX(), 16);
 
 	myAnimationComponent = AddComponent<AnimationComponent>();
 	myAnimationComponent->SetSprite(mySpriteToDisable);
-
-	myAnimationComponent->SetAnimation(&myAnimations[1]);
 }
 
 void UnstablePlatform::ActivatePlatform()
