@@ -1,0 +1,75 @@
+{
+  "particle": [
+    {
+      "EffectType": "CollectibleTrailEffectMedium",
+
+      "ZIndex": 128,
+
+      "EffectTypeIndex": 25,
+      "SpritePath": "Sprites/Particles/ParticleCollectible2Variant2.dds",
+
+      "PauseTimer": 0.0,
+      "PauseSeconds": 0.0,
+
+      "EmitterLifeTime": 0.1,
+
+      "StartScale": 1.0,
+      "EndScale": 1.0,
+
+      "RotateSprite": 0.0,
+
+      "MinTimeBetweenSpawns": 0.99,
+      "MaxTimeBetweenSpawns": 0.99,
+
+      "MinSpeed": 5.0,
+      "MaxSpeed": 1.0,
+
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
+
+      "EmitterAngle": 0.0,
+
+      "EmitterWidth": 0.0,
+      "EmitterHeigth": 0.0,
+
+      "MinParticleLifeTime": 3.0,
+      "MaxParticleLifeTime": 4.0,
+
+      "SpawnLifeTime": 50.0,
+      "SpawnEverySecond": 0.3,
+
+      "Offset": [
+        {
+          "X": 0.0
+        },
+        {
+          "Y": 0.0
+        }
+      ],
+
+      "LockPosition": true,
+
+      "LockedAngular": [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0
+      ],
+
+      "StartColor": [
+        255.0,
+        255.0,
+        255.0,
+        1.0
+      ],
+      "EndColor": [
+        255.0,
+        255.0,
+        255.0,
+        0.0
+      ],
+      "BlendState": "Additive"
+    }
+  ]
+
+}

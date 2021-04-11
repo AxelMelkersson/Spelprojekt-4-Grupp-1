@@ -143,6 +143,11 @@ const int GameObject::GetZIndex()
 	return myZIndex;
 }
 
+const bool GameObject::GetShouldBeDestroyed()
+{
+	return myTransform.myShouldBeDestroyed;
+}
+
 GameObject& GameObject::Destroy()
 {
 	myTransform.myShouldBeDestroyed = true;

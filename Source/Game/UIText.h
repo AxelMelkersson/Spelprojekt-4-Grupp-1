@@ -17,6 +17,8 @@ public:
 
 	void SetPosition(const v2f aPosition);
 
+	void SetText(const std::string& aTextString);
+
 
 private:
 	TextComponent* myText;

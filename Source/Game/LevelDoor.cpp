@@ -44,41 +44,21 @@ void LevelDoor::OnCollision(GameObject* aGameObject)
 	{
 		myWasActivated = true;
 
-		int doorType = 0;
-		const v2f roomSize = myScene->GetCamera().GetBoundSize();
-
-		if (GetPosition().x < 0.0f)
-		{
-			doorType = 0;
-		}
-		else if (GetPosition().x > roomSize.x)
-		{
-			doorType = 1;
-		}
-		else if (GetPosition().y < 0.0f)
-		{
-			doorType = 2;
-		}
-		else if (GetPosition().y > roomSize.y)
-		{
-			doorType = 3;
-		}
-
 		if (myType == eDoorType::Exit)
 		{
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadNext, doorType), true);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadNext, static_cast<int>(myType)), true);
 		}
 		else if (myType == eDoorType::Entry)
 		{
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadPrevious, doorType), true);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadPrevious, static_cast<int>(myType)), true);
 		}
 		else if (myType == eDoorType::HiddenRoom)
 		{
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadHiddenRoom, doorType), true);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadHiddenRoom, static_cast<int>(myType)), true);
 		}
 		else if (myType == eDoorType::MainRoom)
 		{
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadMainRoom, doorType), true);
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadMainRoom, static_cast<int>(myType)), true);
 		}
 	}
 }

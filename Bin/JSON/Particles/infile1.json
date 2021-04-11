@@ -1,46 +1,49 @@
 {
   "particle": [
     {
-      "EffectType": "CollectibleEffect",
+      "EffectType": "CollectibleTrailEffect",
 
-      "ZIndex": 100,
+      "ZIndex": 128,
 
       "EffectTypeIndex": 1,
-      "SpritePath": "Sprites/Particles/ParticleGlowCollectible2.dds",
+      "SpritePath": "Sprites/Particles/Particle1.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 3.0,
+      "EmitterLifeTime": 0.1,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.05,
-      "MaxTimeBetweenSpawns": 0.1,
+      "MinTimeBetweenSpawns": 0.99,
+      "MaxTimeBetweenSpawns": 0.99,
 
-      "MinSpeed": 100.0,
-      "MaxSpeed": 500.0,
+      "MinSpeed": 5.0,
+      "MaxSpeed": 1.0,
 
-      "MinParticleAngularVel": -1.0,
-      "MaxParticleAngularVel": 1.0,
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 0.0,
 
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 5.0,
-      "MaxParticleLifeTime": 8.0,
+      "MinParticleLifeTime": 1.0,
+      "MaxParticleLifeTime": 2.0,
+
+      "SpawnLifeTime": 50.0,
+      "SpawnEverySecond": 0.7,
 
       "Offset": [
         {
           "X": 0.0
         },
         {
-          "Y": 5.0
+          "Y": 0.0
         }
       ],
 
@@ -63,7 +66,7 @@
         255.0,
         255.0,
         255.0,
-        1.0
+        0.0
       ],
       "BlendState": "Additive"
     }

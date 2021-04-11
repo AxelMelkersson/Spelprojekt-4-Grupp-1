@@ -21,6 +21,7 @@
 #include "PostMaster.hpp"
 
 #include "BashableObject.hpp"
+#include "CameraStaticDistance.hpp"
 
 #include "SpriteComponent.h"
 
@@ -32,6 +33,7 @@ LevelScene::LevelScene()
 	myBackground(nullptr),
 	myIsSpeedrun(false),
 	myStayBlackTime(0.2f),
+	myEffectFactory(nullptr),
 	Scene()
 {}
 
@@ -49,25 +51,22 @@ void LevelScene::Load()
 	myReachedFullOpacity = true;
 	myIsTransitioning = false;
 
-	AddBlackScreen();
-
+	myEffectFactory = new ParticleEffectFactory(this);
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
 
 	CGameWorld::GetInstance()->GetLevelManager().LoadLevel(this, myPlayer);
 
+	AddBlackScreen();
+
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
-
-	myEffectFactory = new ParticleEffectFactory();
-	myEffectFactory->ReadEffects(this);
-	myEffectFactory->Init();
 
 	if (myIsSpeedrun)
 	{
 		myTimer = new Timer(this);
-		myTimer->Init({ 10, 10 });
+		myTimer->Init({ 10, 13 });
 		myTimer->Start(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetScore());
 	}
 
@@ -76,6 +75,7 @@ void LevelScene::Load()
 
 void LevelScene::Unload()
 {
+	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
@@ -110,18 +110,20 @@ void LevelScene::Deactivate()
 }
 
 void LevelScene::Update(const float& aDeltaTime)
-{
+{/*
+	if (myEffectFactory != NULL)
+		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
-	{
-		v2f position = GetPlayer()->GetPosition();
+	//if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	//{
+	//	v2f position = GetPlayer()->GetPosition();
 
-		myEffectFactory->TestEffect(position);
-	}
-	else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
-	{
-		myEffectFactory->TestEffectFollowObject();
-	}
+	//	myEffectFactory->TestEffect(position);
+	//}
+	//else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
+	//{
+	//	myEffectFactory->TestEffectFollowObject();
+	//}
 
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();
@@ -150,7 +152,7 @@ void LevelScene::Update(const float& aDeltaTime)
 		return;
 	}
 
-	myBlackScreen->SetPosition(GetCamera().GetPosition());
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	if (myReachedFullOpacity)
 	{
@@ -170,11 +172,13 @@ void LevelScene::AddBlackScreen()
 	myBlackScreen = new GameObject(this);
 	myBlackScreen->SetZIndex(1000);
 
-	myBlackScreen->SetPosition(v2f(160.0f, 92.0f));
+	myBlackScreen->SetPivot(v2f(0.5f, 0.5f));
+
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	SpriteComponent* sprite = myBlackScreen->AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/BlackScreen.dds");
-	sprite->SetSize(v2f(640.0f, 368.0f));
+	sprite->SetSize(v2f(10000.0f, 10000.0f));
 }
 
 void LevelScene::DecreaseBlackScreen()
