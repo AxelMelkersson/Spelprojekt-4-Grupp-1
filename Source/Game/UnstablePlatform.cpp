@@ -4,6 +4,7 @@
 #include "SpriteComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "AnimationComponent.hpp"
 #include "PostMaster.hpp"
 
 #include "AudioManager.h"
@@ -37,7 +38,7 @@ void UnstablePlatform::Update(const float& aDeltaTime)
 		myCollidedWithPlayer = false;
 		DeactivatePlatform();
 	}
-	else if(myTimer <= 0 && !myCollidedLastFrame)
+	else if(myTimer <= 0 && !myCollidedLastFrame && myIsDeactivated)
 	{
 		ActivatePlatform();
 	}
@@ -77,6 +78,8 @@ void UnstablePlatform::OnCollision(GameObject* aGameObject)
 			AudioManager::GetInstance()->PlayAudio(AudioList::WeakPlatform);
 			myCollidedWithPlayer = true;
 			myTimer = myDestroyTime;
+
+			myAnimationComponent->SetAnimation(&myAnimations[0]);
 		}
 	}
 }
@@ -93,18 +96,26 @@ void UnstablePlatform::Landed(const int& aOverlapY)
 void UnstablePlatform::SetSpriteToDisable(SpriteComponent* aSprite)
 {
 	mySpriteToDisable = aSprite;
+
+	myAnimations[0] = Animation(false, true, false, 0, 11, 1, 0.1f, mySpriteToDisable, mySpriteToDisable->GetSizeX(), 16);
+	myAnimations[1] = Animation(true, true, false, 10, 11, 1, 0.1f, mySpriteToDisable, mySpriteToDisable->GetSizeX(), 16);
+
+	myAnimationComponent = AddComponent<AnimationComponent>();
+	myAnimationComponent->SetSprite(mySpriteToDisable);
+
+	myAnimationComponent->SetAnimation(&myAnimations[1]);
 }
 
 void UnstablePlatform::ActivatePlatform()
 {
+	myAnimationComponent->SetAnimation(&myAnimations[1]);
+
 	GetComponent<PhysicsComponent>()->SetCanCollide(true);
-	mySpriteToDisable->Activate();
 	myIsDeactivated = false;
 }
 
 void UnstablePlatform::DeactivatePlatform()
 {
 	GetComponent<PhysicsComponent>()->SetCanCollide(false);
-	mySpriteToDisable->Deactivate();
 	myIsDeactivated = true;
 }
