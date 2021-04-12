@@ -63,7 +63,7 @@
          "name":"HiddenRooms",
          "objects":[
                 {
-                 "height":56,
+                 "height":48,
                  "id":755,
                  "name":"",
                  "rotation":0,
@@ -71,7 +71,7 @@
                  "visible":true,
                  "width":48,
                  "x":0,
-                 "y":168
+                 "y":176
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -182,7 +182,7 @@
                  "y":256
                 }, 
                 {
-                 "height":120,
+                 "height":128,
                  "id":747,
                  "name":"",
                  "rotation":0,
