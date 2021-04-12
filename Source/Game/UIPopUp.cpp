@@ -44,7 +44,7 @@ void UIPopUp::InitPopUp()
 
 	v2f backPos = { Config::ourReferenceSize.x, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
-	v2f collectiblePos = { Config::ourReferenceSize.x - 25.f, 35.0f };
+	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
 	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 202);
@@ -221,7 +221,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myBackground->SetPositionX(myBackground->GetStartPosition().x - 50.f * aDeltaTime);
 				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x - 50.f * aDeltaTime);
-				myCollectibleString->SetPositionX(myCollectibleString->GetPosition().x - 50.f * aDeltaTime);
+				myCollectibleString->SetPosition(myCollectibleString->GetPosition() - v2f(50.f * aDeltaTime, 0));
 			}
 		}
 		else if (myIsMaxLeft == true)
@@ -231,8 +231,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myBackground->SetPositionX(myBackground->GetStartPosition().x + 50.f * aDeltaTime);
 				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x + 50.f * aDeltaTime);
-				myCollectibleString->SetPositionX(myCollectibleString->GetPositionX() + 50.f * aDeltaTime);
-
+				myCollectibleString->SetPosition(myCollectibleString->GetPosition() + v2f(50.f * aDeltaTime, 0));
 			}
 		}
 
