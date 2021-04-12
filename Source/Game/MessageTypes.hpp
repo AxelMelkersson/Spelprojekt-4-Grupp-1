@@ -38,5 +38,8 @@ enum class eMessageType
 	KilledFocus,
 	SetFocus,
 	TurnedInCollectible,
-	Vibrate
+	Vibrate,
+	PopUpMessageE,
+	PopUpMessageM,
+	PopUpMessageH
 };
