@@ -370,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="UIPopUp.h" />
     <ClInclude Include="CreditsMenu.h" />
+    <ClInclude Include="SpeechBubble.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -613,5 +616,8 @@
     </ClCompile>
     <ClCompile Include="UIPopUp.cpp" />
     <ClCompile Include="CreditsMenu.cpp" />
+    <ClCompile Include="SpeechBubble.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
