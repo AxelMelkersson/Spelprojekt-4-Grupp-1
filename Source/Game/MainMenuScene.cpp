@@ -134,7 +134,7 @@ void MainMenuScene::InitObjects()
 
 	myBackground->Init("Sprites/UI/startMenu/UI_startMenu_Background_320x180px.dds", { 520.f, 265.f }, backgroundPos, 200);
 	myTitleSprite->Init("Sprites/UI/startMenu/UI_startMenu_logotype_A_192x64px.dds", { 192.0f, 64.0f }, titleSpritePos, 201);
-	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
+	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, 8, 8, { 200.0f, 70.0f }, 201);
 
 	myNewGameBtn->Init(playSpritePath, playPos, newGameBtnPos, playSpritePathAnim, playPos.x);
 	myLevelSelectBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Marked_72x16px.dds", 72, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_80x9px_Locked.dds", myLevelSelectUnlocked);

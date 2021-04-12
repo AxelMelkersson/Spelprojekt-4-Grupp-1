@@ -35,7 +35,7 @@ private:
 	std::unique_ptr<UIText> myCollectibleString2;
 	std::unique_ptr<UIText> myCollectibleString3;
 
-
+	std::vector<int> myLevelIndexes;
 	std::vector<UIText*> myLevelCollectibles;
 	std::vector<std::vector<int>> myCollectibleInfo;
 	std::vector<std::vector<int>> myCollectibleCollected;
@@ -51,8 +51,9 @@ private:
 	float myMaxTime;
 	float myStayTime;
 
+	int myLevelIndex;
+
 	void Deactivate();
 	void SetNewPositions(const float& aDeltaTime);
-	void ResetObjects();
 	void UpdateCollectibles();
 };

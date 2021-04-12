@@ -9,6 +9,10 @@
 #include "TextComponent.h"
 #include "PostMaster.hpp"
 #include "Game.h"
+#include "SpriteComponent.h"
+#include "AnimationComponent.hpp"
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/writer.h>
 
 UIPopUp::UIPopUp(Scene* aLevelScene)
 {
@@ -17,6 +21,7 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 	myMaxTime = 7.0f;
 	myStayTime = 1.5f;
 	myCurrentStayTime = {};
+	myLevelIndex = 0;
 }
 
 UIPopUp::~UIPopUp()
@@ -46,10 +51,12 @@ void UIPopUp::InitPopUp()
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
 	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
 
+
+
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
-	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 202);
-	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos, 202);
-	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos, 202);
+	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 7, 7, firePos, 202);
+	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 202);
+	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 7, 7, firePos, 202);
 
 	for (int i = 0; i < 8; ++i)
 	{
@@ -86,10 +93,26 @@ void UIPopUp::InitPopUp()
 	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString3->SetPosition(collectiblePos);
 
-	//myCollectibleString->Deactivate();
-	//myCollectibleString2->Deactivate();
-	//myCollectibleString3->Deactivate();
+	std::ifstream levelSelectFile("JSON/Menus/LevelSelect/LevelSelect.json");
+	rapidjson::IStreamWrapper levelSelectStream(levelSelectFile);
+
+	rapidjson::Document levelSelect;
+	levelSelect.ParseStream(levelSelectStream);
+
+
+	int bonfireIndex = 0;
+	for (rapidjson::Value::ConstValueIterator iterator = levelSelect["Bonfires"].Begin(); iterator != levelSelect["Bonfires"].End(); ++iterator)
+	{
+		if (DataManager::GetInstance().GetBonfireState(bonfireIndex))
+		{
+			myLevelIndex = bonfireIndex;
+		}
+
+		++bonfireIndex;
+	}
+
 }
+
 
 void UIPopUp::Update(const float& aDeltaTime)
 {
@@ -97,10 +120,10 @@ void UIPopUp::Update(const float& aDeltaTime)
 	{
 		myCurrentTime += aDeltaTime;
 
+		UpdateCollectibles();
 		SetNewPositions(aDeltaTime);
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
-		UpdateCollectibles();
 
 	}
 	else if (myMedActive)
@@ -108,6 +131,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myCurrentTime += aDeltaTime;
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireMed->UpdateUIObjects(aDeltaTime);
+		UpdateCollectibles();
 		SetNewPositions(aDeltaTime);
 
 	}
@@ -116,18 +140,18 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myCurrentTime += aDeltaTime;
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireHard->UpdateUIObjects(aDeltaTime);
-
+		UpdateCollectibles();
 		SetNewPositions(aDeltaTime);
 	}
-	else
-	{
-		Deactivate();
-		myEasyActive = false;
-		myMedActive = false;
-		myHardActive = false;
+	//else
+	//{
+	//	Deactivate();
+	//	myEasyActive = false;
+	//	myMedActive = false;
+	//	myHardActive = false;
 
 
-	}
+	//}
 	if (myCurrentTime > myMaxTime)
 	{
 		Deactivate();
@@ -140,9 +164,6 @@ void UIPopUp::Update(const float& aDeltaTime)
 
 void UIPopUp::Activate(ePopUpTypes aType)
 {
-	//DataManager::GetInstance().GetCollectableCount();
-
-
 	switch (aType)
 	{
 	case ePopUpTypes::Easy:
@@ -284,34 +305,14 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			}
 		}
 	}
-
-
 }
 
-
-void UIPopUp::ResetObjects()
-{
-	Config::ourReferenceSize = { 320.f, 180.f };
-
-	v2f position = myScene->GetCamera().GetPosition();
-	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
-	v2f firePos = { position.x + Config::ourReferenceSize.x + 15.f, position.y + 30.0f };
-	v2f collectiblePos = { position.x + Config::ourReferenceSize.x + 25.f, position.y + 35.0f };
-
-
-	myCurrentStayTime = 0.f;
-	myIsMaxLeft = false;
-
-	myBackground->SetPosition(backPos);
-	myFireEasy->SetPosition(firePos);
-	myFireMed->SetPosition(firePos);
-	myFireHard->SetPosition(firePos);
-	myCollectibleString->SetPosition(collectiblePos);
-	//myCollectibleString2->SetPosition(collectiblePos);
-	//myCollectibleString3->SetPosition(collectiblePos);
-}
 
 void UIPopUp::UpdateCollectibles()
 {
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[0][0] + 1) + "/" + std::to_string(myCollectibleInfo[0][0]));
+
+	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][0]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][0]));
+	myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][1]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][1]));
+	myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][2]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][2]));
+
 }

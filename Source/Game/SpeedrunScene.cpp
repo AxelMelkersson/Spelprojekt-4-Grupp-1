@@ -60,7 +60,7 @@ void SpeedrunScene::InitObjects()
 	myBar->Init("Sprites/UI/speedrunMenu/UI_speedrunMenu_MenuBar_241x3px.dds", { 241.f, 3.f }, barPos, 202);
 	myBestTime->Init("Sprites/UI/speedrunMenu/UI_speedrunMenu_BestTime_54x10px.dds", { 60.f, 18.f }, bestTimePos, 202);
 	myTitle->Init("Sprites/UI/speedrunMenu/UI_speedrunMenu_MenuTitle_166x20px.dds", { 220.f, 30.f }, titlePos, 202);
-	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 203);
+	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, 8, 8, { 200.0f, 70.0f }, 203);
 
 	myStartGameBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_unmarked.dds", { 56.f,16.f }, startPos, "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_marked.dds", 56);
 	myMainMenuBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f, 16.f }, mainMenuPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);

@@ -27,7 +27,7 @@ void UIObject::Init(const std::string aPathString, const v2f aSize, const v2f aP
 	GameObject::Init();
 }
 
-void UIObject::InitAnimation(const std::string aPathString, const v2f aSize, const v2f aPosition, int aZIndex)
+void UIObject::InitAnimation(const std::string aPathString, const v2f aSize, int aAnimationFrames, int aColumns, const v2f aPosition, int aZIndex)
 {
 	SetZIndex(aZIndex);
 	SetPivot({ 0.5f, 0.5f });
@@ -38,7 +38,7 @@ void UIObject::InitAnimation(const std::string aPathString, const v2f aSize, con
 	sprite->SetSize(aSize);
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(sprite);
-	Animation idleAnimation = Animation(false, false, false, 0, 8, 8, 0.10f, sprite, 16, 16);
+	Animation idleAnimation = Animation(false, false, false, 0, aAnimationFrames, aColumns, 0.10f, sprite, 16, 16);
 	animation->SetAnimation(&idleAnimation);
 
 	GameObject::Init();
