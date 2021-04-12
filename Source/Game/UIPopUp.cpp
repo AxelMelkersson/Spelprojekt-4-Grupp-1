@@ -31,6 +31,9 @@ UIPopUp::~UIPopUp()
 
 void UIPopUp::InitPopUp()
 {
+	myCollectibleInfo.clear();
+	myCollectibleCollected.clear();
+
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageE);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageM);
 	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageH);
@@ -48,6 +51,7 @@ void UIPopUp::InitPopUp()
 	v2f position2 = myScene->GetCamera().GetViewportSize();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
 	v2f firePos = { position.x + Config::ourReferenceSize.x + 15.f, position.y + 30.0f };
+	v2f collectiblePos = { position.x + Config::ourReferenceSize.x - 25.f, position.y + 35.0f };
 
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
@@ -55,33 +59,30 @@ void UIPopUp::InitPopUp()
 	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos, 202);
 	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos, 202);
 
-	//for (int i = 0; i < 8; ++i)
-	//{
-	//	myCollectibleInfo.push_back(std::vector<int>());
-	//	myCollectibleCollected.push_back(std::vector<int>());
 
-	//	for (int difficulty = 0; difficulty < 3; ++difficulty)
-	//	{
-	//		myCollectibleInfo[i].push_back(0);
-	//		myCollectibleCollected[i].push_back(0);
-	//	}
-	//}
+	for (int i = 0; i < 8; ++i)
+	{
+		myCollectibleInfo.push_back(std::vector<int>());
+		myCollectibleCollected.push_back(std::vector<int>());
 
-	//for (int j = 0; j < DataManager::GetInstance().GetCollectableCount(); ++j)
-	//{
-	//	DataManager::GetInstance().GetCollectableInfoIndex(j);
+		for (int difficulty = 0; difficulty < 3; ++difficulty)
+		{
+			myCollectibleInfo[i].push_back(0);
+			myCollectibleCollected[i].push_back(0);
+		}
+	}
 
-	//	++myCollectibleInfo[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
+	for (int j = 0; j < DataManager::GetInstance().GetCollectableCount(); ++j)
+	{
+		DataManager::GetInstance().GetCollectableInfoIndex(j);
 
-	//	if (DataManager::GetInstance().GetCollectableInfoIndex(j).myCollectedState)
-	//	{
-	//		++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
+		++myCollectibleInfo[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
 
-	//	}
-	//}
-
-	//myCollectibleInfo.clear();
-	//myCollectibleCollected.clear();
+		if (DataManager::GetInstance().GetCollectableInfoIndex(j).myCollectedState)
+		{
+			++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
+		}
+	}
 
 	//myLevelCollectibles.push_back(new UIText(myScene));
 	//myLevelCollectibles.push_back(new UIText(myScene));
@@ -100,6 +101,18 @@ void UIPopUp::InitPopUp()
 	//myLevelCollectibles[2]->SetPosition(v2f(290.0f, 30.0f));
 	//myLevelCollectibles[2]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
+
+	myCollectibleString = std::make_unique<UIText>(myScene);
+	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString->SetPosition(collectiblePos);
+	/*myCollectibleString2 = std::make_unique<UIText>(myScene);
+	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString3 = std::make_unique<UIText>(myScene);
+	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);*/
+
+	//myCollectibleString->Deactivate();
+	//myCollectibleString2->Deactivate();
+	//myCollectibleString3->Deactivate();
 }
 
 void UIPopUp::Update(const float& aDeltaTime)
@@ -111,26 +124,32 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
 		SetNewPositions(aDeltaTime);
+		UpdateCollectibles();
 	}
-	if (myMedActive)
+	else if (myMedActive)
 	{
 		myCurrentTime += aDeltaTime;
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireMed->UpdateUIObjects(aDeltaTime);
+
 		SetNewPositions(aDeltaTime);
 
 	}
-	if (myHardActive == true)
+	else if (myHardActive == true)
 	{
 		myCurrentTime += aDeltaTime;
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireHard->UpdateUIObjects(aDeltaTime);
+
 		SetNewPositions(aDeltaTime);
 
 	}
+	else
+	{
+		myCollectibleString->Deactivate();
+	}
 	if (myCurrentTime > myMaxTime)
 	{
-		ResetObjects();
 		Deactivate();
 	}
 }
@@ -139,21 +158,26 @@ void UIPopUp::Activate(ePopUpTypes aType)
 {
 	DataManager::GetInstance().GetCollectableCount();
 
+	//ResetObjects();
+
 	switch (aType)
 	{
 	case ePopUpTypes::Easy:
+		myEasyActive = true;
 		myFireEasy->SetActive(true);
 		myBackground->SetActive(true);
-		myEasyActive = true;
+		myCollectibleString->Activate();
 		break;
 	case ePopUpTypes::Med:
 		myFireMed->SetActive(true);
 		myBackground->SetActive(true);
+		//myCollectibleString2->Activate();
 		myMedActive = true;
 		break;
 	case ePopUpTypes::Hard:
 		myFireHard->SetActive(true);
 		myBackground->SetActive(true);
+		//myCollectibleString3->Activate();
 		myHardActive = true;
 		break;
 	}
@@ -185,12 +209,16 @@ void UIPopUp::Notify(const Message& aMessage)
 
 void UIPopUp::Deactivate()
 {
-	myBackground->SetActive(false);
 	myCurrentTime = 0.0f;
+	myBackground->SetActive(false);
 
 	myFireEasy->SetActive(false);
 	myFireMed->SetActive(false);
 	myFireHard->SetActive(false);
+	myCollectibleString->Deactivate();
+	//myCollectibleString2->Deactivate();
+	//myCollectibleString3->Deactivate();
+
 
 }
 
@@ -206,6 +234,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			}
 			myBackground->SetPositionX(myBackground->GetPositionX() - 50.f * aDeltaTime);
 			myFireEasy->SetPositionX(myFireEasy->GetPositionX() - 50.f * aDeltaTime);
+			myCollectibleString->SetPositionX(myCollectibleString->GetPositionX() - 50.f * aDeltaTime);
 		}
 		else if (myIsMaxLeft == true)
 		{
@@ -214,6 +243,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myBackground->SetPositionX(myBackground->GetPositionX() + 50.f * aDeltaTime);
 				myFireEasy->SetPositionX(myFireEasy->GetPositionX() + 50.f * aDeltaTime);
+				myCollectibleString->SetPositionX(myCollectibleString->GetPositionX() + 50.f * aDeltaTime);
 
 			}
 		}
@@ -273,6 +303,7 @@ void UIPopUp::ResetObjects()
 	v2f position = myScene->GetCamera().GetPosition();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
 	v2f firePos = { position.x + Config::ourReferenceSize.x + 15.f, position.y + 30.0f };
+	v2f collectiblePos = { position.x + Config::ourReferenceSize.x + 25.f, position.y + 30.0f };
 
 
 	myCurrentStayTime = 0.f;
@@ -282,10 +313,20 @@ void UIPopUp::ResetObjects()
 	myFireEasy->SetPosition(firePos);
 	myFireMed->SetPosition(firePos);
 	myFireHard->SetPosition(firePos);
+	myCollectibleString->SetPosition(collectiblePos);
+	//myCollectibleString2->SetPosition(collectiblePos);
+	//myCollectibleString3->SetPosition(collectiblePos);
 
 	myEasyActive = false;
 	myMedActive = false;
 	myHardActive = false;
 }
+
+void UIPopUp::UpdateCollectibles()
+{
+	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[0][0] + 1) + "/" + std::to_string(myCollectibleInfo[0][0]));
+}
+
+
 
 

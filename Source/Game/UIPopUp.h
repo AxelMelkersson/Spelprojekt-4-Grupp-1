@@ -31,6 +31,11 @@ private:
 	std::unique_ptr<UIObject> myFireMed;
 	std::unique_ptr<UIObject> myFireHard;
 
+	std::unique_ptr<UIText> myCollectibleString;
+	std::unique_ptr<UIText> myCollectibleString2;
+	std::unique_ptr<UIText> myCollectibleString3;
+
+
 	std::vector<UIText*> myLevelCollectibles;
 	std::vector<std::vector<int>> myCollectibleInfo;
 	std::vector<std::vector<int>> myCollectibleCollected;
@@ -49,6 +54,6 @@ private:
 	void Deactivate();
 	void SetNewPositions(const float& aDeltaTime);
 	void ResetObjects();
-	
+	void UpdateCollectibles();
 };
 
