@@ -105,8 +105,6 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 		zoom = camera.GetZoom();
 
 		v2f cameraPosition = camera.GetPosition();
-		cameraPosition.x = ceil(cameraPosition.x);
-		cameraPosition.y = ceil(cameraPosition.y);
 
 		v2f trueSize = v2f(Utils::Abs(mySize.x), mySize.y);
 
@@ -136,10 +134,11 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 
 		v2f truePosition = v2f(aTransform.myPosition.x + myRelativePosition.x + offset.x, aTransform.myPosition.y + myRelativePosition.y + offset.y);
 
-		
-		truePosition.x = ceil(truePosition.x);
-		truePosition.y = ceil(truePosition.y);
-		
+		if (myIsCeilingToPixel)
+		{
+			truePosition.x = ceil(truePosition.x);
+			truePosition.y = ceil(truePosition.y);
+		}
 
 		const v2f position = v2f(truePosition.x / width * zoom, truePosition.y / height * zoom);
 		const v2f size = v2f((mySize.x / height) * zoom, ((mySize.y) / height) * zoom);

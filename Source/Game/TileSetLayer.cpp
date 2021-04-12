@@ -65,7 +65,6 @@ SpritebatchComponent* TileSetLayer::LoadTileSetLayer(const TileSetLayerPropertie
 
 		sprite->SetSpriteRect(texelX + xQ * aTileSetLayerProperties.myRectQuadX, texelY + yQ * aTileSetLayerProperties.myRectQuadY, (xQ + 1.0f) * aTileSetLayerProperties.myRectQuadX - texelX, (yQ + 1.0f) * aTileSetLayerProperties.myRectQuadY - texelY);
 		sprite->SetRelativePosition({ x * (aTileSetLayerProperties.mySpriteSizeX), y * (aTileSetLayerProperties.mySpriteSizeY) });
-		sprite->SetCeilPosition(true);
 
 		myBatch->AddSprite(sprite);
 	}

@@ -154,8 +154,6 @@ const void Background::LoadBackgrounds(Scene* aLevelScene, rapidjson::Document& 
 
 const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string aPath, const int aIndex, const v2f anOffset)
 {
-	const v2f offset = v2f(ceil(anOffset.x), ceil(anOffset.y));
-
 	switch (aIndex)
 	{
 	case 0:
@@ -164,7 +162,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite1->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite1->SetZIndex(0);
-		myOffsetBackground1 = offset;
+		myOffsetBackground1 = anOffset;
 		break;
 	}
 	case 1:
@@ -173,7 +171,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite2->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite2->SetZIndex(1);
-		myOffsetBackground2 = offset;
+		myOffsetBackground2 = anOffset;
 		break;
 	}
 	case 2:
@@ -182,7 +180,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite3->AddComponent<SpriteComponent>();
    		sprite->SetSpritePath(aPath);
 		myBackgroundSprite3->SetZIndex(2);
-		myOffsetBackground3 = offset;
+		myOffsetBackground3 = anOffset;
 		break;
 	}
 	case 3:
@@ -191,7 +189,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite4->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite4->SetZIndex(3);
-		myOffsetBackground4 = offset;
+		myOffsetBackground4 = anOffset;
 		break;
 	}
 	case 4:
@@ -200,7 +198,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite5->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite5->SetZIndex(4);
-		myOffsetBackground5 = offset;
+		myOffsetBackground5 = anOffset;
 		break;
 	}
 	case 5:
@@ -209,7 +207,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite6->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite6->SetZIndex(5);
-		myOffsetBackground6 = offset;
+		myOffsetBackground6 = anOffset;
 		break;
 	}
 	case 6:
@@ -218,7 +216,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite7->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite7->SetZIndex(6);
-		myOffsetBackground7 = offset;
+		myOffsetBackground7 = anOffset;
 		break;
 	}
 	default:
@@ -274,8 +272,6 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 
 	v2f cameraPosition = myCamera->GetPosition();
-	cameraPosition.x = ceil(cameraPosition.x);
-	cameraPosition.y = ceil(cameraPosition.y);
 
 	myBackgroundSprite1->SetPosition(cameraPosition + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
 	myBackgroundSprite3->SetPosition(cameraPosition + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
@@ -301,8 +297,6 @@ const v2f Background::GetHalfImageSize(GameObject* aSprite)
 	assert(aSprite->GetComponent<SpriteComponent>() != NULL);
 
 	v2f spriteSize = aSprite->GetComponent<SpriteComponent>()->GetImageSize() / 2.f;
-	spriteSize.x = ceil(spriteSize.x);
-	spriteSize.y = ceil(spriteSize.y);
 
 	return spriteSize;
 }
