@@ -125,6 +125,23 @@ void OptionsMenu::Init()
 	my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
 	myScreenSizeDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_73x7px_Marked.dds", { 8.f, 8.f }, resolutionPos, 204);
 
+	my720pHgh->UpdateUIObjects(0);
+	my1080pHgh->UpdateUIObjects(0);
+	my4KHgh->UpdateUIObjects(0);
+
+	if (CGameWorld::GetInstance()->Game()->GetZoomY() > 720)
+	{
+		myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+	}
+	else if (CGameWorld::GetInstance()->Game()->GetZoomY() > 1080)
+	{
+		myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+	}
+	else
+	{
+		myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+	}
+
 	myButtons.push_back(myScreenBtn.get());
 	myButtons.push_back(mySoundBtn.get());
 	myButtons.push_back(myCreditsBtn.get());
@@ -274,17 +291,21 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
+			CGameWorld::GetInstance()->Game()->SetZoom(1280, 720);
 			Tga2D::CEngine::GetInstance()->SetResolution({ 1280, 720 }, true);
 		}
 		else if (myScreenMovingIndex == 1)
 		{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() + 27.f);
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+
+			CGameWorld::GetInstance()->Game()->SetZoom(1920, 1080);
 			Tga2D::CEngine::GetInstance()->SetResolution({ 1920, 1080 }, true);
 		}
 		else if (myScreenMovingIndex == 2)
 		{
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
-			//Tga2D::CEngine::GetInstance()->SetFullScreen();
+			
+			CGameWorld::GetInstance()->Game()->SetZoom(3840, 2160);
 			Tga2D::CEngine::GetInstance()->SetResolution({ 3840, 2160 }, true);
 		}
 		myScreenSettingsActive = false;
@@ -443,7 +464,10 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
-	myFireHighlight->Update(aDeltaTime);
+	if (myIsOpenedFromPause)
+	{
+		myFireHighlight->Update(aDeltaTime);
+	}
 
 	for (auto button : myButtons)
 		button->UpdateButton(true);
