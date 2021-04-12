@@ -21,12 +21,9 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 
 UIPopUp::~UIPopUp()
 {
-
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageE);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageM);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageH);
-
-
 }
 
 void UIPopUp::InitPopUp()
@@ -47,14 +44,13 @@ void UIPopUp::InitPopUp()
 
 	v2f position = myScene->GetCamera().GetPosition();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
-	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + Config::ourReferenceSize.y - 150.0f };
+	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + 30.f };
 	v2f collectiblePos = { position.x + Config::ourReferenceSize.x - 25.f, position.y + 35.0f };
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
 	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 202);
 	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos, 202);
 	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos, 202);
-
 
 	for (int i = 0; i < 8; ++i)
 	{
@@ -79,7 +75,6 @@ void UIPopUp::InitPopUp()
 			++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
 		}
 	}
-
 
 	myCollectibleString = std::make_unique<UIText>(myScene);
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
