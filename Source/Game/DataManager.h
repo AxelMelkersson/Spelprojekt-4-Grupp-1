@@ -134,11 +134,13 @@ public:
 
 	void ParseCollectableInfo();
 
+	// Document Handling methods
+	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
+
 private:
 	DataManager();
 
 	// Document Handling methods
-	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
 	void AcceptJsonWriter(const std::string aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
 	void AssignCollectedState();
