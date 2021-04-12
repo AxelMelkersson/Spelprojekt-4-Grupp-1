@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AudioManager.h"
+#include "DataManager.h"
 #include "AudioComponent.h"
 #include "Random.hpp"
 #include "tga2d/audio/audio_out.h"
@@ -24,9 +25,9 @@ const std::unique_ptr<AudioManager>& AudioManager::GetInstance()
 
 void AudioManager::Init()
 {
-	myAudioOut = {};
-	mySFXVolume = 0.2f;
-	myMusicVolume = 0.5f;
+	myAudioOut = nullptr;
+	mySFXVolume = DataManager::GetInstance().GetSFXVolume();
+	myMusicVolume = DataManager::GetInstance().GetMusicVolume();
 	SetMusicVolume(mySFXVolume);
 	SetSFXVolume(mySFXVolume);
 }

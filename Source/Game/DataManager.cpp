@@ -135,6 +135,16 @@ void DataManager::SaveCollectedCollectible(const unsigned int anID)
 	}
 	AcceptJsonWriter("JSON/SaveFile.json");
 }
+void DataManager::SaveSFXVolume(const float aVolume)
+{
+	mySaveFile["Settings"]["SFXVolume"].SetFloat(aVolume);
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
+void DataManager::SaveMusicVolume(const float aVolume)
+{
+	mySaveFile["Settings"]["MusicVolume"].SetFloat(aVolume);
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
 
 void DataManager::ResetSaveFile()
 {
@@ -202,12 +212,10 @@ const CollectableInfo &DataManager::GetCollectableInfo(const int anID) const
 	}
 	assert((false) && "A Collectible ID not found in DataManager::GetCollectableInfo().");
 }
-
 const CollectableInfo& DataManager::GetCollectableInfoIndex(const int anID) const
 {
 	return myCollectableInfo[anID];
 }
-
 const unsigned int DataManager::GetCollectableCount() const
 {
 	return static_cast<int>(myCollectableInfo.size());
@@ -225,6 +233,15 @@ const std::array<float, 10> &DataManager::GetHighScores() const
 	}
 	return tempArray;
 }
+const float DataManager::GetSFXVolume() const
+{
+	return 	mySaveFile["Settings"]["SFXVolume"].GetFloat();
+}
+const float DataManager::GetMusicVolume() const
+{
+	return mySaveFile["Settings"]["MusicVolume"].GetFloat();
+}
+
 void DataManager::ParseCollectableInfo(){
 	for (const auto& levelDoc : myLevelVector)
 	{

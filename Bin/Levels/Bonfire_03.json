@@ -1,4 +1,16 @@
-{ "compressionlevel":-1,
+{
+       "properties":[
+       {
+        "name":"Area",
+        "type":"int",
+        "value":0
+       }, 
+       {
+        "name":"Particles",
+        "type":"int",
+        "value":0
+       }],
+"compressionlevel":-1,
  "height":23,
  "infinite":false,
  "layers":[

@@ -9,33 +9,38 @@
 #include "Game.h"
 #include "tga2d/engine.h"
 #include "AudioManager.h"
+#include "DataManager.h"
 #include "AnimationComponent.hpp"
 
 #include "TutorialMenu.h"
 #include "CreditsMenu.h"
 
-OptionsMenu::OptionsMenu(Scene* aLevelScene)
-	: myCamera(aLevelScene->GetCamera()),
-	myPauseMenu(nullptr)
+OptionsMenu::OptionsMenu(Scene* aLevelScene) : myCamera(aLevelScene->GetCamera()), myPauseMenu(nullptr)
 {
 	myScene = aLevelScene;
+
 	myMovingIndex = 0;
-	myMenuAcitve = {};
 	mySoundMovingIndex = 0;
 	myScreenMovingIndex = 0;
-	myMusicVol = 0;
-	myVFXVol = 0;
+
+	myMusicVol = 0.0f;
+	mySFXVol = 0.0f;
 	myMusicStep = 2.0f;
 	myVFXStep = 2.0f;
 
+	myMenuAcitve = false;
 	myIsOpenedFromPause = false;
+
+	myAudioManager = nullptr;
+	myCreditsMenu = nullptr;
+	myTutorial = nullptr;
 }
 
 void OptionsMenu::Init()
 {
 	v2f referenceSize = Config::ourReferenceSize;
 	myMusicVol = myAudioManager->GetInstance()->GetMusicVolume();
-	myVFXVol = myAudioManager->GetInstance()->GetSFXVolume();
+	mySFXVol = myAudioManager->GetInstance()->GetSFXVolume();
 	myInput = CGameWorld::GetInstance()->Input();
 
 	myBackground = std::make_unique<UIObject>(myScene);
@@ -76,7 +81,7 @@ void OptionsMenu::Init()
 	v2f resetPos = { 30.f, 160.f };
 	v2f soundSettingPos = { 215.f, 90.f };
 	v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
-	v2f SFXDot = { 215.f + (myVFXVol * 40.f), 110.f };
+	v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
 	v2f resolutionPos = { 215, 73.f };
 	v2f creditScreenPos = { 120.f, 50.f };
 
@@ -158,10 +163,7 @@ void OptionsMenu::Init()
 	myResolutionObj.push_back(my720pHgh.get());
 	myResolutionObj.push_back(my1080pHgh.get());
 	myResolutionObj.push_back(my4KHgh.get());
-
-	InitTexts();
 }
-
 void OptionsMenu::Update(const float& aDeltaTime)
 {
 	if (myTutorialActtive)
@@ -190,28 +192,45 @@ void OptionsMenu::Update(const float& aDeltaTime)
 		UpdateUIElements(aDeltaTime);
 	}
 	else
+	{
 		DeactivateMenu();
+	}
 }
 
 void OptionsMenu::SetActive(const bool aStatement)
 {
 	myMenuAcitve = aStatement;
 }
-
-bool OptionsMenu::IsOptionsActive()
+const bool OptionsMenu::IsOptionsActive() const
 {
 	return myMenuAcitve;
 }
 
+void OptionsMenu::DeactivateTutorial()
+{
+	myTutorial->Deactivate();
+}
+void OptionsMenu::DeactivateCredits()
+{
+	myCreditsMenu->Deactivate();
+}
 
+void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
+{
+	myIsOpenedFromPause = true;
+	myPauseMenu = aPauseMenu;
+}
+
+// Private Methods
 void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 {
 	bool entered = myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross);
 
 	if (entered && myScreenSettingsActive == false)
 	{
-		if (myMovingIndex == static_cast<int>(eOptionsMenu::Back))
+		switch (static_cast<eOptionsMenu>(myMovingIndex))
 		{
+		case eOptionsMenu::Back:{
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 			if (myIsOpenedFromPause)
 			{
@@ -223,9 +242,9 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			{
 				CGameWorld::GetInstance()->GetLevelManager().ReloadScene(LevelManager::eScenes::MainMenu);
 			}
+			break;
 		}
-		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Sound))
-		{
+		case eOptionsMenu::Sound:{
 			if (!mySoundSettingsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -239,10 +258,12 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myBGHighlight->SetActive(false);
 				myVFXHighlight->SetActive(false);
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+				DataManager::GetInstance().SaveSFXVolume(mySFXVol);
+				DataManager::GetInstance().SaveMusicVolume(myMusicVol);
 			}
+			break;
 		}
-		else if (myMovingIndex == static_cast<int>(eOptionsMenu::ScreenSize))
-		{
+		case eOptionsMenu::ScreenSize:{
 			if (!myScreenSettingsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -253,9 +274,9 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 				myScreenSettingsActive = false;
 			}
+			break;
 		}
-		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Credits))
-		{
+		case eOptionsMenu::Credits:{
 			if (!myCreditsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -270,9 +291,9 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				ActivateMenu();
 				myCreditsActive = false;
 			}
+			break;
 		}
-		else if (myMovingIndex == static_cast<int>(eOptionsMenu::Tutorial))
-		{
+		case eOptionsMenu::Tutorial:{
 			if (!myTutorialActtive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -287,31 +308,39 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				ActivateMenu();
 				myTutorial->Deactivate();
 			}
+			break;
+		}
+		default:{
+			assert((false) && "myMovingIndex in OptionsMenu::CheckIndexPress does not correlate to eOptionsMenu.");
+			break;
+		}
 		}
 	}
 	else if (myScreenSettingsActive == true && entered)
 	{
 		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
-
-		if (myScreenMovingIndex == 0)
+		switch (myScreenMovingIndex)
 		{
+		case 0:{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
+			break;
 		}
-		else if (myScreenMovingIndex == 1)
-		{
+		case 1:{
 			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
+			break;
 		}
-		else if (myScreenMovingIndex == 2)
-		{
+		case 2:{
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
+			break;
 		}
-
+		default:{
+			assert((false) && "myScreenMovingIndex in OptionsMenu::CheckIndexPress does not correlate to any option.");
+			break;
+		}
+		}
 		myScreenSettingsActive = false;
 
 		for (int i = 0; i < myResolutionObj.size(); i++)
@@ -320,7 +349,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 	}
 
-	if (mySoundSettingsActive == true)
+	if (mySoundSettingsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -344,13 +373,12 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			{
 				myMusicVol += 0.05f;
 				myBGDot->SetPositionX(myBGDot->GetPositionX() + myMusicStep);
-				UpdateSoundSettings();
 			}
-			else if (mySoundMovingIndex == 1 && myVFXVol < 1.0f)
+			else if (mySoundMovingIndex == 1 && mySFXVol < 1.0f)
 			{
-				myVFXVol += 0.05f;
+				mySFXVol += 0.05f;
 				myVFXDot->SetPositionX(myVFXDot->GetPositionX() + myVFXStep);
-				myAudioManager->GetInstance()->SetSFXVolume(myVFXVol);
+				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
@@ -360,19 +388,17 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			{
 				myMusicVol -= 0.05f;
 				myBGDot->SetPositionX(myBGDot->GetPositionX() - myMusicStep);
-				UpdateSoundSettings();
 			}
-			else if (mySoundMovingIndex == 1 && myVFXVol > 0.0f)
+			else if (mySoundMovingIndex == 1 && mySFXVol > 0.0f)
 			{
-				myVFXVol -= 0.05f;
+				mySFXVol -= 0.05f;
 				myVFXDot->SetPositionX(myVFXDot->GetPositionX() - myVFXStep);
-				myAudioManager->GetInstance()->SetSFXVolume(myVFXVol);
+				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
-
 	}
 
-	else if (myScreenSettingsActive == true)
+	else if (myScreenSettingsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
@@ -389,7 +415,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myScreenMovingIndex = 0;
 		}
 	}
-	else if (mySoundSettingsActive == false && myScreenSettingsActive == false && myCreditsActive == false && myTutorialActtive == false && !myCreditsActive)
+	else if (!mySoundSettingsActive && !myScreenSettingsActive && !myTutorialActtive && !myCreditsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -406,9 +432,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMovingIndex = 0;
 		}
 	}
-
 }
-
 void OptionsMenu::ActivateMenu()
 {
 	if (myTutorialActtive || myCreditsActive)
@@ -429,7 +453,6 @@ void OptionsMenu::ActivateMenu()
 	myResolutions->SetActive(true);
 	myScreenSizeDot->SetActive(true);
 }
-
 void OptionsMenu::DeactivateMenu()
 {
 	for (auto button : myButtons)
@@ -452,12 +475,6 @@ void OptionsMenu::DeactivateMenu()
 	myScreenSizeDot->SetActive(false);
 	myFireHighlight->SetActive(false);
 }
-
-void OptionsMenu::InitTexts()
-{
-
-}
-
 void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 {
 	myBackground->UpdateUIObjects(aDeltaTime);
@@ -483,7 +500,6 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	for (auto res : myResolutionObj)
 		res->UpdateUIObjects(true);
 }
-
 void OptionsMenu::CheckActiveAnimations()
 {
 	for (int i = 0; i < myButtons.size(); i++)
@@ -495,7 +511,9 @@ void OptionsMenu::CheckActiveAnimations()
 			myFireHighlight->SetPositionY(myButtons[i]->GetPositionY() + 4.f);
 		}
 		else
+		{
 			myButtons[i]->SetIsHighlightActive(false);
+		}
 	}
 	if (mySoundSettingsActive == true)
 	{
@@ -507,7 +525,9 @@ void OptionsMenu::CheckActiveAnimations()
 				mySoundObjects[i]->SetActive(true);
 			}
 			else
+			{
 				mySoundObjects[i]->SetActive(false);
+			}
 		}
 	}
 	if (myScreenSettingsActive == true)
@@ -524,7 +544,9 @@ void OptionsMenu::CheckActiveAnimations()
 				myResolutionObj[i]->SetActive(true);
 			}
 			else
+			{
 				myResolutionObj[i]->SetActive(false);
+			}
 		}
 	}
 	if (myCreditsActive == true || myTutorialActtive == true)
@@ -532,12 +554,6 @@ void OptionsMenu::CheckActiveAnimations()
 		InactivateHighlight();
 	}
 }
-
-void OptionsMenu::UpdateSoundSettings()
-{
-	myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
-}
-
 void OptionsMenu::InactivateHighlight()
 {
 	myFireHighlight->SetActive(false);
@@ -545,20 +561,4 @@ void OptionsMenu::InactivateHighlight()
 	{
 		myButtons[i]->SetIsHighlightActive(false);
 	}
-}
-
-void OptionsMenu::DeactivateTutorial()
-{
-	myTutorial->Deactivate();
-}
-
-void OptionsMenu::DeactivateCredits()
-{
-	myCreditsMenu->Deactivate();
-}
-
-void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
-{
-	myIsOpenedFromPause = true;
-	myPauseMenu = aPauseMenu;
 }
