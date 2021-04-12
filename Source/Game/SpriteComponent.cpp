@@ -103,6 +103,7 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 	{
 		Camera& camera = scene->GetCamera();
 		zoom = camera.GetZoom();
+
 		v2f cameraPosition = camera.GetPosition();
 
 		v2f trueSize = v2f(Utils::Abs(mySize.x), mySize.y);

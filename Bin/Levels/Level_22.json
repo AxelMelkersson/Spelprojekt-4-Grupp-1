@@ -1,4 +1,16 @@
-{ "compressionlevel":-1,
+{
+       "properties":[
+       {
+        "name":"Area",
+        "type":"int",
+        "value":0
+       }, 
+       {
+        "name":"Particles",
+        "type":"int",
+        "value":0
+       }],
+"compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -646,7 +658,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":184,
+                 "x":192,
                  "y":136
                 }],
          "opacity":1,
