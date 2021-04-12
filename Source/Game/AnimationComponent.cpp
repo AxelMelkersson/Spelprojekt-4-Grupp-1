@@ -119,8 +119,6 @@ void AnimationComponent::Update(Transform& aTransform, GameObject& aGameObject)
 	{
 		if (myIsBoomerang && myHasReachedEnd)
 		{
-
-
 			--mySpriteIndex;
 			if (mySpriteIndex <= 0)
 			{
@@ -188,10 +186,14 @@ void AnimationComponent::SetAnimation(Animation* aAnimation)
 	mySprite->Deactivate();
 	mySprite = aAnimation->mySpriteComponent;
 	mySprite->Activate();
+	
 	myBoundsX = aAnimation->myBoundsX;
 	myBoundsY = aAnimation->myBoundsY;
+	
 	SetAnimation(mySprite, aAnimation->myAnimationFrameCount, aAnimation->myColumns, aAnimation->myUpdateTime);
+	
 	mySpriteIndex = aAnimation->mySpriteIndex;
+
 	myIsBoomerang = aAnimation->myIsBoomerang;
 	myIsBackwards = aAnimation->myIsBackwards;
 	myDisplayOnce = aAnimation->myDisplayOnce;

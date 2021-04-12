@@ -17,7 +17,7 @@ public:
     void Init(Transform& aTransform, GameObject& aGameObject) override;
     void Render(Transform& aTransform, GameObject& aGameObject) override;
 
-    void SetText(const std::string aString);
+    void SetText(const std::string& aString);
     std::string GetText();
     void SetColor(Tga2D::CColor aColor);
     void SetAnchor(const float anAnchor);
@@ -25,6 +25,8 @@ public:
     void SetRelativePositionX(const float anX);
     void SetRelativePositionY(const float aY);
     void SetFontSize(EFontSize aFontSize);
+
+    float GetWidth();
 
     const bool& IsActive() const;
     TextComponent& Activate();

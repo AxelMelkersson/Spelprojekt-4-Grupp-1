@@ -71,12 +71,6 @@ void LevelScene::Load()
 	}
 
 	Scene::Load();
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectBackgroundParticle, myPlayer->GetPosition()));
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectForegroundParticle, myPlayer->GetPosition()));
-
-	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::RainEffectNextScreenParticle, myPlayer->GetPosition()));
-
 }
 
 void LevelScene::Unload()
@@ -120,16 +114,16 @@ void LevelScene::Update(const float& aDeltaTime)
 	if (myEffectFactory != NULL)
 		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
-	{
-		v2f position = GetPlayer()->GetPosition();
+	//if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	//{
+	//	v2f position = GetPlayer()->GetPosition();
 
-		myEffectFactory->TestEffect(position);
-	}
-	else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
-	{
-		myEffectFactory->TestEffectFollowObject();
-	}*/
+	//	myEffectFactory->TestEffect(position);
+	//}
+	//else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
+	//{
+	//	myEffectFactory->TestEffectFollowObject();
+	//}
 
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();
@@ -158,7 +152,7 @@ void LevelScene::Update(const float& aDeltaTime)
 		return;
 	}
 
-	myBlackScreen->SetPosition(GetCamera().GetPosition());
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	if (myReachedFullOpacity)
 	{
@@ -178,11 +172,13 @@ void LevelScene::AddBlackScreen()
 	myBlackScreen = new GameObject(this);
 	myBlackScreen->SetZIndex(1000);
 
-	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX() - 500.0f, myPlayer->GetPositionY() - 250.0f));
+	myBlackScreen->SetPivot(v2f(0.5f, 0.5f));
+
+	myBlackScreen->SetPosition(v2f(myPlayer->GetPositionX(), myPlayer->GetPositionY()));
 
 	SpriteComponent* sprite = myBlackScreen->AddComponent<SpriteComponent>();
 	sprite->SetSpritePath("Sprites/BlackScreen.dds");
-	sprite->SetSize(v2f(1280.0f, 720.0f));
+	sprite->SetSize(v2f(10000.0f, 10000.0f));
 }
 
 void LevelScene::DecreaseBlackScreen()

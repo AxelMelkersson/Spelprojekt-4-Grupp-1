@@ -56,9 +56,33 @@
     },
     {
       "file18": "JSON/Particles/infile18.json"
+    },
+    {
+      "file19": "JSON/Particles/infile19.json"
+    },
+    {
+      "file20": "JSON/Particles/infile20.json"
+    },
+    {
+      "file21": "JSON/Particles/infile21.json"
+    },
+    {
+      "file22": "JSON/Particles/infile22.json"
+    },
+    {
+      "file23": "JSON/Particles/infile23.json"
+    },
+    {
+      "file24": "JSON/Particles/infile24.json"
+    },
+    {
+      "file25": "JSON/Particles/infile25.json"
+    },
+    {
+      "file26": "JSON/Particles/infile26.json"
     }
   ],
   "TestEffect": {
-    "File": 0
+    "File": 20
   }
 }

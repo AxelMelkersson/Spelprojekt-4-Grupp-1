@@ -362,15 +362,15 @@ void LevelSelect::InitTexts()
 
 	UIText* totalEasyText = new UIText(this);
 	totalEasyText->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize_48);
-	totalEasyText->SetPosition(v2f(160.0f, 60.0f));
+	totalEasyText->SetPosition(v2f(166.0f, 60.0f));
 
 	UIText* totalMediumText = new UIText(this);
 	totalMediumText->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize_48);
-	totalMediumText->SetPosition(v2f(212.0f, 60.0f));
+	totalMediumText->SetPosition(v2f(218.0f, 60.0f));
 
 	UIText* totalHardText = new UIText(this);
 	totalHardText->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize_48);
-	totalHardText->SetPosition(v2f(264.0f, 60.0f));
+	totalHardText->SetPosition(v2f(270.0f, 60.0f));
 
 	myLevelCollectibles.push_back(new UIText(this));
 	myLevelCollectibles.push_back(new UIText(this));
@@ -382,15 +382,15 @@ void LevelSelect::InitTexts()
 	myLevelCollectibles[0]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
 	myLevelCollectibles[1]->Init(std::to_string(myCollectibleInfoCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
-	myLevelCollectibles[1]->SetPosition(v2f(160.0f, 46.0f));
+	myLevelCollectibles[1]->SetPosition(v2f(166.0f, 46.0f));
 	myLevelCollectibles[1]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
 	myLevelCollectibles[2]->Init(std::to_string(myCollectibleInfoCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
-	myLevelCollectibles[2]->SetPosition(v2f(212.0f, 46.0f));
+	myLevelCollectibles[2]->SetPosition(v2f(218.0f, 46.0f));
 	myLevelCollectibles[2]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 
 	myLevelCollectibles[3]->Init(std::to_string(myCollectibleInfoCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
-	myLevelCollectibles[3]->SetPosition(v2f(264.0f, 46.0f));
+	myLevelCollectibles[3]->SetPosition(v2f(270.0f, 46.0f));
 	myLevelCollectibles[3]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
 }
 

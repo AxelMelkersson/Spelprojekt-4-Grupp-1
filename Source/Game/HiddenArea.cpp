@@ -21,7 +21,8 @@ HiddenArea::HiddenArea(Scene* aLevelScene, const v2f& aPosition, const v2f& aSiz
 	myHiddenSpriteBatch(nullptr),
 	myOpacity(1.0f),
 	myOpacityChangeSpeed(3.0f),
-	myHasBeenFound(false)
+	myHasBeenFound(false),
+	myTimer(0.5f)
 {
 	SetZIndex(130);
 	SetPosition(aPosition);
@@ -39,6 +40,12 @@ HiddenArea::HiddenArea(Scene* aLevelScene, const v2f& aPosition, const v2f& aSiz
 
 void HiddenArea::Update(const float& aDeltaTime)
 {
+	myTimer -= aDeltaTime;
+	if (myTimer <= 0)
+	{
+		myTimer = 0;
+	}
+
 	if (myPlayerCollided)
 	{
 		myOpacity = Utils::Lerp(myOpacity, 0.0f, myOpacityChangeSpeed * aDeltaTime);
@@ -59,7 +66,12 @@ void HiddenArea::OnCollision(GameObject* aGameObject)
 	if (player)
 	{
 		myPlayerCollided = true;
-		if (!myHasBeenFound)
+		if (myTimer > 0)
+		{
+			myHasBeenFound = true;
+			myOpacity = 0.0f;
+		}
+		else if (!myHasBeenFound)
 		{
 			AudioManager::GetInstance()->PlayAudio(AudioList::HiddenRoomUnlock);
 			myHasBeenFound = true;

@@ -41,7 +41,7 @@ void TextComponent::Render(Transform& aTransform, GameObject& aGameObject)
 	myText->Render();
 }
 
-void TextComponent::SetText(const std::string aString)
+void TextComponent::SetText(const std::string& aString)
 {
 	if (myText == nullptr) return;
 	myText->SetText(aString);
@@ -100,6 +100,11 @@ void TextComponent::SetFontSize(EFontSize aFontSize)
 {
 	if (myText == nullptr) return;
 	myText->SetFontSize(aFontSize);
+}
+
+float TextComponent::GetWidth()
+{
+	return myText->GetWidth();
 }
 
 void TextComponent::UpdateTransform(Transform& aTransform, GameObject& aGameObject)
