@@ -14,7 +14,7 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 {
 	myScene = aLevelScene;
 	myCurrentTime = {};
-	myMaxTime = 4.0f;
+	myMaxTime = 7.0f;
 	myStayTime = 1.5f;
 	myCurrentStayTime = {};
 }
@@ -40,19 +40,15 @@ void UIPopUp::InitPopUp()
 
 	Config::ourReferenceSize = { 320.f, 180.f };
 
-
-
 	myBackground = std::make_unique<UIObject>(myScene);
 	myFireEasy = std::make_unique<UIObject>(myScene);
 	myFireMed = std::make_unique<UIObject>(myScene);
 	myFireHard = std::make_unique<UIObject>(myScene);
 
 	v2f position = myScene->GetCamera().GetPosition();
-	v2f position2 = myScene->GetCamera().GetViewportSize();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
-	v2f firePos = { position.x + Config::ourReferenceSize.x + 15.f, position.y + 30.0f };
+	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + Config::ourReferenceSize - 150.0f };
 	v2f collectiblePos = { position.x + Config::ourReferenceSize.x - 25.f, position.y + 35.0f };
-
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
 	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 202);
@@ -84,27 +80,11 @@ void UIPopUp::InitPopUp()
 		}
 	}
 
-	//myLevelCollectibles.push_back(new UIText(myScene));
-	//myLevelCollectibles.push_back(new UIText(myScene));
-	//myLevelCollectibles.push_back(new UIText(myScene));
-
-
-	//myLevelCollectibles[0]->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
-	//myLevelCollectibles[0]->SetPosition(v2f(290.0f, 30.0f));
-	//myLevelCollectibles[0]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
-
-	//myLevelCollectibles[1]->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
-	//myLevelCollectibles[1]->SetPosition(v2f(290.0f, 30.0f));
-	//myLevelCollectibles[1]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
-
-	//myLevelCollectibles[2]->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
-	//myLevelCollectibles[2]->SetPosition(v2f(290.0f, 30.0f));
-	//myLevelCollectibles[2]->GetComponent<TextComponent>()->SetColor(Tga2D::CColor(0.0f, 0.5f, 1.0f, 1.0f));
-
 
 	myCollectibleString = std::make_unique<UIText>(myScene);
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
+	myCollectibleString->SetZIndex(202);
 	/*myCollectibleString2 = std::make_unique<UIText>(myScene);
 	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString3 = std::make_unique<UIText>(myScene);
@@ -125,13 +105,13 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myFireEasy->UpdateUIObjects(aDeltaTime);
 		SetNewPositions(aDeltaTime);
 		UpdateCollectibles();
+
 	}
 	else if (myMedActive)
 	{
 		myCurrentTime += aDeltaTime;
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireMed->UpdateUIObjects(aDeltaTime);
-
 		SetNewPositions(aDeltaTime);
 
 	}
@@ -142,31 +122,38 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myFireHard->UpdateUIObjects(aDeltaTime);
 
 		SetNewPositions(aDeltaTime);
-
 	}
 	else
 	{
-		myCollectibleString->Deactivate();
+		Deactivate();
+		myEasyActive = false;
+		myMedActive = false;
+		myHardActive = false;
+
+
 	}
 	if (myCurrentTime > myMaxTime)
 	{
 		Deactivate();
+		myEasyActive = false;
+		myMedActive = false;
+		myHardActive = false;
 	}
+
 }
 
 void UIPopUp::Activate(ePopUpTypes aType)
 {
-	DataManager::GetInstance().GetCollectableCount();
+	//DataManager::GetInstance().GetCollectableCount();
 
-	//ResetObjects();
 
 	switch (aType)
 	{
 	case ePopUpTypes::Easy:
-		myEasyActive = true;
 		myFireEasy->SetActive(true);
 		myBackground->SetActive(true);
 		myCollectibleString->Activate();
+		myEasyActive = true;
 		break;
 	case ePopUpTypes::Med:
 		myFireMed->SetActive(true);
@@ -210,26 +197,30 @@ void UIPopUp::Notify(const Message& aMessage)
 void UIPopUp::Deactivate()
 {
 	myCurrentTime = 0.0f;
+	/*ResetObjects();*/
 	myBackground->SetActive(false);
-
 	myFireEasy->SetActive(false);
 	myFireMed->SetActive(false);
 	myFireHard->SetActive(false);
 	myCollectibleString->Deactivate();
 	//myCollectibleString2->Deactivate();
 	//myCollectibleString3->Deactivate();
-
+	myIsMaxLeft = false;
+	myCurrentStayTime = 0.f;
 
 }
 
 void UIPopUp::SetNewPositions(const float& aDeltaTime)
 {
+	Config::ourReferenceSize = { 320.f, 180.f };
+	v2f position = myScene->GetCamera().GetPosition();
+
 	if (myEasyActive)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < 265.f)
-			{
+			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
+			{ // 265.f
 				myIsMaxLeft = true;
 			}
 			myBackground->SetPositionX(myBackground->GetPositionX() - 50.f * aDeltaTime);
@@ -253,7 +244,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < 265.f)
+			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
 			{
 				myIsMaxLeft = true;
 			}
@@ -275,7 +266,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < 265.f)
+			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
 			{
 				myIsMaxLeft = true;
 			}
@@ -300,10 +291,12 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 
 void UIPopUp::ResetObjects()
 {
+	Config::ourReferenceSize = { 320.f, 180.f };
+
 	v2f position = myScene->GetCamera().GetPosition();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
 	v2f firePos = { position.x + Config::ourReferenceSize.x + 15.f, position.y + 30.0f };
-	v2f collectiblePos = { position.x + Config::ourReferenceSize.x + 25.f, position.y + 30.0f };
+	v2f collectiblePos = { position.x + Config::ourReferenceSize.x + 25.f, position.y + 35.0f };
 
 
 	myCurrentStayTime = 0.f;
@@ -316,10 +309,6 @@ void UIPopUp::ResetObjects()
 	myCollectibleString->SetPosition(collectiblePos);
 	//myCollectibleString2->SetPosition(collectiblePos);
 	//myCollectibleString3->SetPosition(collectiblePos);
-
-	myEasyActive = false;
-	myMedActive = false;
-	myHardActive = false;
 }
 
 void UIPopUp::UpdateCollectibles()

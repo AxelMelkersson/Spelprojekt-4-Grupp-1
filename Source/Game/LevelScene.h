@@ -7,6 +7,7 @@
 #include "PauseMenu.h"
 #include "Timer.h" 
 #include "ParticleEffectFactory.h"
+#include "UIPopUp.h"
 
 #include "Subscriber.hpp"
 
@@ -42,6 +43,7 @@ private:
     PauseMenu* myPauseMenu;
     Timer* myTimer;
     ParticleEffectFactory* myEffectFactory;
+    UIPopUp* myPopUp;
 
     float myBlackScreenOpacity;
     float myBlackScreenOpacitySpeed;
