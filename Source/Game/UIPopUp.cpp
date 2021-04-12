@@ -79,10 +79,12 @@ void UIPopUp::InitPopUp()
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
 	myCollectibleString->SetZIndex(202);
-	/*myCollectibleString2 = std::make_unique<UIText>(myScene);
+	myCollectibleString2 = std::make_unique<UIText>(myScene);
 	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString2->SetPosition(collectiblePos);
 	myCollectibleString3 = std::make_unique<UIText>(myScene);
-	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);*/
+	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString3->SetPosition(collectiblePos);
 
 	//myCollectibleString->Deactivate();
 	//myCollectibleString2->Deactivate();
@@ -152,13 +154,13 @@ void UIPopUp::Activate(ePopUpTypes aType)
 	case ePopUpTypes::Med:
 		myFireMed->SetActive(true);
 		myBackground->SetActive(true);
-		//myCollectibleString2->Activate();
+		myCollectibleString2->Activate();
 		myMedActive = true;
 		break;
 	case ePopUpTypes::Hard:
 		myFireHard->SetActive(true);
 		myBackground->SetActive(true);
-		//myCollectibleString3->Activate();
+		myCollectibleString3->Activate();
 		myHardActive = true;
 		break;
 	}
@@ -191,16 +193,15 @@ void UIPopUp::Notify(const Message& aMessage)
 void UIPopUp::Deactivate()
 {
 	myCurrentTime = 0.0f;
-	/*ResetObjects();*/
+	myCurrentStayTime = 0.f;
+	myIsMaxLeft = false;
 	myBackground->SetActive(false);
 	myFireEasy->SetActive(false);
 	myFireMed->SetActive(false);
 	myFireHard->SetActive(false);
 	myCollectibleString->Deactivate();
-	//myCollectibleString2->Deactivate();
-	//myCollectibleString3->Deactivate();
-	myIsMaxLeft = false;
-	myCurrentStayTime = 0.f;
+	myCollectibleString2->Deactivate();
+	myCollectibleString3->Deactivate();
 
 }
 
@@ -213,7 +214,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 		if (myIsMaxLeft == false)
 		{
 			if (myBackground->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
-			{ // 265.f
+			{ 
 
 				myIsMaxLeft = true;
 			}
@@ -244,17 +245,18 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myIsMaxLeft = true;
 			}
-			myBackground->SetPositionX(myBackground->GetPositionX() - 50.f * aDeltaTime);
-			myFireMed->SetPositionX(myFireMed->GetPositionX() - 50.f * aDeltaTime);
+			myBackground->SetPositionX(myBackground->GetStartPosition().x - 50.f * aDeltaTime);
+			myFireMed->SetPositionX(myFireMed->GetStartPosition().x - 50.f * aDeltaTime);
+			myCollectibleString2->SetPosition(myCollectibleString2->GetPosition() - v2f(50.f * aDeltaTime, 0));
 		}
 		else if (myIsMaxLeft == true)
 		{
 			myCurrentStayTime += aDeltaTime;
 			if (myCurrentStayTime > myStayTime)
 			{
-				myBackground->SetPositionX(myBackground->GetPositionX() + 50.f * aDeltaTime);
-				myFireMed->SetPositionX(myFireMed->GetPositionX() + 50.f * aDeltaTime);
-
+				myBackground->SetPositionX(myBackground->GetStartPosition().x + 50.f * aDeltaTime);
+				myFireMed->SetPositionX(myFireMed->GetStartPosition().x + 50.f * aDeltaTime);
+				myCollectibleString2->SetPosition(myCollectibleString2->GetPosition() + v2f(50.f * aDeltaTime, 0));
 			}
 		}
 	}
@@ -266,8 +268,9 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myIsMaxLeft = true;
 			}
-			myBackground->SetPositionX(myBackground->GetPositionX() - 50.f * aDeltaTime);
-			myFireHard->SetPositionX(myFireHard->GetPositionX() - 50.f * aDeltaTime);
+			myBackground->SetPositionX(myBackground->GetStartPosition().x - 50.f * aDeltaTime);
+			myFireHard->SetPositionX(myFireHard->GetStartPosition().x - 50.f * aDeltaTime);
+			myCollectibleString3->SetPosition(myCollectibleString3->GetPosition() - v2f(50.f * aDeltaTime, 0));
 		}
 		else if (myIsMaxLeft == true)
 		{
@@ -276,6 +279,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			{
 				myBackground->SetPositionX(myBackground->GetPositionX() + 50.f * aDeltaTime);
 				myFireHard->SetPositionX(myFireHard->GetPositionX() + 50.f * aDeltaTime);
+				myCollectibleString3->SetPosition(myCollectibleString3->GetPosition() + v2f(50.f * aDeltaTime, 0));
 
 			}
 		}
