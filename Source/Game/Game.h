@@ -54,12 +54,17 @@ private:
 	void UpdateCallBack();
 	LRESULT WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+	void UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight);
+
 	CGameWorld myGameWorld;
 
 	Utils::Timer* myTimer;
 
 	int myZoomX = 0;
 	int myZoomY = 0;
+
+	int myGotOutOfFocusSizeX = 0;
+	int myGotOutOfFocusSizeY = 0;
 
 #ifndef _RETAIL
 	void InitDebugger();

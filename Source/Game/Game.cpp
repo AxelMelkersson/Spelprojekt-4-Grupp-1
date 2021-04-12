@@ -69,6 +69,9 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_KILLFOCUS:
 	{
+		myGotOutOfFocusSizeX = myZoomX;
+		myGotOutOfFocusSizeY = myZoomY;
+
 		myTimer->SetTimeScale(0.0f);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::KilledFocus, 0));
 		break;
@@ -76,6 +79,8 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_SETFOCUS:
 	{
+		UpdateWindowSize(myGotOutOfFocusSizeX, myGotOutOfFocusSizeY);
+
 		myTimer->SetTimeScale(1.0f);
 		break;
 	}
@@ -114,7 +119,10 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Overlapped;
 #endif // DEBUG
 #ifdef _RETAIL
-	createParameters.myStartInFullScreen = true;
+	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
+
+	SetResolution(monitorWidth, monitorHeight);
+	SetZoom(monitorWidth, monitorHeight);
 #endif // RETAIL
 
 	createParameters.myUseLetterboxAndPillarbox;
@@ -138,6 +146,9 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 void CGame::InitCallBack()
 {
 	myGameWorld.Init();
+
+	HWND handle = GetActiveWindow();
+	SetWindowPos(handle, 0, 0, 0, myZoomX, myZoomY, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
 #ifndef _RETAIL
 	//InitDebugger();
@@ -174,6 +185,15 @@ void CGame::SetResolution(const uint16_t& aWidth, const uint16_t& aHeight)
 	Config::windowHeight = aHeight;
 
 	//Tga2D::CEngine::GetInstance()->SetTargetSize({ aWidth, aHeight });
+}
+
+void CGame::UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight)
+{
+	SetResolution(aWidth, aHeight);
+	SetZoom(aWidth, aHeight);
+
+	HWND handle = GetActiveWindow();
+	SetWindowPos(handle, 0, 0, 0, myZoomX, myZoomY, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 }
 
 #ifndef _RETAIL
