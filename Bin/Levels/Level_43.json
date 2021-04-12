@@ -834,10 +834,56 @@
          "draworder":"topdown",
          "id":8,
          "name":"Enemies",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":472,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"Speed",
+                         "type":"float",
+                         "value":70
+                        }, 
+                        {
+                         "name":"Waypoints",
+                         "type":"string",
+                         "value":"0 10"
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":112
+                }, 
+                {
+                 "height":0,
+                 "id":473,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"Speed",
+                         "type":"float",
+                         "value":70
+                        }, 
+                        {
+                         "name":"Waypoints",
+                         "type":"string",
+                         "value":"0 -11"
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":144,
+                 "y":192
+                }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -985,7 +1031,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":472,
+ "nextobjectid":474,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
