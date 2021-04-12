@@ -117,12 +117,12 @@ void LevelScene::Update(const float& aDeltaTime)
 	if (myEffectFactory != NULL)
 		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
 	{
 		v2f position = GetPlayer()->GetPosition();
 
 		myEffectFactory->TestEffect(position);
-	}
+	}*/
 	//else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
 	//{
 	//	myEffectFactory->TestEffectFollowObject();

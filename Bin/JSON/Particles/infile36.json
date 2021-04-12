@@ -18,7 +18,7 @@
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.03,
+      "MinTimeBetweenSpawns": 0.02,
       "MaxTimeBetweenSpawns": 0.03,
 
       "MinSpeed": 5.0,
@@ -60,7 +60,7 @@
         255.0,
         255.0,
         255.0,
-        1.0
+        0.7
       ],
       "EndColor": [
         255.0,

@@ -738,8 +738,8 @@ const void ParticleEffectFactory::StartEffects()
 		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
 		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
 		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::DustParticleThree);
-		ParticleEffect* dustparticleStartupOne = SpawnEffect(boundaries * 0.5f, eParticleEffects::DustParticleStartupOne);
-		ParticleEffect* dustparticleStartupTwo = SpawnEffect(boundaries * 0.5f, eParticleEffects::DustParticleStartupTwo);
+		ParticleEffect* dustparticleStartupOne = SpawnEffect({boundaries.x * 0.5f, boundaries.y}, eParticleEffects::DustParticleStartupOne);
+		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::DustParticleStartupTwo);
 
 		dustParticle1->SetHeight(boundaries.y);
 		dustParticle2->SetHeight(boundaries.y);
