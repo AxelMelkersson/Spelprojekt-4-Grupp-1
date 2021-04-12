@@ -71,7 +71,10 @@ void Bonfire::Update(const float& aDeltaTime)
 
 void Bonfire::OnCollision(GameObject* aGameObject)
 {
-	mySpeechBubble->Speak();
+	if(mySpeechBubble->GetIsSpeaking() == false)
+	{ 
+		mySpeechBubble->Speak();
+	}
 
 	Player* player = dynamic_cast<Player*>(aGameObject);
 	if (player)
