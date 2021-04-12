@@ -7,6 +7,7 @@
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "AudioManager.h"
 
 #include "Player.hpp"
 
@@ -78,6 +79,7 @@ void Glide::OnCollision(GameObject* aGameObject)
 
 			myTimer = myDisappearTime;
 			myIsTaken = true;
+			AudioManager::GetInstance()->PlayAudio(AudioList::HoverActivate);
 		}
 	}
 }
