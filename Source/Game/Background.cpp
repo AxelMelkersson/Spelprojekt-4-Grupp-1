@@ -154,6 +154,8 @@ const void Background::LoadBackgrounds(Scene* aLevelScene, rapidjson::Document& 
 
 const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string aPath, const int aIndex, const v2f anOffset)
 {
+	const v2f offset = v2f(ceil(anOffset.x), ceil(anOffset.y));
+
 	switch (aIndex)
 	{
 	case 0:
@@ -162,7 +164,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite1->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite1->SetZIndex(0);
-		myOffsetBackground1 = anOffset;
+		myOffsetBackground1 = offset;
 		break;
 	}
 	case 1:
@@ -171,7 +173,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite2->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite2->SetZIndex(1);
-		myOffsetBackground2 = anOffset;
+		myOffsetBackground2 = offset;
 		break;
 	}
 	case 2:
@@ -180,7 +182,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite3->AddComponent<SpriteComponent>();
    		sprite->SetSpritePath(aPath);
 		myBackgroundSprite3->SetZIndex(2);
-		myOffsetBackground3 = anOffset;
+		myOffsetBackground3 = offset;
 		break;
 	}
 	case 3:
@@ -189,7 +191,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite4->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite4->SetZIndex(3);
-		myOffsetBackground4 = anOffset;
+		myOffsetBackground4 = offset;
 		break;
 	}
 	case 4:
@@ -198,7 +200,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite5->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite5->SetZIndex(4);
-		myOffsetBackground5 = anOffset;
+		myOffsetBackground5 = offset;
 		break;
 	}
 	case 5:
@@ -207,7 +209,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite6->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite6->SetZIndex(5);
-		myOffsetBackground6 = anOffset;
+		myOffsetBackground6 = offset;
 		break;
 	}
 	case 6:
@@ -216,7 +218,7 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		SpriteComponent* sprite = myBackgroundSprite7->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
 		myBackgroundSprite7->SetZIndex(6);
-		myOffsetBackground7 = anOffset;
+		myOffsetBackground7 = offset;
 		break;
 	}
 	default:
@@ -271,12 +273,16 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 						  -(cameraPos.y) * myBackgroundSpeedSevenY };
 
 
-	myBackgroundSprite1->SetPosition(myCamera->GetPosition() + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
-	myBackgroundSprite3->SetPosition(myCamera->GetPosition() + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
-	myBackgroundSprite4->SetPosition(myCamera->GetPosition() + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
-	myBackgroundSprite5->SetPosition(myCamera->GetPosition() + backgroundSpeedFive + GetHalfImageSize(myBackgroundSprite5) + myOffsetBackground5);
-	myBackgroundSprite6->SetPosition(myCamera->GetPosition() + backgroundSpeedSix + GetHalfImageSize(myBackgroundSprite6) + myOffsetBackground6);
-	myBackgroundSprite7->SetPosition(myCamera->GetPosition() + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
+	v2f cameraPosition = myCamera->GetPosition();
+	cameraPosition.x = ceil(cameraPosition.x);
+	cameraPosition.y = ceil(cameraPosition.y);
+
+	myBackgroundSprite1->SetPosition(cameraPosition + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
+	myBackgroundSprite3->SetPosition(cameraPosition + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
+	myBackgroundSprite4->SetPosition(cameraPosition + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
+	myBackgroundSprite5->SetPosition(cameraPosition + backgroundSpeedFive + GetHalfImageSize(myBackgroundSprite5) + myOffsetBackground5);
+	myBackgroundSprite6->SetPosition(cameraPosition + backgroundSpeedSix + GetHalfImageSize(myBackgroundSprite6) + myOffsetBackground6);
+	myBackgroundSprite7->SetPosition(cameraPosition + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
@@ -295,6 +301,8 @@ const v2f Background::GetHalfImageSize(GameObject* aSprite)
 	assert(aSprite->GetComponent<SpriteComponent>() != NULL);
 
 	v2f spriteSize = aSprite->GetComponent<SpriteComponent>()->GetImageSize() / 2.f;
+	spriteSize.x = ceil(spriteSize.x);
+	spriteSize.y = ceil(spriteSize.y);
 
 	return spriteSize;
 }
