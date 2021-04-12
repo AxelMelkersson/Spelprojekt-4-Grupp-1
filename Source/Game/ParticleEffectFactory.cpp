@@ -25,31 +25,6 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 
 ParticleEffectFactory::~ParticleEffectFactory()
 {
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleEasy);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleMedium);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleCollectedParticleHard);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectEasy);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectMedium);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffectHard);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::CollectibleTrailEffect);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::UnstablePlatformParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireIdleParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::BonfireWakeupTopParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectNextScreenParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectForegroundParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::RainEffectBackgroundParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::VelocityLinesParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeRightGrabbedLegParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLedgeRightGrabbedHandParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerLandedParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PlayerBashedSmallParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyBulletTrailEmitter);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingTrailParticle);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
 	GameObject::~GameObject();
 }
 
@@ -419,31 +394,31 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 
 const void ParticleEffectFactory::AddSubscribers()
 {
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleEasy);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleMedium);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleCollectedParticleHard);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectEasy);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectMedium);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffectHard);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::CollectibleTrailEffect);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::UnstablePlatformParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireIdleParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupExplosionParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::BonfireWakeupTopParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectNextScreenParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectForegroundParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::RainEffectBackgroundParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::VelocityLinesParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedLegParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeLeftGrabbedHandParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeRightGrabbedLegParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLedgeRightGrabbedHandParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerLandedParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedPlayerParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PlayerBashedSmallParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingTrailParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyShootingBulletHitParticle);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::EnemyBulletTrailEmitter);
+	Subscribe(eMessageType::CollectibleCollectedParticleEasy);
+	Subscribe(eMessageType::CollectibleCollectedParticleMedium);
+	Subscribe(eMessageType::CollectibleCollectedParticleHard);
+	Subscribe(eMessageType::CollectibleTrailEffectEasy);
+	Subscribe(eMessageType::CollectibleTrailEffectMedium);
+	Subscribe(eMessageType::CollectibleTrailEffectHard);
+	Subscribe(eMessageType::CollectibleTrailEffect);
+	Subscribe(eMessageType::UnstablePlatformParticle);
+	Subscribe(eMessageType::BonfireIdleParticle);
+	Subscribe(eMessageType::BonfireWakeupExplosionParticle);
+	Subscribe(eMessageType::BonfireWakeupTopParticle);
+	Subscribe(eMessageType::RainEffectNextScreenParticle);
+	Subscribe(eMessageType::RainEffectForegroundParticle);
+	Subscribe(eMessageType::RainEffectBackgroundParticle);
+	Subscribe(eMessageType::VelocityLinesParticle);
+	Subscribe(eMessageType::PlayerLedgeLeftGrabbedLegParticle);
+	Subscribe(eMessageType::PlayerLedgeLeftGrabbedHandParticle);
+	Subscribe(eMessageType::PlayerLedgeRightGrabbedLegParticle);
+	Subscribe(eMessageType::PlayerLedgeRightGrabbedHandParticle);
+	Subscribe(eMessageType::PlayerLandedParticle);
+	Subscribe(eMessageType::PlayerBashedPlayerParticle);
+	Subscribe(eMessageType::PlayerBashedSmallParticle);
+	Subscribe(eMessageType::EnemyShootingTrailParticle);
+	Subscribe(eMessageType::EnemyShootingBulletHitParticle);
+	Subscribe(eMessageType::EnemyBulletTrailEmitter);
 }
 
 void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType)
