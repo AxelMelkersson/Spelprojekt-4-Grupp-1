@@ -368,31 +368,39 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
+			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
 			{
 				myMusicVol += 0.05f;
-				myBGDot->SetPositionX(myBGDot->GetPositionX() + myMusicStep);
+				myBGDot->SetPosition(bgDot - v2f(0.0f - myMusicStep, 0));
+				myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 			}
 			else if (mySoundMovingIndex == 1 && mySFXVol < 1.0f)
 			{
 				mySFXVol += 0.05f;
-				myVFXDot->SetPositionX(myVFXDot->GetPositionX() + myVFXStep);
+				myVFXDot->SetPosition(SFXDot - v2f(0.0f - myVFXStep, 0.0f));
 				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
+			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
 			{
 				myMusicVol -= 0.05f;
-				myBGDot->SetPositionX(myBGDot->GetPositionX() - myMusicStep);
+				myBGDot->SetPosition(bgDot + v2f(0.0f - myMusicStep, 0));
+				myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 			}
 			else if (mySoundMovingIndex == 1 && mySFXVol > 0.0f)
 			{
 				mySFXVol -= 0.05f;
-				myVFXDot->SetPositionX(myVFXDot->GetPositionX() - myVFXStep);
+				myVFXDot->SetPosition(SFXDot + v2f(0.0f - myVFXStep, 0.0f));
 				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
