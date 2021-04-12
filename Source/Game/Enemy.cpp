@@ -93,6 +93,12 @@ void NormalEnemy::Update(const float& aDeltaTime)
 	{
 		myWayPointComponent->Move(aDeltaTime);
 	}
+
+	if (!myActivatedParticle)
+	{
+		myActivatedParticle = true;
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyPurpleTrailParticle, this));
+	}
 	GameObject::Update(aDeltaTime);
 }
 void ShootingEnemy::Update(const float& aDeltaTime)

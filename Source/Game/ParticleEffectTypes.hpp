@@ -42,5 +42,6 @@ enum class eParticleEffects
 	DustParticleStartupOne,
 	DustParticleStartupTwo,
 	UnstableGroundParticleTwo,
-	UnstableGroundIdleParticle
+	UnstableGroundIdleParticle,
+	EnemyPurpleTrailParticle
 };

@@ -24,6 +24,7 @@ enum class eMessageType
 	EnemyShootingBulletHitParticle,
 	EnemyBulletTrailEmitter,
 	EnemyShootingTrailParticle,
+	EnemyPurpleTrailParticle,
 	RainEffectForegroundParticle,
 	RainEffectBackgroundParticle,
 	RainEffectNextScreenParticle,

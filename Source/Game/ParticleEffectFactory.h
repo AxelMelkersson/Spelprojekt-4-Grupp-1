@@ -38,6 +38,7 @@ private:
 		float myTotalTimer = {};
 		float myTotalSpawnTimer = {};
 		float mySpawnEverySecond = {};
+		bool mySpawningAllTime = false;
 	};
 
 	Scene* myScene;

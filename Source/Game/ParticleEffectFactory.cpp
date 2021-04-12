@@ -119,8 +119,13 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 		mySpawningEffects[i].myTimer += aDeltaTime;
 		mySpawningEffects[i].myTotalTimer += aDeltaTime;
 
+		if (mySpawningEffects[i].mySpawningAllTime && mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond)
+		{
+			mySpawningEffects[i].myTimer = {};
 
-		if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
+			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+		}
+		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
 		{
 			mySpawningEffects[i].myTimer = {};
 
@@ -133,7 +138,7 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 			break;
 		}
 
-		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer)
+		if (mySpawningEffects[i].myTotalTimer >= mySpawningEffects[i].myTotalSpawnTimer && !mySpawningEffects[i].mySpawningAllTime)
 		{
 			mySpawningEffects.erase(mySpawningEffects.begin() + i);
 			break;
@@ -150,6 +155,13 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		const v2f position = std::get<v2f>(aMessage.myData);
 
 		SpawnEffect(position, eParticleEffects::BulletEffectTrail2);
+		break;
+	}
+	case eMessageType::EnemyPurpleTrailParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+
+		SpawnEffect(gameobjectToFollow, eParticleEffects::EnemyPurpleTrailParticle);
 		break;
 	}
 	case eMessageType::PlayerLandedParticle:
@@ -468,6 +480,9 @@ void ParticleEffectFactory::SpawnEffect(GameObject* aGameObject, const eParticle
 	timerEffect.myTotalSpawnTimer = myEffects[static_cast<int>(aEffectType)].mySpawnLifeTime;
 	timerEffect.mySpawnEverySecond = myEffects[static_cast<int>(aEffectType)].mySpawnEverySecond;
 
+	if (timerEffect.myTotalSpawnTimer <= 0.f)
+		timerEffect.mySpawningAllTime = true;
+
 	mySpawningEffects.push_back(timerEffect);
 }
 
@@ -543,6 +558,7 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::EnemyShootingTrailParticle);
 	Subscribe(eMessageType::EnemyShootingBulletHitParticle);
 	Subscribe(eMessageType::EnemyBulletTrailEmitter);
+	Subscribe(eMessageType::EnemyPurpleTrailParticle);
 }
 
 void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType)
@@ -624,6 +640,11 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		break;
 	}
 	case eParticleEffects::BulletEffectTrail2:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::EnemyPurpleTrailParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
