@@ -218,6 +218,7 @@ void Player::Update(const float& aDeltaTime)
 		if (myIsLerpingToPosition)
 		{
 			LerpToPosition(myLerpPosition);
+			LerpToPosition(myLerpPosition);
 		}
 
 		if (!myIsInRangeOfBash)
@@ -334,12 +335,6 @@ void Player::CheckMove(const float& aDeltaTime)
 	else
 	{
 		myCurrentVelocity.x = Utils::Lerp(myCurrentVelocity.x, 0.0f, myJsonData->myFloatValueMap[PEnum::Retardation] * aDeltaTime);
-	}
-
-	if (myInputHandler->IsMovingDown())
-	{
-		myBashAbility->ResetVelocity(true, false);
-		myPlatformVelocity.x = 0.0f;
 	}
 }
 void Player::CheckJump()
@@ -677,6 +672,16 @@ void Player::LerpToPosition(const v2f& aPosition)
 	else if(aPosition.x < myTransform.myPosition.x)
 	{
 		myDirectionX = -1;
+	}
+
+	if (Utils::Abs(aPosition.x - myTransform.myPosition.x) <= 0.5f)
+	{
+		myTransform.myPosition.x = aPosition.x;
+	}
+
+	if (Utils::Abs(aPosition.y - myTransform.myPosition.y) <= 0.5f)
+	{
+		myTransform.myPosition.y = aPosition.y;
 	}
 
 	myTimerInput->SetTimeScale(timeScale);

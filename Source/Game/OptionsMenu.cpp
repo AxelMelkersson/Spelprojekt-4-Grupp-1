@@ -65,7 +65,7 @@ void OptionsMenu::Init()
 	my4KHgh = std::make_unique<UIObject>(myScene);
 	myScreenSizeDot = std::make_unique<UIObject>(myScene);
 
-	v2f backgroundPos = { 5.f, 5.f };
+	v2f backgroundPos = { 8.f, 8.f };
 	v2f titlePos = { 140.f, 35.f };
 	v2f barPos = { 30.0f, 60.0f };
 	v2f screenPos = { 140.f, 70.f };
@@ -81,7 +81,7 @@ void OptionsMenu::Init()
 	v2f creditScreenPos = { 120.f, 50.f };
 
 	//Misc
-	myBackground->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Background.dds", { 520.f, 265.f }, backgroundPos, 201);
+	myBackground->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Background.dds", { 512.0f, 256.f }, backgroundPos, 201);
 	myBar->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseBarScreen_241x3px.dds", { 275.0f, 5.f }, barPos, 202);
 	myTitle->Init("Sprites/UI/optionsMenu/UI_options_MenuTitle_143_20px.dds", { 250.f, 35.f }, titlePos, 202);
 
@@ -124,6 +124,26 @@ void OptionsMenu::Init()
 	my1080pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_1080p_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
 	my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
 	myScreenSizeDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_73x7px_Marked.dds", { 8.f, 8.f }, resolutionPos, 204);
+
+	my720pHgh->UpdateUIObjects(0);
+	my1080pHgh->UpdateUIObjects(0);
+	my4KHgh->UpdateUIObjects(0);
+
+	if (CGameWorld::GetInstance()->Game()->GetZoomY() > 720)
+	{
+		myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+		myScreenMovingIndex = 1;
+	}
+	else if (CGameWorld::GetInstance()->Game()->GetZoomY() > 1080)
+	{
+		myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+		myScreenMovingIndex = 2;
+	}
+	else
+	{
+		myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+		myScreenMovingIndex = 0;
+	}
 
 	myButtons.push_back(myScreenBtn.get());
 	myButtons.push_back(mySoundBtn.get());
@@ -186,7 +206,9 @@ bool OptionsMenu::IsOptionsActive()
 
 void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 {
-	if ((myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)) && myScreenSettingsActive == false)
+	bool entered = myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross);
+
+	if (entered && myScreenSettingsActive == false)
 	{
 		if (myMovingIndex == static_cast<int>(eOptionsMenu::Back))
 		{
@@ -267,27 +289,31 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 		}
 	}
-	else if ((myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)) && myScreenSettingsActive == true)
+	else if (myScreenSettingsActive == true && entered)
 	{
 		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+
 		if (myScreenMovingIndex == 0)
 		{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
-			Tga2D::CEngine::GetInstance()->SetResolution({ 1280, 720 }, true);
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
 		}
 		else if (myScreenMovingIndex == 1)
 		{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() + 27.f);
-			Tga2D::CEngine::GetInstance()->SetResolution({ 1920, 1080 }, true);
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
 		}
 		else if (myScreenMovingIndex == 2)
 		{
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
-			//Tga2D::CEngine::GetInstance()->SetFullScreen();
-			Tga2D::CEngine::GetInstance()->SetResolution({ 3840, 2160 }, true);
+
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
 		}
+
 		myScreenSettingsActive = false;
+
 		for (int i = 0; i < myResolutionObj.size(); i++)
 		{
 			myResolutionObj[i]->SetActive(false);
@@ -443,7 +469,10 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
-	myFireHighlight->Update(aDeltaTime);
+	if (myIsOpenedFromPause)
+	{
+		myFireHighlight->Update(aDeltaTime);
+	}
 
 	for (auto button : myButtons)
 		button->UpdateButton(true);
