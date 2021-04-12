@@ -115,6 +115,9 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 	int monitorWidth = info.rcMonitor.right - info.rcMonitor.left;
 	int monitorHeight = info.rcMonitor.bottom - info.rcMonitor.top;
 
+	myMonitorSizeX = monitorWidth;
+	myMonitorSizeY = monitorHeight;
+
 #ifdef _DEBUG
 	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Overlapped;
 #endif // DEBUG
@@ -192,8 +195,11 @@ void CGame::UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight)
 	SetResolution(aWidth, aHeight);
 	SetZoom(aWidth, aHeight);
 
+	const int posX = myMonitorSizeX / 2 - aWidth / 2;
+	const int posY = myMonitorSizeY / 2 - aHeight / 2;
+
 	HWND handle = GetActiveWindow();
-	SetWindowPos(handle, 0, 0, 0, myZoomX, myZoomY, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
+	SetWindowPos(handle, 0, posX, posY, myZoomX, myZoomY, 0);
 }
 
 #ifndef _RETAIL
