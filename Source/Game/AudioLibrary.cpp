@@ -71,6 +71,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::Forest_Theme,    new AudioClip("Sounds/Music/Forest_Theme.wav",       true, 0.1f, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Village_Theme,   new AudioClip("Sounds/Music/Village_Theme.wav",      true, 0.1f, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Castle_Theme,    new AudioClip("Sounds/Music/Castle_Theme.wav",       true, 0.1f, 0.5f,  AudioLayer::Music));
+	myAudioList.insert_or_assign(AudioList::Finale,          new AudioClip("Sounds/Music/Final_Theme.wav",        true, 0.1f, 0.5f,  AudioLayer::Music));
 
 	myAudioList.insert_or_assign(AudioList::Wind,            new AudioClip("Sounds/Music/AtmosphereWind.wav",     true, 0.1f, 0.3f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::Crows,           new AudioClip("Sounds/Music/AtmosphereCrows.wav",    true, 0.1f, 0.3f, AudioLayer::SoundEffect));
