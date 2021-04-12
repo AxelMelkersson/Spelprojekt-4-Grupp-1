@@ -52,6 +52,9 @@ void LevelScene::Load()
 	myIsTransitioning = false;
 
 	myEffectFactory = new ParticleEffectFactory(this);
+	myEffectFactory->StartDustEffects();
+	//myEffectFactory->StartRainEffects();
+
 	myPlayer = new Player(this);
 
 	myBackground = new Background(this);
@@ -115,12 +118,12 @@ void LevelScene::Update(const float& aDeltaTime)
 	if (myEffectFactory != NULL)
 		myEffectFactory->SpawnEffect(myPlayer->GetPosition(), eParticleEffects::TrailEffect2);*/
 
-	//if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
-	//{
-	//	v2f position = GetPlayer()->GetPosition();
+	/*if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
+	{
+		v2f position = GetPlayer()->GetPosition();
 
-	//	myEffectFactory->TestEffect(position);
-	//}
+		myEffectFactory->TestEffect(position);
+	}*/
 	//else if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::RightMouseButton))
 	//{
 	//	myEffectFactory->TestEffectFollowObject();

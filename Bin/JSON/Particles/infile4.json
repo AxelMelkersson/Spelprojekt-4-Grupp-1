@@ -16,7 +16,7 @@
       "StartScale": 1.0,
       "EndScale": 1.0,
 
-      "RotateSprite": 1.0,
+      "RotateSprite": 0.0,
 
       "MinTimeBetweenSpawns": 0.05,
       "MaxTimeBetweenSpawns": 0.15,
@@ -27,7 +27,7 @@
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 210.0,
+      "EmitterAngle": 227.0,
 
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,

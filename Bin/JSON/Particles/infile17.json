@@ -1,12 +1,12 @@
 {
   "particle": [
     {
-      "EffectType": "UnstablePlatformParticle",
+      "EffectType": "UnstablePlatformParticleOne",
 
       "ZIndex": 95,
 
       "EffectTypeIndex": 17,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleUnstableGrounds2.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -16,13 +16,13 @@
       "StartScale": 1.0,
       "EndScale": 1.0,
 
-      "RotateSprite": 0.5,
+      "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.2,
-      "MaxTimeBetweenSpawns": 0.2,
+      "MinTimeBetweenSpawns": 0.03,
+      "MaxTimeBetweenSpawns": 0.05,
 
-      "MinSpeed": 3.0,
-      "MaxSpeed": 6.0,
+      "MinSpeed": 21.0,
+      "MaxSpeed": 22.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
@@ -32,8 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 0.8,
-      "MaxParticleLifeTime": 1.1,
+      "MinParticleLifeTime": 0.7,
+      "MaxParticleLifeTime": 0.9,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,
@@ -43,7 +43,7 @@
           "X": 12.0
         },
         {
-          "Y": 7.0
+          "Y": 0.0
         }
       ],
 
@@ -51,7 +51,7 @@
 
       "LockedAngular": [
         -1.0,
-        -1.0,
+        0.0,
         1.0,
         1.0
       ],
