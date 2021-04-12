@@ -170,6 +170,7 @@ void Collectible::TurnIn()
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleGone);
 		ActivateCollectedEffect();
 		Destroy();
 	}

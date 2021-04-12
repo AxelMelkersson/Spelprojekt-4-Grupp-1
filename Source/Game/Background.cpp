@@ -271,19 +271,21 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 						  -(cameraPos.y) * myBackgroundSpeedSevenY };
 
 
-	myBackgroundSprite1->SetPosition(myCamera->GetPosition() + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
-	myBackgroundSprite3->SetPosition(myCamera->GetPosition() + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
-	myBackgroundSprite4->SetPosition(myCamera->GetPosition() + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
-	myBackgroundSprite5->SetPosition(myCamera->GetPosition() + backgroundSpeedFive + GetHalfImageSize(myBackgroundSprite5) + myOffsetBackground5);
-	myBackgroundSprite6->SetPosition(myCamera->GetPosition() + backgroundSpeedSix + GetHalfImageSize(myBackgroundSprite6) + myOffsetBackground6);
-	myBackgroundSprite7->SetPosition(myCamera->GetPosition() + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
+	v2f cameraPosition = myCamera->GetPosition();
+
+	myBackgroundSprite1->SetPosition(cameraPosition + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
+	myBackgroundSprite3->SetPosition(cameraPosition + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
+	myBackgroundSprite4->SetPosition(cameraPosition + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
+	myBackgroundSprite5->SetPosition(cameraPosition + backgroundSpeedFive + GetHalfImageSize(myBackgroundSprite5) + myOffsetBackground5);
+	myBackgroundSprite6->SetPosition(cameraPosition + backgroundSpeedSix + GetHalfImageSize(myBackgroundSprite6) + myOffsetBackground6);
+	myBackgroundSprite7->SetPosition(cameraPosition + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
 	v2f imagePos = {0.f, GetHalfImageSize(myBackgroundSprite2).y };
 
-	myBackgroundSprite2->SetPosition(myCamera->GetPosition() + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
+	myBackgroundSprite2->SetPosition(cameraPosition + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
 
 	if (*myCloudDistance < -960)
 		*myCloudDistance = 220.f;

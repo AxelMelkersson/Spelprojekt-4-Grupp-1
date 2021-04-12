@@ -17,8 +17,6 @@ InputWrapper::InputWrapper()
 
 void InputWrapper::Init()
 {
-	//myMouseSensitivityX = 4.f;
-	//myMouseSensitivityY = 4.f;
 	myController = std::make_shared<Controller>();
 	myInput = std::make_shared<Utils::Input>();
 	myController->Init();
@@ -38,7 +36,6 @@ float InputWrapper::GetLeftPullForce()
 {
 	return std::abs(myController->LeftThumbStickPull());
 }
-
 float InputWrapper::GetRightPullForce()
 {
 	return std::abs(myController->RightThumbStickPull());
@@ -48,7 +45,6 @@ v2f InputWrapper::GetLeftStickMovement()
 {
 	return myController->GetLeftThumbStick();
 }
-
 v2f InputWrapper::GetRightStickMovement()
 {
 	return myController->GetRightThumbStick();
@@ -56,10 +52,8 @@ v2f InputWrapper::GetRightStickMovement()
 
 v2f InputWrapper::GetMouseAxisMovement()
 {
-	//return myMouseDirection;
 	return myNormalizedDirection;
 }
-
 v2f InputWrapper::GetAxisMovement()
 {
 	if (GetLeftStickMovement().x != 0.0f || GetLeftStickMovement().y != 0.0f)
@@ -88,7 +82,7 @@ bool InputWrapper::IsMovingLeft()
 
 bool InputWrapper::IsMovingDown()
 {
-	if (myInput->GetKeyDown(Keys::SKey) || GetController()->GetLeftThumbStick().y > 0.9f || GetController()->IsButtonHoldDown(Controller::Button::DPadDown))
+	if (myInput->GetKeyDown(Keys::SKey) || GetController()->GetLeftThumbStick().y > 0.0f || GetController()->IsButtonHoldDown(Controller::Button::DPadDown))
 		return true;
 	else
 		return false;
@@ -113,7 +107,7 @@ bool InputWrapper::IsJumping()
 
 bool InputWrapper::IsDashing()
 {
-	if (GetInput()->GetKeyDown(Keys::LeftMouseButton) || GetController()->IsButtonHoldDown(Controller::Button::Square))
+	if (GetInput()->GetKeyDown(Keys::LeftMouseButton) || GetInput()->GetKeyDown(Keys::SHIFTKey) || GetController()->IsButtonHoldDown(Controller::Button::Square))
 	{
 		if (!myHoldDash)
 		{
@@ -134,7 +128,7 @@ bool InputWrapper::IsDashing()
 
 bool InputWrapper::IsDashingReleased()
 {
-	if (GetInput()->GetKeyJustUp(Keys::LeftMouseButton) || !GetController()->IsButtonHoldDown(Controller::Button::Square))
+	if (GetInput()->GetKeyJustUp(Keys::LeftMouseButton) || GetInput()->GetKeyJustUp(Keys::SHIFTKey) || !GetController()->IsButtonHoldDown(Controller::Button::Square))
 	{
 		return true;
 	}
@@ -187,7 +181,6 @@ void InputWrapper::SetMousePosition()
 	myPreviousMousePosition.x = static_cast<float>(myCursor.x);
 	myPreviousMousePosition.y = static_cast<float>(myCursor.y);
 }
-
 
 void InputWrapper::CalculateMouseAxis()
 {

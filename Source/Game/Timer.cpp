@@ -21,7 +21,7 @@ void Timer::Init(const v2f aPos)
 {
 	SpriteComponent* spriteComponent = AddComponent<SpriteComponent>();
 	spriteComponent->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
-	spriteComponent->SetRelativePosition({ 34, 10});
+	spriteComponent->SetRelativePosition({ 34, 10 });
 	spriteComponent->SetSize(v2f(54.0f, 12.0f));
 
 	TextComponent* textComponent = AddComponent<TextComponent>();

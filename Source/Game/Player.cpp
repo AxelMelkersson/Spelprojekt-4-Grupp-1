@@ -218,6 +218,7 @@ void Player::Update(const float& aDeltaTime)
 		if (myIsLerpingToPosition)
 		{
 			LerpToPosition(myLerpPosition);
+			LerpToPosition(myLerpPosition);
 		}
 
 		if (!myIsInRangeOfBash)
@@ -334,12 +335,6 @@ void Player::CheckMove(const float& aDeltaTime)
 	else
 	{
 		myCurrentVelocity.x = Utils::Lerp(myCurrentVelocity.x, 0.0f, myJsonData->myFloatValueMap[PEnum::Retardation] * aDeltaTime);
-	}
-
-	if (myInputHandler->IsMovingDown())
-	{
-		myBashAbility->ResetVelocity(true, false);
-		myPlatformVelocity.x = 0.0f;
 	}
 }
 void Player::CheckJump()
@@ -557,6 +552,11 @@ void Player::RedirectVelocities(const v2f& aDirection)
 
 	mySpringVelocity.x = Utils::Abs(mySpringVelocity.x) * aDirection.x;
 	mySpringVelocity.y = Utils::Abs(mySpringVelocity.y) * aDirection.y;
+	std::cout << myPlatformVelocity.x << " : " << myPlatformVelocity.y << "\n";
+	if (mySpringVelocity.y < -170.0f)
+	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::SuperBash);
+	}
 }
 
 
@@ -677,6 +677,16 @@ void Player::LerpToPosition(const v2f& aPosition)
 	else if(aPosition.x < myTransform.myPosition.x)
 	{
 		myDirectionX = -1;
+	}
+
+	if (Utils::Abs(aPosition.x - myTransform.myPosition.x) <= 0.5f)
+	{
+		myTransform.myPosition.x = aPosition.x;
+	}
+
+	if (Utils::Abs(aPosition.y - myTransform.myPosition.y) <= 0.5f)
+	{
+		myTransform.myPosition.y = aPosition.y;
 	}
 
 	myTimerInput->SetTimeScale(timeScale);
@@ -979,7 +989,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 
 void Player::PlayLandingSounds(const int& aPlatformIndex)
 {
-	if (myCurrentVelocity.y > 200.0f)
+	if (myCurrentVelocity.y > 240.0f)
 	{
 		switch (aPlatformIndex)
 		{
@@ -1021,6 +1031,11 @@ void Player::PlayLandingSounds(const int& aPlatformIndex)
 			break;
 		}
 	}
+}
+
+const v2f Player::GetCurrentVelocity()
+{
+	return myCurrentVelocity;
 }
 
 #ifdef _DEBUG

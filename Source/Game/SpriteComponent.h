@@ -96,6 +96,8 @@ public:
     void SetForceRender(const bool& aIsForced);
     const bool& GetForceRender() const;
 
+    void SetCeilPosition(const bool& aIsCeiled);
+
 private:
     /* Sprite */
     std::string mySpritePath;
@@ -120,4 +122,6 @@ private:
     bool myIsPartOfBatch;
     bool myForceRender;
     bool myShouldRender;
+    bool myIsCeilingToPixel;
+
 };

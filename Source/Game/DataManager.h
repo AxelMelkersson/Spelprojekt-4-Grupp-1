@@ -118,6 +118,8 @@ public:
 	void SaveHighScores(const std::array<float, 10> &someHighscores);
 	void SaveBonfireState(const unsigned int anIndex, const bool aState);
 	void SaveCollectedCollectible(const unsigned int anID);
+	void SaveSFXVolume(const float aVolume);
+	void SaveMusicVolume(const float aVolume);
 
 	// Reset Methods
 	void ResetSaveFile();
@@ -131,14 +133,18 @@ public:
 	const unsigned int GetCollectableCount() const;
 	const bool GetBonfireState(const unsigned int anIndex) const;
 	const std::array<float, 10> &GetHighScores() const;
+	const float GetSFXVolume() const;
+	const float GetMusicVolume() const;
 
 	void ParseCollectableInfo();
+
+	// Document Handling methods
+	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
 
 private:
 	DataManager();
 
 	// Document Handling methods
-	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
 	void AcceptJsonWriter(const std::string aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
 	void AssignCollectedState();

@@ -81,10 +81,11 @@ UnstablePlatform* PlatformFactory::CreateUnstablePlatform(Scene* aLevelScene, co
 		spritePath = "Sprites/Platforms/Unstable1.dds";
 	}
 
-	unstablePlatform->Init(adjustedSize, adjustedSize, aPosition, false);
-	unstablePlatform->SetTimerProperties(aDestroyTime, aRespawnTime);
 	mainSprite->SetSpritePath(spritePath);
 	mainSprite->SetSize(adjustedSpriteSize);
+
+	unstablePlatform->Init(adjustedSize, adjustedSize, aPosition, false);
+	unstablePlatform->SetTimerProperties(aDestroyTime, aRespawnTime);
 
 	unstablePlatform->SetSpriteToDisable(mainSprite);
 
