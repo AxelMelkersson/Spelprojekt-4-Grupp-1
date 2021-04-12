@@ -49,6 +49,8 @@ public:
 		return myZoomY;
 	}
 
+	void UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight);
+
 private:
 	void InitCallBack();
 	void UpdateCallBack();
@@ -60,6 +62,12 @@ private:
 
 	int myZoomX = 0;
 	int myZoomY = 0;
+
+	int myGotOutOfFocusSizeX = 0;
+	int myGotOutOfFocusSizeY = 0;
+
+	int myMonitorSizeX = 0;
+	int myMonitorSizeY = 0;
 
 #ifndef _RETAIL
 	void InitDebugger();

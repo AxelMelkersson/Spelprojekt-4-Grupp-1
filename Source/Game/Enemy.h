@@ -20,7 +20,6 @@ public:
 
 protected:
 	virtual void InitCollider();
-
 	EnemyData* myJsonData = new EnemyData();
 	bool IsMoving = false;
 	WaypointComponent* myWayPointComponent;
@@ -52,7 +51,7 @@ public:
 	void Update(const float& aDeltaTime);
 
 private:
-	float myShotTimer = 0.0f;
+	float myShotTimer = 3.0f;
 	Animation myAnimations[2];
 
 	void InitAnimation();

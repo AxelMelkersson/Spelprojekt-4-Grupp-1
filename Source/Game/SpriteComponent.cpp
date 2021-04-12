@@ -22,6 +22,7 @@ SpriteComponent::SpriteComponent()
 	, mySprite(nullptr)
 
 	, myForceRender(false)
+	, myIsCeilingToPixel(false)
 	, myAlpha(1.0f)
 	, myZIndex(0)
 	, myRelativePosition()
@@ -108,6 +109,7 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 
 		v2f spriteMin = GetTopLeft(aTransform);
 		v2f spriteMax = GetBottomRight(aTransform);
+
 		v2f cameraMin = cameraPosition - trueSize;
 		v2f cameraMax = v2f(cameraPosition.x + (width / zoom), cameraPosition.y + (height / zoom)) + trueSize;
 
@@ -129,7 +131,15 @@ void SpriteComponent::Render(Transform & aTransform, GameObject& aGameObject)
 
 		alpha *= camera.GetAlpha();
 
-		const v2f position = v2f((aTransform.myPosition.x + myRelativePosition.x + offset.x) / width * zoom, (aTransform.myPosition.y + myRelativePosition.y + offset.y) / height * zoom);
+		v2f truePosition = v2f(aTransform.myPosition.x + myRelativePosition.x + offset.x, aTransform.myPosition.y + myRelativePosition.y + offset.y);
+
+		if (myIsCeilingToPixel)
+		{
+			truePosition.x = ceil(truePosition.x);
+			truePosition.y = ceil(truePosition.y);
+		}
+
+		const v2f position = v2f(truePosition.x / width * zoom, truePosition.y / height * zoom);
 		const v2f size = v2f((mySize.x / height) * zoom, ((mySize.y) / height) * zoom);
 		const v4f color = v4f(myColor.x, myColor.y, myColor.z, myColor.w * alpha);
 		UpdateSprite(mySprite, position, size, aTransform.myPivot, aTransform.myRotation + myRelativeRotation, myColor, myRect);
@@ -374,4 +384,9 @@ void SpriteComponent::SetForceRender(const bool& aIsForced)
 const bool& SpriteComponent::GetForceRender() const
 {
 	return myForceRender;
+}
+
+void SpriteComponent::SetCeilPosition(const bool& aIsCeiled)
+{
+	myIsCeilingToPixel = aIsCeiled;
 }

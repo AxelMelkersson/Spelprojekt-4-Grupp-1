@@ -29,8 +29,8 @@
 
       "EmitterAngle": 210.0,
 
-      "EmitterWidth": 350.0,
-      "EmitterHeigth": 120.0,
+      "EmitterWidth": 0.0,
+      "EmitterHeigth": 180.0,
 
       "MinParticleLifeTime": 3.0,
       "MaxParticleLifeTime": 3.0,

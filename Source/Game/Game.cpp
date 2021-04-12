@@ -69,6 +69,9 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_KILLFOCUS:
 	{
+		myGotOutOfFocusSizeX = myZoomX;
+		myGotOutOfFocusSizeY = myZoomY;
+
 		myTimer->SetTimeScale(0.0f);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::KilledFocus, 0));
 		break;
@@ -76,6 +79,8 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_SETFOCUS:
 	{
+		UpdateWindowSize(myGotOutOfFocusSizeX, myGotOutOfFocusSizeY);
+
 		myTimer->SetTimeScale(1.0f);
 		break;
 	}
@@ -110,11 +115,17 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 	int monitorWidth = info.rcMonitor.right - info.rcMonitor.left;
 	int monitorHeight = info.rcMonitor.bottom - info.rcMonitor.top;
 
+	myMonitorSizeX = monitorWidth;
+	myMonitorSizeY = monitorHeight;
+
 #ifdef _DEBUG
 	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Overlapped;
 #endif // DEBUG
 #ifdef _RETAIL
-	createParameters.myStartInFullScreen = true;
+	createParameters.myWindowSetting = Tga2D::EWindowSetting::EWindowSetting_Borderless;
+
+	SetResolution(monitorWidth, monitorHeight);
+	SetZoom(monitorWidth, monitorHeight);
 #endif // RETAIL
 
 	createParameters.myUseLetterboxAndPillarbox;
@@ -139,6 +150,9 @@ void CGame::InitCallBack()
 {
 	myGameWorld.Init();
 
+	HWND handle = GetActiveWindow();
+	SetWindowPos(handle, 0, 0, 0, myZoomX, myZoomY, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
+
 #ifndef _RETAIL
 	//InitDebugger();
 #endif _RETAIL
@@ -146,7 +160,9 @@ void CGame::InitCallBack()
 
 void CGame::UpdateCallBack()
 {
-	ShowCursor(true);
+#ifdef _RETAIL
+	ShowCursor(false);
+#endif
 
 	myTimer->Update();
 	myGameWorld.Update();
@@ -155,6 +171,8 @@ void CGame::UpdateCallBack()
 	PostMaster::GetInstance().SendWaitingMessages();
 
 #ifndef _RETAIL
+	ShowCursor(true);
+
 	if (myGameWorld.myInput->GetInput()->GetKeyJustDown(Keys::F1Key))
 	{
 		myDebugger.Toggle();
@@ -170,6 +188,18 @@ void CGame::SetResolution(const uint16_t& aWidth, const uint16_t& aHeight)
 	Config::windowHeight = aHeight;
 
 	//Tga2D::CEngine::GetInstance()->SetTargetSize({ aWidth, aHeight });
+}
+
+void CGame::UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight)
+{
+	SetResolution(aWidth, aHeight);
+	SetZoom(aWidth, aHeight);
+
+	const int posX = myMonitorSizeX / 2 - aWidth / 2;
+	const int posY = myMonitorSizeY / 2 - aHeight / 2;
+
+	HWND handle = GetActiveWindow();
+	SetWindowPos(handle, 0, posX, posY, myZoomX, myZoomY, 0);
 }
 
 #ifndef _RETAIL

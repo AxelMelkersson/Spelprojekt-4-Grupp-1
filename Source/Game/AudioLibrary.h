@@ -5,7 +5,7 @@ class AudioClip;
 enum class AudioList
 {
 	PlayerJump, PlayerDoubleJump, PlayerDeath, PlayerRespawn, PlayerHover, PlayerJumpPad,
-	EnemyNormalIdle, EnemyShootingIdle, EnemyShooting,
+	EnemyNormalIdle, MenuStart, EnemyShooting,
 	MenuMove, MenuSelect, MenuAmbience,
 	GrabLedge, GrabLedge2, LeaveLedge,
 	ButtonPress,
@@ -17,7 +17,9 @@ enum class AudioList
 	BashCharge, BashRelease,
 	CollectableV1, BonfireActivated,
 
-	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme 
+	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme, Wind, Crows, Castle,
+
+	CollectibleDown, CollectibleGone, BonfireGust, HoverActivate, EnemyKill
 };
 
 enum class AudioLayer

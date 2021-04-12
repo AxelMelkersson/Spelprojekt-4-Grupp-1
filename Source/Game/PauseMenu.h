@@ -64,9 +64,9 @@ private:
 	std::unique_ptr<UIButton> myMainMenuBtn;
 
 	std::unique_ptr<UIObject> myTitleString;
-	std::unique_ptr<UIText> myCollectibleString;
-	std::unique_ptr<UIText> myCollectibleString2;
-	std::unique_ptr<UIText> myCollectibleString3;
+	UIText* myCollectibleString;
+	UIText* myCollectibleString2;
+	UIText* myCollectibleString3;
 
 	std::shared_ptr<InputWrapper> myInput;
 
@@ -75,11 +75,13 @@ private:
 	bool myMenuActive;
 	bool myIsSpeedrun;
 	bool mySkipOneUpdate;
+	bool myIsOutOfFocus;
 
 	void CheckIndexPress();
 	void ActivateMenu();
 	void DeactivateMenu();
 	void InitTexts();
+	void UpdateCollectibleInfo(const bool aIniting);
 	void UpdateUIElements(const float& aDeltaTime);
 	void CheckActiveAnimations();
 };
