@@ -44,6 +44,11 @@ enum class eMessageType
 	BonfireWakeupTopParticleHard,
 	BonfireWakeupExplosionParticleHard,
 	BonfireIdleParticleHard,
+	DustParticleOne,
+	DustParticleTwo,
+	DustParticleThree,
+	DustParticleStartupOne,
+	DustParticleStartupTwo,
 	UnstablePlatformParticle
 
 };

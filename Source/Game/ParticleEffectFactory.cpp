@@ -20,6 +20,8 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myScene = aLevelScene;
 	myEffects = {};
 	myTestIndex = {};
+	myActiveDust = {};
+	myActiveRain = {};
 	myStartup = false;
 }
 
@@ -107,7 +109,7 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 	if (!myStartup)
 	{
 		AddSubscribers();
-		StartRainEffects();
+		StartEffects();
 		myStartup = true;
 	}
 
@@ -360,6 +362,41 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::BonfireIdleParticleHard);
 		break;
 	}
+	case eMessageType::DustParticleOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::DustParticleOne);
+		break;
+	}
+	case eMessageType::DustParticleTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::DustParticleTwo);
+		break;
+	}
+	case eMessageType::DustParticleThree:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::DustParticleThree);
+		break;
+	}
+	case eMessageType::DustParticleStartupOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::DustParticleStartupOne);
+		break;
+	}
+	case eMessageType::DustParticleStartupTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::DustParticleStartupTwo);
+		break;
+	}
 	case eMessageType::UnstablePlatformParticle:
 	{
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
@@ -434,8 +471,23 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 	effect->SetIsActive(true);
 }
 
+void ParticleEffectFactory::StartRainEffects()
+{
+	myActiveRain = true;
+}
+
+void ParticleEffectFactory::StartDustEffects()
+{
+	myActiveDust = true;
+}
+
 const void ParticleEffectFactory::AddSubscribers()
 {
+	Subscribe(eMessageType::DustParticleStartupOne);
+	Subscribe(eMessageType::DustParticleStartupTwo);
+	Subscribe(eMessageType::DustParticleOne);
+	Subscribe(eMessageType::DustParticleTwo);
+	Subscribe(eMessageType::DustParticleThree);
 	Subscribe(eMessageType::CollectibleCollectedParticleEasy);
 	Subscribe(eMessageType::CollectibleCollectedParticleMedium);
 	Subscribe(eMessageType::CollectibleCollectedParticleHard);
@@ -637,19 +689,62 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
+	case eParticleEffects::DustParticleOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::DustParticleTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::DustParticleThree:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::DustParticleStartupOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::DustParticleStartupTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
 	}
 }
 
-const void ParticleEffectFactory::StartRainEffects()
+const void ParticleEffectFactory::StartEffects()
 {
 	Camera& cam = myScene->GetCamera();
 	v2f boundaries = cam.GetBoundSize();
 
-	ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
-	ParticleEffect* rainForeground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectForegroundParticle);
-	ParticleEffect* rainNextScreen = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::RainEffectNextScreenParticle);
+	if (myActiveRain)
+	{
+		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainForeground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectForegroundParticle);
+		ParticleEffect* rainNextScreen = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::RainEffectNextScreenParticle);
 
-	rainBackground->SetWidth(boundaries.x);
-	rainForeground->SetWidth(boundaries.x);
-	rainNextScreen->SetWidth(boundaries.x);
+		rainBackground->SetWidth(boundaries.x);
+		rainForeground->SetWidth(boundaries.x);
+		rainNextScreen->SetWidth(boundaries.x);
+	}
+
+	if (myActiveDust)
+	{
+		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
+		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
+		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::DustParticleThree);
+		ParticleEffect* dustparticleStartupOne = SpawnEffect(boundaries * 0.5f, eParticleEffects::DustParticleStartupOne);
+		ParticleEffect* dustparticleStartupTwo = SpawnEffect(boundaries * 0.5f, eParticleEffects::DustParticleStartupTwo);
+
+		dustParticle1->SetHeight(boundaries.y);
+		dustParticle2->SetHeight(boundaries.y);
+		dustParticle3->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetHeight(boundaries.y);
+	}
 }

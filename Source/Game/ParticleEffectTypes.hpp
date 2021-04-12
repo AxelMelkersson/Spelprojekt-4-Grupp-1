@@ -35,5 +35,10 @@ enum class eParticleEffects
 	BonfireIdleParticleMedium,
 	BonfireWakeupTopParticleHard,
 	BonfireWakeupExplosionParticleHard,
-	BonfireIdleParticleHard
+	BonfireIdleParticleHard,
+	DustParticleOne,
+	DustParticleTwo,
+	DustParticleThree,
+	DustParticleStartupOne,
+	DustParticleStartupTwo
 };

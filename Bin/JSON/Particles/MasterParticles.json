@@ -98,9 +98,24 @@
     },
     {
       "file32": "JSON/Particles/infile32.json"
+    },
+    {
+      "file33": "JSON/Particles/infile33.json"
+    },
+    {
+      "file34": "JSON/Particles/infile34.json"
+    },
+    {
+      "file35": "JSON/Particles/infile35.json"
+    },
+    {
+      "file36": "JSON/Particles/infile36.json"
+    },
+    {
+      "file37": "JSON/Particles/infile37.json"
     }
   ],
   "TestEffect": {
-    "File": 20
+    "File": 36
   }
 }

@@ -26,6 +26,9 @@ public:
 	ParticleEffect* SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType);
 	void SpawnEffectFollowObject(GameObject* aObject, const eParticleEffects aEffectType);
 
+	void StartRainEffects();
+	void StartDustEffects();
+
 private:
 	struct SpawnEffects
 	{
@@ -42,12 +45,14 @@ private:
 	std::vector<ParticleStats> myEffects;
 	std::vector<SpawnEffects> mySpawningEffects;
 
+	bool myActiveDust;
+	bool myActiveRain;
 	bool myStartup;
 	int myTestIndex;
 
 	const void AddSubscribers();
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
-	const void StartRainEffects();
+	const void StartEffects();
 
 };
 

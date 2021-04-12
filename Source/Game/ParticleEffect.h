@@ -24,6 +24,7 @@ public:
 	const void SetEffect(ParticleStats aEffect);
 	const void SetFollowObject(GameObject& aFollowObject);
 	const void SetWidth(const float anXSize);
+	const void SetHeight(const float anYSize);
 	const void SetOffset(const float aOffset);
 	
 	const bool GetIsActive();

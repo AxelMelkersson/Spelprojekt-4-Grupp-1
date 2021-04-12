@@ -278,6 +278,11 @@ const void ParticleEffect::SetWidth(const float anXSize)
 	myStats.myEmitterWidth = myStats.myEmitterWidth + anXSize;
 }
 
+const void ParticleEffect::SetHeight(const float anYSize)
+{
+	myStats.myEmitterHeigth = myStats.myEmitterHeigth + anYSize;
+}
+
 const void ParticleEffect::SetOffset(const float aOffset)
 {
 	myStats.myOffset = {aOffset, myStats.myOffset.y};
