@@ -6,7 +6,7 @@
       "ZIndex": 120,
 
       "EffectTypeIndex": 35,
-      "SpritePath": "Sprites/Particles/ParticleJump.dds",
+      "SpritePath": "Sprites/Particles/ParticleEnemy1Attack.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -18,11 +18,11 @@
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 10.0,
+      "MinTimeBetweenSpawns": 3.0,
       "MaxTimeBetweenSpawns": 5.0,
 
       "MinSpeed": 5.0,
-      "MaxSpeed": 15.0,
+      "MaxSpeed": 8.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
@@ -32,8 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 5.0,
-      "MaxParticleLifeTime": 10.0,
+      "MinParticleLifeTime": 45.0,
+      "MaxParticleLifeTime": 55.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,

@@ -6,7 +6,7 @@
       "ZIndex": 120,
 
       "EffectTypeIndex": 34,
-      "SpritePath": "Sprites/Particles/ParticleJump.dds",
+      "SpritePath": "Sprites/Particles/ParticleEnemy1Attack.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -21,8 +21,8 @@
       "MinTimeBetweenSpawns": 5.0,
       "MaxTimeBetweenSpawns": 9.0,
 
-      "MinSpeed": 15.0,
-      "MaxSpeed": 45.0,
+      "MinSpeed": 10.0,
+      "MaxSpeed": 12.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
