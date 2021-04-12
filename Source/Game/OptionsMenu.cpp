@@ -284,34 +284,35 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 		}
 	}
-	else if ((myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)) && myScreenSettingsActive == true)
+	
+	if (myScreenSettingsActive == true)
 	{
-		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
-		if (myScreenMovingIndex == 0)
+		if (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross))
 		{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+				if (myScreenMovingIndex == 0)
+				{
+					myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
-			CGameWorld::GetInstance()->Game()->SetZoom(1280, 720);
-			Tga2D::CEngine::GetInstance()->SetResolution({ 1280, 720 }, true);
-		}
-		else if (myScreenMovingIndex == 1)
-		{
-			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+					CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
+				}
+				else if (myScreenMovingIndex == 1)
+				{
+					myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
 
-			CGameWorld::GetInstance()->Game()->SetZoom(1920, 1080);
-			Tga2D::CEngine::GetInstance()->SetResolution({ 1920, 1080 }, true);
-		}
-		else if (myScreenMovingIndex == 2)
-		{
-			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
-			
-			CGameWorld::GetInstance()->Game()->SetZoom(3840, 2160);
-			Tga2D::CEngine::GetInstance()->SetResolution({ 3840, 2160 }, true);
-		}
-		myScreenSettingsActive = false;
-		for (int i = 0; i < myResolutionObj.size(); i++)
-		{
-			myResolutionObj[i]->SetActive(false);
+					CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
+				}
+				else if (myScreenMovingIndex == 2)
+				{
+					myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
+
+					CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
+				}
+			myScreenSettingsActive = false;
+			for (int i = 0; i < myResolutionObj.size(); i++)
+			{
+				myResolutionObj[i]->SetActive(false);
+			}
 		}
 	}
 
