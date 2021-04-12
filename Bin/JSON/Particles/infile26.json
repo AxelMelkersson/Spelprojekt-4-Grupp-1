@@ -19,7 +19,7 @@
       "RotateSprite": 0.0,
 
       "MinTimeBetweenSpawns": 0.2,
-      "MaxTimeBetweenSpawns": 0.2,
+      "MaxTimeBetweenSpawns": 0.6,
 
       "MinSpeed": 3.0,
       "MaxSpeed": 6.0,
