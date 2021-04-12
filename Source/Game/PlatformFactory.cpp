@@ -56,40 +56,33 @@ UnstablePlatform* PlatformFactory::CreateUnstablePlatform(Scene* aLevelScene, co
 {
 	UnstablePlatform* unstablePlatform = new UnstablePlatform(aLevelScene);
 
-	SpriteComponent* markSprite = unstablePlatform->AddComponent<SpriteComponent>();
 	SpriteComponent* mainSprite = unstablePlatform->AddComponent<SpriteComponent>();
 
-	std::string markSpritePath = "Sprites/Platforms/Unstable5Marking.dds";
 	std::string spritePath = "Sprites/Platforms/Unstable5.dds";
 
 	v2f adjustedSize = v2f(0.0f, 8.0f);
-	v2f adjustedSpriteSize = v2f(0.0f, 8.0f);
+	v2f adjustedSpriteSize = v2f(0.0f, 16.0f);
 	if (aCollisionSize.x >= 40.0f)
 	{
 		adjustedSize.x = 40.0f;
 		adjustedSpriteSize.x = 64.0f;
-		markSpritePath = "Sprites/Platforms/Unstable5Marking.dds";
 		spritePath = "Sprites/Platforms/Unstable5.dds";
 	}
 	else if (aCollisionSize.x >= 24.0f)
 	{
 		adjustedSize.x = 24.0f;
 		adjustedSpriteSize.x = 32.0f;
-		markSpritePath = "Sprites/Platforms/Unstable3Marking.dds";
 		spritePath = "Sprites/Platforms/Unstable3.dds";
 	}
 	else
 	{
 		adjustedSize.x = 8.0f;
 		adjustedSpriteSize.x = 8.0f;
-		markSpritePath = "Sprites/Platforms/Unstable1Marking.dds";
 		spritePath = "Sprites/Platforms/Unstable1.dds";
 	}
 
 	unstablePlatform->Init(adjustedSize, adjustedSize, aPosition, false);
 	unstablePlatform->SetTimerProperties(aDestroyTime, aRespawnTime);
-	markSprite->SetSpritePath(markSpritePath);
-	markSprite->SetSize(adjustedSpriteSize);
 	mainSprite->SetSpritePath(spritePath);
 	mainSprite->SetSize(adjustedSpriteSize);
 
@@ -126,9 +119,9 @@ DestructiblePlatform* PlatformFactory::CreateDestructiblePlatform(Scene* aLevelS
 	return destructiblePlatform;
 }
 
-DeadlyPlatform* PlatformFactory::CreateDeadlyPlatform(Scene* aLevelScene, const v2f& aPosition, const v2f& aCollisionSize, const v2f& aSpriteSize)
+DeadlyPlatform* PlatformFactory::CreateDeadlyPlatform(Scene* aLevelScene, const v2f& aPosition, const v2f& aCollisionSize, const v2f& aSpriteSize, const int& aMaterial)
 {
 	DeadlyPlatform* deadlyPlatform = new DeadlyPlatform(aLevelScene);
-	deadlyPlatform->Init(aCollisionSize, aSpriteSize, aPosition, false);
+	deadlyPlatform->Init(aCollisionSize, aSpriteSize, aPosition, false, aMaterial);
 	return deadlyPlatform;
 }

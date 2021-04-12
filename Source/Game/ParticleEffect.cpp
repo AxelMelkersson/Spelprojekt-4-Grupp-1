@@ -10,13 +10,14 @@
 #include "Random.hpp"
 #include "SpriteComponent.h"
 #include "SpritebatchComponent.h"
-
+#include "PostMaster.hpp"
 
 ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:
 	GameObject(aLevelScene),
 	myBatch(nullptr)
-{
+{ 
+	myScene = aLevelScene;
 	mySpawningInLocalSpace = {};
 	myFollowObject = nullptr;
 	myEffectIsDestroyed = {};
@@ -32,6 +33,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myAddedPauseTimer = {};
 	myZIndex = {};
 	myInitBatching = {};
+	mySetZIndex = {};
 }
 
 ParticleEffect::~ParticleEffect()
@@ -52,9 +54,17 @@ void ParticleEffect::Init(ParticleStats aStats)
 	myBatch->Init();
 
 	SetPosition(GetPosition());
-	SetZIndex(myStats.myZIndex);
 	SetPivot({ 0.5f, 0.5f });
 	Activate();
+
+	/*if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
+	{
+
+		v2f bounds = myScene->GetCamera().GetBoundSize();
+
+		myStats.myEmitterWidth = myStats.myEmitterWidth + bounds.x * 1.5f;
+		myStats.myOffset = { myStats.myOffset.x, myStats.myOffset.y + -bounds.y };
+	}*/
 }
 
 void ParticleEffect::Render()
@@ -67,6 +77,12 @@ void ParticleEffect::Render()
 
 void ParticleEffect::Update(const float& aDeltaTime)
 {
+	if (!mySetZIndex)
+	{
+		SetZIndex(myStats.myZIndex);
+		mySetZIndex = true;
+	}
+
 	if (myActiveEffect)
 	{
 		UpdateParticle(aDeltaTime);
@@ -219,7 +235,7 @@ const void ParticleEffect::CheckActiveStats()
 
 	if (myObjectIsFollowing)
 	{
-		if (myFollowObject->myTransform.myShouldBeDestroyed || !myFollowObject->IsActive())
+		if (myFollowObject->GetShouldBeDestroyed() || !myFollowObject->IsActive())
 		{
 			for (auto sprite : mySprites)
 				sprite->SetInactive();
@@ -255,4 +271,14 @@ const void ParticleEffect::SetFollowObject(GameObject& aFollowObject)
 {
 	myFollowObject = &aFollowObject;
 	myObjectIsFollowing = true;
+}
+
+const void ParticleEffect::SetWidth(const float anXSize)
+{
+	myStats.myEmitterWidth = myStats.myEmitterWidth + anXSize;
+}
+
+const void ParticleEffect::SetOffset(const float aOffset)
+{
+	myStats.myOffset = {aOffset, myStats.myOffset.y};
 }

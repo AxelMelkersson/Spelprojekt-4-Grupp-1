@@ -18,8 +18,11 @@ public:
 
 private:
 	SpritebatchComponent* myHiddenSpriteBatch;
+	
 	float myOpacity;
 	float myOpacityChangeSpeed;
+	float myTimer;
+
 	bool myPlayerCollided;
 	bool myHasBeenFound;
 

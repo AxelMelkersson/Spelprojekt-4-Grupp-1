@@ -58,5 +58,10 @@ private:
 
 	const unsigned int myID;
 	const unsigned int myBonfireID;
+
+	const void ActivateTrailEffect();
+	const void ActivateCollectedEffect();
+
 };
+
 

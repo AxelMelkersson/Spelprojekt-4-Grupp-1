@@ -130,6 +130,7 @@ void DataManager::SaveCollectedCollectible(const unsigned int anID)
 		if (mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["ID"].GetInt() == anID)
 		{
 			mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].SetBool(true);
+			myCollectableInfo[i].myCollectedState = true;
 		}
 	}
 	AcceptJsonWriter("JSON/SaveFile.json");

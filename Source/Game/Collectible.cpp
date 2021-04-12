@@ -8,6 +8,9 @@
 #include "ColliderComponent.h"
 #include "AudioManager.h"
 
+#include "PostMaster.hpp"
+
+
 #include "../External/Headers/CU/Utilities.h"
 
 #include "GameWorld.h"
@@ -144,9 +147,9 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		{
 			//SetAnimation;
 			myWasCollected = true;
-			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
+			ActivateTrailEffect();
 		}
 	}
 }
@@ -163,13 +166,18 @@ void Collectible::TurnIn()
 {
 	if (!myWasTurnedIn)
 	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleDown);
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
+
 		CheckPopUpMessages();
-		
+
+		DataManager::GetInstance().SaveCollectedCollectible(myID);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
+		ActivateCollectedEffect();
 		Destroy();
 	}
 }
@@ -201,6 +209,7 @@ void Collectible::ImGuiUpdate()
 	ImGui::End();
 }
 
+
 void Collectible::CheckPopUpMessages()
 {
 	v2f position = {};
@@ -216,5 +225,39 @@ void Collectible::CheckPopUpMessages()
 	else if (myType == eCollectibleType::Hard)
 	{
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+	}
+}
+
+
+const void Collectible::ActivateTrailEffect()
+{
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectEasy, this));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectMedium, this));
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleTrailEffectHard, this));
+	}
+}
+
+const void Collectible::ActivateCollectedEffect()
+{
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleEasy, GetPosition()));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleMedium, GetPosition()));
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::CollectibleCollectedParticleHard, GetPosition()));
+
 	}
 }

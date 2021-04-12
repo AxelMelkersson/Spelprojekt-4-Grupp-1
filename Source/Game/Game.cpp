@@ -145,7 +145,9 @@ void CGame::InitCallBack()
 
 void CGame::UpdateCallBack()
 {
-	ShowCursor(true);
+#ifdef _RETAIL
+	ShowCursor(false);
+#endif
 
 	myTimer->Update();
 	myGameWorld.Update();
@@ -154,6 +156,8 @@ void CGame::UpdateCallBack()
 	PostMaster::GetInstance().SendWaitingMessages();
 
 #ifndef _RETAIL
+	ShowCursor(true);
+
 	if (myGameWorld.myInput->GetInput()->GetKeyJustDown(Keys::F1Key))
 	{
 		myDebugger.Toggle();

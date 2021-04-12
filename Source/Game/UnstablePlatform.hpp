@@ -1,5 +1,6 @@
 #pragma once
 #include "Platform.h"
+#include "Animation.hpp"
 
 class SpriteComponent;
 
@@ -23,6 +24,9 @@ public:
 
 private:
 	SpriteComponent* mySpriteToDisable;
+	AnimationComponent* myAnimationComponent;
+
+	Animation myAnimations[2];
 
 	float myDestroyTime;
 	float myRespawnTime;
