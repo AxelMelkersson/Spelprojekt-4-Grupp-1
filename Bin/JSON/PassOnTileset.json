@@ -1,8 +1,8 @@
 { "columns":32,
   "image": [
     "Sprites\/tileset.dds",
-    "Sprites\/tileset1.dds",
-    "Sprites\/tileset2.dds"
+    "Sprites\/tileset2.dds",
+    "Sprites\/tileset3.dds"
   ],
  "imageheight":256,
  "imagewidth":256,
