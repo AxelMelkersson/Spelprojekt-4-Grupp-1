@@ -425,6 +425,8 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstableGroundIdleParticle);
 		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
 		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		effect->SetGameObject(gameobjectToFollow);
+
 		break;
 	}
 	default:

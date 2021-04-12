@@ -126,3 +126,8 @@ void UnstablePlatform::DeactivatePlatform()
 	GetComponent<PhysicsComponent>()->SetCanCollide(false);
 	myIsDeactivated = true;
 }
+
+bool UnstablePlatform::GetDeactivatedPlatform()
+{
+	return myIsDeactivated;
+}

@@ -11,6 +11,7 @@
 #include "SpriteComponent.h"
 #include "SpritebatchComponent.h"
 #include "PostMaster.hpp"
+#include "UnstablePlatform.hpp"
 
 ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:
@@ -20,6 +21,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myScene = aLevelScene;
 	mySpawningInLocalSpace = {};
 	myFollowObject = nullptr;
+	myCheckObject = nullptr;
 	myEffectIsDestroyed = {};
 	myKilledEffect = {};
 	myObjectIsFollowing = {};
@@ -34,6 +36,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myZIndex = {};
 	myInitBatching = {};
 	mySetZIndex = {};
+	myPauseEffect = false;
 }
 
 ParticleEffect::~ParticleEffect()
@@ -112,7 +115,7 @@ const void ParticleEffect::UpdateParticle(const float& aDeltaTime)
 
 	CheckActiveStats();
 
-	if (!myKilledEffect)
+	if (!myKilledEffect && !myPauseEffect)
 		CheckWhenToSpawnSprites();
 
 	CheckIfSpritesAreDead(aDeltaTime);
@@ -245,6 +248,24 @@ const void ParticleEffect::CheckActiveStats()
 		else
 			SetPosition(myFollowObject->GetPosition());
 	}
+
+
+	if (myCheckObject != NULL)
+	{
+		UnstablePlatform* platform = dynamic_cast<UnstablePlatform*>(myCheckObject);
+
+		if (platform != NULL)
+		{
+			if (platform->GetDeactivatedPlatform())
+			{
+				myPauseEffect = true;
+			}
+			else
+				myPauseEffect = false;
+		}
+
+	}
+
 }
 
 const void ParticleEffect::DeleteSprites()
@@ -286,4 +307,9 @@ const void ParticleEffect::SetHeight(const float anYSize)
 const void ParticleEffect::SetOffset(const float aOffset)
 {
 	myStats.myOffset = {aOffset, myStats.myOffset.y};
+}
+
+const void ParticleEffect::SetGameObject(GameObject* aObject)
+{
+	myCheckObject = aObject;
 }

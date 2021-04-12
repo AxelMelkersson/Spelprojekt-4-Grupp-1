@@ -26,6 +26,7 @@ public:
 	const void SetWidth(const float anXSize);
 	const void SetHeight(const float anYSize);
 	const void SetOffset(const float aOffset);
+	const void SetGameObject(GameObject* aObject);
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
@@ -35,6 +36,8 @@ private:
 	std::vector<EffectSprite*> mySprites;
 
 	GameObject* myFollowObject;
+	GameObject* myCheckObject;
+
 	SpritebatchComponent* myBatch;
 	Scene* myScene;
 	ParticleStats myStats;
@@ -46,6 +49,8 @@ private:
 
 	int myZIndex; 
 
+
+	bool myPauseEffect;
 	bool mySetZIndex;
 	bool mySpawningInLocalSpace;
 	bool myKilledEffect;

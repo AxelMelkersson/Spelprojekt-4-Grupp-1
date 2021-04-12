@@ -22,6 +22,8 @@ public:
 	void ActivatePlatform();
 	void DeactivatePlatform();
 
+	bool GetDeactivatedPlatform();
+
 private:
 	SpriteComponent* mySpriteToDisable;
 	AnimationComponent* myAnimationComponent;
