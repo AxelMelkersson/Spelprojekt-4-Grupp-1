@@ -32,11 +32,11 @@
       "EmitterWidth": 3.0,
       "EmitterHeigth": 3.0,
 
-      "MinParticleLifeTime": 0.2,
-      "MaxParticleLifeTime": 0.3,
+      "MinParticleLifeTime": 0.4,
+      "MaxParticleLifeTime": 0.4,
 
       "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.01,
+      "SpawnEverySecond": 0.005,
 
       "Offset": [
         {
