@@ -24,8 +24,8 @@
       "MinSpeed": 20.0,
       "MaxSpeed": 5.0,
 
-      "MinParticleAngularVel": -5.0,
-      "MaxParticleAngularVel": 5.0,
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 0.0,
 
