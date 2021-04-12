@@ -55,7 +55,7 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 
 void Bonfire::Update(const float& aDeltaTime)
 {
-	if (!myActivateParticle)
+	if (!myActivateParticle && myHasBeenActivated)
 	{
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticleEasy, GetPosition()));
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticleMedium, GetPosition()));

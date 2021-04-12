@@ -32,6 +32,7 @@ void EffectSprite::AddSprite(SpriteComponent* aSprite)
 {
 	mySprite = aSprite;
 	mySprite->SetSpritePath(myPathString);
+	mySprite->SetCeilPosition(true);
 	myCurrentColor = myStartColor;
 
 	SetNewColor();
