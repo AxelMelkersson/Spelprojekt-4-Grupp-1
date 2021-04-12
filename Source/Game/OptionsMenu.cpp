@@ -491,11 +491,29 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	mySoundSettings->UpdateUIObjects(aDeltaTime);
 	myBGDot->UpdateUIObjects(aDeltaTime);
 	myVFXDot->UpdateUIObjects(aDeltaTime);
+
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
 	if (myIsOpenedFromPause)
 	{
+		my720pHgh->UpdateUIObjects(0);
+		my1080pHgh->UpdateUIObjects(0);
+		my4KHgh->UpdateUIObjects(0);
+
+		if (myScreenMovingIndex == 1)
+		{
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+		}
+		else if (myScreenMovingIndex == 2)
+		{
+			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+		}
+		else
+		{
+			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+		}
+
 		myTutorial->Update(0);
 		myTutorial->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
 
