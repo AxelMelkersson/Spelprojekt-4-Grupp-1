@@ -47,7 +47,7 @@ void UIPopUp::InitPopUp()
 
 	v2f position = myScene->GetCamera().GetPosition();
 	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
-	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + Config::ourReferenceSize - 150.0f };
+	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + Config::ourReferenceSize.y - 150.0f };
 	v2f collectiblePos = { position.x + Config::ourReferenceSize.x - 25.f, position.y + 35.0f };
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
