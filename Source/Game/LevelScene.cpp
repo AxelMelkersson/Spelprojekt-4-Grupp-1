@@ -53,7 +53,7 @@ void LevelScene::Load()
 
 	myEffectFactory = new ParticleEffectFactory(this);
 	myEffectFactory->StartDustEffects();
-	myEffectFactory->StartRainEffects();
+	//myEffectFactory->StartRainEffects();
 
 	myPlayer = new Player(this);
 

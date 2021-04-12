@@ -397,12 +397,32 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::DustParticleStartupTwo);
 		break;
 	}
-	case eMessageType::UnstablePlatformParticle:
+	case eMessageType::UnstablePlatformParticleOne:
 	{
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
 		v2f position = gameobjectToFollow->GetPosition();
 
-		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstablePlatformParticle);
+		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstablePlatformParticleOne);
+		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		break;
+	}
+	case eMessageType::UnstablePlatformParticleTwo:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+		v2f position = gameobjectToFollow->GetPosition();
+
+		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstableGroundParticleTwo);
+		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
+		break;
+	}
+	case eMessageType::UnstableGroundIdleParticle:
+	{
+		GameObject* gameobjectToFollow = aMessage.myEffectObject;
+		v2f position = gameobjectToFollow->GetPosition();
+
+		ParticleEffect* effect = SpawnEffect(position, eParticleEffects::UnstableGroundIdleParticle);
 		effect->SetWidth(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
 		effect->SetOffset(gameobjectToFollow->GetComponent<ColliderComponent>()->GetWidth() * 0.5f);
 		break;
@@ -495,7 +515,9 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::CollectibleTrailEffectMedium);
 	Subscribe(eMessageType::CollectibleTrailEffectHard);
 	Subscribe(eMessageType::CollectibleTrailEffect);
-	Subscribe(eMessageType::UnstablePlatformParticle);
+	Subscribe(eMessageType::UnstablePlatformParticleOne);
+	Subscribe(eMessageType::UnstablePlatformParticleTwo);
+	Subscribe(eMessageType::UnstableGroundIdleParticle);
 	Subscribe(eMessageType::BonfireIdleParticleEasy);
 	Subscribe(eMessageType::BonfireWakeupExplosionParticleEasy);
 	Subscribe(eMessageType::BonfireWakeupTopParticleEasy);
@@ -684,7 +706,12 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
-	case eParticleEffects::UnstablePlatformParticle:
+	case eParticleEffects::UnstablePlatformParticleOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::UnstableGroundParticleTwo:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
@@ -710,6 +737,11 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		break;
 	}
 	case eParticleEffects::DustParticleStartupTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::UnstableGroundIdleParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;

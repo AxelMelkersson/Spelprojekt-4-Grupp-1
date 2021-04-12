@@ -32,6 +32,7 @@ private:
 	float myRespawnTime;
 	float myTimer;
 
+	bool myActivatedIdleParticle;
 	bool myCollidedWithPlayer;
 	bool myCollidedLastFrame;
 	bool myIsDeactivated;

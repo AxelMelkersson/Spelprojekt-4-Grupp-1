@@ -23,6 +23,7 @@ UnstablePlatform::UnstablePlatform(Scene* aLevelScene)
 {
 	SetZIndex(94);
 	myMaterial = 1;
+	myActivatedIdleParticle = false;
 }
 
 void UnstablePlatform::Update(const float& aDeltaTime)
@@ -45,6 +46,12 @@ void UnstablePlatform::Update(const float& aDeltaTime)
 
 	myPlayerIsOnTop = false;
 	myCollidedLastFrame = false;
+
+	if (!myActivatedIdleParticle)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::UnstableGroundIdleParticle, this));
+		myActivatedIdleParticle = true;
+	}
 
 	Platform::Update(aDeltaTime);
 }
@@ -74,7 +81,7 @@ void UnstablePlatform::OnCollision(GameObject* aGameObject)
 		{
 			player->SetPlatformVelocity(v2f(0.0f, 0.0f));
 
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::UnstablePlatformParticle, this));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::UnstablePlatformParticleOne, this));
 			AudioManager::GetInstance()->PlayAudio(AudioList::WeakPlatform);
 			myCollidedWithPlayer = true;
 			myTimer = myDestroyTime;

@@ -113,9 +113,15 @@
     },
     {
       "file37": "JSON/Particles/infile37.json"
+    },
+    {
+      "file38": "JSON/Particles/infile38.json"
+    },
+    {
+      "file39": "JSON/Particles/infile39.json"
     }
   ],
   "TestEffect": {
-    "File": 36
+    "File": 39
   }
 }

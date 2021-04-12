@@ -20,7 +20,7 @@ enum class eParticleEffects
 	PlayerLedgeLeftGrabbedHandParticle,
 	PlayerLedgeLeftGrabbedLegParticle,
 	VelocityLinesParticles,
-	UnstablePlatformParticle,
+	UnstablePlatformParticleOne,
 	CollectibleCollectedParticleEasy,
 	CollectibleCollectedParticleMedium,
 	CollectibleCollectedParticleHard,
@@ -40,5 +40,7 @@ enum class eParticleEffects
 	DustParticleTwo,
 	DustParticleThree,
 	DustParticleStartupOne,
-	DustParticleStartupTwo
+	DustParticleStartupTwo,
+	UnstableGroundParticleTwo,
+	UnstableGroundIdleParticle
 };
