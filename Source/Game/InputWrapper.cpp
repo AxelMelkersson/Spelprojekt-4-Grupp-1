@@ -88,7 +88,7 @@ bool InputWrapper::IsMovingLeft()
 
 bool InputWrapper::IsMovingDown()
 {
-	if (myInput->GetKeyDown(Keys::SKey) || GetController()->GetLeftThumbStick().y > 0.9f || GetController()->IsButtonHoldDown(Controller::Button::DPadDown))
+	if (myInput->GetKeyDown(Keys::SKey) || GetController()->GetLeftThumbStick().y > 0.0f || GetController()->IsButtonHoldDown(Controller::Button::DPadDown))
 		return true;
 	else
 		return false;
