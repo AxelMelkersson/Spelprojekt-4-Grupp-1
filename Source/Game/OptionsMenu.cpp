@@ -275,20 +275,17 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
 			Tga2D::CEngine::GetInstance()->SetResolution({ 1280, 720 }, true);
-			Tga2D::CEngine::GetInstance()->SetTargetSize({ 1280, 720 });
 		}
 		else if (myScreenMovingIndex == 1)
 		{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() + 27.f);
 			Tga2D::CEngine::GetInstance()->SetResolution({ 1920, 1080 }, true);
-			Tga2D::CEngine::GetInstance()->SetTargetSize({ 1920, 1080 });
 		}
 		else if (myScreenMovingIndex == 2)
 		{
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
 			//Tga2D::CEngine::GetInstance()->SetFullScreen();
 			Tga2D::CEngine::GetInstance()->SetResolution({ 3840, 2160 }, true);
-			Tga2D::CEngine::GetInstance()->SetTargetSize({ 3840, 2160 });
 		}
 		myScreenSettingsActive = false;
 		for (int i = 0; i < myResolutionObj.size(); i++)

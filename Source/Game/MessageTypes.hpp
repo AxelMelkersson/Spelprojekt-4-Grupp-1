@@ -36,5 +36,7 @@ enum class eMessageType
 	UnstablePlatformParticle,
 
 	KilledFocus,
+	SetFocus,
+	TurnedInCollectible,
 	Vibrate
 };

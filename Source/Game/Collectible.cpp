@@ -141,7 +141,6 @@ void Collectible::OnCollision(GameObject* aGameObject)
 		if (player)
 		{
 			myWasCollected = true;
-			DataManager::GetInstance().SaveCollectedCollectible(myID);
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
 			ActivateTrailEffect();
@@ -162,6 +161,9 @@ void Collectible::TurnIn()
 		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleDown);
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
+
+		DataManager::GetInstance().SaveCollectedCollectible(myID);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{

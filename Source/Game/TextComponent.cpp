@@ -41,7 +41,7 @@ void TextComponent::Render(Transform& aTransform, GameObject& aGameObject)
 	myText->Render();
 }
 
-void TextComponent::SetText(const std::string aString)
+void TextComponent::SetText(const std::string& aString)
 {
 	if (myText == nullptr) return;
 	myText->SetText(aString);
