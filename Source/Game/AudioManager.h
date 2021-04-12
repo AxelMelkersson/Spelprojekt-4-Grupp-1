@@ -30,6 +30,7 @@ public:
 
 	void SetSoundVolume(AudioList aSound, const float& aVolume);
 	void SetSoundPosition(AudioList aSound, const VECTOR2F& aPosition);
+	void SetComponentVolume(AudioList aSound, const float& aVolume);
 
 	void Fade(const float& aDeltaTime);
 

@@ -37,6 +37,20 @@ void AudioClip::SetVolume(const float& aVolChange)
 	myAudio->SetVolume(myVolume);
 }
 
+void AudioClip::SetComponentVolume(const float& aVolChange)
+{
+	myVolume = GetVolPercentage(aVolChange) * AudioManager::GetInstance()->GetSFXVolume();
+	if (myVolume < 0)
+	{
+		myVolume = 0;
+	}
+	if (myVolume > myMaxVolume)
+	{
+		myVolume = myMaxVolume;
+	}
+	myAudio->SetVolume(myVolume);
+}
+
 void AudioClip::AddVolume(const float& aVolChange)
 {
 	myVolume += aVolChange;
@@ -121,15 +135,31 @@ bool AudioClip::Fade(const float& aDeltaTime)
 	else
 	{
 		PlayIfAvailable();
-		if (myVolume < GetVolPercentage(AudioManager::GetInstance()->GetMusicVolume()))
+		if (myLayer == AudioLayer::SoundEffect)
 		{
-			myVolume += aDeltaTime / 5.0f;
-			myAudio->SetVolume(myVolume);
+			if (myVolume < GetVolPercentage(AudioManager::GetInstance()->GetSFXVolume()))
+			{
+				myVolume += aDeltaTime / 5.0f;
+				myAudio->SetVolume(myVolume);
+			}
+			else
+			{
+				myIsFading = false;
+				return true;
+			}
 		}
 		else
 		{
-			myIsFading = false;
-			return true;
+			if (myVolume < GetVolPercentage(AudioManager::GetInstance()->GetMusicVolume()))
+			{
+				myVolume += aDeltaTime / 5.0f;
+				myAudio->SetVolume(myVolume);
+			}
+			else
+			{
+				myIsFading = false;
+				return true;
+			}
 		}
 	}
 	return false;
