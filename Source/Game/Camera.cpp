@@ -49,6 +49,16 @@ void Camera::Update(const float& aDeltaTime)
 			myLesserThanViewPortY * Utils::Lerp<float>(myY, targetPos.y - myWorldViewSize.y * 0.5f, myLerp.y * aDeltaTime)
 		});
 
+		if (Utils::Abs(myX - (targetPos.x - myWorldViewSize.x * 0.5f)) <= 0.5f)
+		{
+			myX = myLesserThanViewPortX * (targetPos.x - myWorldViewSize.x * 0.5f);
+		}
+
+		if (Utils::Abs(myY - (targetPos.y - myWorldViewSize.y * 0.5f)) <= 0.5f)
+		{
+			myY = myLesserThanViewPortY * (targetPos.y - myWorldViewSize.y * 0.5f);
+		}
+
 		SetActive();
 	}
 
