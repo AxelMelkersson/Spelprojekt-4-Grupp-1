@@ -21,12 +21,9 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 
 UIPopUp::~UIPopUp()
 {
-
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageE);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageM);
 	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageH);
-
-
 }
 
 void UIPopUp::InitPopUp()
@@ -54,7 +51,6 @@ void UIPopUp::InitPopUp()
 	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos, 202);
 	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos, 202);
 
-
 	for (int i = 0; i < 8; ++i)
 	{
 		myCollectibleInfo.push_back(std::vector<int>());
@@ -78,7 +74,6 @@ void UIPopUp::InitPopUp()
 			++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
 		}
 	}
-
 
 	myCollectibleString = std::make_unique<UIText>(myScene);
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
