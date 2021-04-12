@@ -80,3 +80,8 @@ void UIObject::SetActive(const bool aActiveState)
 {
 	myIsActive = aActiveState;
 }
+
+const v2f UIObject::GetStartPosition()
+{
+	return myStartPosition;
+}

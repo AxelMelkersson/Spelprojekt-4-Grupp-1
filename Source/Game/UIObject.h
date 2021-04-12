@@ -23,6 +23,8 @@ public:
 
 	void SetActive(const bool aActiveState);
 
+	const v2f GetStartPosition();
+
 
 private:
 	Camera* myCamera;

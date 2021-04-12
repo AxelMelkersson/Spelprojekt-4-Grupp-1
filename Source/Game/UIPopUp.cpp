@@ -45,10 +45,9 @@ void UIPopUp::InitPopUp()
 	myFireMed = std::make_unique<UIObject>(myScene);
 	myFireHard = std::make_unique<UIObject>(myScene);
 
-	v2f position = myScene->GetCamera().GetPosition();
-	v2f backPos = { position.x + Config::ourReferenceSize.x, position.y + 15.f };
-	v2f firePos = { position.x + Config::ourReferenceSize.x + 10.f, position.y + Config::ourReferenceSize.y - 150.0f };
-	v2f collectiblePos = { position.x + Config::ourReferenceSize.x - 25.f, position.y + 35.0f };
+	v2f backPos = { Config::ourReferenceSize.x, 15.f };
+	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
+	v2f collectiblePos = { Config::ourReferenceSize.x - 25.f, 35.0f };
 
 	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 201);
 	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 202);
@@ -101,9 +100,9 @@ void UIPopUp::Update(const float& aDeltaTime)
 	{
 		myCurrentTime += aDeltaTime;
 
+		SetNewPositions(aDeltaTime);
 		myBackground->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
-		SetNewPositions(aDeltaTime);
 		UpdateCollectibles();
 
 	}
@@ -213,27 +212,30 @@ void UIPopUp::Deactivate()
 void UIPopUp::SetNewPositions(const float& aDeltaTime)
 {
 	Config::ourReferenceSize = { 320.f, 180.f };
-	v2f position = myScene->GetCamera().GetPosition();
 
 	if (myEasyActive)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
+			if (myBackground->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
 			{ // 265.f
+
 				myIsMaxLeft = true;
 			}
-			myBackground->SetPositionX(myBackground->GetPositionX() - 50.f * aDeltaTime);
-			myFireEasy->SetPositionX(myFireEasy->GetPositionX() - 50.f * aDeltaTime);
-			myCollectibleString->SetPositionX(myCollectibleString->GetPositionX() - 50.f * aDeltaTime);
+			else
+			{
+				myBackground->SetPositionX(myBackground->GetStartPosition().x - 50.f * aDeltaTime);
+				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x - 50.f * aDeltaTime);
+				myCollectibleString->SetPositionX(myCollectibleString->GetPosition().x - 50.f * aDeltaTime);
+			}
 		}
 		else if (myIsMaxLeft == true)
 		{
 			myCurrentStayTime += aDeltaTime;
 			if (myCurrentStayTime > myStayTime)
 			{
-				myBackground->SetPositionX(myBackground->GetPositionX() + 50.f * aDeltaTime);
-				myFireEasy->SetPositionX(myFireEasy->GetPositionX() + 50.f * aDeltaTime);
+				myBackground->SetPositionX(myBackground->GetStartPosition().x + 50.f * aDeltaTime);
+				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x + 50.f * aDeltaTime);
 				myCollectibleString->SetPositionX(myCollectibleString->GetPositionX() + 50.f * aDeltaTime);
 
 			}
@@ -244,7 +246,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
+			if (myBackground->GetPositionX() < Config::ourReferenceSize.x - 55.f)
 			{
 				myIsMaxLeft = true;
 			}
@@ -266,7 +268,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetPositionX() < position.x + Config::ourReferenceSize.x - 55.f)
+			if (myBackground->GetPositionX() < Config::ourReferenceSize.x - 55.f)
 			{
 				myIsMaxLeft = true;
 			}
