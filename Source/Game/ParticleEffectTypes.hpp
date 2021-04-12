@@ -21,13 +21,19 @@ enum class eParticleEffects
 	PlayerLedgeLeftGrabbedLegParticle,
 	VelocityLinesParticles,
 	UnstablePlatformParticle,
-	BonfireWakeupTopParticle,
-	BonfireWakeupExplosionParticle,
-	BonfireIdleParticle,
 	CollectibleCollectedParticleEasy,
 	CollectibleCollectedParticleMedium,
 	CollectibleCollectedParticleHard,
 	CollectibleTrailEffectEasy,
 	CollectibleTrailEffectMedium,
-	CollectibleTrailEffectHard
+	CollectibleTrailEffectHard,
+	BonfireWakeupTopParticleEasy,
+	BonfireWakeupExplosionParticleEasy,
+	BonfireIdleParticleEasy,
+	BonfireWakeupTopParticleMedium,
+	BonfireWakeupExplosionParticleMedium,
+	BonfireIdleParticleMedium,
+	BonfireWakeupTopParticleHard,
+	BonfireWakeupExplosionParticleHard,
+	BonfireIdleParticleHard
 };

@@ -57,7 +57,9 @@ void Bonfire::Update(const float& aDeltaTime)
 {
 	if (!myActivateParticle)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticle, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticleEasy, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticleMedium, GetPosition()));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireIdleParticleHard, GetPosition()));
 		myActivateParticle = true;
 	}
 
@@ -81,8 +83,12 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 			myHasBeenActivated = true;
 			AudioManager::GetInstance()->PlayAudio(AudioList::BonfireActivated);
 			DataManager::GetInstance().SaveBonfireState(myBonfireIndex, myHasBeenActivated);
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticle, GetPosition()));
-			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticle, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticleEasy, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticleEasy, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticleMedium, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticleMedium, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupTopParticleHard, GetPosition()));
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::BonfireWakeupExplosionParticleHard, GetPosition()));
 		}
 	}
 }

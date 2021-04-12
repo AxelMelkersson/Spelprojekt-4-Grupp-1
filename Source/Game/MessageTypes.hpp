@@ -9,6 +9,11 @@ enum class eMessageType
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
 
+	KilledFocus,
+	SetFocus,
+	TurnedInCollectible,
+	Vibrate,
+
 	PlayerLandedParticle,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
@@ -30,13 +35,15 @@ enum class eMessageType
 	CollectibleTrailEffectMedium,
 	CollectibleTrailEffectHard,
 	CollectibleTrailEffect,
-	BonfireWakeupTopParticle,
-	BonfireWakeupExplosionParticle,
-	BonfireIdleParticle,
-	UnstablePlatformParticle,
+	BonfireWakeupTopParticleEasy,
+	BonfireWakeupExplosionParticleEasy,
+	BonfireIdleParticleEasy,
+	BonfireWakeupTopParticleMedium,
+	BonfireWakeupExplosionParticleMedium,
+	BonfireIdleParticleMedium,
+	BonfireWakeupTopParticleHard,
+	BonfireWakeupExplosionParticleHard,
+	BonfireIdleParticleHard,
+	UnstablePlatformParticle
 
-	KilledFocus,
-	SetFocus,
-	TurnedInCollectible,
-	Vibrate
 };

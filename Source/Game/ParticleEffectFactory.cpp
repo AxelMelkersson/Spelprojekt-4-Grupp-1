@@ -297,25 +297,67 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::RainEffectNextScreenParticle);
 		break;
 	}
-	case eMessageType::BonfireWakeupTopParticle:
+	case eMessageType::BonfireWakeupTopParticleEasy:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::BonfireWakeupTopParticle);
+		SpawnEffect(position, eParticleEffects::BonfireWakeupTopParticleEasy);
 		break;
 	}
-	case eMessageType::BonfireWakeupExplosionParticle:
+	case eMessageType::BonfireWakeupExplosionParticleEasy:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticle);
+		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticleEasy);
 		break;
 	}
-	case eMessageType::BonfireIdleParticle:
+	case eMessageType::BonfireIdleParticleEasy:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
 
-		SpawnEffect(position, eParticleEffects::BonfireIdleParticle);
+		SpawnEffect(position, eParticleEffects::BonfireIdleParticleEasy);
+		break;
+	}
+	case eMessageType::BonfireWakeupTopParticleMedium:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireWakeupTopParticleEasy);
+		break;
+	}
+	case eMessageType::BonfireWakeupExplosionParticleMedium:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticleEasy);
+		break;
+	}
+	case eMessageType::BonfireIdleParticleMedium:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireIdleParticleMedium);
+		break;
+	}
+	case eMessageType::BonfireWakeupTopParticleHard:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireWakeupTopParticleHard);
+		break;
+	}
+	case eMessageType::BonfireWakeupExplosionParticleHard:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireWakeupExplosionParticleHard);
+		break;
+	}
+	case eMessageType::BonfireIdleParticleHard:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::BonfireIdleParticleHard);
 		break;
 	}
 	case eMessageType::UnstablePlatformParticle:
@@ -402,9 +444,15 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::CollectibleTrailEffectHard);
 	Subscribe(eMessageType::CollectibleTrailEffect);
 	Subscribe(eMessageType::UnstablePlatformParticle);
-	Subscribe(eMessageType::BonfireIdleParticle);
-	Subscribe(eMessageType::BonfireWakeupExplosionParticle);
-	Subscribe(eMessageType::BonfireWakeupTopParticle);
+	Subscribe(eMessageType::BonfireIdleParticleEasy);
+	Subscribe(eMessageType::BonfireWakeupExplosionParticleEasy);
+	Subscribe(eMessageType::BonfireWakeupTopParticleEasy);
+	Subscribe(eMessageType::BonfireIdleParticleMedium);
+	Subscribe(eMessageType::BonfireWakeupExplosionParticleMedium);
+	Subscribe(eMessageType::BonfireWakeupTopParticleMedium);
+	Subscribe(eMessageType::BonfireIdleParticleHard);
+	Subscribe(eMessageType::BonfireWakeupExplosionParticleHard);
+	Subscribe(eMessageType::BonfireWakeupTopParticleHard);
 	Subscribe(eMessageType::RainEffectNextScreenParticle);
 	Subscribe(eMessageType::RainEffectForegroundParticle);
 	Subscribe(eMessageType::RainEffectBackgroundParticle);
@@ -432,131 +480,161 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 	}
 	case eParticleEffects::CollectibleTrailEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleCollectedParticleEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleEasy)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleCollectedParticleMedium:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleMedium)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleCollectedParticleHard:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleCollectedParticleHard)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleTrailEffectEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectEasy)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleTrailEffectMedium:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectMedium)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::CollectibleTrailEffectHard:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::CollectibleTrailEffectHard)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::DeathEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::DeathEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::RainEffectBackgroundParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectBackgroundParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}case eParticleEffects::RainEffectForegroundParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::RainEffectForegroundParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::BulletEffectTrail:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BulletEffectTrail)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::BulletEffectHit:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BulletEffectHit)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::FogEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::FogEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerFallLandEffect:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerFallLandEffect)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::BulletEffectTrail2:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BulletEffectTrail2)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerBashedPlayerParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedPlayerParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerBashedSmallParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerBashedSmallParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerLedgeRightGrabbedHandParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeRightGrabbedHandParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerLedgeRightGrabbedLegParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeRightGrabbedLegParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerLedgeLeftGrabbedHandParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeLeftGrabbedHandParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::PlayerLedgeLeftGrabbedLegParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::PlayerLedgeLeftGrabbedLegParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::VelocityLinesParticles:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::VelocityLinesParticles)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
-	case eParticleEffects::BonfireWakeupTopParticle:
+	case eParticleEffects::BonfireWakeupTopParticleEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupTopParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
-	case eParticleEffects::BonfireWakeupExplosionParticle:
+	case eParticleEffects::BonfireWakeupExplosionParticleEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireWakeupExplosionParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
-	case eParticleEffects::BonfireIdleParticle:
+	case eParticleEffects::BonfireIdleParticleEasy:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::BonfireIdleParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupTopParticleMedium:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupExplosionParticleMedium:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireIdleParticleMedium:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupTopParticleHard:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireWakeupExplosionParticleHard:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::BonfireIdleParticleHard:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	case eParticleEffects::UnstablePlatformParticle:
 	{
-		aEffect.Init(myEffects[static_cast<int>(eParticleEffects::UnstablePlatformParticle)]);
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
 	}
