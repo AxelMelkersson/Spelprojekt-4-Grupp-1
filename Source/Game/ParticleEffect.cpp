@@ -168,6 +168,12 @@ const void ParticleEffect::SpawnSprite()
 	sprite->myEmitterAngular = myStats.myEmitterAngular;
 	sprite->myOffset = myStats.myOffset;
 	sprite->mySpriteRotation = myStats.mySpriteRotation;
+	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) ||
+		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle) ||
+		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectNextScreenParticle))
+	{
+		sprite->SetCeilPosition(false);
+	}
 
 	sprite->AddSprite(AddComponent<SpriteComponent>());
 	myBatch->AddSprite(sprite->GetSprite());

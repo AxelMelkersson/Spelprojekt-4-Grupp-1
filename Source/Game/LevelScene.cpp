@@ -52,8 +52,8 @@ void LevelScene::Load()
 	myIsTransitioning = false;
 
 	myEffectFactory = new ParticleEffectFactory(this);
-	myEffectFactory->StartDustEffects();
-	//myEffectFactory->StartRainEffects();
+	//myEffectFactory->StartDustEffects();
+	myEffectFactory->StartRainEffects();
 
 	myPlayer = new Player(this);
 

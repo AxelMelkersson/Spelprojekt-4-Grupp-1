@@ -32,7 +32,7 @@ void EffectSprite::AddSprite(SpriteComponent* aSprite)
 {
 	mySprite = aSprite;
 	mySprite->SetSpritePath(myPathString);
-	mySprite->SetCeilPosition(true);
+	mySprite->SetCeilPosition(myHasCeilPosition);
 	myCurrentColor = myStartColor;
 
 	SetNewColor();
@@ -74,6 +74,11 @@ bool EffectSprite::IsAlive()
 void EffectSprite::SetInactive()
 {
 	myIsAlive = false;
+}
+
+void EffectSprite::SetCeilPosition(const bool aStatement)
+{
+	myHasCeilPosition = aStatement;
 }
 
 const void EffectSprite::MoveSprite(const float& aDeltaTime)
