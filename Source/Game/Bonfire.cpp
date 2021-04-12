@@ -16,8 +16,9 @@
 #include "AudioManager.h"
 #include "DataManager.h"
 
-Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene), myBonfireIndex(anIndex)
+Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos) : GameObject(aScene), myBonfireIndex(anIndex)
 {
+	SetPosition(aPos);
 	SetPivot(v2f(0.5f, 1.0f));
 	SetZIndex(91);
 
@@ -53,8 +54,8 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex) : GameObject(aScene)
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 	}
 
-	mySpeechBubble = std::make_unique<SpeechBubble>(this); //FElet
-	mySpeechBubble->Init({ "hej" });
+	mySpeechBubble = new SpeechBubble(aScene);
+	mySpeechBubble->Init(myBonfireIndex, GetPosition());
 }
 
 void Bonfire::Update(const float& aDeltaTime)
@@ -70,6 +71,8 @@ void Bonfire::Update(const float& aDeltaTime)
 
 void Bonfire::OnCollision(GameObject* aGameObject)
 {
+	mySpeechBubble->Speak();
+
 	Player* player = dynamic_cast<Player*>(aGameObject);
 	if (player)
 	{

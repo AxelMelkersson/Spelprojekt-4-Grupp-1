@@ -80,7 +80,7 @@ void LevelScene::Unload()
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
 
-	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
+	if (myIsSpeedrun)
 	{
 		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetScore(myTimer->GetTime());
 		myTimer->Stop();

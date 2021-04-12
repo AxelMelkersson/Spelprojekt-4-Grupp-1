@@ -1,36 +1,52 @@
 {
   "BonfireStory": [
-      [
-        "Bonfire1.1",
-        "Bonfire1.2"
-      ],
-      [
-        "Bonfire2.1",
-        "Bonfire2.2"
-      ],
-      [
-        "Bonfire3.1",
-        "Bonfire3.2"
-      ],
-      [
-        "Bonfire4.1",
-        "Bonfire4.2"
-      ],
-      [
-        "Bonfire5.1",
-        "Bonfire5.2"
-      ],
-      [
-        "Bonfire6.1",
-        "Bonfire6.2"
-      ],
-      [
-        "Bonfire7.1",
-        "Bonfire7.2"
-      ],
-      [
-        "Bonfire8.1",
-        "Bonfire8.2"
+    {
+      "text": [
+        "Bonfire 1",
+        "Bonfire 1.2 ASFJGASFJDKG SLADKFNAÖG AÖSLJKAGN DF GASKDFGÖLF A DSFGADFG SADF ASGA FSDJG ASJNJFKGNFG DFGHG"
       ]
+    },
+    {
+      "text": [
+        "Bonfire 2",
+        "Bonfire 2.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 3",
+        "Bonfire 3.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 4.",
+        "Bonfire 4.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 5",
+        "Bonfire 5.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 6",
+        "Bonfire 6.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 7",
+        "Bonfire 7.2"
+      ]
+    },
+    {
+      "text": [
+        "Bonfire 8",
+        "Bonfire 8.2"
+      ]
+    }
   ]
 }

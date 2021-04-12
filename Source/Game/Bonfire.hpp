@@ -10,7 +10,7 @@ class SpeechBubble;
 class Bonfire : public GameObject
 {
 public:
-	Bonfire(Scene* aScene, const unsigned int anIndex);
+	Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos);
 
 	void Update(const float& aDeltaTime) override;
 
@@ -26,6 +26,6 @@ private:
 	const int myBonfireIndex;
 
 	bool myHasBeenActivated;
-	std::unique_ptr<SpeechBubble> mySpeechBubble;
+	SpeechBubble* mySpeechBubble;
 	bool myActivateParticle;
 };

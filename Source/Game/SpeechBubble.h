@@ -1,15 +1,20 @@
 #pragma once
 #include "GameObject.h" 
 
+class Scene;
+
 class SpeechBubble : public GameObject
 {
 public:
+	SpeechBubble(Scene* aScene);
 
-	void Init(std::vector<std::string> someMessages);
-	//void Update(const float& aDeltaTime) override;
-	//void Render() override;
+	void Init(const int aBonfireID, const v2f aPos);
+	void Speak();
 
 private:
-	std::vector<std::string> myMessages;
+	void ParseText(const int aIndex);
+	std::vector<std::string> SplitText(std::string someText);
+
+	std::vector<std::string> myText;
 };
 
