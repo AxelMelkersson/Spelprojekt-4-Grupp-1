@@ -17,9 +17,9 @@ enum class AudioList
 	BashCharge, BashRelease,
 	CollectableV1, BonfireActivated,
 
-	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme,
+	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme, Wind, Crows, Castle,
 
-	CollectibleDown
+	CollectibleDown, CollectibleGone, BonfireGust, HoverActivate, EnemyKill
 };
 
 enum class AudioLayer
