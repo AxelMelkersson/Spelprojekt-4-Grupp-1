@@ -135,11 +135,6 @@ void DataManager::SaveCollectedCollectible(const unsigned int anID)
 	}
 	AcceptJsonWriter("JSON/SaveFile.json");
 }
-void DataManager::SaveScreenResolution(const unsigned int anID)
-{
-	mySaveFile["Settings"]["ScreenResolutionID"].SetInt(anID);
-	AcceptJsonWriter("JSON/SaveFile.json");
-}
 void DataManager::SaveSFXVolume(const float aVolume)
 {
 	mySaveFile["Settings"]["SFXVolume"].SetFloat(aVolume);
@@ -237,10 +232,6 @@ const std::array<float, 10> &DataManager::GetHighScores() const
 		tempArray[i] = mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].GetFloat();
 	}
 	return tempArray;
-}
-const unsigned int DataManager::GetScreenResolution() const
-{
-	return mySaveFile["Settings"]["ScreenResolutionID"].GetInt();
 }
 const float DataManager::GetSFXVolume() const
 {

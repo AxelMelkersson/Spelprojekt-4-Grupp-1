@@ -59,8 +59,8 @@ private:
 	std::vector<AudioComponent*> myPlatformComponents;
 	std::vector<AudioComponent*> myEnemyComponents;
 	std::vector<AudioList> myFades;
-	float myMusicVolume = 1;
-	float mySFXVolume = 1;
+	float myMusicVolume = 0.2;
+	float mySFXVolume = 0.5;
 
 	AudioLibrary myLibrary = AudioLibrary();
 

@@ -46,7 +46,7 @@ private:
 	PauseMenu* myPauseMenu;
 
 	float myMusicVol;
-	float myVFXVol;
+	float mySFXVol;
 	float myMusicStep;
 	float myVFXStep;
 
@@ -104,7 +104,6 @@ private:
 	void DeactivateMenu();
 	void UpdateUIElements(const float& aDeltaTime);
 	void CheckActiveAnimations();
-	void UpdateSoundSettings();
 	void InactivateHighlight();
 	
 };

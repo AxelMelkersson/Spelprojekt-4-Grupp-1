@@ -9,6 +9,7 @@
 #include "Game.h"
 #include "tga2d/engine.h"
 #include "AudioManager.h"
+#include "DataManager.h"
 #include "AnimationComponent.hpp"
 
 #include "TutorialMenu.h"
@@ -23,7 +24,7 @@ OptionsMenu::OptionsMenu(Scene* aLevelScene) : myCamera(aLevelScene->GetCamera()
 	myScreenMovingIndex = 0;
 
 	myMusicVol = 0.0f;
-	myVFXVol = 0.0f;
+	mySFXVol = 0.0f;
 	myMusicStep = 2.0f;
 	myVFXStep = 2.0f;
 
@@ -39,7 +40,7 @@ void OptionsMenu::Init()
 {
 	v2f referenceSize = Config::ourReferenceSize;
 	myMusicVol = myAudioManager->GetInstance()->GetMusicVolume();
-	myVFXVol = myAudioManager->GetInstance()->GetSFXVolume();
+	mySFXVol = myAudioManager->GetInstance()->GetSFXVolume();
 	myInput = CGameWorld::GetInstance()->Input();
 
 	myBackground = std::make_unique<UIObject>(myScene);
@@ -80,7 +81,7 @@ void OptionsMenu::Init()
 	v2f resetPos = { 30.f, 160.f };
 	v2f soundSettingPos = { 215.f, 90.f };
 	v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
-	v2f SFXDot = { 215.f + (myVFXVol * 40.f), 110.f };
+	v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
 	v2f resolutionPos = { 215, 73.f };
 	v2f creditScreenPos = { 120.f, 50.f };
 
@@ -257,6 +258,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myBGHighlight->SetActive(false);
 				myVFXHighlight->SetActive(false);
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+				DataManager::GetInstance().SaveSFXVolume(mySFXVol);
+				DataManager::GetInstance().SaveMusicVolume(myMusicVol);
 			}
 			break;
 		}
@@ -320,19 +323,18 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 		case 0:{
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
+			break;
 		}
 		case 1:{
 			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
 			break;
 		}
 		case 2:{
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
-
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
+			break;
 		}
 		default:{
 			assert((false) && "myScreenMovingIndex in OptionsMenu::CheckIndexPress does not correlate to any option.");
@@ -372,11 +374,11 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMusicVol += 0.05f;
 				myBGDot->SetPositionX(myBGDot->GetPositionX() + myMusicStep);
 			}
-			else if (mySoundMovingIndex == 1 && myVFXVol < 1.0f)
+			else if (mySoundMovingIndex == 1 && mySFXVol < 1.0f)
 			{
-				myVFXVol += 0.05f;
+				mySFXVol += 0.05f;
 				myVFXDot->SetPositionX(myVFXDot->GetPositionX() + myVFXStep);
-				myAudioManager->GetInstance()->SetSFXVolume(myVFXVol);
+				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
@@ -387,11 +389,11 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMusicVol -= 0.05f;
 				myBGDot->SetPositionX(myBGDot->GetPositionX() - myMusicStep);
 			}
-			else if (mySoundMovingIndex == 1 && myVFXVol > 0.0f)
+			else if (mySoundMovingIndex == 1 && mySFXVol > 0.0f)
 			{
-				myVFXVol -= 0.05f;
+				mySFXVol -= 0.05f;
 				myVFXDot->SetPositionX(myVFXDot->GetPositionX() - myVFXStep);
-				myAudioManager->GetInstance()->SetSFXVolume(myVFXVol);
+				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
 	}
@@ -413,7 +415,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myScreenMovingIndex = 0;
 		}
 	}
-	else if (!mySoundSettingsActive && !myScreenSettingsActive && myCreditsActive && !myTutorialActtive && !myCreditsActive)
+	else if (!mySoundSettingsActive && !myScreenSettingsActive && !myTutorialActtive && !myCreditsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -430,7 +432,6 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMovingIndex = 0;
 		}
 	}
-
 }
 void OptionsMenu::ActivateMenu()
 {
@@ -552,10 +553,6 @@ void OptionsMenu::CheckActiveAnimations()
 	{
 		InactivateHighlight();
 	}
-}
-void OptionsMenu::UpdateSoundSettings()
-{
-	myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 }
 void OptionsMenu::InactivateHighlight()
 {

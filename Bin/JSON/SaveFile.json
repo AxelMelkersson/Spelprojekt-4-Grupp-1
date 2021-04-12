@@ -408,8 +408,7 @@
     { "Score": { "Value": 0 } }
   ],
   "Settings": {
-    "SFXVolume": 0.2,
-    "MusicVolume": 0.5,
-    "ScreenResolutionID": 0
+    "SFXVolume": 0.8000001311302185,
+    "MusicVolume": 0.8000001311302185
   }
 }

@@ -118,7 +118,6 @@ public:
 	void SaveHighScores(const std::array<float, 10> &someHighscores);
 	void SaveBonfireState(const unsigned int anIndex, const bool aState);
 	void SaveCollectedCollectible(const unsigned int anID);
-	void SaveScreenResolution(const unsigned int anID);
 	void SaveSFXVolume(const float aVolume);
 	void SaveMusicVolume(const float aVolume);
 
@@ -134,7 +133,6 @@ public:
 	const unsigned int GetCollectableCount() const;
 	const bool GetBonfireState(const unsigned int anIndex) const;
 	const std::array<float, 10> &GetHighScores() const;
-	const unsigned int GetScreenResolution() const;
 	const float GetSFXVolume() const;
 	const float GetMusicVolume() const;
 
