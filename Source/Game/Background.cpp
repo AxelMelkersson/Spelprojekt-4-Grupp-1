@@ -289,7 +289,7 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
 	v2f imagePos = {0.f, GetHalfImageSize(myBackgroundSprite2).y };
 
-	myBackgroundSprite2->SetPosition(myCamera->GetPosition() + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
+	myBackgroundSprite2->SetPosition(cameraPosition + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
 
 	if (*myCloudDistance < -960)
 		*myCloudDistance = 220.f;
