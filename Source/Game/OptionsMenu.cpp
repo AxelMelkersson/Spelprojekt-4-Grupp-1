@@ -132,14 +132,17 @@ void OptionsMenu::Init()
 	if (CGameWorld::GetInstance()->Game()->GetZoomY() > 720)
 	{
 		myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+		myScreenMovingIndex = 1;
 	}
 	else if (CGameWorld::GetInstance()->Game()->GetZoomY() > 1080)
 	{
 		myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+		myScreenMovingIndex = 2;
 	}
 	else
 	{
 		myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+		myScreenMovingIndex = 0;
 	}
 
 	myButtons.push_back(myScreenBtn.get());
@@ -203,7 +206,9 @@ bool OptionsMenu::IsOptionsActive()
 
 void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 {
-	if ((myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)) && myScreenSettingsActive == false)
+	bool entered = myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross);
+
+	if (entered && myScreenSettingsActive == false)
 	{
 		if (myMovingIndex == static_cast<int>(eOptionsMenu::Back))
 		{
@@ -284,29 +289,31 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 		}
 	}
-	
-	if (myScreenSettingsActive == true && (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross)))
+	else if (myScreenSettingsActive == true && entered)
 	{
 		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
-			if (myScreenMovingIndex == 0)
-			{
-				myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
-				CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
-			}
-			else if (myScreenMovingIndex == 1)
-			{
-				myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+		if (myScreenMovingIndex == 0)
+		{
+			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
 
-				CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
-			}
-			else if (myScreenMovingIndex == 2)
-			{
-				myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
+		}
+		else if (myScreenMovingIndex == 1)
+		{
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
 
-				CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
-			}
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
+		}
+		else if (myScreenMovingIndex == 2)
+		{
+			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
+
+			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
+		}
+
 		myScreenSettingsActive = false;
+
 		for (int i = 0; i < myResolutionObj.size(); i++)
 		{
 			myResolutionObj[i]->SetActive(false);
