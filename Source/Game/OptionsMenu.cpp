@@ -322,17 +322,17 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		switch (myScreenMovingIndex)
 		{
 		case 0:{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
 			break;
 		}
 		case 1:{
-			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
 			break;
 		}
 		case 2:{
-			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
+			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
 			break;
 		}
@@ -496,6 +496,12 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 
 	if (myIsOpenedFromPause)
 	{
+		myTutorial->Update(0);
+		myTutorial->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
+
+		myCreditsMenu->Update(0);
+		myCreditsMenu->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
+
 		myFireHighlight->Update(aDeltaTime);
 	}
 
