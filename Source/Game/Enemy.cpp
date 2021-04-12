@@ -168,6 +168,7 @@ void Enemy::OnCollision(GameObject* aGameObject)
 	{
 		if (!player->GetHasDied())
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::EnemyKill);
 			player->Kill();
 		}
 	}

@@ -16,6 +16,7 @@ public:
 	~AudioClip();
 
 	void SetVolume(const float& aVolChange);
+	void SetComponentVolume(const float& aVolChange);
 	void AddVolume(const float& aVolChange);
 	void SetPosition(const VECTOR2F aPosition);
 

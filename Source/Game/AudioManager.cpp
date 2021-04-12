@@ -93,6 +93,11 @@ void AudioManager::SetSoundPosition(AudioList aSound, const VECTOR2F& aPosition)
 	myLibrary.myAudioList[aSound]->SetPosition(aPosition);
 }
 
+void AudioManager::SetComponentVolume(AudioList aSound, const float& aVolume)
+{
+	myLibrary.myAudioList[aSound]->SetComponentVolume(aVolume);
+}
+
 void AudioManager::Fade(const float& aDeltaTime)
 {
 	if (myFades.size() > 0)
@@ -135,47 +140,9 @@ float AudioManager::GetSFXVolume() const
 	return mySFXVolume;
 }
 
-//void AudioManager::PlayMusic(const std::string & anAudioPath, float aVolume, bool aShouldLoop)
-//{
-//	Tga2D::AudioOut::Handle channel = {};
-//
-//	if (!IsPlaying(anAudioPath))
-//	{
-//		const float volume = myMusicVolume * aVolume;
-//		StopCurrentMusic();
-//
-//		if (Utils::RandomInt(0, 100) == 100)
-//		{
-//			myAudioOut->PlayMusic("Sounds/Music/GameMusic.mp3", aShouldLoop, channel);
-//		}
-//		else
-//		{
-//			myAudioOut->PlayMusic(anAudioPath, aShouldLoop, channel);
-//		}
-//		
-//		myAudioOut->SetVolume(channel, volume);
-//	}
-//
-//	if (aShouldLoop)
-//	{
-//		BASS_ChannelFlags(channel, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
-//	}
-//}
-
 void AudioManager::PlayAudio(AudioList aSound)
 {
 	myLibrary.myAudioList[aSound]->Play();
-	//Tga2D::AudioOut::Handle channel;
-
-	//const float volume = mySFXVolume * aVolume;
-	//myAudioOut->Play(anAudioPath, false, channel);
-
-	//myAudioOut->SetVolume(channel, volume);
-
-	//if (aShouldLoop)
-	//{
-	//	BASS_ChannelFlags(channel, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
-	//}
 }
 
 void AudioManager::PlayIfAvailable(AudioList aSound)
@@ -186,18 +153,7 @@ void AudioManager::PlayIfAvailable(AudioList aSound)
 void AudioManager::Stop(AudioList aSound)
 {
 	myLibrary.myAudioList[aSound]->Stop();
-	//myAudioOut->Stop(anAudioPath, true);
 }
-
-//bool AudioManager::IsPlaying(const std::string & anAudioPath)
-//{
-//	return Tga2D::audio_helpers::IsNowPlaying(*myAudioOut, anAudioPath);
-//}
-//
-//void AudioManager::StopAll(bool anOnlyRepeating)
-//{
-//	Tga2D::audio_helpers::StopAllNowPlaying(*myAudioOut, anOnlyRepeating);
-//}
 
 void AudioManager::StopCurrentMusic()
 {
@@ -206,11 +162,6 @@ void AudioManager::StopCurrentMusic()
 
 void AudioManager::StopAllSounds(bool anAndMusic)
 {
-	//if (anAndMusic)
-	//{
-	//	StopCurrentMusic();
-	//}
-
 	for (auto const& [key, val] : myLibrary.myAudioList)
 	{
 		if (myLibrary.myAudioList[key]->GetLayer() == AudioLayer::SoundEffect)
@@ -254,7 +205,7 @@ void AudioManager::ComponentUpdate()
 	}
 	if (myPlatformComponents.size() > 0)
 	{
-		SetSoundVolume(myPlatformComponents[0]->myAudio, myPlatformComponents[0]->myVolume);
+		SetComponentVolume(myPlatformComponents[0]->myAudio, myPlatformComponents[0]->myVolume);
 	}
 	if (myEnemyComponents.size() > 1)
 	{
@@ -262,7 +213,7 @@ void AudioManager::ComponentUpdate()
 	}
 	if (myEnemyComponents.size() > 0)
 	{
-		SetSoundVolume(myEnemyComponents[0]->myAudio, myEnemyComponents[0]->myVolume);
+		SetComponentVolume(myEnemyComponents[0]->myAudio, myEnemyComponents[0]->myVolume);
 	}
 }
 
