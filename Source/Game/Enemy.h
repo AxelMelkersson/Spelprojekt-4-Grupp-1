@@ -40,6 +40,8 @@ private:
 	void InitAnimation();
 	void InitCollider() override;
 	Animation myAnimation;
+
+	bool myActivatedParticle = false;
 };
 
 class ShootingEnemy : public Enemy

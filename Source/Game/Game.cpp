@@ -152,10 +152,6 @@ void CGame::InitCallBack()
 
 	HWND handle = GetActiveWindow();
 	SetWindowPos(handle, 0, 0, 0, myZoomX, myZoomY, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
-
-#ifndef _RETAIL
-	//InitDebugger();
-#endif _RETAIL
 }
 
 void CGame::UpdateCallBack()
@@ -186,10 +182,7 @@ void CGame::SetResolution(const uint16_t& aWidth, const uint16_t& aHeight)
 {
 	Config::windowWidth = aWidth;
 	Config::windowHeight = aHeight;
-
-	//Tga2D::CEngine::GetInstance()->SetTargetSize({ aWidth, aHeight });
 }
-
 void CGame::UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight)
 {
 	SetResolution(aWidth, aHeight);

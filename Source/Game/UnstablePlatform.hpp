@@ -22,6 +22,8 @@ public:
 	void ActivatePlatform();
 	void DeactivatePlatform();
 
+	bool GetDeactivatedPlatform();
+
 private:
 	SpriteComponent* mySpriteToDisable;
 	AnimationComponent* myAnimationComponent;
@@ -32,6 +34,7 @@ private:
 	float myRespawnTime;
 	float myTimer;
 
+	bool myActivatedIdleParticle;
 	bool myCollidedWithPlayer;
 	bool myCollidedLastFrame;
 	bool myIsDeactivated;

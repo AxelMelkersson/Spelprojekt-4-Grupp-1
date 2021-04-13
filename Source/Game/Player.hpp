@@ -98,6 +98,8 @@ public:
 	void PlayFootSteps(const int& aPlatformIndex);
 	void PlayLandingSounds(const int& aPlatformIndex);
 
+	const v2f GetCurrentVelocity();
+
 private:
 #ifdef _DEBUG
 	void ImGuiUpdate();

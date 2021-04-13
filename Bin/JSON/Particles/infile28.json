@@ -1,0 +1,75 @@
+{
+  "particle": [
+    {
+      "EffectType": "BonfireWakeupExplosionParticleMedium",
+
+      "ZIndex": 90,
+
+      "EffectTypeIndex": 28,
+      "SpritePath": "Sprites/Particles/ParticleCollectible2Variant2.dds",
+
+      "PauseTimer": 0.0,
+      "PauseSeconds": 0.0,
+
+      "EmitterLifeTime": 0.5,
+
+      "StartScale": 1.0,
+      "EndScale": 1.0,
+
+      "RotateSprite": 0.0,
+
+      "MinTimeBetweenSpawns": 0.005,
+      "MaxTimeBetweenSpawns": 0.005,
+
+      "MinSpeed": 0.0,
+      "MaxSpeed": 100.0,
+
+      "MinParticleAngularVel": -1.0,
+      "MaxParticleAngularVel": 1.0,
+
+      "EmitterAngle": 270.0,
+
+      "EmitterWidth": 4.0,
+      "EmitterHeigth": 4.0,
+
+      "MinParticleLifeTime": 1.0,
+      "MaxParticleLifeTime": 0.5,
+
+      "SpawnLifeTime": 0.0,
+      "SpawnEverySecond": 0.0,
+
+      "Offset": [
+        {
+          "X": 0.0
+        },
+        {
+          "Y": -15.0
+        }
+      ],
+
+      "LockPosition": true,
+
+      "LockedAngular": [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0
+      ],
+
+      "StartColor": [
+        255.0,
+        255.0,
+        255.0,
+        1.0
+      ],
+      "EndColor": [
+        255.0,
+        255.0,
+        255.0,
+        0.0
+      ],
+      "BlendState": "Additive"
+    }
+  ]
+
+}
