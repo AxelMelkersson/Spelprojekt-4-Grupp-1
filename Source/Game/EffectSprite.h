@@ -19,7 +19,7 @@ public:
 
 	void SetInactive();
 	void SetCeilPosition(const bool aStatement);
-
+	void SetReverseImage();
 
 	SpriteComponent* mySprite;
 
@@ -57,6 +57,7 @@ public:
 	bool myIsAlive = true;
 	bool myIsLockedPos = false;
 	bool myHasCeilPosition = true;
+	bool myReversedImage = false;
 
 	Tga2D::CColor myCurrentColor = {};
 

@@ -101,17 +101,21 @@ public:
 
 	const v2f GetCurrentVelocity();
 
+	void SpawnAnimation();
+	void StopSpawn();
+
 private:
 #ifdef _DEBUG
 	void ImGuiUpdate();
 #endif // _DEBUG
 
-	Animation myAnimations[13];
+	Animation myAnimations[15];
 	std::vector<Collectible*> myCollectibles;
 
 	std::shared_ptr<InputWrapper> myInputHandler;
 	BashAbility* myBashAbility;
 	BashableObject* myBashableObject;
+	AnimationComponent* myAnimationComponent;
 
 	Utils::Timer* myTimerInput;
 
@@ -148,6 +152,8 @@ private:
 	bool myIsGliding;
 	bool myIsInRangeOfBash;
 	bool myCheckParticleLanding;
+	bool myIsSpawning;
+	bool mySkipOneUpdate;
 
 	PlayerData* myJsonData = new PlayerData();
 

@@ -27,6 +27,8 @@ public:
 	const void SetHeight(const float anYSize);
 	const void SetOffset(const float aOffset);
 	const void SetGameObject(GameObject* aObject);
+	const void SetNewPlayerSprite(const int aIndex);
+	const void SetReverseImage();
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
@@ -69,6 +71,7 @@ private:
 	const void CheckIfSpritesAreDead(const float& aDeltaTime);
 	const void CheckActiveStats();
 	const void DeleteSprites();
+	const void ActivateBatching();
 
 };
 

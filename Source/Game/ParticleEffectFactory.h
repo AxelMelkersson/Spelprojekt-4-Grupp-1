@@ -38,10 +38,12 @@ private:
 		float myTotalTimer = {};
 		float myTotalSpawnTimer = {};
 		float mySpawnEverySecond = {};
+		int mySpawnAmount = {};
 		bool mySpawningAllTime = false;
 	};
 
 	Scene* myScene;
+	Player* myPlayer;
 
 	std::vector<ParticleStats> myEffects;
 	std::vector<SpawnEffects> mySpawningEffects;
@@ -54,6 +56,8 @@ private:
 	const void AddSubscribers();
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
 	const void StartEffects();
+	const void CheckPlayerSpriteDirection(ParticleEffect* aEffect);
+	const void CheckPlayerSpritePath(ParticleEffect* aEffect, const int aIndex);
 
 };
 
