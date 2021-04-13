@@ -29,17 +29,17 @@ public:
 private:
 	std::shared_ptr<InputWrapper> myInput;
 
-	std::unique_ptr<UIObject> myTitle;
-	std::unique_ptr<UIObject> myBackground2;
-	std::unique_ptr<UIObject> myBackground;
-	std::unique_ptr<UIObject> myBar;
-	std::unique_ptr<UIObject> myBestTime;
-	std::unique_ptr<UIObject> myFireHighlight;
+	UIObject* myTitle;
+	UIObject* myBackground2;
+	UIObject* myBackground;
+	UIObject* myBar;
+	UIObject* myBestTime;
+	UIObject* myFireHighlight;
 
-	std::unique_ptr<UIButton> myStartGameBtn;
-	std::unique_ptr<UIButton> myMainMenuBtn;
+	UIButton* myStartGameBtn;
+	UIButton* myMainMenuBtn;
 
-	std::array<std::unique_ptr<UIText>, 10> myHighscoreList;
+	std::array<UIText*, 10> myHighscoreList;
 
 	std::vector<UIButton*> myButtons;
 

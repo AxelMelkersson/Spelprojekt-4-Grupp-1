@@ -93,14 +93,14 @@ void MainMenuScene::Update(const float& aDeltaTime)
 
 void MainMenuScene::InitObjects()
 {
-	myBackground = std::make_unique<UIObject>(this);
-	myTitleSprite = std::make_unique<UIObject>(this);
-	myFireHighlight = std::make_unique<UIObject>(this);
-	myNewGameBtn = std::make_unique<UIButton>(this);
-	mySpeedrunModeBtn = std::make_unique<UIButton>(this);
-	myLevelSelectBtn = std::make_unique<UIButton>(this);
-	myOptionsBtn = std::make_unique<UIButton>(this);
-	myExitGameBtn = std::make_unique<UIButton>(this);
+	myBackground = new UIObject(this);
+	myTitleSprite = new UIObject(this);
+	myFireHighlight = new UIObject(this);
+	myNewGameBtn = new UIButton(this);
+	mySpeedrunModeBtn = new UIButton(this);
+	myLevelSelectBtn = new UIButton(this);
+	myOptionsBtn = new UIButton(this);
+	myExitGameBtn = new UIButton(this);
 
 	v2f backgroundPos = { 0.f, 0.f };
 	v2f titleSpritePos = { 101.f, 16.f };
@@ -147,11 +147,11 @@ void MainMenuScene::InitObjects()
 
 	InitLogoAnimations();
 
-	myButtons.push_back(myNewGameBtn.get());
-	myButtons.push_back(myLevelSelectBtn.get());
-	myButtons.push_back(mySpeedrunModeBtn.get());
-	myButtons.push_back(myOptionsBtn.get());
-	myButtons.push_back(myExitGameBtn.get());
+	myButtons.push_back(myNewGameBtn);
+	myButtons.push_back(myLevelSelectBtn);
+	myButtons.push_back(mySpeedrunModeBtn);
+	myButtons.push_back(myOptionsBtn);
+	myButtons.push_back(myExitGameBtn);
 }
 
 void MainMenuScene::UpdateObjects(const float& aDeltaTime)
