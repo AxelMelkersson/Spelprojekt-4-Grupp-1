@@ -333,7 +333,7 @@ Camera& Camera::Shake(const float& aDuration, const float& anIntensity, const fl
 }
 Camera& Camera::Shake(const float& aDuration, const v2f& anIntensity, const float& aDropOff)
 {
-	myIsShaking = true;
+	//myIsShaking = true;
 	myShakeDuration = aDuration;
 	myShakeIntensity = anIntensity;
 	myShakeDropoff = aDropOff;
