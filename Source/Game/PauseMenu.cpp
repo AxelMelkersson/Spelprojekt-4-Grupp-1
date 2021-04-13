@@ -49,11 +49,11 @@ void PauseMenu::InitMenu()
 	myBar = new UIObject(myScene);
 	v2f barPos = { 30.0f, 90.0f };
 	myFire = new UIObject(myScene);
-	v2f firePos = {35.0f, 20.0f};
+	v2f firePos = {70.0f, 20.0f};
 	myFire2 = new UIObject(myScene);
-	v2f firePos2 = { 112.5f, 20.0f };
+	v2f firePos2 = { 147.5f, 20.0f };
 	myFire3 = new UIObject(myScene);
-	v2f firePos3 = { 190.0f, 20.0f };
+	v2f firePos3 = { 225.0f, 20.0f };
 
 	myFireHighlight = new UIObject(myScene);
 
@@ -262,15 +262,15 @@ void PauseMenu::InitTexts()
 
 	myCollectibleString = new UIText(myScene);
 	myCollectibleString->Init(std::to_string(myTotalCollectibleInfoCollected[0]) + "/" + std::to_string(myTotalCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString->SetPosition({ 50.0f, 25.0f });
+	myCollectibleString->SetPosition({83.0f, 25.0f });
 
 	myCollectibleString2 = new UIText(myScene);
 	myCollectibleString2->Init(std::to_string(myTotalCollectibleInfoCollected[1]) + "/" + std::to_string(myTotalCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString2->SetPosition({ 125.0f, 25.0f });
+	myCollectibleString2->SetPosition({ 160.5f, 25.0f });
 
 	myCollectibleString3 = new UIText(myScene);
 	myCollectibleString3->Init(std::to_string(myTotalCollectibleInfoCollected[2]) + "/" + std::to_string(myTotalCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize::EFontSize_48);
-	myCollectibleString3->SetPosition({ 205.0f, 25.0f });
+	myCollectibleString3->SetPosition({ 238.0f, 25.0f });
 }
 
 void PauseMenu::UpdateCollectibleInfo(const bool aIniting)

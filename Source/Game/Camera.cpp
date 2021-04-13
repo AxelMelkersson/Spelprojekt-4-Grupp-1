@@ -44,14 +44,11 @@ void Camera::Update(const float& aDeltaTime)
 	{
 		const v2f& targetPos = GetTargetPosition();
 
-		if ((targetPos - v2f(myX, myY)).LengthSqr() > 1.0f)
-		{
 			SetPosition
 			({
 				myLesserThanViewPortX * Utils::Lerp<float>(myX, targetPos.x - myWorldViewSize.x * 0.5f, myLerp.x * aDeltaTime),
 				myLesserThanViewPortY * Utils::Lerp<float>(myY, targetPos.y - myWorldViewSize.y * 0.5f, myLerp.y * aDeltaTime)
-				});
-		}
+			});
 
 		SetActive();
 	}
