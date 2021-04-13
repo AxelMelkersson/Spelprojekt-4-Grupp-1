@@ -123,21 +123,25 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 		{
 			mySpawningEffects[i].myTimer = {};
 
-			if (mySpawningEffects[i].myEffectType == eParticleEffects::PlayerBashedPlayerParticle)
-			{
-				ParticleEffect* effect = SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
-				
-			}
-			else
-			{
-				SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
-			}
+			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
 		}
 		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer && !mySpawningEffects[i].mySpawningAllTime)
 		{
 			mySpawningEffects[i].myTimer = {};
 
-			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			if (mySpawningEffects[i].myEffectType == eParticleEffects::PlayerBashedPlayerParticle)
+			{
+				if (mySpawningEffects[i].mySpawnAmount > 2)
+					mySpawningEffects[i].mySpawnAmount = {};
+
+				ParticleEffect* effect = SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+				effect->SetNewPlayerSprite(mySpawningEffects[i].mySpawnAmount);
+				mySpawningEffects[i].mySpawnAmount++;
+			}
+			else
+			{
+				SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			}
 		}
 
 		if (!mySpawningEffects[i].myGameObject->IsActive() || mySpawningEffects[i].myGameObject->GetShouldBeDestroyed())
