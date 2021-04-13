@@ -28,6 +28,7 @@ public:
 	const void SetOffset(const float aOffset);
 	const void SetGameObject(GameObject* aObject);
 	const void SetNewPlayerSprite(const int aIndex);
+	const void SetReverseImage();
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;

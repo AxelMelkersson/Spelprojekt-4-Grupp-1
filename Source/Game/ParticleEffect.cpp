@@ -166,6 +166,9 @@ const void ParticleEffect::SpawnSprite()
 		sprite->SetCeilPosition(false);
 	}
 
+	if (myStats.myReversedImage)
+		sprite->SetReverseImage();
+
 	sprite->AddSprite(AddComponent<SpriteComponent>());
 	myBatch->AddSprite(sprite->GetSprite());
 
@@ -343,5 +346,10 @@ const void ParticleEffect::SetNewPlayerSprite(const int aIndex)
 	}
 
 	ActivateBatching();
+}
+
+const void ParticleEffect::SetReverseImage()
+{
+	myStats.myReversedImage = true;
 }
 
