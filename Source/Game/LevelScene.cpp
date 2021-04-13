@@ -228,6 +228,11 @@ ParticleEffectFactory& LevelScene::GetEffectFactory()
 	return *myEffectFactory;
 }
 
+Background& LevelScene::GetBackground()
+{
+	return *myBackground;
+}
+
 void LevelScene::Transitioning()
 {
 	myIsTransitioning = true;

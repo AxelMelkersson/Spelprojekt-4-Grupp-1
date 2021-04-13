@@ -35,10 +35,17 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, cons
 	std::vector<HiddenArea*> hiddenRoomsData;
 
 	int area = 0;
+	int particle = 0;
 
 	if (levelDoc.HasMember("properties"))
 	{
+		LevelScene* levelScene = dynamic_cast<LevelScene*>(aScene);
+
 		area = levelDoc["properties"][0]["value"].GetInt();
+
+		levelScene->GetBackground().LoadBackground(area);
+
+		particle = levelDoc["properties"][1]["value"].GetInt();
 	}
 
 	aScene->GetCamera().SetBounds(v2f(), v2f(levelDoc["width"].GetInt() * 8, levelDoc["height"].GetInt() * 8));
