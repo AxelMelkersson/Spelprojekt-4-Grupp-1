@@ -44,24 +44,24 @@ void PauseMenu::InitMenu()
 
 	myInput = CGameWorld::GetInstance()->Input();
 
-	myBackground = std::make_unique<UIObject>(myScene);
+	myBackground = new UIObject(myScene);
 	v2f backgroundPos = {8.f, 8.f};
-	myBar = std::make_unique<UIObject>(myScene);
+	myBar = new UIObject(myScene);
 	v2f barPos = { 30.0f, 90.0f };
-	myFire = std::make_unique<UIObject>(myScene);
+	myFire = new UIObject(myScene);
 	v2f firePos = {35.0f, 20.0f};
-	myFire2 = std::make_unique<UIObject>(myScene);
+	myFire2 = new UIObject(myScene);
 	v2f firePos2 = { 112.5f, 20.0f };
-	myFire3 = std::make_unique<UIObject>(myScene);
+	myFire3 = new UIObject(myScene);
 	v2f firePos3 = { 190.0f, 20.0f };
 
-	myFireHighlight = std::make_unique<UIObject>(myScene);
+	myFireHighlight = new UIObject(myScene);
 
-	myContinueBtn = std::make_unique<UIButton>(myScene);
+	myContinueBtn = new UIButton(myScene);
 	v2f continuePos = { 165.f, 105.f };
-	myOptionsBtn = std::make_unique<UIButton>(myScene);
+	myOptionsBtn = new UIButton(myScene);
 	v2f optionsPos = { 165.f, 125.f };
-	myMainMenuBtn = std::make_unique<UIButton>(myScene);
+	myMainMenuBtn = new UIButton(myScene);
 	v2f mainMenuPos = { 165.f, 145.f };
 
 	myOptionsMenu->SetOpenedFromPauseMenu(this);
@@ -90,9 +90,9 @@ void PauseMenu::InitMenu()
 	myButtons.clear();
 
 	InitTexts();
-	myButtons.push_back(myContinueBtn.get());
-	myButtons.push_back(myOptionsBtn.get());
-	myButtons.push_back(myMainMenuBtn.get());
+	myButtons.push_back(myContinueBtn);
+	myButtons.push_back(myOptionsBtn);
+	myButtons.push_back(myMainMenuBtn);
 }
 
 void PauseMenu::Update(const float& aDeltaTime)
@@ -257,7 +257,7 @@ void PauseMenu::InitTexts()
 {
 	UpdateCollectibleInfo(true);
 
-	myTitleString = std::make_unique<UIObject>(myScene);
+	myTitleString = new UIObject(myScene);
 	myTitleString->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseTitleScreen_125x16px.dds", v2f(128.0f, 16.0f), { 155.f, 65.f }, 201);
 
 	myCollectibleString = new UIText(myScene);
