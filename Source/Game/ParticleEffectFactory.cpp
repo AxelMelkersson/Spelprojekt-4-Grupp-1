@@ -9,6 +9,7 @@
 #include "Random.hpp"
 #include "ColliderComponent.h"
 #include "PhysicsComponent.h"
+#include "ParticleStartUpTypes.hpp"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
@@ -21,8 +22,10 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myScene = aLevelScene;
 	myEffects = {};
 	myTestIndex = {};
-	myActiveDust = {};
+	myActiveFireFlies = {};
 	myActiveRain = {};
+	myActiveRainBackground = {};
+	myActiveRainBackgroundDust = {};
 	myStartup = false;
 	myPlayer = {};
 
@@ -523,14 +526,46 @@ void ParticleEffectFactory::SpawnEffectFollowObject(GameObject* aObject, const e
 	effect->SetIsActive(true);
 }
 
-void ParticleEffectFactory::StartRainEffects()
+void ParticleEffectFactory::StartEffect(const int aIndex)
+{
+	eEffectStartUpTypes startupType = static_cast<eEffectStartUpTypes>(aIndex);
+
+	switch (startupType)
+	{
+	case eEffectStartUpTypes::FireFlies:
+	{
+
+		break;
+	}
+	case eEffectStartUpTypes::RainForeground_Background:
+	{
+
+		break;
+	}
+	case eEffectStartUpTypes::RainBackground:
+	{
+
+		break;
+	}
+	case eEffectStartUpTypes::RainBackground_Dust:
+	{
+
+		break;
+	}
+	default:
+		break;
+	}
+
+}
+
+void ParticleEffectFactory::StartAllRainEffects()
 {
 	myActiveRain = true;
 }
 
-void ParticleEffectFactory::StartDustEffects()
+void ParticleEffectFactory::StartFirefliesEffects()
 {
-	myActiveDust = true;
+	myActiveFireFlies = true;
 }
 
 const void ParticleEffectFactory::AddSubscribers()
@@ -803,7 +838,31 @@ const void ParticleEffectFactory::StartEffects()
 		rainNextScreen->SetWidth(boundaries.x);
 	}
 
-	if (myActiveDust)
+	if (myActiveRainBackground)
+	{
+		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
+		rainBackground->SetWidth(boundaries.x);
+	}
+
+	if (myActiveRainBackgroundDust)
+	{
+		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
+		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
+		ParticleEffect* dustParticle3 = SpawnEffect({ 0.f, boundaries.y }, eParticleEffects::DustParticleThree);
+		ParticleEffect* dustparticleStartupOne = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::DustParticleStartupOne);
+		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::DustParticleStartupTwo);
+
+		dustParticle1->SetHeight(boundaries.y);
+		dustParticle2->SetHeight(boundaries.y);
+		dustParticle3->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetHeight(boundaries.y);
+
+		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
+		rainBackground->SetWidth(boundaries.x);
+	}
+
+	if (myActiveFireFlies)
 	{
 		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
 		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
