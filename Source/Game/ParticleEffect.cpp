@@ -17,7 +17,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	:
 	GameObject(aLevelScene),
 	myBatch(nullptr)
-{ 
+{
 	myScene = aLevelScene;
 	mySpawningInLocalSpace = {};
 	myFollowObject = nullptr;
@@ -37,6 +37,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myInitBatching = {};
 	mySetZIndex = {};
 	myPauseEffect = false;
+	myBatchActive = {};
 }
 
 ParticleEffect::~ParticleEffect()
@@ -51,23 +52,13 @@ void ParticleEffect::Init(ParticleStats aStats)
 {
 	myStats = aStats;
 	myCreatingSprites = true;
-	myBatch = AddComponent<SpritebatchComponent>();
-	myBatch->SetSpritePath(myStats.mySpritePath);
-	myBatch->SetSamplerFilter(ESamplerFilter_Point);
-	myBatch->Init();
+
+	if (myStats.myEffectTypeIndex != static_cast<int>(eParticleEffects::PlayerBashedPlayerParticle))
+		ActivateBatching();
 
 	SetPosition(GetPosition());
 	SetPivot({ 0.5f, 0.5f });
 	Activate();
-
-	/*if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) || myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle))
-	{
-
-		v2f bounds = myScene->GetCamera().GetBoundSize();
-
-		myStats.myEmitterWidth = myStats.myEmitterWidth + bounds.x * 1.5f;
-		myStats.myOffset = { myStats.myOffset.x, myStats.myOffset.y + -bounds.y };
-	}*/
 }
 
 void ParticleEffect::Render()
@@ -176,6 +167,9 @@ const void ParticleEffect::SpawnSprite()
 		sprite->SetCeilPosition(false);
 	}
 
+	if (myStats.myReversedImage)
+		sprite->SetReverseImage();
+
 	sprite->AddSprite(AddComponent<SpriteComponent>());
 	myBatch->AddSprite(sprite->GetSprite());
 
@@ -207,8 +201,13 @@ const void ParticleEffect::CheckIfEffectIsDead()
 
 		if (!spritesAreMoving)
 		{
-			delete myBatch;
-			myBatch = nullptr;
+			if (myBatch != NULL && myBatchActive)
+			{
+				delete myBatch;
+				myBatch = nullptr;
+				myBatchActive = false;
+			}
+
 			DeleteComponents();
 			mySprites.clear();
 			myEffectIsDestroyed = true;
@@ -284,10 +283,25 @@ const void ParticleEffect::DeleteSprites()
 		mySprites.erase(mySprites.begin() + x);
 	}
 
-	delete myBatch;
-	myBatch = nullptr;
+	if (myBatch != NULL && myBatchActive)
+	{
+		delete myBatch;
+		myBatch = nullptr;
+		myBatchActive = false;
+	}
+
 	DeleteComponents();
 	mySprites.clear();
+}
+
+const void ParticleEffect::ActivateBatching()
+{
+	myBatch = AddComponent<SpritebatchComponent>();
+	myBatch->SetSpritePath(myStats.mySpritePath);
+	myBatch->SetSamplerFilter(ESamplerFilter_Point);
+	myBatch->Init();
+
+	myBatchActive = true;
 }
 
 const void ParticleEffect::SetEffect(ParticleStats aEffect)
@@ -313,10 +327,42 @@ const void ParticleEffect::SetHeight(const float anYSize)
 
 const void ParticleEffect::SetOffset(const float aOffset)
 {
-	myStats.myOffset = {aOffset, myStats.myOffset.y};
+	myStats.myOffset = { aOffset, myStats.myOffset.y };
 }
 
 const void ParticleEffect::SetGameObject(GameObject* aObject)
 {
 	myCheckObject = aObject;
 }
+
+const void ParticleEffect::SetNewPlayerSprite(const int aIndex)
+{
+	switch (aIndex)
+	{
+	case 0:
+	{
+		myStats.mySpritePath = "Sprites/Particles/PlayerBashFade1.dds";
+		break;
+	}
+	case 1:
+	{
+		myStats.mySpritePath = "Sprites/Particles/PlayerBashFade2.dds";
+		break;
+	}
+	case 2:
+	{
+		myStats.mySpritePath = "Sprites/Particles/PlayerBashFade3.dds";
+		break;
+	}
+	default:
+		break;
+	}
+
+	ActivateBatching();
+}
+
+const void ParticleEffect::SetReverseImage()
+{
+	myStats.myReversedImage = true;
+}
+

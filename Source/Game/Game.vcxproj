@@ -187,6 +187,7 @@
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="ParticleEffectFactory.h" />
     <ClInclude Include="ParticleEffectTypes.hpp" />
+    <ClInclude Include="ParticleStartUpTypes.hpp" />
     <ClInclude Include="ParticleStats.hpp" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="CameraStaticDistance.hpp" />

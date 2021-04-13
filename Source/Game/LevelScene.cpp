@@ -52,7 +52,7 @@ void LevelScene::Load()
 	myIsTransitioning = false;
 
 	myEffectFactory = new ParticleEffectFactory(this);
-	myEffectFactory->StartDustEffects();
+	myEffectFactory->StartFirefliesEffects();
 	//myEffectFactory->StartRainEffects();
 
 	myPlayer = new Player(this);
@@ -62,6 +62,9 @@ void LevelScene::Load()
 	CGameWorld::GetInstance()->GetLevelManager().LoadLevel(this, myPlayer);
 
 	AddBlackScreen();
+
+	myPopUp = new UIPopUp(this);
+	myPopUp->InitPopUp();
 
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
@@ -78,6 +81,8 @@ void LevelScene::Load()
 
 void LevelScene::Unload()
 {
+	delete myPauseMenu;
+
 	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
@@ -165,6 +170,8 @@ void LevelScene::Update(const float& aDeltaTime)
 
 	myPauseMenu->Update(aDeltaTime);
 
+	myPopUp->Update(aDeltaTime);
+
 	if (myPauseMenu->IsPauseActive() == false && myPauseMenu->GetOptionsIsActive() == false)
 		Scene::Update(aDeltaTime);
 	else if (myIsSpeedrun)
@@ -226,6 +233,11 @@ GameObject* LevelScene::GetPlayer()
 ParticleEffectFactory& LevelScene::GetEffectFactory()
 {
 	return *myEffectFactory;
+}
+
+Background& LevelScene::GetBackground()
+{
+	return *myBackground;
 }
 
 void LevelScene::Transitioning()

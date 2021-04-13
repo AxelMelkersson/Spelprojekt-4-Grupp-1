@@ -19,5 +19,6 @@ public:
 private:
 	Animation myAnimations[2];
 	SpriteComponent* myHighlight;
+	SpriteComponent* myIdle;
 
 };

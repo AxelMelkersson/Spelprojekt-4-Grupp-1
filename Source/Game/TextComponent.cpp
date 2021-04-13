@@ -126,3 +126,8 @@ void TextComponent::UpdateTransform(Transform& aTransform, GameObject& aGameObje
 
 	myText->SetPosition(position);
 }
+
+const Tga2D::Vector2f& TextComponent::GetPosition()
+{
+	return myPixelPosition;
+}

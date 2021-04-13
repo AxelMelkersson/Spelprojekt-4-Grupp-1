@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class Camera;
+
 class Timer : public GameObject
 {
 public:
@@ -16,10 +18,12 @@ public:
 	const float GetTime() const;
 
 private:
+	Camera* myCamera;
+	
+	v2f myStartPosition;
 	bool myIsActive;
 	float myTime;
 	float myStartTime;
 	float myLastTime;
 	float myTotalTime;
-
 };

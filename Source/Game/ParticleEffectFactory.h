@@ -26,8 +26,10 @@ public:
 	ParticleEffect* SpawnEffect(const v2f aPosition, const eParticleEffects aEffectType);
 	void SpawnEffectFollowObject(GameObject* aObject, const eParticleEffects aEffectType);
 
-	void StartRainEffects();
-	void StartDustEffects();
+	void StartEffect(const int aIndex);
+
+	void StartAllRainEffects();
+	void StartFirefliesEffects();
 
 private:
 	struct SpawnEffects
@@ -38,22 +40,29 @@ private:
 		float myTotalTimer = {};
 		float myTotalSpawnTimer = {};
 		float mySpawnEverySecond = {};
+		int mySpawnAmount = {};
 		bool mySpawningAllTime = false;
 	};
 
 	Scene* myScene;
+	Player* myPlayer;
 
 	std::vector<ParticleStats> myEffects;
 	std::vector<SpawnEffects> mySpawningEffects;
 
-	bool myActiveDust;
+	bool myActiveFireFlies;
 	bool myActiveRain;
+	bool myActiveRainBackground;
+	bool myActiveRainBackgroundDust;
 	bool myStartup;
+
 	int myTestIndex;
 
 	const void AddSubscribers();
 	void SetEffect(ParticleEffect& aEffect, const eParticleEffects aEffectType);
 	const void StartEffects();
+	const void CheckPlayerSpriteDirection(ParticleEffect* aEffect);
+	const void CheckPlayerSpritePath(ParticleEffect* aEffect, const int aIndex);
 
 };
 

@@ -11,6 +11,22 @@
     {
       "LevelIndex": 48,
       "FilePath": "Levels/HiddenRoom_03.json"
+    },
+    {
+      "LevelIndex": 49,
+      "FilePath": "Levels/HiddenRoom_04.json"
+    },
+    {
+      "LevelIndex": 22,
+      "FilePath": "Levels/HiddenRoom_05.json"
+    },
+    {
+      "LevelIndex": 25,
+      "FilePath": "Levels/HiddenRoom_06.json"
+    },
+    {
+      "LevelIndex": 28,
+      "FilePath": "Levels/HiddenRoom_07.json"
     }
   ]
 }
