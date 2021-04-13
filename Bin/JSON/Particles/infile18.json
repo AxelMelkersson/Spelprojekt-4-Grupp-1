@@ -1,9 +1,9 @@
 {
   "particle": [
     {
-      "EffectType": "BonfireWakeupTopParticle",
+      "EffectType": "CollectibleCollectedParticleEasy",
 
-      "ZIndex": 90,
+      "ZIndex": 128,
 
       "EffectTypeIndex": 18,
       "SpritePath": "Sprites/Particles/ParticleCollectible3Variant2.dds",
@@ -11,7 +11,7 @@
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.5,
+      "EmitterLifeTime": 0.1,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
@@ -21,19 +21,19 @@
       "MinTimeBetweenSpawns": 0.01,
       "MaxTimeBetweenSpawns": 0.01,
 
-      "MinSpeed": 500.0,
-      "MaxSpeed": 400.0,
+      "MinSpeed": 20.0,
+      "MaxSpeed": 10.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 270.0,
 
-      "EmitterWidth": 6.0,
-      "EmitterHeigth": 0.0,
+      "EmitterWidth": 2.0,
+      "EmitterHeigth": 2.0,
 
-      "MinParticleLifeTime": 0.4,
-      "MaxParticleLifeTime": 0.4,
+      "MinParticleLifeTime": 1.5,
+      "MaxParticleLifeTime": 2.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,
@@ -43,16 +43,16 @@
           "X": 0.0
         },
         {
-          "Y": -180.0
+          "Y": 0.0
         }
       ],
 
-      "LockPosition": false,
+      "LockPosition": true,
 
       "LockedAngular": [
         -1.0,
-        0.0,
-        0.0,
+        -1.0,
+        1.0,
         1.0
       ],
 
@@ -66,7 +66,7 @@
         255.0,
         255.0,
         255.0,
-        1.0
+        0.0
       ],
       "BlendState": "Additive"
     }

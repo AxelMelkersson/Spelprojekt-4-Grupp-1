@@ -18,6 +18,7 @@ public:
 	bool IsAlive();
 
 	void SetInactive();
+	void SetCeilPosition(const bool aStatement);
 
 
 	SpriteComponent* mySprite;
@@ -55,6 +56,7 @@ public:
 	bool myHasActivated = {};
 	bool myIsAlive = true;
 	bool myIsLockedPos = false;
+	bool myHasCeilPosition = true;
 
 	Tga2D::CColor myCurrentColor = {};
 

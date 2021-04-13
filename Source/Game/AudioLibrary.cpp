@@ -4,6 +4,7 @@
 
 AudioLibrary::AudioLibrary()
 {
+	myAudioList.insert_or_assign(AudioList::SuperBash,       new AudioClip("Sounds/Effects/SuperBash.wav",        false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BashRelease,     new AudioClip("Sounds/Effects/PushfromBash.wav",     false, 0.4f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BonfireActivated,new AudioClip("Sounds/Effects/BonfireActivated.wav", false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BonfireGust,     new AudioClip("Sounds/Effects/BonfireWhoosh.wav",    false, 0.2f, 1,    AudioLayer::SoundEffect));

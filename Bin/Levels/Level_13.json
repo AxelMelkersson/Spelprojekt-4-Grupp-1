@@ -1,4 +1,16 @@
-{ "compressionlevel":-1,
+{
+       "properties":[
+       {
+        "name":"Area",
+        "type":"int",
+        "value":0
+       }, 
+       {
+        "name":"Particles",
+        "type":"int",
+        "value":0
+       }],
+"compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -1322,17 +1334,6 @@
  "nextlayerid":19,
  "nextobjectid":453,
  "orientation":"orthogonal",
- "properties":[
-        {
-         "name":"Area",
-         "type":"int",
-         "value":0
-        }, 
-        {
-         "name":"ID",
-         "type":"int",
-         "value":201
-        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

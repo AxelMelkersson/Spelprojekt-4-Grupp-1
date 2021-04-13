@@ -1,0 +1,75 @@
+{
+  "particle": [
+    {
+      "EffectType": "UnstablePlatformParticleTwo",
+
+      "ZIndex": 95,
+
+      "EffectTypeIndex": 38,
+      "SpritePath": "Sprites/Particles/ParticleUnstableGrounds1.dds",
+
+      "PauseTimer": 0.0,
+      "PauseSeconds": 0.0,
+
+      "EmitterLifeTime": 0.45,
+
+      "StartScale": 1.0,
+      "EndScale": 1.0,
+
+      "RotateSprite": 0.0,
+
+      "MinTimeBetweenSpawns": 0.03,
+      "MaxTimeBetweenSpawns": 0.05,
+
+      "MinSpeed": 21.0,
+      "MaxSpeed": 22.0,
+
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
+
+      "EmitterAngle": 270.0,
+
+      "EmitterWidth": 0.0,
+      "EmitterHeigth": 0.0,
+
+      "MinParticleLifeTime": 0.7,
+      "MaxParticleLifeTime": 0.9,
+
+      "SpawnLifeTime": 0.0,
+      "SpawnEverySecond": 0.0,
+
+      "Offset": [
+        {
+          "X": 12.0
+        },
+        {
+          "Y": 0.0
+        }
+      ],
+
+      "LockPosition": false,
+
+      "LockedAngular": [
+        -1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+
+      "StartColor": [
+        255.0,
+        255.0,
+        255.0,
+        1.0
+      ],
+      "EndColor": [
+        255.0,
+        255.0,
+        255.0,
+        0.0
+      ],
+      "BlendState": "Additive"
+    }
+  ]
+
+}

@@ -42,6 +42,8 @@ void Button::InitButton(const v2f myStartingPosition, const v2f myPositionFromSt
 	sprite->SetSpritePath("Sprites/Objects/Button.dds");
 	sprite->SetSize(mySize);
 
+	sprite->SetCeilPosition(true);
+
 	myAnimation[0] = Animation(false, true, false, 0, 1, 1, 0.10f, sprite, 16, 8);
 	myAnimation[1] = Animation(false, true, false, 0, 2, 2, 0.10f, sprite, 16, 8);
 

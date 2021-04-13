@@ -552,6 +552,11 @@ void Player::RedirectVelocities(const v2f& aDirection)
 
 	mySpringVelocity.x = Utils::Abs(mySpringVelocity.x) * aDirection.x;
 	mySpringVelocity.y = Utils::Abs(mySpringVelocity.y) * aDirection.y;
+	std::cout << myPlatformVelocity.x << " : " << myPlatformVelocity.y << "\n";
+	if (mySpringVelocity.y < -170.0f)
+	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::SuperBash);
+	}
 }
 
 
@@ -984,7 +989,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 
 void Player::PlayLandingSounds(const int& aPlatformIndex)
 {
-	if (myCurrentVelocity.y > 200.0f)
+	if (myCurrentVelocity.y > 240.0f)
 	{
 		switch (aPlatformIndex)
 		{
@@ -1026,6 +1031,11 @@ void Player::PlayLandingSounds(const int& aPlatformIndex)
 			break;
 		}
 	}
+}
+
+const v2f Player::GetCurrentVelocity()
+{
+	return myCurrentVelocity;
 }
 
 #ifdef _DEBUG

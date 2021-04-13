@@ -6,7 +6,7 @@
       "ZIndex": 139,
 
       "EffectTypeIndex": 9,
-      "SpritePath": "Sprites/Particles/Particle1.dds",
+      "SpritePath": "Sprites/Particles/ParticleEnemy1Attack.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -29,8 +29,8 @@
 
       "EmitterAngle": 0.0,
 
-      "EmitterWidth": 0.0,
-      "EmitterHeigth": 0.0,
+      "EmitterWidth": 2.0,
+      "EmitterHeigth": 2.0,
 
       "MinParticleLifeTime": 0.15,
       "MaxParticleLifeTime": 0.15,
