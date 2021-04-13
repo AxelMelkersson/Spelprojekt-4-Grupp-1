@@ -41,13 +41,13 @@ void UIPopUp::InitPopUp()
 
 	Config::ourReferenceSize = { 320.f, 180.f };
 
-	myBackgroundE = std::make_unique<UIObject>(myScene);
-	myBackgroundM = std::make_unique<UIObject>(myScene);
-	myBackgroundH = std::make_unique<UIObject>(myScene);
+	myBackgroundE = new UIObject(myScene);
+	myBackgroundM = new UIObject(myScene);
+	myBackgroundH = new UIObject(myScene);
 
-	myFireEasy = std::make_unique<UIObject>(myScene);
-	myFireMed = std::make_unique<UIObject>(myScene);
-	myFireHard = std::make_unique<UIObject>(myScene);
+	myFireEasy = new UIObject(myScene);
+	myFireMed = new UIObject(myScene);
+	myFireHard = new UIObject(myScene);
 
 	v2f backPos = { Config::ourReferenceSize.x, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
@@ -84,15 +84,15 @@ void UIPopUp::InitPopUp()
 		}
 	}
 
-	myCollectibleString = std::make_unique<UIText>(myScene);
+	myCollectibleString = new UIText(myScene);
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
 	myCollectibleString->SetZIndex(201);
-	myCollectibleString2 = std::make_unique<UIText>(myScene);
+	myCollectibleString2 = new UIText(myScene);
 	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString2->SetPosition(collectiblePos);
 	myCollectibleString2->SetZIndex(201);
-	myCollectibleString3 = std::make_unique<UIText>(myScene);
+	myCollectibleString3 = new UIText(myScene);
 	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString3->SetPosition(collectiblePos);
 	myCollectibleString3->SetZIndex(201);
