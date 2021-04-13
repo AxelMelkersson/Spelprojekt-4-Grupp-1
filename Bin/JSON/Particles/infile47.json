@@ -18,8 +18,8 @@
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.05,
-      "MaxTimeBetweenSpawns": 0.15,
+      "MinTimeBetweenSpawns": 0.25,
+      "MaxTimeBetweenSpawns": 0.35,
 
       "MinSpeed": 190.0,
       "MaxSpeed": 210.0,
@@ -32,8 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 3.0,
-      "MaxParticleLifeTime": 3.0,
+      "MinParticleLifeTime": 5.0,
+      "MaxParticleLifeTime": 5.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,

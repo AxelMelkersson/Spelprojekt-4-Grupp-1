@@ -913,17 +913,32 @@ const void ParticleEffectFactory::StartEffects()
 	{
 		ParticleEffect* rainBackground = SpawnEffect({boundaries.x * 0.5f, 0.f}, eParticleEffects::RainEffectBackgroundParticle);
 		ParticleEffect* rainForeground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectForegroundParticle);
+		ParticleEffect* rainForegroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectForegroundSideParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
 		ParticleEffect* rainNextScreen = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::RainEffectNextScreenParticle);
 
 		rainBackground->SetWidth(boundaries.x * 0.5f);
 		rainForeground->SetWidth(boundaries.x * 0.5f);
 		rainNextScreen->SetWidth(boundaries.x * 0.5f);
+		
+		rainForegroundSide->SetHeight(boundaries.y);
+		rainBackgroundSide->SetHeight(boundaries.y);
+
+		
 	}
 
 	if (myActiveRainBackground)
 	{
 		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
+
 		rainBackground->SetWidth(boundaries.x * 0.7f);
+		rainBackgroundSide->SetHeight(boundaries.y);
+
+		if (boundaries.x > 1500)
+		{
+			rainBackground->SetSpawnTime(0.03f, 0.07f);
+		}
 	}
 
 	if (myActiveRainBackgroundDust)
@@ -941,7 +956,10 @@ const void ParticleEffectFactory::StartEffects()
 		dustparticleStartupTwo->SetHeight(boundaries.y);
 
 		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.6f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
+
 		rainBackground->SetWidth(boundaries.x * 0.6f);
+		rainBackgroundSide->SetHeight(boundaries.y);
 	}
 
 	if (myActiveFireFlies)

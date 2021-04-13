@@ -366,3 +366,9 @@ const void ParticleEffect::SetReverseImage()
 	myStats.myReversedImage = true;
 }
 
+const void ParticleEffect::SetSpawnTime(const float aMinSpawn, const float aMaxSpawn)
+{
+	myStats.myMinBetweenSpawn = aMinSpawn;
+	myStats.myMaxBetweenSpawn = aMaxSpawn;
+}
+
