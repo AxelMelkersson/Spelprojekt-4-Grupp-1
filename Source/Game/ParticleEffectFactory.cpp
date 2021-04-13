@@ -28,7 +28,6 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myActiveRainBackgroundDust = {};
 	myStartup = false;
 	myPlayer = {};
-
 }
 
 ParticleEffectFactory::~ParticleEffectFactory()
