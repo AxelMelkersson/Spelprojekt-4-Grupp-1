@@ -820,7 +820,7 @@
         {
          "name":"Particles",
          "type":"int",
-         "value":0
+         "value":2
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
