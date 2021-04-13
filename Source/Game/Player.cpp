@@ -77,6 +77,8 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myIsLerpingToPosition = false;
 	myIsGliding = false;
 	myCheckParticleLanding = true;
+	myIsSpawning = true;
+	mySkipOneUpdate = true;
 
 	myGlideFactor = 0.14f;
 
@@ -162,7 +164,7 @@ void Player::InitAnimations()
 	spriteGlide->Deactivate();
 
 	SpriteComponent* spriteSpawn = AddComponent<SpriteComponent>();
-	spriteSpawn->SetSpritePath("Sprites/Characters/PlayerGlidingLoop.dds");
+	spriteSpawn->SetSpritePath("Sprites/Characters/PlayerSpawn.dds");
 	spriteSpawn->SetSize(mySize);
 	spriteSpawn->Deactivate();
 
@@ -179,10 +181,12 @@ void Player::InitAnimations()
 	myAnimations[10] = Animation(false, true, false, 0, 20, 20, 0.09f, spriteDeath, 16, 16);
 	myAnimations[11] = Animation(false, true, false, 0, 4, 4, 0.07f, spriteGlideTransition, 16, 16);
 	myAnimations[12] = Animation(false, false, false, 0, 4, 4, 0.085f, spriteGlide, 16, 16);
+	myAnimations[13] = Animation(false, true, false, 0, 7, 7, 0.095f, spriteSpawn, 16, 16);
+	myAnimations[14] = Animation(false, true, false, 7, 12, 12, 0.14f, spriteSpawn, 16, 16);
 
-	AnimationComponent* animation = AddComponent<AnimationComponent>();
-	animation->SetSprite(spriteIdle);
-	animation->SetAnimation(&myAnimations[0]);
+	myAnimationComponent = AddComponent<AnimationComponent>();
+	myAnimationComponent->SetSprite(spriteIdle);
+	myAnimationComponent->SetAnimation(&myAnimations[0]);
 	spriteIdle->SetSize(mySize);
 }
 void Player::InitCollider()
@@ -200,6 +204,22 @@ void Player::InitCollider()
 void Player::Update(const float& aDeltaTime)
 {
 	GameObject::Update(aDeltaTime);
+
+	if (myIsSpawning)
+	{
+		if (myAnimationComponent->GetCurrentIndex() >= 11)
+		{
+			myIsSpawning = false;
+		}
+
+		return;
+	}
+
+	if (mySkipOneUpdate)
+	{
+		mySkipOneUpdate = false;
+		return;
+	}
 
 	CheckParticleLanding();
 
@@ -246,7 +266,7 @@ void Player::Update(const float& aDeltaTime)
 	if (CGameWorld::GetInstance()->GetTimer()->GetTimeScale() <= 0.05f)
 	{
 		CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
-		GetComponent<AnimationComponent>()->Update(myTransform, *this);
+		myAnimationComponent->Update(myTransform, *this);
 		CGameWorld::GetInstance()->GetTimer()->SetTimeScale(0.0f);
 	}
 
@@ -441,15 +461,15 @@ void Player::Jump()
 	v2f calculatedSpring = mySpringVelocity;
 	calculatedSpring.y = calculatedSpring.y;
 	myCurrentVelocity.y = -myJsonData->myFloatValueMap[PEnum::Jump_Velocity] + myPlatformVelocity.y - calculatedSpring.y;
-	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2]);
+	myAnimationComponent->SetAnimation(&myAnimations[2]);
 
 	if (myIsGliding)
 	{
-		GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[12]);
+		myAnimationComponent->SetNextAnimation(&myAnimations[12]);
 	}
 	else
 	{
-		GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[4]);
+		myAnimationComponent->SetNextAnimation(&myAnimations[4]);
 	}
 	
 	myCurrentAnimationIndex = 2;
@@ -462,15 +482,15 @@ void Player::DoubleJump()
 	myPlatformVelocity.y = 0;
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerDoubleJump);
 	myCurrentVelocity.y = -myJsonData->myFloatValueMap[PEnum::Double_Jump_Velocity] + myPlatformVelocity.y - mySpringVelocity.y;
-	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[3]);
+	myAnimationComponent->SetAnimation(&myAnimations[3]);
 
 	if (myIsGliding)
 	{
-		GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[12]);
+		myAnimationComponent->SetNextAnimation(&myAnimations[12]);
 	}
 	else
 	{
-		GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[4]);
+		myAnimationComponent->SetNextAnimation(&myAnimations[4]);
 	}
 
 	myCurrentAnimationIndex = 3;
@@ -490,7 +510,7 @@ void Player::LedgeJump()
 
 	myIsLerpingToPosition = false;
 
-	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2]);
+	myAnimationComponent->SetAnimation(&myAnimations[2]);
 	myCurrentAnimationIndex = 2;
 	myHasDoubleJumped = false;
 	myWillJumpWhenFalling = false;
@@ -585,7 +605,7 @@ void Player::SetPlatformVelocity(const v2f& aPlatformVelocity)
 
 void Player::AnimationState()
 {
-	AnimationComponent* animation = GetComponent<AnimationComponent>();
+	AnimationComponent* animation = myAnimationComponent;
 	if (Utils::Abs(myCurrentVelocity.x) <= myTriggerRunningAnimationSpeed && myHasLanded && myCurrentAnimationIndex != 0)
 	{
 		animation->SetAnimation(&myAnimations[0]);
@@ -636,7 +656,7 @@ void Player::GrabLedge(const v2f& aLedgeLerpPosition, const v2f& aLedgePosition)
 
 	SetLerpPosition(aLedgeLerpPosition);
 
-	AnimationComponent* animation = GetComponent<AnimationComponent>();
+	AnimationComponent* animation = myAnimationComponent;
 	animation->SetAnimation(&myAnimations[5]);
 
 	myGrabbedLedge = true;
@@ -660,7 +680,7 @@ void Player::LeaveLedge()
 	myIsLerpingToPosition = false;
 	AudioManager::GetInstance()->PlayAudio(AudioList::LeaveLedge);
 
-	AnimationComponent* animation = GetComponent<AnimationComponent>();
+	AnimationComponent* animation = myAnimationComponent;
 	if (myIsGliding)
 	{
 		animation->SetNextAnimation(&myAnimations[12]);
@@ -754,7 +774,7 @@ void Player::Kill()
 		AudioManager::GetInstance()->PlayAudio(AudioList::PlayerRespawn);
 		KillReset();
 	}
-	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
+	else if (myAnimationComponent->GetIsDisplayedOnce() && myAnimationComponent->GetHasBeenDisplayedOnce())
 	{
 		LevelScene* levelScene = dynamic_cast<LevelScene*>(myScene);
 		if (levelScene)
@@ -793,7 +813,7 @@ void Player::KillReset()
 	myPlatformVelocity = v2f();
 	myHasDied = true;
 	SetAnimation(10);
-	GetComponent<AnimationComponent>()->SetNextAnimation(nullptr);
+	myAnimationComponent->SetNextAnimation(nullptr);
 }
 
 void Player::Respawn()
@@ -864,13 +884,13 @@ void Player::DecreaseSpringJump(const float& aDeltaTime)
 
 void Player::SetAnimation(const int& aAnimationIndex)
 {
-	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[aAnimationIndex]);
+	myAnimationComponent->SetAnimation(&myAnimations[aAnimationIndex]);
 }
 
 
 void Player::SetNextAnimation(const int& aAnimationIndex)
 {
-	GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[aAnimationIndex]);
+	myAnimationComponent->SetNextAnimation(&myAnimations[aAnimationIndex]);
 }
 
 void Player::UnlockLandingSounds()
@@ -891,8 +911,8 @@ void Player::StartGliding()
 {
 	myIsGliding = true;
 
-	GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[11]);
-	GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[12]);
+	myAnimationComponent->SetAnimation(&myAnimations[11]);
+	myAnimationComponent->SetNextAnimation(&myAnimations[12]);
 
 	AudioManager::GetInstance()->PlayAudio(AudioList::PlayerHover);
 	AudioManager::GetInstance()->LockAudio(AudioList::PlayerHover);
@@ -910,7 +930,7 @@ const bool Player::GetHasDied()
 
 void Player::PlayFootSteps(const int& aPlatformIndex)
 {
-	AnimationComponent* animation = GetComponent<AnimationComponent>();
+	AnimationComponent* animation = myAnimationComponent;
 	if (myCurrentAnimationIndex == 1)
 	{
 		//If is running
@@ -1056,6 +1076,19 @@ void Player::PlayLandingSounds(const int& aPlatformIndex)
 const v2f Player::GetCurrentVelocity()
 {
 	return myCurrentVelocity;
+}
+
+void Player::SpawnAnimation() 
+{
+	myAnimationComponent->SetAnimation(&myAnimations[13]);
+	myAnimationComponent->SetNextAnimation(&myAnimations[14]);
+}
+
+void Player::StopSpawn()
+{
+	SetAnimation(0);
+	myCurrentAnimationIndex = 0;
+	myIsSpawning = false;
 }
 
 #ifdef _DEBUG

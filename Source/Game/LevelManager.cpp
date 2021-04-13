@@ -167,6 +167,11 @@ void LevelManager::UsedLevelSelect()
 	myTiledLoader->UsedLevelSelect();
 }
 
+void LevelManager::Continued()
+{
+	myTiledLoader->Continued();
+}
+
 void LevelManager::Notify(const Message& aMessage)
 {
 	if (aMessage.myMessageType == eMessageType::LoadNext)

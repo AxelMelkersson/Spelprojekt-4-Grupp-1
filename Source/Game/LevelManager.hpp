@@ -57,6 +57,7 @@ public:
 
 	void SetLevelIndex(const int& aLevelIndex);
 	void UsedLevelSelect();
+	void Continued();
 
 	void Notify(const Message& aMessage) override;
 
