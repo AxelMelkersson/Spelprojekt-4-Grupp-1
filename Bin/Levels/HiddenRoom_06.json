@@ -442,15 +442,15 @@
                  "y":264
                 }, 
                 {
-                 "height":16,
+                 "height":128,
                  "id":584,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":152,
-                 "x":-40,
-                 "y":-40
+                 "width":280,
+                 "x":-24,
+                 "y":-152
                 }, 
                 {
                  "height":72,

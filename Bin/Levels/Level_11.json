@@ -631,6 +631,23 @@
                  "width":128,
                  "x":288,
                  "y":-32
+                }, 
+                {
+                 "height":8,
+                 "id":345,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":240,
+                 "x":-24,
+                 "y":-32
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -736,7 +753,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":144,
+                 "height":192,
                  "id":308,
                  "name":"",
                  "rotation":0,
@@ -744,7 +761,7 @@
                  "visible":true,
                  "width":8,
                  "x":-24,
-                 "y":24
+                 "y":-24
                 }, 
                 {
                  "height":72,
@@ -838,7 +855,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":345,
+ "nextobjectid":346,
  "orientation":"orthogonal",
  "properties":[
         {

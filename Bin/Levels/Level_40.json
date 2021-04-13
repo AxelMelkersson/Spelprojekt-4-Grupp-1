@@ -825,7 +825,7 @@
                  "y":40
                 }, 
                 {
-                 "height":24,
+                 "height":8,
                  "id":424,
                  "name":"",
                  "properties":[
@@ -839,7 +839,7 @@
                  "visible":true,
                  "width":216,
                  "x":-24,
-                 "y":-48
+                 "y":-32
                 }],
          "opacity":1,
          "properties":[

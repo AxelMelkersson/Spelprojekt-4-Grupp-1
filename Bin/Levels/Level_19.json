@@ -199,7 +199,7 @@
                  "y":168
                 }, 
                 {
-                 "height":56,
+                 "height":72,
                  "id":655,
                  "name":"",
                  "rotation":0,
@@ -295,7 +295,7 @@
                  "y":160
                 }, 
                 {
-                 "height":56,
+                 "height":72,
                  "id":674,
                  "name":"",
                  "rotation":0,
@@ -306,7 +306,7 @@
                  "y":184
                 }, 
                 {
-                 "height":48,
+                 "height":64,
                  "id":675,
                  "name":"",
                  "rotation":0,
@@ -362,7 +362,7 @@
                  "y":208
                 }, 
                 {
-                 "height":24,
+                 "height":40,
                  "id":679,
                  "name":"",
                  "rotation":0,
@@ -405,6 +405,17 @@
                  "width":12,
                  "x":264,
                  "y":204
+                }, 
+                {
+                 "height":8,
+                 "id":685,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":448,
+                 "x":-24,
+                 "y":-40
                 }],
          "opacity":1,
          "properties":[
@@ -626,7 +637,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":80,
+                 "height":120,
                  "id":650,
                  "name":"",
                  "rotation":0,
@@ -634,10 +645,10 @@
                  "visible":true,
                  "width":8,
                  "x":416,
-                 "y":8
+                 "y":-32
                 }, 
                 {
-                 "height":64,
+                 "height":192,
                  "id":651,
                  "name":"",
                  "rotation":0,
@@ -645,7 +656,7 @@
                  "visible":true,
                  "width":8,
                  "x":-24,
-                 "y":96
+                 "y":-32
                 }, 
                 {
                  "height":32,
@@ -715,7 +726,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":685,
+ "nextobjectid":686,
  "orientation":"orthogonal",
  "properties":[
         {

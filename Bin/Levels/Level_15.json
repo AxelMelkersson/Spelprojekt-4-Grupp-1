@@ -463,14 +463,14 @@
                  "y":149
                 }, 
                 {
-                 "height":47,
+                 "height":41,
                  "id":568,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":528,
-                 "x":-16,
+                 "width":536,
+                 "x":-24,
                  "y":-73
                 }, 
                 {
@@ -683,7 +683,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":88,
+                 "height":96,
                  "id":512,
                  "name":"",
                  "rotation":0,
@@ -691,7 +691,7 @@
                  "visible":true,
                  "width":8,
                  "x":496,
-                 "y":-24
+                 "y":-32
                 }, 
                 {
                  "height":216,
