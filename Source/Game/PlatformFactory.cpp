@@ -27,24 +27,28 @@ MovingPlatform* PlatformFactory::CreateMovingPlatform(Scene* aLevelScene, const 
 	std::string spritePath = "Sprites/Platforms/Moving6.dds";
 
 	v2f adjustedSize = v2f(0.0f, 8.0f);
+	v2f adjustedSpriteSize = v2f(0.0f, 8.0f);
 	if (aCollisionSize.x >= 40.0f)
 	{
 		adjustedSize.x = 48.0f;
+		adjustedSpriteSize.x = 64.0f;
 		spritePath = "Sprites/Platforms/Moving6.dds";
 	}
 	else if (aCollisionSize.x >= 24.0f)
 	{
 		adjustedSize.x = 32.0f;
+		adjustedSpriteSize.x = 32.0f;
 		spritePath = "Sprites/Platforms/Moving4.dds";
 	}
 	else
 	{
 		adjustedSize.x = 16.0f;
+		adjustedSpriteSize.x = 16.0f;
 		spritePath = "Sprites/Platforms/Moving2.dds";
 	}
 
 	movingPlatform->GetComponent<SpriteComponent>()->SetSpritePath(spritePath);
-	movingPlatform->GetComponent<SpriteComponent>()->SetSize(adjustedSize);
+	movingPlatform->GetComponent<SpriteComponent>()->SetSize(adjustedSpriteSize);
 	movingPlatform->Init(adjustedSize, adjustedSize, aPosition, true);
 	movingPlatform->SetWaypoints(aWayPoints);
 	movingPlatform->GetComponent<WaypointComponent>()->SetSpeed(aSpeed);

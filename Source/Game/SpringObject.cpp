@@ -63,7 +63,8 @@ void SpringObject::OnCollision(GameObject* aGameObject)
 			AudioManager::GetInstance()->PlayAudio(AudioList::PlayerJumpPad);
 			mySpringActive = true;
 			myTimer = {};
-			GetComponent<AnimationComponent>()->SetAnimation(&myAnimation);
+			GetComponent<AnimationComponent>()->SetAnimation(&myAnimation[1]);
+			GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimation[2]);
 		}
 	}
 }
@@ -97,8 +98,11 @@ void SpringObject::CreateGroundSpring()
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(sprite);
-	myAnimation = Animation(false, false, false, 0, 13, 13, 0.1f, sprite, 16, 16);
-	animation->SetAnimation(&myAnimation);
+	myAnimation[0] = Animation(false, true, false, 0, 1, 1, 0.055f, sprite, 16, 16);
+	myAnimation[1] = Animation(false, true, false, 0, 4, 4, 0.055f, sprite, 16, 16);
+	myAnimation[2] = Animation(false, true, false, 4, 11, 11, 0.1f, sprite, 16, 16);
+	animation->SetAnimation(&myAnimation[0]);
+	sprite->SetSize(mySize);
 }
 void SpringObject::LoadJson()
 {

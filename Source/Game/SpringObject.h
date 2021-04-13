@@ -13,7 +13,7 @@ public:
 	virtual void OnCollision(GameObject* aGameObject) override;
 
 private:
-	Animation myAnimation;
+	Animation myAnimation[3];
 
 	v2f myPosition;
 	v2f mySize;

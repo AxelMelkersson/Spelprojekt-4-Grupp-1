@@ -24,7 +24,7 @@ Glide::Glide(Scene* aScene)
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(sprite);
 
-	myAnimations[0] = Animation(false, false, false, 0, 9, 9, 0.1f, sprite, 16, 16);
+	myAnimations[0] = Animation(false, false, false, 0, 9, 9, 0.125f, sprite, 16, 16);
 
 	animation->SetAnimation(&myAnimations[0]);
 
