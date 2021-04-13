@@ -124,7 +124,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 		myBackgroundE->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
 	}
-	if (myMedActive)
+	else if (myMedActive)
 	{
 		if (myEasyActive == false && myHardActive == false)
 		{
@@ -134,7 +134,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 			myFireMed->UpdateUIObjects(aDeltaTime);
 		}
 	}
-	if (myHardActive)
+	else if (myHardActive)
 	{
 		myCurrentHTime += aDeltaTime;
 		SetNewHardPositions(aDeltaTime);
