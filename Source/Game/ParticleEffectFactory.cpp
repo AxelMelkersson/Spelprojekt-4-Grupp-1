@@ -595,16 +595,6 @@ void ParticleEffectFactory::StartEffect(const int aIndex)
 
 }
 
-void ParticleEffectFactory::StartAllRainEffects()
-{
-	myActiveRain = true;
-}
-
-void ParticleEffectFactory::StartFirefliesEffects()
-{
-	myActiveFireFlies = true;
-}
-
 const void ParticleEffectFactory::AddSubscribers()
 {
 	Subscribe(eMessageType::DustParticleStartupOne);
