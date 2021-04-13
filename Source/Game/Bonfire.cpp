@@ -30,8 +30,12 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos) : Ga
 	myHasBeenActivated = DataManager::GetInstance().GetBonfireState(anIndex);
 
 	SpriteComponent* spriteIdle = AddComponent<SpriteComponent>();
-	spriteIdle->SetSpritePath("Sprites/Objects/Bonfire.dds");
-	spriteIdle->SetSize(v2f(32.0f, 32.0f));
+	spriteIdle->SetSpritePath("Sprites/Objects/BonfiredDeactivated.dds");
+	spriteIdle->SetSize(v2f(24.0f, 24.0f));
+
+	SpriteComponent* spriteActivate = AddComponent<SpriteComponent>();
+	spriteActivate->SetSpritePath("Sprites/Objects/BonfiredActivated.dds");
+	spriteActivate->SetSize(v2f(24.0f, 24.0f));
 
 	PhysicsComponent* physics = AddComponent<PhysicsComponent>();
 	physics->SetCanCollide(false);
@@ -41,13 +45,15 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos) : Ga
 	ColliderComponent* collider = AddComponent<ColliderComponent>();
 	collider->SetSize(32.0f, 32.0f);
 
-	myAnimations[0] = Animation(false, false, false, 0, 1, 1, 0.1f, spriteIdle, 32, 32);
-	myAnimations[1] = Animation(false, true, false, 0, 2, 2, 0.1f, spriteIdle, 32, 32);
+	myAnimations[0] = Animation(false, true, false, 0, 1, 1, 0.1f, spriteIdle, 24, 24);
+	myAnimations[1] = Animation(false, true, false, 0, 10, 10, 0.1f, spriteActivate, 24, 24);
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(spriteIdle);
 	animation->SetAnimation(&myAnimations[0]);
-	spriteIdle->SetSize(v2f(32.0f, 32.0f));
+	spriteIdle->SetSize(v2f(24.0f, 24.0f));
+
+	spriteActivate->Deactivate();
 
 	if (myHasBeenActivated)
 	{

@@ -373,13 +373,13 @@ void Player::CheckMove(const float& aDeltaTime)
 }
 void Player::CheckJump()
 {
-	if (myInputHandler->IsJumping())
+	if (myInputHandler->IsJumping() || myInputHandler->GetInput()->GetKeyDown(Keys::SKey))
 	{
 		if (myGrabbedLedge)
 		{
 			LedgeJump();
 		}
-		else
+		else if(!myInputHandler->GetInput()->GetKeyDown(Keys::SKey))
 		{
 			if (myCanJumpWhenFalling && !myHasLanded && GetComponent<PhysicsComponent>()->GetVelocityY() >= 0.0f)
 			{

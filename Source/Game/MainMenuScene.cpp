@@ -308,10 +308,10 @@ void MainMenuScene::InitLogoAnimations()
 	animationSprite1->Deactivate();
 	animationSprite3->Deactivate();
 
-	myLogoAnimations[0] = Animation(false, true, false, 0, 1, 1, 0.125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
-	myLogoAnimations[1] = Animation(false, true, false, 0, 8, 8, 0.125f, animationSprite1, 192, 64);
-	myLogoAnimations[2] = Animation(false, true, false, 0, 1, 1, 0.125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
-	myLogoAnimations[3] = Animation(false, true, false, 0, 12, 12, 0.125f, animationSprite3, 192, 64);
+	myLogoAnimations[0] = Animation(false, true, false, 0, 1, 1, 0.06125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
+	myLogoAnimations[1] = Animation(false, true, false, 0, 8, 8, 0.06125f, animationSprite1, 192, 64);
+	myLogoAnimations[2] = Animation(false, true, false, 0, 1, 1, 0.06125f, myTitleSprite->GetComponent<SpriteComponent>(), 192, 64);
+	myLogoAnimations[3] = Animation(false, true, false, 0, 12, 12, 0.06125f, animationSprite3, 192, 64);
 
 	AnimationComponent* titleAnimation = myTitleSprite->AddComponent<AnimationComponent>();
 	titleAnimation->SetSprite(myTitleSprite->GetComponent<SpriteComponent>());
