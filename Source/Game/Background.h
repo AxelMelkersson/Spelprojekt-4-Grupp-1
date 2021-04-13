@@ -13,11 +13,13 @@ public:
 	Background(Scene* aLevelScene);
 	~Background();
 
+	void LoadBackground(const int aIndex);
 	void Update(const float& aDeltaTime) override;
 
 private:
 	Camera* myCamera;
 	Player* myPlayer;
+	LevelScene* myLevelScene;
 
 	GameObject* myBackgroundSprite1;
 	GameObject* myBackgroundSprite2;
@@ -70,11 +72,11 @@ private:
 
 	const void UpdateBackground(const float& aDeltaTime);
 	const void MoveBackground(const float& aDeltaTime);
-	const void LoadJson(Scene* aLevelScene);
 	const void LoadBackgrounds(Scene* aLevelScene, rapidjson::Document& someDocuments);
 	const void CreateBackgrounds(Scene* aLevelScene, const std::string aPath, const int aIndex, const v2f anOffset);
 	const void AddStartingCameraPos();
 	const void CalculateCameraPositions(const float& aDeltaTime);
+	const void ResetDistanceValues();
 	
 	const v2f GetHalfImageSize(GameObject* aSprite);
 

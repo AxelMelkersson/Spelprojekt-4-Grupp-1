@@ -43,11 +43,9 @@ Background::Background(Scene* aLevelScene)
 	myStartingCameraPos.y = -1;
 
 	assert(&aLevelScene->GetCamera() != NULL);
-	LevelScene* levelScene = dynamic_cast<LevelScene*>(aLevelScene);
-	myPlayer = dynamic_cast<Player*>(levelScene->GetPlayer());
+	myLevelScene = dynamic_cast<LevelScene*>(aLevelScene);
+	myPlayer = dynamic_cast<Player*>(myLevelScene->GetPlayer());
 	myCamera = &aLevelScene->GetCamera();
-	LoadJson(aLevelScene);
-
 }
 
 Background::~Background()
@@ -66,6 +64,56 @@ Background::~Background()
 
 }
 
+void Background::LoadBackground(const int aIndex)
+{
+	if (Distance::myCurrentAreaIndex != aIndex)
+	{
+		Distance::myCurrentAreaIndex = aIndex;
+		Distance::myBackgroundDistanceX = {};
+	}
+
+
+	std::ifstream backgroundObjectFile("JSON/Background.json");
+	rapidjson::IStreamWrapper backgroundObjectStream(backgroundObjectFile);
+
+	rapidjson::Document backgroundDocuments;
+	backgroundDocuments.ParseStream(backgroundObjectStream);
+
+
+	std::ifstream backgroundPathObjectsFile(backgroundDocuments["BackgroundArray"][aIndex]["FilePath"].GetString());
+	rapidjson::IStreamWrapper backgroundPathObjectStream(backgroundPathObjectsFile);
+
+	rapidjson::Document backgroundPathDocuments;
+	backgroundPathDocuments.ParseStream(backgroundPathObjectStream);
+
+	LoadBackgrounds(myLevelScene, backgroundPathDocuments);
+
+	myBackgroundSpeedOneX = backgroundDocuments["SpeedVariables"][0]["SpeedOneX"].GetFloat();
+	myBackgroundSpeedOneY = backgroundDocuments["SpeedVariables"][0]["SpeedOneY"].GetFloat();
+
+	myBackgroundSpeedTwoX = backgroundDocuments["SpeedVariables"][1]["SpeedTwoX"].GetFloat();
+	myBackgroundSpeedTwoY = backgroundDocuments["SpeedVariables"][1]["SpeedTwoY"].GetFloat();
+
+	myBackgroundSpeedThreeX = backgroundDocuments["SpeedVariables"][2]["SpeedThreeX"].GetFloat();
+	myBackgroundSpeedThreeY = backgroundDocuments["SpeedVariables"][2]["SpeedThreeY"].GetFloat();
+
+	myBackgroundSpeedFourX = backgroundDocuments["SpeedVariables"][3]["SpeedFourX"].GetFloat();
+	myBackgroundSpeedFourY = backgroundDocuments["SpeedVariables"][3]["SpeedFourY"].GetFloat();
+
+	myBackgroundSpeedFiveX = backgroundDocuments["SpeedVariables"][4]["SpeedFiveX"].GetFloat();
+	myBackgroundSpeedFiveY = backgroundDocuments["SpeedVariables"][4]["SpeedFiveY"].GetFloat();
+
+	myBackgroundSpeedSixX = backgroundDocuments["SpeedVariables"][5]["SpeedSixX"].GetFloat();
+	myBackgroundSpeedSixY = backgroundDocuments["SpeedVariables"][5]["SpeedSixY"].GetFloat();
+
+	myBackgroundSpeedSevenX = backgroundDocuments["SpeedVariables"][6]["SpeedSevenX"].GetFloat();
+	myBackgroundSpeedSevenY = backgroundDocuments["SpeedVariables"][6]["SpeedSevenY"].GetFloat();
+
+	myCloudSpeed = backgroundDocuments["Cloud"][0]["SpeedX"].GetFloat();
+
+	backgroundPathObjectsFile.close();
+	backgroundObjectFile.close();
+}
 
 void Background::Update(const float& aDeltaTime)
 {
@@ -95,50 +143,6 @@ const void Background::MoveBackground(const float& aDeltaTime)
 	CalculateCameraPositions(aDeltaTime);
 
 	myTotalCameraDistanceX = Distance::myStartingCameraPos + myCamera->GetPositionX();
-}
-
-const void Background::LoadJson(Scene* aLevelScene)
-{
-	std::ifstream backgroundObjectFile("JSON/Background.json");
-	rapidjson::IStreamWrapper backgroundObjectStream(backgroundObjectFile);
-
-	rapidjson::Document backgroundDocuments;
-	backgroundDocuments.ParseStream(backgroundObjectStream);
-
-
-	std::ifstream backgroundPathObjectsFile(backgroundDocuments["BackgroundArray"][1]["FilePath"].GetString());
-	rapidjson::IStreamWrapper backgroundPathObjectStream(backgroundPathObjectsFile);
-
-	rapidjson::Document backgroundPathDocuments;
-	backgroundPathDocuments.ParseStream(backgroundPathObjectStream);
-
-	LoadBackgrounds(aLevelScene, backgroundPathDocuments);
-
-	myBackgroundSpeedOneX = backgroundDocuments["SpeedVariables"][0]["SpeedOneX"].GetFloat();
-	myBackgroundSpeedOneY = backgroundDocuments["SpeedVariables"][0]["SpeedOneY"].GetFloat();
-
-	myBackgroundSpeedTwoX = backgroundDocuments["SpeedVariables"][1]["SpeedTwoX"].GetFloat();
-	myBackgroundSpeedTwoY = backgroundDocuments["SpeedVariables"][1]["SpeedTwoY"].GetFloat();
-
-	myBackgroundSpeedThreeX = backgroundDocuments["SpeedVariables"][2]["SpeedThreeX"].GetFloat();
-	myBackgroundSpeedThreeY = backgroundDocuments["SpeedVariables"][2]["SpeedThreeY"].GetFloat();
-
-	myBackgroundSpeedFourX = backgroundDocuments["SpeedVariables"][3]["SpeedFourX"].GetFloat();
-	myBackgroundSpeedFourY = backgroundDocuments["SpeedVariables"][3]["SpeedFourY"].GetFloat();
-
-	myBackgroundSpeedFiveX = backgroundDocuments["SpeedVariables"][4]["SpeedFiveX"].GetFloat();
-	myBackgroundSpeedFiveY = backgroundDocuments["SpeedVariables"][4]["SpeedFiveY"].GetFloat();
-
-	myBackgroundSpeedSixX = backgroundDocuments["SpeedVariables"][5]["SpeedSixX"].GetFloat();
-	myBackgroundSpeedSixY = backgroundDocuments["SpeedVariables"][5]["SpeedSixY"].GetFloat();
-
-	myBackgroundSpeedSevenX = backgroundDocuments["SpeedVariables"][6]["SpeedSevenX"].GetFloat();
-	myBackgroundSpeedSevenY = backgroundDocuments["SpeedVariables"][6]["SpeedSevenY"].GetFloat();
-
-	myCloudSpeed = backgroundDocuments["Cloud"][0]["SpeedX"].GetFloat();
-
-	backgroundPathObjectsFile.close();
-	backgroundObjectFile.close();
 }
 
 const void Background::LoadBackgrounds(Scene* aLevelScene, rapidjson::Document& someDocuments)
@@ -289,6 +293,11 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 	if (*myCloudDistance < -960)
 		*myCloudDistance = 220.f;
+}
+
+const void Background::ResetDistanceValues()
+{
+	Distance::myBackgroundDistanceX = {};
 }
 
 

@@ -6,7 +6,7 @@
       "ZIndex": 120,
 
       "EffectTypeIndex": 33,
-      "SpritePath": "Sprites/Particles/ParticleEnemy1Attack.dds",
+      "SpritePath": "Sprites/Particles/ParticleFirefly.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
