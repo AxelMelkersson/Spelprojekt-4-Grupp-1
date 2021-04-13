@@ -211,7 +211,7 @@ void LevelSelect::InitiateButtons()
 	myBackButton->SetActive(true);
 
 	myBackButtonFire = new UIObject(this);
-	myBackButtonFire->InitAnimation("Sprites/UI/levelSelect/UI_levelSelect_Flame_16x16px.dds", v2f(16.0f, 16.0f), v2f(230.0f, 156), 201);
+	myBackButtonFire->InitAnimation("Sprites/UI/levelSelect/UI_levelSelect_Flame_16x16px.dds", v2f(16.0f, 16.0f),8,8, v2f(230.0f, 156), 201);
 	myBackButtonFire->SetPosition(v2f(230.0f, 152.0f));
 	myBackButtonFire->SetPivot(v2f(0.0f, 0.0f));
 

@@ -25,6 +25,12 @@ void UIText::SetPosition(const v2f aPosition)
 	myText->SetRelativePosition(aPosition.x, aPosition.y);
 }
 
+const v2f UIText::GetPosition()
+{
+	const v2f position = v2f(myText->GetPosition().x, myText->GetPosition().y);
+	return position;
+}
+
 void UIText::SetText(const std::string& aTextString)
 {
 	if (myText == nullptr)  return;

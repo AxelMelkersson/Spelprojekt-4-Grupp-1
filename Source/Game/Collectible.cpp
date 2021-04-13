@@ -10,6 +10,7 @@
 #include "ColliderComponent.h"
 #include "AudioManager.h"
 #include "PostMaster.hpp"
+#include "UIPopUp.h"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -162,6 +163,8 @@ void Collectible::TurnIn()
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
+		CheckPopUpMessages();
+
 		DataManager::GetInstance().SaveCollectedCollectible(myID);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));
 	}
@@ -199,6 +202,26 @@ void Collectible::ImGuiUpdate()
 
 	ImGui::End();
 }
+
+const void Collectible::CheckPopUpMessages()
+{
+	v2f position = {};
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, position));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, position));
+
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+	}
+}
+
+
 
 const void Collectible::ActivateTrailEffect()
 {
