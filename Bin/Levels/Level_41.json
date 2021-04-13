@@ -660,7 +660,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":5
+                         "value":7
                         }, 
                         {
                          "name":"ID",
@@ -668,7 +668,7 @@
                          "value":111
                         }],
                  "rotation":0,
-                 "type":"1",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":372,
