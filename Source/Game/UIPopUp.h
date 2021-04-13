@@ -17,7 +17,6 @@ public:
 	};
 
 	UIPopUp(Scene* aLevelScene);
-
 	void InitPopUp();
 	void Update(const float& aDeltaTime) override;
 	void Activate(ePopUpTypes aType);
@@ -50,6 +49,7 @@ private:
 	bool myIsMMaxLeft = false;
 	bool myIsHMaxLeft = false;
 
+	float myBackXPos;
 	float myCurrentTime;
 	float myCurrentMTime;
 	float myCurrentHTime;
