@@ -1554,12 +1554,12 @@
         {
          "name":"Area",
          "type":"int",
-         "value":0
+         "value":1
         }, 
         {
          "name":"Particles",
          "type":"int",
-         "value":0
+         "value":1
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
