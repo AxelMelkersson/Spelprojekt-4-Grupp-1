@@ -164,8 +164,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":24,
-                 "x":76,
+                 "width":16,
+                 "x":80,
                  "y":68
                 }, 
                 {
@@ -209,8 +209,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":22,
-                 "x":205,
+                 "width":16,
+                 "x":208,
                  "y":68
                 }, 
                 {
@@ -293,8 +293,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":24,
-                 "x":140,
+                 "width":16,
+                 "x":144,
                  "y":152
                 }, 
                 {
@@ -338,12 +338,12 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":14,
-                 "x":261,
+                 "width":8,
+                 "x":264,
                  "y":120
                 }, 
                 {
-                 "height":67,
+                 "height":64,
                  "id":340,
                  "name":"",
                  "properties":[
@@ -423,8 +423,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":24,
-                 "x":260,
+                 "width":16,
+                 "x":264,
                  "y":156
                 }, 
                 {
@@ -513,8 +513,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":24,
-                 "x":308,
+                 "width":16,
+                 "x":312,
                  "y":76
                 }, 
                 {
@@ -547,8 +547,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":12,
-                 "x":356,
+                 "width":8,
+                 "x":360,
                  "y":80
                 }, 
                 {
@@ -581,8 +581,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":76,
-                 "x":364,
+                 "width":72,
+                 "x":368,
                  "y":112
                 }, 
                 {
@@ -626,7 +626,7 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":16,
+                 "width":12,
                  "x":100,
                  "y":212
                 }, 
@@ -643,8 +643,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":88,
-                 "x":116,
+                 "width":92,
+                 "x":112,
                  "y":228
                 }, 
                 {
@@ -759,6 +759,23 @@
                  "width":384,
                  "x":-24,
                  "y":-48
+                }, 
+                {
+                 "height":12,
+                 "id":378,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":6
+                        }],
+                 "rotation":0,
+                 "type":"4",
+                 "visible":true,
+                 "width":4,
+                 "x":112,
+                 "y":216
                 }],
          "opacity":1,
          "properties":[
@@ -1036,7 +1053,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":378,
+ "nextobjectid":379,
  "orientation":"orthogonal",
  "properties":[
         {
