@@ -1093,7 +1093,7 @@ void Player::SpawnAnimation()
 
 void Player::StopSpawn()
 {
-	if (myCurrentAnimationIndex != 13)
+	if (myCurrentAnimationIndex != 13 && myIsSpawning)
 	{
 		SetAnimation(0);
 		myCurrentAnimationIndex = 0;
