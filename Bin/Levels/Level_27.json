@@ -1242,7 +1242,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":4
+                         "value":5
                         }, 
                         {
                          "name":"ID",
@@ -1250,7 +1250,7 @@
                          "value":113
                         }],
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":304,
@@ -1554,12 +1554,12 @@
         {
          "name":"Area",
          "type":"int",
-         "value":0
+         "value":1
         }, 
         {
          "name":"Particles",
          "type":"int",
-         "value":0
+         "value":1
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

@@ -3,6 +3,7 @@
 #include "Animation.hpp"
 #include "BashAbility.h"
 #include "DataManager.h"
+#include "BashableObject.hpp"
 
 namespace Utils
 {
@@ -110,6 +111,7 @@ private:
 
 	std::shared_ptr<InputWrapper> myInputHandler;
 	BashAbility* myBashAbility;
+	BashableObject* myBashableObject;
 
 	Utils::Timer* myTimerInput;
 

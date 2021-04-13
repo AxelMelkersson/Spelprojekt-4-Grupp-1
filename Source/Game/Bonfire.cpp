@@ -82,7 +82,7 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 		{
 			GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		}
-		
+
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerReachedBonfire, 0));
 
 		if (!myHasBeenActivated)
