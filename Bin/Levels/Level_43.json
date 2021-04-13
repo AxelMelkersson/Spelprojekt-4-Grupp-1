@@ -233,7 +233,7 @@
                  "y":94
                 }, 
                 {
-                 "height":137,
+                 "height":153,
                  "id":414,
                  "name":"",
                  "rotation":0,
@@ -241,7 +241,7 @@
                  "visible":true,
                  "width":24,
                  "x":264,
-                 "y":0
+                 "y":-16
                 }, 
                 {
                  "height":62,
@@ -754,6 +754,17 @@
                  "width":99,
                  "x":429,
                  "y":-64
+                }, 
+                {
+                 "height":8,
+                 "id":476,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":288,
+                 "x":-24,
+                 "y":-24
                 }],
          "opacity":1,
          "properties":[
@@ -809,18 +820,6 @@
                  "visible":true,
                  "width":0,
                  "x":304,
-                 "y":0
-                }, 
-                {
-                 "height":0,
-                 "id":423,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":288,
                  "y":0
                 }, 
                 {
@@ -915,7 +914,7 @@
                  "y":-48
                 }, 
                 {
-                 "height":96,
+                 "height":216,
                  "id":470,
                  "name":"",
                  "rotation":0,
@@ -923,7 +922,7 @@
                  "visible":true,
                  "width":8,
                  "x":-24,
-                 "y":104
+                 "y":-16
                 }, 
                 {
                  "height":8,
@@ -1053,7 +1052,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":476,
+ "nextobjectid":477,
  "orientation":"orthogonal",
  "properties":[
         {

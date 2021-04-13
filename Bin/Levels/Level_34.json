@@ -454,15 +454,15 @@
                  "y":100
                 }, 
                 {
-                 "height":16,
+                 "height":16.0883977900553,
                  "id":619,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":176,
-                 "x":320,
-                 "y":-32
+                 "width":472,
+                 "x":32,
+                 "y":-32.0441988950276
                 }],
          "opacity":1,
          "properties":[
