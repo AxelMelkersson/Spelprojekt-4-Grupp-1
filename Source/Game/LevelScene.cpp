@@ -35,7 +35,9 @@ LevelScene::LevelScene()
 	myStayBlackTime(0.2f),
 	myEffectFactory(nullptr),
 	Scene()
-{}
+{
+	Subscribe(eMessageType::PopUpNextLevel);
+}
 
 void LevelScene::Load()
 {
@@ -206,6 +208,25 @@ void LevelScene::DecreaseBlackScreen()
 	if (myBlackScreenOpacity <= 0.0f)
 	{
 		myReachedFullOpacity = false;
+		if (myShowPopUp != -1)
+		{
+			switch (myShowPopUp)
+			{
+				case 0:
+					PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, 0));
+					break;
+
+				case 1:
+					PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, 0));
+					break;
+
+				case 2:
+					PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0));
+					break;
+			}
+
+			myShowPopUp = -1;
+		}
 	}
 }
 
@@ -238,6 +259,14 @@ ParticleEffectFactory& LevelScene::GetEffectFactory()
 Background& LevelScene::GetBackground()
 {
 	return *myBackground;
+}
+
+void LevelScene::Notify(const Message& aMessage)
+{
+	if (aMessage.myMessageType == eMessageType::PopUpNextLevel)
+	{
+		myShowPopUp = std::get<int>(aMessage.myData);
+	}
 }
 
 void LevelScene::Transitioning()
