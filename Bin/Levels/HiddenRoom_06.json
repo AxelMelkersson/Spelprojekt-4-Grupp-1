@@ -644,6 +644,17 @@
                  "width":4,
                  "x":516,
                  "y":88
+                }, 
+                {
+                 "height":232,
+                 "id":601,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":16,
+                 "x":-24,
+                 "y":-24
                 }],
          "opacity":1,
          "properties":[
@@ -841,7 +852,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":280,
+                 "height":48,
                  "id":512,
                  "name":"",
                  "rotation":0,
@@ -849,7 +860,7 @@
                  "visible":true,
                  "width":8,
                  "x":-24,
-                 "y":-24
+                 "y":208
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -956,7 +967,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":601,
+ "nextobjectid":602,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
