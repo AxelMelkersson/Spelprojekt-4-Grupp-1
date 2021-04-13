@@ -44,6 +44,8 @@ void LevelDoor::OnCollision(GameObject* aGameObject)
 	{
 		myWasActivated = true;
 
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerEnterDoor, static_cast<int>(myType)));
+
 		if (myType == eDoorType::Exit)
 		{
 			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::LoadNext, static_cast<int>(myType)), true);

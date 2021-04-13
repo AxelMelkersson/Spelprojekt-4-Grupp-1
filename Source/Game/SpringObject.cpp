@@ -97,7 +97,7 @@ void SpringObject::CreateGroundSpring()
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(sprite);
-	myAnimation = Animation(false, false, false, 0, 4, 4, 0.06f, sprite, 16, 16);
+	myAnimation = Animation(false, false, false, 0, 13, 13, 0.1f, sprite, 16, 16);
 	animation->SetAnimation(&myAnimation);
 }
 void SpringObject::LoadJson()
