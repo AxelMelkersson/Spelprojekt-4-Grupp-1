@@ -117,7 +117,6 @@ void UIPopUp::InitPopUp()
 
 void UIPopUp::Update(const float& aDeltaTime)
 {
-	UpdateCollectibles();
 	if (myEasyActive)
 	{
 		myCurrentTime += aDeltaTime;
