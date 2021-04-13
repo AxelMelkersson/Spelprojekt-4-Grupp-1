@@ -616,6 +616,11 @@ void Player::AnimationState()
 		animation->SetAnimation(&myAnimations[1]);
 		myCurrentAnimationIndex = 1;
 	}
+	if (Utils::Abs(myCurrentVelocity.y) > 0 && myHasLanded && myCurrentAnimationIndex == 0)
+	{
+		animation->SetAnimation(&myAnimations[0]);
+		myCurrentAnimationIndex = 0;
+	}
 
 	if (myCurrentAnimationIndex != 2 && myCurrentAnimationIndex != 3 && myCurrentAnimationIndex != 4 && !myHasLanded)
 	{

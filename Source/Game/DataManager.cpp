@@ -477,6 +477,7 @@ void DataManager::AssignCollectedState()
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
 	}
 }
+#ifndef _RETAIL
 void DataManager::FindCollectibleDuplicates() const
 {
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
@@ -493,3 +494,4 @@ void DataManager::FindCollectibleDuplicates() const
 		}
 	}
 }
+#endif // !_RETAIL
