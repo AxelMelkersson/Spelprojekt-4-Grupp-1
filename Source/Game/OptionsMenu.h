@@ -50,21 +50,21 @@ private:
 	float myMusicStep;
 	float myVFXStep;
 
-	std::unique_ptr<UIObject> myBackground;
-	std::unique_ptr<UIObject> myTitle;
-	std::unique_ptr<UIObject> myOptionsTitle;
-	std::unique_ptr<UIObject> myFireHighlight;
-	std::unique_ptr<UIObject> myBar;
-	std::unique_ptr<UIObject> mySoundSettings;
-	std::unique_ptr<UIObject> myBGHighlight;
-	std::unique_ptr<UIObject> myVFXHighlight;
-	std::unique_ptr<UIObject> myBGDot;
-	std::unique_ptr<UIObject> myVFXDot;
-	std::unique_ptr<UIObject> myResolutions;
-	std::unique_ptr<UIObject> my720pHgh;
-	std::unique_ptr<UIObject> my1080pHgh;
-	std::unique_ptr<UIObject> my4KHgh;
-	std::unique_ptr<UIObject> myScreenSizeDot;
+	UIObject* myBackground;
+	UIObject* myTitle;
+	UIObject* myOptionsTitle;
+	UIObject* myFireHighlight;
+	UIObject* myBar;
+	UIObject* mySoundSettings;
+	UIObject* myBGHighlight;
+	UIObject* myVFXHighlight;
+	UIObject* myBGDot;
+	UIObject* myVFXDot;
+	UIObject* myResolutions;
+	UIObject* my720pHgh;
+	UIObject* my1080pHgh;
+	UIObject* my4KHgh;
+	UIObject* myScreenSizeDot;
 
 	//Credits
 	CreditsMenu* myCreditsMenu;
@@ -72,12 +72,12 @@ private:
 	//Tutorial
 	TutorialMenu* myTutorial;
 
-	std::unique_ptr<UIButton> myTutorialsBtn;
-	std::unique_ptr<UIButton> myScreenBtn;
-	std::unique_ptr<UIButton> mySoundBtn;
-	std::unique_ptr<UIButton> myCreditsBtn;
-	std::unique_ptr<UIButton> myBackBtn;
-	std::unique_ptr<UIButton> myResetBtn;
+	UIButton* myTutorialsBtn;
+	UIButton* myScreenBtn;
+	UIButton* mySoundBtn;
+	UIButton* myCreditsBtn;
+	UIButton* myBackBtn;
+	UIButton* myResetBtn;
 
 	std::vector<UIObject*> myResolutionObj;
 	std::vector<UIObject*> mySoundObjects;

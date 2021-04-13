@@ -92,8 +92,11 @@ void SpritebatchComponent::RemoveObject(SpriteComponent* aSprite, Tga2D::CSprite
 
 void SpritebatchComponent::Reset()
 {
-	delete myBatch;
-	myBatch = nullptr;
+	if (myBatch != NULL)
+	{
+		delete myBatch;
+		myBatch = nullptr;
+	}
 }
 
 void SpritebatchComponent::SetBlendState(const EBlendState aBlendState)

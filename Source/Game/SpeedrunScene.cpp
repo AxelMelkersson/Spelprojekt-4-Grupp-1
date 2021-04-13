@@ -37,15 +37,15 @@ void SpeedrunScene::Load()
 
 void SpeedrunScene::InitObjects()
 {
-	myBackground = std::make_unique<UIObject>(this);
-	myBackground2 = std::make_unique<UIObject>(this);
-	myBar = std::make_unique<UIObject>(this);
-	myBestTime = std::make_unique<UIObject>(this);
-	myTitle = std::make_unique<UIObject>(this);
-	myFireHighlight = std::make_unique<UIObject>(this);
+	myBackground = new UIObject(this);
+	myBackground2 = new UIObject(this);
+	myBar = new UIObject(this);
+	myBestTime = new UIObject(this);
+	myTitle = new UIObject(this);
+	myFireHighlight = new UIObject(this);
 
-	myStartGameBtn = std::make_unique<UIButton>(this);
-	myMainMenuBtn = std::make_unique<UIButton>(this);
+	myStartGameBtn = new UIButton(this);
+	myMainMenuBtn = new UIButton(this);
 
 	v2f back2Pos = { 0.f, 0.f };
 	v2f backgroundPos = { 5.f, 5.f };
@@ -65,8 +65,8 @@ void SpeedrunScene::InitObjects()
 	myStartGameBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_unmarked.dds", { 56.f,16.f }, startPos, "Sprites/UI/startMenu/UI_StartMenu_Text_NewGame_56x16px_marked.dds", 56);
 	myMainMenuBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f, 16.f }, mainMenuPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
 
-	myButtons.push_back(myStartGameBtn.get());
-	myButtons.push_back(myMainMenuBtn.get());
+	myButtons.push_back(myStartGameBtn);
+	myButtons.push_back(myMainMenuBtn);
 
 	InitHighscores();
 
@@ -94,7 +94,7 @@ void SpeedrunScene::InitHighscores()
 		}
 
 		text = to_string(i + 1) + ".  " + score;
-		myHighscoreList[i] = std::make_unique<UIText>(this);
+		myHighscoreList[i] = new UIText(this);
 		myHighscoreList[i]->Init(text, "Text/alagard.ttf", EFontSize::EFontSize_48);
 		myHighscoreList[i]->SetPosition(aPos);
 		myHighscoreList[i]->SetZIndex(300);

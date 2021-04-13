@@ -15,6 +15,8 @@
 #include <rapidjson/writer.h>
 
 UIPopUp::UIPopUp(Scene* aLevelScene)
+	:
+	GameObject(aLevelScene)
 {
 	myScene = aLevelScene;
 	myCurrentTime = {};
@@ -28,31 +30,24 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 	myLevelIndex = 0;
 }
 
-UIPopUp::~UIPopUp()
-{
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageE);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageM);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageH);
-}
-
 void UIPopUp::InitPopUp()
 {
 	myCollectibleInfo.clear();
 	myCollectibleCollected.clear();
 
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageE);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageM);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageH);
+	Subscribe(eMessageType::PopUpMessageE);
+	Subscribe(eMessageType::PopUpMessageM);
+	Subscribe(eMessageType::PopUpMessageH);
 
 	Config::ourReferenceSize = { 320.f, 180.f };
 
-	myBackgroundE = std::make_unique<UIObject>(myScene);
-	myBackgroundM = std::make_unique<UIObject>(myScene);
-	myBackgroundH = std::make_unique<UIObject>(myScene);
+	myBackgroundE = new UIObject(myScene);
+	myBackgroundM = new UIObject(myScene);
+	myBackgroundH = new UIObject(myScene);
 
-	myFireEasy = std::make_unique<UIObject>(myScene);
-	myFireMed = std::make_unique<UIObject>(myScene);
-	myFireHard = std::make_unique<UIObject>(myScene);
+	myFireEasy = new UIObject(myScene);
+	myFireMed = new UIObject(myScene);
+	myFireHard = new UIObject(myScene);
 
 	v2f backPos = { Config::ourReferenceSize.x, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
@@ -65,40 +60,36 @@ void UIPopUp::InitPopUp()
 	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 
-	for (int i = 0; i < 8; ++i)
-	{
-		myCollectibleInfo.push_back(std::vector<int>());
-		myCollectibleCollected.push_back(std::vector<int>());
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
 
-		for (int difficulty = 0; difficulty < 3; ++difficulty)
-		{
-			myCollectibleInfo[i].push_back(0);
-			myCollectibleCollected[i].push_back(0);
-		}
-	}
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
 
 	for (int j = 0; j < DataManager::GetInstance().GetCollectableCount(); ++j)
 	{
-		DataManager::GetInstance().GetCollectableInfoIndex(j);
+		CollectableInfo collectibleInfo = DataManager::GetInstance().GetCollectableInfoIndex(j);
 
-		++myCollectibleInfo[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
+		++myCollectibleInfo[collectibleInfo.myDifficulty];
 
-		if (DataManager::GetInstance().GetCollectableInfoIndex(j).myCollectedState)
+		if (collectibleInfo.myCollectedState)
 		{
-			++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
+			++myCollectibleCollected[collectibleInfo.myDifficulty];
 		}
 	}
 
-	myCollectibleString = std::make_unique<UIText>(myScene);
-	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString = new UIText(myScene);
+	myCollectibleString->Init(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
 	myCollectibleString->SetZIndex(201);
-	myCollectibleString2 = std::make_unique<UIText>(myScene);
-	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString2 = new UIText(myScene);
+	myCollectibleString2->Init(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString2->SetPosition(collectiblePos);
 	myCollectibleString2->SetZIndex(201);
-	myCollectibleString3 = std::make_unique<UIText>(myScene);
-	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString3 = new UIText(myScene);
+	myCollectibleString3->Init(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString3->SetPosition(collectiblePos);
 	myCollectibleString3->SetZIndex(201);
 
@@ -129,9 +120,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 	UpdateCollectibles();
 	if (myEasyActive)
 	{
-
 		myCurrentTime += aDeltaTime;
-
 		SetNewPositions(aDeltaTime);
 		myBackgroundE->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
@@ -141,8 +130,6 @@ void UIPopUp::Update(const float& aDeltaTime)
 		if (myEasyActive == false && myHardActive == false)
 		{
 			myCurrentMTime += aDeltaTime;
-
-			//UpdateCollectibles();
 			SetNewMedPositions(aDeltaTime);
 			myBackgroundM->UpdateUIObjects(aDeltaTime);
 			myFireMed->UpdateUIObjects(aDeltaTime);
@@ -151,7 +138,6 @@ void UIPopUp::Update(const float& aDeltaTime)
 	if (myHardActive)
 	{
 		myCurrentHTime += aDeltaTime;
-		UpdateCollectibles();
 		SetNewHardPositions(aDeltaTime);
 		myBackgroundH->UpdateUIObjects(aDeltaTime);
 		myFireHard->UpdateUIObjects(aDeltaTime);
@@ -205,6 +191,8 @@ void UIPopUp::Activate(ePopUpTypes aType)
 		myHardActive = true;
 		break;
 	}
+
+	UpdateCollectibles();
 }
 
 void UIPopUp::Notify(const Message& aMessage)
@@ -213,16 +201,19 @@ void UIPopUp::Notify(const Message& aMessage)
 	{
 	case eMessageType::PopUpMessageE:
 	{
+		++myCollectibleCollected[0];
 		Activate(ePopUpTypes::Easy);
 		break;
 	}
 	case eMessageType::PopUpMessageM:
 	{
+		++myCollectibleCollected[1];
 		Activate(ePopUpTypes::Med);
 		break;
 	}
 	case eMessageType::PopUpMessageH:
 	{
+		++myCollectibleCollected[2];
 		Activate(ePopUpTypes::Hard);
 		break;
 	}
@@ -361,8 +352,8 @@ void UIPopUp::SetNewHardPositions(const float& aDeltaTime)
 void UIPopUp::UpdateCollectibles()
 {
 
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][0]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][0]));
-	myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][1]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][1]));
-	myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][2]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][2]));
+	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]));
+	myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]));
+	myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]));
 
 }
