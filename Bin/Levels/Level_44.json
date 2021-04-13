@@ -465,7 +465,7 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":8,
+                 "width":4,
                  "x":252,
                  "y":84
                 }, 
@@ -516,8 +516,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":16,
-                 "x":276,
+                 "width":12,
+                 "x":280,
                  "y":84
                 }, 
                 {
@@ -567,8 +567,8 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":40,
-                 "x":356,
+                 "width":32,
+                 "x":360,
                  "y":140
                 }, 
                 {
@@ -652,7 +652,7 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":52,
+                 "width":48,
                  "x":496,
                  "y":92
                 }, 
