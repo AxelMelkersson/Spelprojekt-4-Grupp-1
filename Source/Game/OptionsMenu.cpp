@@ -80,8 +80,8 @@ void OptionsMenu::Init()
 	v2f backPos = { 140.f, 150.f };
 	v2f resetPos = { 30.f, 160.f };
 	v2f soundSettingPos = { 215.f, 90.f };
-	v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
-	v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+	v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
+	v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
 	v2f resolutionPos = { 215, 73.f };
 	v2f creditScreenPos = { 120.f, 50.f };
 
@@ -109,9 +109,9 @@ void OptionsMenu::Init()
 	myResetBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Unmarked.dds", { 65.f,16.f }, resetPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Marked.dds", 65);
 
 	//Sound
-	mySoundSettings->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_Unmarked.dds", { 72.f, 26.f }, soundSettingPos, 202);
-	myBGHighlight->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_BG_Marked.dds", { 74.f,26.f }, soundSettingPos, 203);
-	myVFXHighlight->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_VFX_Marked.dds", { 74.f,26.f }, soundSettingPos, 203);
+	mySoundSettings->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_Unmarked.dds", { 128.f, 32.f }, soundSettingPos, 202);
+	myBGHighlight->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_BG_Marked.dds", { 128.f, 32.f }, soundSettingPos, 203);
+	myVFXHighlight->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_VFX_Marked.dds", { 128.f, 32.f }, soundSettingPos, 203);
 	myBGDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_SettingsMark_3x3px.dds", { 3.f, 3.f }, bgDot, 204);
 	myVFXDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_SettingsMark_3x3px.dds", { 3.f, 3.f }, SFXDot, 204);
 
@@ -124,10 +124,10 @@ void OptionsMenu::Init()
 	myTutorial->SetZIndex(205);
 
 	//Screen
-	myResolutions->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_All_73x7px_Unmarked.dds", { 73.f, 7.f }, resolutionPos, 202);
-	my720pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_720p_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
-	my1080pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_1080p_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
-	my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 73.f,7.f }, resolutionPos, 203);
+	myResolutions->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_All_73x7px_Unmarked.dds", { 128.0f, 8.0f }, resolutionPos, 202);
+	my720pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_720p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
+	my1080pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_1080p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
+	my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
 	myScreenSizeDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_73x7px_Marked.dds", { 8.f, 8.f }, resolutionPos, 204);
 
 	my720pHgh->UpdateUIObjects(0);
@@ -368,8 +368,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
-			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
-			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+			v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
+			v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
 
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
@@ -387,8 +387,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
-			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
-			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+			v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
+			v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
 
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
