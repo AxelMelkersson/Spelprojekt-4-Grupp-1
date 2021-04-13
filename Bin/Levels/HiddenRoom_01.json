@@ -387,8 +387,19 @@
                  "id":358,
                  "name":"",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1601
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":248,
