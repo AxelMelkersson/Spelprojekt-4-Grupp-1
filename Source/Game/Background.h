@@ -77,7 +77,8 @@ private:
 	const void AddStartingCameraPos();
 	const void CalculateCameraPositions(const float& aDeltaTime);
 	const void ResetDistanceValues();
-	
+	const void CheckResetLoop(GameObject* aGameObject);
+
 	const v2f GetHalfImageSize(GameObject* aSprite);
 
 };

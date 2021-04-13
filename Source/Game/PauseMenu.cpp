@@ -11,6 +11,7 @@
 #include "SpeedrunManager.h"
 #include "DataManager.h"
 #include "AudioManager.h"
+#include "CameraStaticDistance.hpp"
 
 #include "AnimationComponent.hpp"
 
@@ -151,7 +152,10 @@ void PauseMenu::SelectButton()
 #endif //RETAIL
 	}
 	else if (myMovingIndex == 2)
+	{
 		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
+		Distance::myBackgroundDistanceX = {};
+	}
 }
 
 

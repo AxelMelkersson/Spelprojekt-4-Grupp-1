@@ -28,9 +28,6 @@ public:
 
 	void StartEffect(const int aIndex);
 
-	void StartAllRainEffects();
-	void StartFirefliesEffects();
-
 private:
 	struct SpawnEffects
 	{
