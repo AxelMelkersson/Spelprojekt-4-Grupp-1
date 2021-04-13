@@ -27,9 +27,13 @@ PauseMenu::PauseMenu(Scene* aLevelScene)
 
 	myIsSpeedrun = false;
 
-	myIsOutOfFocus = false;
-
 	Subscribe(eMessageType::KilledFocus);
+	Subscribe(eMessageType::TurnedInCollectible);
+}
+
+PauseMenu::~PauseMenu()
+{
+	delete myOptionsMenu;
 }
 
 void PauseMenu::InitMenu()
@@ -117,11 +121,6 @@ void PauseMenu::Update(const float& aDeltaTime)
 void PauseMenu::SetActiveMenu(const bool aStatement)
 {
 	myMenuActive = aStatement;
-
-	if (myMenuActive && !myIsOutOfFocus)
-	{
-		UpdateCollectibleInfo(false);
-	}
 }
 
 bool PauseMenu::IsPauseActive()
@@ -191,6 +190,12 @@ void PauseMenu::UpdateUIElements(const float& aDeltaTime)
 	myFire3->UpdateUIObjects(aDeltaTime);
 	myTitleString->UpdateUIObjects(aDeltaTime);
 
+	myFire->Update(aDeltaTime);
+	myFire2->Update(aDeltaTime);
+	myFire3->Update(aDeltaTime);
+
+	myFireHighlight->Update(aDeltaTime);
+
 	for (auto button : myButtons)
 		button->UpdateButton(aDeltaTime);
 }
@@ -221,7 +226,7 @@ void PauseMenu::CheckActiveAnimations()
 		{
 			myButtons[i]->SetIsHighlightActive(true);
 			myFireHighlight->SetPositionX(myButtons[i]->GetPositionX() - 10.0f);
-			myFireHighlight->SetPositionY(myButtons[i]->GetPositionY());
+			myFireHighlight->SetPositionY(myButtons[i]->GetPositionY() + 4.0f);
 		}
 		else
 			myButtons[i]->SetIsHighlightActive(false);
@@ -313,16 +318,13 @@ void PauseMenu::Notify(const Message& aMessage)
 {
 	if (aMessage.myMessageType == eMessageType::KilledFocus)
 	{
-		myIsOutOfFocus = true;
-
 		if (!myOptionsMenu->IsOptionsActive())
 		{
 			SetActiveMenu(true);
 		}
 	}
-	else if (aMessage.myMessageType == eMessageType::SetFocus)
+	else if (aMessage.myMessageType == eMessageType::TurnedInCollectible)
 	{
-		myIsOutOfFocus = false;
 		UpdateCollectibleInfo(false);
 	}
 }

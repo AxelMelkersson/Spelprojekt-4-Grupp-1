@@ -20,6 +20,7 @@ class PauseMenu : Subscriber
 {
 public:
 	PauseMenu(Scene* aLevelScene);
+	~PauseMenu();
 
 	void InitMenu();
 
@@ -75,7 +76,6 @@ private:
 	bool myMenuActive;
 	bool myIsSpeedrun;
 	bool mySkipOneUpdate;
-	bool myIsOutOfFocus;
 
 	void CheckIndexPress();
 	void ActivateMenu();

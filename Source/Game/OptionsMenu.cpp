@@ -80,8 +80,8 @@ void OptionsMenu::Init()
 	v2f backPos = { 140.f, 150.f };
 	v2f resetPos = { 30.f, 160.f };
 	v2f soundSettingPos = { 215.f, 90.f };
-	v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
-	v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
+	v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.f };
+	v2f SFXDot = { 215.f + (mySFXVol * 74.f), 115.f };
 	v2f resolutionPos = { 215, 73.f };
 	v2f creditScreenPos = { 120.f, 50.f };
 
@@ -368,8 +368,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
-			v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
-			v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
+			v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 115.f };
 
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
@@ -387,8 +387,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
-			v2f bgDot = { 212.f + (myMusicVol * 74.f), 97.f };
-			v2f SFXDot = { 212.f + (mySFXVol * 74.f), 115.f };
+			v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 115.f };
 
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
