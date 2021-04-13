@@ -15,6 +15,8 @@
 #include <rapidjson/writer.h>
 
 UIPopUp::UIPopUp(Scene* aLevelScene)
+	:
+	GameObject(aLevelScene)
 {
 	myScene = aLevelScene;
 	myCurrentTime = {};
@@ -28,21 +30,14 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 	myLevelIndex = 0;
 }
 
-UIPopUp::~UIPopUp()
-{
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageE);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageM);
-	PostMaster::GetInstance().RemoveSubcriber(this, eMessageType::PopUpMessageH);
-}
-
 void UIPopUp::InitPopUp()
 {
 	myCollectibleInfo.clear();
 	myCollectibleCollected.clear();
 
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageE);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageM);
-	PostMaster::GetInstance().AddSubcriber(this, eMessageType::PopUpMessageH);
+	Subscribe(eMessageType::PopUpMessageE);
+	Subscribe(eMessageType::PopUpMessageM);
+	Subscribe(eMessageType::PopUpMessageH);
 
 	Config::ourReferenceSize = { 320.f, 180.f };
 

@@ -6,7 +6,7 @@ class Scene;
 class UIText;
 
 class UIPopUp
-	: public Subscriber
+	: public Subscriber, public GameObject
 {
 public:
 	enum class ePopUpTypes
@@ -17,9 +17,8 @@ public:
 	};
 
 	UIPopUp(Scene* aLevelScene);
-	~UIPopUp();
 	void InitPopUp();
-	void Update(const float& aDeltaTime);
+	void Update(const float& aDeltaTime) override;
 	void Activate(ePopUpTypes aType);
 	void Notify(const Message& aMessage) override;
 
