@@ -34,8 +34,8 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::MenuStart,       new AudioClip("Sounds/Effects/MenuStart.wav",        false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::MenuSelect,      new AudioClip("Sounds/Effects/MenuSelect.wav",       false, 0.2f, 1,    AudioLayer::SoundEffect));
 
-	myAudioList.insert_or_assign(AudioList::WalkGravelRight, new AudioClip("Sounds/Effects/Step_Gravel_Right.wav",false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::WalkGravelLeft,  new AudioClip("Sounds/Effects/Step_Gravel_Left.wav", false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::WalkGravelRight, new AudioClip("Sounds/Effects/Step_Carpet_Right.wav",false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::WalkGravelLeft,  new AudioClip("Sounds/Effects/Step_Carpet_Left.wav", false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WalkGrassRight,  new AudioClip("Sounds/Effects/Step_Grass_Right.wav", false, 0.4f, 1,       AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WalkGrassLeft,   new AudioClip("Sounds/Effects/Step_Grass_Left.wav",  false, 0.4f, 1,       AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WalkBrickRight,  new AudioClip("Sounds/Effects/Step_Bricks_Right.wav",false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
@@ -53,8 +53,8 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::LandBricksHeavy, new AudioClip("Sounds/Effects/LandBricksHeavy.wav",  false, 0.1f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandWoodLight,   new AudioClip("Sounds/Effects/LandWoodLight.wav",    false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandWoodHeavy,   new AudioClip("Sounds/Effects/LandWoodHeavy.wav",    false, 0.2f, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LandGravelLight, new AudioClip("Sounds/Effects/LandGravelLight.wav",  false, 0.4f, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LandGravelHeavy, new AudioClip("Sounds/Effects/LandGravelHeavy.wav",  false, 0.2f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandGravelLight, new AudioClip("Sounds/Effects/LandCarpetLight.wav",  false, 0.4f, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandGravelHeavy, new AudioClip("Sounds/Effects/LandCarpetHeavy.wav",  false, 0.2f, 1,    AudioLayer::SoundEffect));
 
 	myAudioList.insert_or_assign(AudioList::MovingPlatform,  new AudioClip("Sounds/Effects/MovingPlatform.wav",   true,  0.1f, 0.15f,AudioLayer::SoundEffect));
 
