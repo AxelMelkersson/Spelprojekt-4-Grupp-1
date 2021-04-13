@@ -17,6 +17,7 @@ public:
 	};
 
 	UIPopUp(Scene* aLevelScene);
+
 	void InitPopUp();
 	void Update(const float& aDeltaTime) override;
 	void Activate(ePopUpTypes aType);
@@ -25,17 +26,17 @@ public:
 private:
 	Scene* myScene;
 
-	std::unique_ptr<UIObject> myBackgroundE;
-	std::unique_ptr<UIObject> myBackgroundM;
-	std::unique_ptr<UIObject> myBackgroundH;
+	UIObject* myBackgroundE;
+	UIObject* myBackgroundM;
+	UIObject* myBackgroundH;
 
-	std::unique_ptr<UIObject> myFireEasy;
-	std::unique_ptr<UIObject> myFireMed;
-	std::unique_ptr<UIObject> myFireHard;
+	UIObject* myFireEasy;
+	UIObject* myFireMed;
+	UIObject* myFireHard;
 
-	std::unique_ptr<UIText> myCollectibleString;
-	std::unique_ptr<UIText> myCollectibleString2;
-	std::unique_ptr<UIText> myCollectibleString3;
+	UIText* myCollectibleString;
+	UIText* myCollectibleString2;
+	UIText* myCollectibleString3;
 
 	std::vector<int> myLevelIndexes;
 	std::vector<UIText*> myLevelCollectibles;
@@ -49,7 +50,6 @@ private:
 	bool myIsMMaxLeft = false;
 	bool myIsHMaxLeft = false;
 
-	float myBackXPos;
 	float myCurrentTime;
 	float myCurrentMTime;
 	float myCurrentHTime;

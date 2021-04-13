@@ -17,7 +17,7 @@
       "FilePath": "Levels/HiddenRoom_04.json"
     },
     {
-      "LevelIndex": 19,
+      "LevelIndex": 22,
       "FilePath": "Levels/HiddenRoom_05.json"
     },
     {
@@ -27,6 +27,30 @@
     {
       "LevelIndex": 28,
       "FilePath": "Levels/HiddenRoom_07.json"
+    },
+    {
+      "LevelIndex": 29,
+      "FilePath": "Levels/HiddenRoom_08.json"
+    },
+    {
+      "LevelIndex": 32,
+      "FilePath": "Levels/HiddenRoom_09.json"
+    },
+    {
+      "LevelIndex": 38,
+      "FilePath": "Levels/HiddenRoom_10.json"
+    },
+    {
+      "LevelIndex": 52,
+      "FilePath": "Levels/HiddenRoom_11.json"
+    },
+    {
+      "LevelIndex": 53,
+      "FilePath": "Levels/HiddenRoom_12.json"
+    },
+    {
+      "LevelIndex": 54,
+      "FilePath": "Levels/HiddenRoom_13.json"
     }
   ]
 }

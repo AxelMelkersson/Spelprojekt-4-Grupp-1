@@ -836,9 +836,32 @@
          "visible":false,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":22,
+         "name":"AudioObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":540,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"50",
+                 "visible":true,
+                 "width":0,
+                 "x":240,
+                 "y":32
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":21,
- "nextobjectid":540,
+ "nextlayerid":24,
+ "nextobjectid":542,
  "orientation":"orthogonal",
  "properties":[
         {

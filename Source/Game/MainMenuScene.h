@@ -30,17 +30,17 @@ public:
 
 
 private:
-    std::unique_ptr<UIObject> myBackground;
-    std::unique_ptr<UIObject> myTitleSprite;
-    std::unique_ptr<UIObject> myFireHighlight;
+    UIObject* myBackground;
+    UIObject* myTitleSprite;
+    UIObject* myFireHighlight;
 
     std::vector<UIButton*> myButtons;
 
-    std::unique_ptr<UIButton> myNewGameBtn;
-    std::unique_ptr<UIButton> myLevelSelectBtn;
-    std::unique_ptr<UIButton> mySpeedrunModeBtn;
-    std::unique_ptr<UIButton> myOptionsBtn;
-    std::unique_ptr<UIButton> myExitGameBtn;
+   UIButton* myNewGameBtn;
+   UIButton* myLevelSelectBtn;
+   UIButton* mySpeedrunModeBtn;
+   UIButton* myOptionsBtn;
+   UIButton* myExitGameBtn;
 
     std::shared_ptr<InputWrapper> myInput;
 
