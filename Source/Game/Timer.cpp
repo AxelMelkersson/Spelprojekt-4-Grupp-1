@@ -3,7 +3,6 @@
 #include "../External/Headers/CU/Utilities.h"
 #include "GameWorld.h"
 #include "TextComponent.h"
-#include <assimp\StringUtils.h>
 #include "SpeedrunManager.h"
 #include "SpriteComponent.h"
 
