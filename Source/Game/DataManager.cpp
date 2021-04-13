@@ -7,6 +7,10 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
 
+#ifndef _RETAIL
+#include <iostream>
+#endif // !_RETAIL 
+
 void DataManager::SetDataStruct(const DataEnum aDataEnum)
 {
 	rapidjson::Document tempDoc;
@@ -328,9 +332,9 @@ void DataManager::ParseCollectableInfo()
 		levelIndex++;
 	}
 
-
 #ifndef _RETAIL
 	ResetSaveFile();
+	FindCollectibleDuplicates();
 #endif // !_RETAIL
 	AssignCollectedState();
 }
@@ -471,5 +475,21 @@ void DataManager::AssignCollectedState()
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
+	}
+}
+void DataManager::FindCollectibleDuplicates() const
+{
+	for (size_t i = 0; i < myCollectableInfo.size(); i++)
+	{
+		for (size_t e = 0; e < myCollectableInfo.size(); e++)
+		{
+			if (i != e)
+			{
+				if (myCollectableInfo[i].myID == myCollectableInfo[e].myID)
+				{
+					std::cout << "Collectible ID " << myCollectableInfo[i].myID << " is used more than once. \n";
+				}
+			}
+		}
 	}
 }

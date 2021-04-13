@@ -148,6 +148,7 @@ private:
 	void AcceptJsonWriter(const std::string aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
 	void AssignCollectedState();
+	void FindCollectibleDuplicates() const;
 
 	//Master Documents
 	rapidjson::Document myMasterDoc;
