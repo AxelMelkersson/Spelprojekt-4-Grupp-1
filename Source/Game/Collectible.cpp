@@ -28,6 +28,7 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myMinRadiusFromTarget(25.0f),
 	myTimeOffset(0.0f),
 	myType(eCollectibleType::Easy),
+	myWasCollectedBefore(false),
 	myWasCollected(false),
 	myWasTurnedIn(false),
 	myID(anID),
@@ -80,6 +81,8 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 	{
 		spriteIdle->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
 		spritePickup->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
+
+		myWasCollectedBefore = true;
 	}
 
 	myAnimations[0] = Animation(false, false, false, 0, 7, 7, 0.14f, spriteIdle, 16, 16);
@@ -163,7 +166,10 @@ void Collectible::TurnIn()
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
-		CheckPopUpMessages();
+		if (!myWasCollectedBefore)
+		{
+			CheckPopUpMessages();
+		}
 
 		DataManager::GetInstance().SaveCollectedCollectible(myID);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));

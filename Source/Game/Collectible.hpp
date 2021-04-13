@@ -47,6 +47,7 @@ private:
 	float myTimeOffset;
 
 	eCollectibleType myType;
+	bool myWasCollectedBefore;
 	bool myWasCollected;
 	bool myWasTurnedIn;
 
