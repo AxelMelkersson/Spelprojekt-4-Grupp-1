@@ -210,6 +210,9 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		myBackgroundSprite6 = new GameObject(aLevelScene);
 		SpriteComponent* sprite = myBackgroundSprite6->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
+		SpriteComponent* sprite2 = myBackgroundSprite2->AddComponent<SpriteComponent>();
+		sprite2->SetSpritePath(aPath);
+		sprite2->SetRelativePosition({ sprite->GetImageSize().x, 0.f });
 		myBackgroundSprite6->SetZIndex(5);
 		myOffsetBackground6 = anOffset;
 		break;
@@ -219,6 +222,9 @@ const void Background::CreateBackgrounds(Scene* aLevelScene, const std::string a
 		myBackgroundSprite7 = new GameObject(aLevelScene);
 		SpriteComponent* sprite = myBackgroundSprite7->AddComponent<SpriteComponent>();
 		sprite->SetSpritePath(aPath);
+		SpriteComponent* sprite2 = myBackgroundSprite2->AddComponent<SpriteComponent>();
+		sprite2->SetSpritePath(aPath);
+		sprite2->SetRelativePosition({ sprite->GetImageSize().x, 0.f });
 		myBackgroundSprite7->SetZIndex(6);
 		myOffsetBackground7 = anOffset;
 		break;
@@ -282,7 +288,8 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 	myBackgroundSprite4->SetPosition(cameraPosition + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
 	myBackgroundSprite5->SetPosition(cameraPosition + backgroundSpeedFive + GetHalfImageSize(myBackgroundSprite5) + myOffsetBackground5);
 	myBackgroundSprite6->SetPosition(cameraPosition + backgroundSpeedSix + GetHalfImageSize(myBackgroundSprite6) + myOffsetBackground6);
-	myBackgroundSprite7->SetPosition(cameraPosition + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
+	//myBackgroundSprite7->SetPosition(cameraPosition + backgroundSpeedSeven + GetHalfImageSize(myBackgroundSprite7) + myOffsetBackground7);
+	myBackgroundSprite7->SetPosition({10.f * aDeltaTime, 0.f});
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
