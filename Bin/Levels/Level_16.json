@@ -2338,7 +2338,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":68,
+                 "width":92,
                  "x":916,
                  "y":128
                 }],
@@ -2464,17 +2464,6 @@
                  "width":8,
                  "x":976,
                  "y":48
-                }, 
-                {
-                 "height":0,
-                 "id":412,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":632,
-                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",

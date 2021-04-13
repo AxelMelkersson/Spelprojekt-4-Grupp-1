@@ -74,8 +74,8 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::Castle_Theme,    new AudioClip("Sounds/Music/Castle_Theme.wav",       true, 0.1f, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Finale,          new AudioClip("Sounds/Music/Final_Theme.wav",        true, 0.1f, 0.5f,  AudioLayer::Music));
 
-	myAudioList.insert_or_assign(AudioList::Wind,            new AudioClip("Sounds/Music/AtmosphereWind.wav",     true, 0.1f, 0.3f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::Crows,           new AudioClip("Sounds/Music/AtmosphereCrows.wav",    true, 0.1f, 0.3f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::Castle,          new AudioClip("Sounds/Music/AtmosphereCastle.wav",   true, 0.1f, 0.3f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::Wind,            new AudioClip("Sounds/Effects/Atmosphere_Cicadas.wav",     true, 0.1f, 0.3f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::Crows,           new AudioClip("Sounds/Effects/Atmosphere_Village.wav",    true, 0.1f, 0.3f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::Castle,          new AudioClip("Sounds/Effects/Atmosphere_Spook.wav",   true, 0.1f, 0.3f, AudioLayer::SoundEffect));
 
 }

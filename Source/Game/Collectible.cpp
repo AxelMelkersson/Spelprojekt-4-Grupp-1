@@ -31,11 +31,13 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myWasCollectedBefore(false),
 	myWasCollected(false),
 	myWasTurnedIn(false),
+	myWasTurnedInWhenEnteringDoor(false),
 	myID(anID),
 	myBonfireID(aBonfireID)
 {
 	Subscribe(eMessageType::PlayerSafeLanded);
 	Subscribe(eMessageType::PlayerDeath);
+	Subscribe(eMessageType::PlayerEnterDoor);
 }
 
 void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
@@ -166,7 +168,7 @@ void Collectible::TurnIn()
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
-		if (!myWasCollectedBefore)
+		if (!myWasCollectedBefore && !myWasTurnedInWhenEnteringDoor)
 		{
 			CheckPopUpMessages();
 		}
@@ -195,6 +197,15 @@ void Collectible::Notify(const Message& aMessage)
 	{
 		Reset();
 	}
+	else if (aMessage.myMessageType == eMessageType::PlayerEnterDoor)
+	{
+		if (myWasCollected && !myWasCollectedBefore)
+		{
+			myWasTurnedInWhenEnteringDoor = true;
+			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpNextLevel, static_cast<int>(myType)), true);
+			TurnIn();
+		}
+	}
 }
 
 void Collectible::ImGuiUpdate()
@@ -211,19 +222,18 @@ void Collectible::ImGuiUpdate()
 
 const void Collectible::CheckPopUpMessages()
 {
-	v2f position = {};
 	if (myType == eCollectibleType::Easy)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, 0), true);
 	}
 	else if (myType == eCollectibleType::Medium)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, 0), true);
 
 	}
 	else if (myType == eCollectibleType::Hard)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0), true);
 	}
 }
 

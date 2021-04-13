@@ -14,7 +14,7 @@
 class GameObject;
 
 class LevelScene :
-    public Scene
+    public Scene, public Subscriber
 {
 public:
     LevelScene();
@@ -37,6 +37,8 @@ public:
     ParticleEffectFactory& GetEffectFactory();
     Background& GetBackground();
 
+    void Notify(const Message& aMessage) override;
+
 private:
     GameObject* myBlackScreen;
     GameObject* myPlayer;
@@ -53,5 +55,7 @@ private:
     bool myReachedFullOpacity;
     bool myIsTransitioning;
     bool myIsSpeedrun;
+
+    int myShowPopUp = -1;
 };
 
