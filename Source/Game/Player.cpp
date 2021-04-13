@@ -923,7 +923,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkGrassRight);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkGrassRight);
 				break;
-			case 7:
+			case 6:
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkGrassLeft);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkGrassLeft);
 				break;
@@ -940,7 +940,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkStoneRight);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkStoneRight);
 				break;
-			case 7:
+			case 6:
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkStoneLeft);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkStoneLeft);
 				break;
@@ -957,7 +957,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkBrickRight);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkBrickRight);
 				break;
-			case 7:
+			case 6:
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkBrickLeft);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkBrickLeft);
 				break;
@@ -974,7 +974,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkWoodRight);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkWoodRight);
 				break;
-			case 7:
+			case 6:
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkWoodLeft);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkWoodLeft);
 				break;
@@ -991,7 +991,7 @@ void Player::PlayFootSteps(const int& aPlatformIndex)
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkGravelRight);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkGravelRight);
 				break;
-			case 7:
+			case 6:
 				AudioManager::GetInstance()->PlayAudio(AudioList::WalkGravelLeft);
 				AudioManager::GetInstance()->LockAudio(AudioList::WalkGravelLeft);
 				break;
