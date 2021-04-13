@@ -312,7 +312,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":80,
+                 "width":72,
                  "x":456,
                  "y":175.944420415225
                 }, 
@@ -600,7 +600,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":80,
+                 "width":72,
                  "x":456,
                  "y":184
                 }, 
@@ -679,7 +679,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":56,
+                 "width":72,
                  "x":448,
                  "y":117
                 }, 
@@ -823,6 +823,23 @@
                  "width":8,
                  "x":72,
                  "y":40
+                }, 
+                {
+                 "height":24,
+                 "id":424,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Materials",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":216,
+                 "x":-24,
+                 "y":-48
                 }],
          "opacity":1,
          "properties":[
@@ -968,20 +985,20 @@
                  "rotation":0,
                  "type":"1",
                  "visible":true,
-                 "width":32,
-                 "x":536,
+                 "width":8,
+                 "x":520,
                  "y":128
                 }, 
                 {
-                 "height":40,
+                 "height":216,
                  "id":391,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":40,
-                 "x":-56,
-                 "y":152
+                 "width":8,
+                 "x":-24,
+                 "y":-24
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1088,7 +1105,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":424,
+ "nextobjectid":425,
  "orientation":"orthogonal",
  "properties":[
         {
