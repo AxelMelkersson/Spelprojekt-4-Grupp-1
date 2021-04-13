@@ -53,7 +53,7 @@ public:
 	void Update(const float& aDeltaTime);
 
 private:
-	float myShotTimer = 3.0f;
+	float myShotTimer = 0.3f;
 	Animation myAnimations[2];
 
 	void InitAnimation();

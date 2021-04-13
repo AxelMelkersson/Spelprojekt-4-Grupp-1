@@ -47,12 +47,14 @@ private:
 	float myTimeOffset;
 
 	eCollectibleType myType;
+	bool myWasCollectedBefore;
 	bool myWasCollected;
 	bool myWasTurnedIn;
 
 	const unsigned int myID;
 	const unsigned int myBonfireID;
 
+	const void CheckPopUpMessages();
 	const void ActivateTrailEffect();
 	const void ActivateCollectedEffect();
 

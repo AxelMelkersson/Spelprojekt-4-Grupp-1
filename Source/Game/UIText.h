@@ -17,6 +17,8 @@ public:
 
 	void SetPosition(const v2f aPosition);
 
+	const v2f GetPosition();
+
 	void SetText(const std::string& aTextString);
 
 

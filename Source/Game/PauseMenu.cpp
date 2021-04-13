@@ -27,9 +27,13 @@ PauseMenu::PauseMenu(Scene* aLevelScene)
 
 	myIsSpeedrun = false;
 
-	myIsOutOfFocus = false;
-
 	Subscribe(eMessageType::KilledFocus);
+	Subscribe(eMessageType::TurnedInCollectible);
+}
+
+PauseMenu::~PauseMenu()
+{
+	delete myOptionsMenu;
 }
 
 void PauseMenu::InitMenu()
@@ -65,9 +69,9 @@ void PauseMenu::InitMenu()
 
 	myBackground->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Bakground_304x164px.dds", {512.f, 256.f}, backgroundPos, 200);
 	myBar->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseBarScreen_241x3px.dds", { 275.0f, 5.f }, barPos, 201);
-	myFire->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, firePos, 201);
-	myFire2->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, firePos2, 201);
-	myFire3->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, firePos3, 201);
+	myFire->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 8, 8, firePos, 201);
+	myFire2->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 8, 8, firePos2, 201);
+	myFire3->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 8, 8, firePos3, 201);
 
 	Animation animation1 = Animation(false, false, false, 0, 7, 7, 0.125f, myFire->GetComponent<SpriteComponent>(), 16, 16);
 	Animation animation2 = Animation(false, false, false, 0, 7, 7, 0.125f, myFire2->GetComponent<SpriteComponent>(), 16, 16);
@@ -77,7 +81,7 @@ void PauseMenu::InitMenu()
 	myFire2->GetComponent<AnimationComponent>()->SetAnimation(&animation2);
 	myFire3->GetComponent<AnimationComponent>()->SetAnimation(&animation3);
 
-	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
+	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, 8, 8, { 200.0f, 70.0f }, 201);
 
 	myContinueBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Continue_Unmarked_64x16px.dds", { 64.f,16.f }, continuePos, "Sprites/UI/pauseMenu/UI_PauseMenu_Text_Continue_Marked_64x16px.dds", 64);
 	myOptionsBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Options_Unmarked_44x16px.dds", { 44.f,16.f }, optionsPos,"Sprites/UI/pauseMenu/UI_PauseMenu_Text_Options_Marked_44x16px.dds", 44);
@@ -117,11 +121,6 @@ void PauseMenu::Update(const float& aDeltaTime)
 void PauseMenu::SetActiveMenu(const bool aStatement)
 {
 	myMenuActive = aStatement;
-
-	if (myMenuActive && !myIsOutOfFocus)
-	{
-		UpdateCollectibleInfo(false);
-	}
 }
 
 bool PauseMenu::IsPauseActive()
@@ -191,6 +190,12 @@ void PauseMenu::UpdateUIElements(const float& aDeltaTime)
 	myFire3->UpdateUIObjects(aDeltaTime);
 	myTitleString->UpdateUIObjects(aDeltaTime);
 
+	myFire->Update(aDeltaTime);
+	myFire2->Update(aDeltaTime);
+	myFire3->Update(aDeltaTime);
+
+	myFireHighlight->Update(aDeltaTime);
+
 	for (auto button : myButtons)
 		button->UpdateButton(aDeltaTime);
 }
@@ -221,7 +226,7 @@ void PauseMenu::CheckActiveAnimations()
 		{
 			myButtons[i]->SetIsHighlightActive(true);
 			myFireHighlight->SetPositionX(myButtons[i]->GetPositionX() - 10.0f);
-			myFireHighlight->SetPositionY(myButtons[i]->GetPositionY());
+			myFireHighlight->SetPositionY(myButtons[i]->GetPositionY() + 4.0f);
 		}
 		else
 			myButtons[i]->SetIsHighlightActive(false);
@@ -313,16 +318,13 @@ void PauseMenu::Notify(const Message& aMessage)
 {
 	if (aMessage.myMessageType == eMessageType::KilledFocus)
 	{
-		myIsOutOfFocus = true;
-
 		if (!myOptionsMenu->IsOptionsActive())
 		{
 			SetActiveMenu(true);
 		}
 	}
-	else if (aMessage.myMessageType == eMessageType::SetFocus)
+	else if (aMessage.myMessageType == eMessageType::TurnedInCollectible)
 	{
-		myIsOutOfFocus = false;
 		UpdateCollectibleInfo(false);
 	}
 }

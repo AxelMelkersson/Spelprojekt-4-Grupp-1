@@ -10,6 +10,7 @@
 #include "ColliderComponent.h"
 #include "AudioManager.h"
 #include "PostMaster.hpp"
+#include "UIPopUp.h"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -27,6 +28,7 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myMinRadiusFromTarget(25.0f),
 	myTimeOffset(0.0f),
 	myType(eCollectibleType::Easy),
+	myWasCollectedBefore(false),
 	myWasCollected(false),
 	myWasTurnedIn(false),
 	myID(anID),
@@ -79,6 +81,8 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 	{
 		spriteIdle->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
 		spritePickup->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
+
+		myWasCollectedBefore = true;
 	}
 
 	myAnimations[0] = Animation(false, false, false, 0, 7, 7, 0.14f, spriteIdle, 16, 16);
@@ -162,6 +166,11 @@ void Collectible::TurnIn()
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
+		if (!myWasCollectedBefore)
+		{
+			CheckPopUpMessages();
+		}
+
 		DataManager::GetInstance().SaveCollectedCollectible(myID);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));
 	}
@@ -199,6 +208,26 @@ void Collectible::ImGuiUpdate()
 
 	ImGui::End();
 }
+
+const void Collectible::CheckPopUpMessages()
+{
+	v2f position = {};
+	if (myType == eCollectibleType::Easy)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, position));
+	}
+	else if (myType == eCollectibleType::Medium)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, position));
+
+	}
+	else if (myType == eCollectibleType::Hard)
+	{
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+	}
+}
+
+
 
 const void Collectible::ActivateTrailEffect()
 {

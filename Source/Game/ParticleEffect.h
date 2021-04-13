@@ -51,7 +51,7 @@ private:
 
 	int myZIndex; 
 
-
+	bool myBatchActive;
 	bool myPauseEffect;
 	bool mySetZIndex;
 	bool mySpawningInLocalSpace;
