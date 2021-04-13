@@ -67,5 +67,5 @@ private:
 	void SetNewPositions(const float& aDeltaTime);
 	void SetNewMedPositions(const float& aDeltaTime);
 	void SetNewHardPositions(const float& aDeltaTime);
-	void UpdateCollectibles(const bool aIniting);
+	void UpdateCollectibles();
 };
