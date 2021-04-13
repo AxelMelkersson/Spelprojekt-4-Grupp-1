@@ -11,12 +11,14 @@ SpeechBubble::SpeechBubble(Scene* aScene)
 	GameObject(aScene),
 	myIsSpeaking(false),
 	myHasFadedIn(false),
-	myHasFadedOut(true),
+	myHasFadedOut(false),
+	myPlayerIsStandingByTheBonfire(false),
 	myRowNumber(5),
 	myAlpha(0.0f),
-	myFadeSpeed(0.5f)
-{
-}
+	myFadeSpeed(0.5f),
+	mySpeakTime(5.f),
+	myTimeIHasSpoken(0.f)
+{}
 
 void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 {
@@ -56,29 +58,46 @@ void SpeechBubble::Update(const float& aDeltaTime)
 	{
 		if (!myHasFadedIn)
 		{
-			GetComponent<SpriteComponent>()->SetColor({ 1, 1, 1, myAlpha });
-			for (int i = 0; i < myRowNumber; ++i)
-			{
-				myTextComps[i]->SetColor({ 1, 1, 1, myAlpha });
-			}
 			if (myAlpha >= 1.f)
 			{
 				myAlpha = 1.f;
 				myHasFadedIn = true;
+				myHasFadedOut = false;
 			}
 			else
 			{
-				myAlpha += aDeltaTime * myFadeSpeed;
+				Fade(true, aDeltaTime);
+			}
+		}
+		else if(!myHasFadedOut)
+		{
+			myTimeIHasSpoken += aDeltaTime;
+			if (myTimeIHasSpoken >= mySpeakTime && !myPlayerIsStandingByTheBonfire)
+			{
+				if (myAlpha <= 0.f)
+				{
+					myAlpha = 0.f;
+					myHasFadedOut = true;
+					myHasFadedIn = false;
+					myIsSpeaking = false;
+					myTimeIHasSpoken = 0.f;
+				}
+				else
+				{
+					Fade(false, aDeltaTime);
+				}
 			}
 		}
 	}
 
+	myPlayerIsStandingByTheBonfire = false;
 	GameObject::Update(aDeltaTime);
 }
 
 void SpeechBubble::Speak()
 {
 	myIsSpeaking = true;
+	myPlayerIsStandingByTheBonfire = true;
 }
 
 bool SpeechBubble::GetIsSpeaking()
@@ -105,7 +124,19 @@ void SpeechBubble::ParseText(const int aIndex)
 	}
 }
 
-std::vector<std::string> SpeechBubble::SplitText(std::string someText)
+void SpeechBubble::Fade(const bool aIsFadingIn, const float& aDeltaTime)
 {
-	return { someText };
+	GetComponent<SpriteComponent>()->SetColor({ 1, 1, 1, myAlpha });
+	for (int i = 0; i < myRowNumber; ++i)
+	{
+		myTextComps[i]->SetColor({ 1, 1, 1, myAlpha });
+	}
+	if (aIsFadingIn)
+	{
+		myAlpha += aDeltaTime * myFadeSpeed;
+	}
+	else
+	{
+		myAlpha -= aDeltaTime * myFadeSpeed;
+	}
 }

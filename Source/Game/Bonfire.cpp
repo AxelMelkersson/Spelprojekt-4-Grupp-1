@@ -73,10 +73,7 @@ void Bonfire::Update(const float& aDeltaTime)
 
 void Bonfire::OnCollision(GameObject* aGameObject)
 {
-	if(mySpeechBubble->GetIsSpeaking() == false)
-	{ 
-		mySpeechBubble->Speak();
-	}
+	mySpeechBubble->Speak();
 
 	Player* player = dynamic_cast<Player*>(aGameObject);
 	if (player)
@@ -85,7 +82,7 @@ void Bonfire::OnCollision(GameObject* aGameObject)
 		{
 			GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		}
-		
+
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerReachedBonfire, 0));
 
 		if (!myHasBeenActivated)
