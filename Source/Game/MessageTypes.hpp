@@ -30,6 +30,8 @@ enum class eMessageType
 	RainEffectForegroundParticle,
 	RainEffectBackgroundParticle,
 	RainEffectNextScreenParticle,
+	RainEffectBackgroundSideParticle,
+	RainEffectForegroundSideParticle,
 	VelocityLinesParticle,
 	CollectibleCollectedParticleEasy,
 	CollectibleCollectedParticleMedium,

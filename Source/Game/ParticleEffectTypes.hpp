@@ -48,5 +48,7 @@ enum class eParticleEffects
 	DustParticleTwo,
 	DustParticleThree,
 	DustParticleStartupOne,
-	DustParticleStartupTwo
+	DustParticleStartupTwo,
+	RainEffectBackgroundSideParticle,
+	RainEffectForegroundSideParticle
 };

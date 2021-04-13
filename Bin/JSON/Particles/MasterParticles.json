@@ -137,6 +137,12 @@
     },
     {
       "file45": "JSON/Particles/infile45.json"
+    },
+    {
+      "file46": "JSON/Particles/infile46.json"
+    },
+    {
+      "file47": "JSON/Particles/infile47.json"
     }
   ],
   "TestEffect": {
