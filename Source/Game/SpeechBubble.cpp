@@ -29,12 +29,12 @@ void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 	spriteComp->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
 	spriteComp->SetSize({ 160, 64 });
 	spriteComp->SetRelativePosition({ GetPosition().x - 110, GetPosition().y - 130 });
-	spriteComp->SetAlpha(myAlpha);
+	spriteComp->SetColor({1, 1, 1, myAlpha });
 
 	for (int i = 0; i < myRowNumber; ++i)
 	{
 		TextComponent* textComp = AddComponent<TextComponent>();
-		textComp->CreateText("Text/alagard.ttf", EFontSize::EFontSize_36, 0);
+		textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_36, 0);
 		textComp->SetRelativePosition(GetPosition().x - 30, GetPosition().y - 50 + i * 10);
 		textComp->SetColor({ 1, 1, 1, myAlpha });
 
@@ -56,7 +56,7 @@ void SpeechBubble::Update(const float& aDeltaTime)
 	{
 		if (!myHasFadedIn)
 		{
-			GetComponent<SpriteComponent>()->SetAlpha(myAlpha);
+			GetComponent<SpriteComponent>()->SetColor({ 1, 1, 1, myAlpha });
 			for (int i = 0; i < myRowNumber; ++i)
 			{
 				myTextComps[i]->SetColor({ 1, 1, 1, myAlpha });
