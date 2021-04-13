@@ -3,7 +3,6 @@
 #include "UIObject.h"
 #include "UIText.h"
 
-
 #include <vector>
 
 class InputWrapper;
@@ -30,11 +29,10 @@ public:
 	OptionsMenu(Scene* aLevelScene);
 		
 	void Init();
-
 	void Update(const float& aDeltaTime);
 
 	void SetActive(const bool aStatement);
-	bool IsOptionsActive();
+	const bool IsOptionsActive() const;
 
 	void DeactivateTutorial();
 	void DeactivateCredits();
@@ -48,7 +46,7 @@ private:
 	PauseMenu* myPauseMenu;
 
 	float myMusicVol;
-	float myVFXVol;
+	float mySFXVol;
 	float myMusicStep;
 	float myVFXStep;
 
@@ -104,12 +102,8 @@ private:
 	void CheckIndexPress(const float& aDeltaTime);
 	void ActivateMenu();
 	void DeactivateMenu();
-	void InitTexts();
 	void UpdateUIElements(const float& aDeltaTime);
 	void CheckActiveAnimations();
-	void UpdateSoundSettings();
 	void InactivateHighlight();
 	
-
 };
-
