@@ -24,7 +24,11 @@ public:
 	const void SetEffect(ParticleStats aEffect);
 	const void SetFollowObject(GameObject& aFollowObject);
 	const void SetWidth(const float anXSize);
+	const void SetHeight(const float anYSize);
 	const void SetOffset(const float aOffset);
+	const void SetGameObject(GameObject* aObject);
+	const void SetNewPlayerSprite(const int aIndex);
+	const void SetReverseImage();
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
@@ -34,6 +38,8 @@ private:
 	std::vector<EffectSprite*> mySprites;
 
 	GameObject* myFollowObject;
+	GameObject* myCheckObject;
+
 	SpritebatchComponent* myBatch;
 	Scene* myScene;
 	ParticleStats myStats;
@@ -45,6 +51,8 @@ private:
 
 	int myZIndex; 
 
+
+	bool myPauseEffect;
 	bool mySetZIndex;
 	bool mySpawningInLocalSpace;
 	bool myKilledEffect;
@@ -63,6 +71,7 @@ private:
 	const void CheckIfSpritesAreDead(const float& aDeltaTime);
 	const void CheckActiveStats();
 	const void DeleteSprites();
+	const void ActivateBatching();
 
 };
 

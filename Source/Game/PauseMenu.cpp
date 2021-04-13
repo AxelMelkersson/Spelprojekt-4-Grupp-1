@@ -41,7 +41,7 @@ void PauseMenu::InitMenu()
 	myInput = CGameWorld::GetInstance()->Input();
 
 	myBackground = std::make_unique<UIObject>(myScene);
-	v2f backgroundPos = {5.f, 5.f};
+	v2f backgroundPos = {8.f, 8.f};
 	myBar = std::make_unique<UIObject>(myScene);
 	v2f barPos = { 30.0f, 90.0f };
 	myFire = std::make_unique<UIObject>(myScene);
@@ -63,7 +63,7 @@ void PauseMenu::InitMenu()
 	myOptionsMenu->SetOpenedFromPauseMenu(this);
 	myOptionsMenu->Init();
 
-	myBackground->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Bakground_304x164px.dds", {520.f, 265.f}, backgroundPos, 200);
+	myBackground->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Bakground_304x164px.dds", {512.f, 256.f}, backgroundPos, 200);
 	myBar->Init("Sprites/UI/pauseMenu/UI_PauseMenu_PauseBarScreen_241x3px.dds", { 275.0f, 5.f }, barPos, 201);
 	myFire->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 8, 8, firePos, 201);
 	myFire2->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 8, 8, firePos2, 201);
@@ -314,7 +314,11 @@ void PauseMenu::Notify(const Message& aMessage)
 	if (aMessage.myMessageType == eMessageType::KilledFocus)
 	{
 		myIsOutOfFocus = true;
-		SetActiveMenu(true);
+
+		if (!myOptionsMenu->IsOptionsActive())
+		{
+			SetActiveMenu(true);
+		}
 	}
 	else if (aMessage.myMessageType == eMessageType::SetFocus)
 	{

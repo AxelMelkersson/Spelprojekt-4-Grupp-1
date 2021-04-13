@@ -18,6 +18,7 @@ private:
 	int myEffectTypeIndex = {};
 	int myZIndex = {};
 
+	bool myReversedImage = {};
 	bool myLockedPosition = {};
 	
 	float myPauseTimer = {};

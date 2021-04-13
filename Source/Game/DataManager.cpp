@@ -105,7 +105,7 @@ EnemyData::EnemyData()
 	}
 }
 
-void DataManager::SaveHighScores(const std::array<float, 10> &someHighscores)
+void DataManager::SaveHighScores(const std::array<float, 10>& someHighscores)
 {
 	for (size_t i = 0; i < someHighscores.size(); i++)
 	{
@@ -201,7 +201,7 @@ void DataManager::ResetHighScores()
 	AcceptJsonWriter("JSON/SaveFile.json");
 }
 
-const CollectableInfo &DataManager::GetCollectableInfo(const int anID) const
+const CollectableInfo& DataManager::GetCollectableInfo(const int anID) const
 {
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
@@ -224,7 +224,7 @@ const bool DataManager::GetBonfireState(const unsigned int anIndex) const
 {
 	return mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].GetBool();
 }
-const std::array<float, 10> &DataManager::GetHighScores() const
+const std::array<float, 10>& DataManager::GetHighScores() const
 {
 	std::array<float, 10> tempArray;
 	for (size_t i = 0; i < mySaveFile["HighScore"].GetArray().Size(); i++)
@@ -242,7 +242,10 @@ const float DataManager::GetMusicVolume() const
 	return mySaveFile["Settings"]["MusicVolume"].GetFloat();
 }
 
-void DataManager::ParseCollectableInfo(){
+void DataManager::ParseCollectableInfo()
+{
+	unsigned int levelIndex = 0;
+
 	for (const auto& levelDoc : myLevelVector)
 	{
 		if (levelDoc.IsObject())
@@ -259,7 +262,7 @@ void DataManager::ParseCollectableInfo(){
 						std::string type = (*object)["type"].GetString();
 						std::stringstream degree(type);
 						degree >> info.myDifficulty;
-						
+
 						if ((*object).HasMember("properties"))
 						{
 							for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
@@ -277,9 +280,51 @@ void DataManager::ParseCollectableInfo(){
 						}
 					}
 				}
+				if (name == "Doors" && (*layer).HasMember("objects"))
+				{
+					for (auto doorObject = (*layer)["objects"].Begin(); doorObject != (*layer)["objects"].End(); ++doorObject)
+					{
+						if ((*doorObject)["type"] == 2)
+						{
+							for (auto innerLayer = myHiddenRooms[levelIndex]["layers"].Begin(); innerLayer != myHiddenRooms[levelIndex]["layers"].End(); ++innerLayer)
+							{
+								std::string innerName = (*innerLayer)["name"].GetString();
+
+								if (innerName == "Collectables" && (*innerLayer).HasMember("objects"))
+								{
+									for (auto object = (*innerLayer)["objects"].Begin(); object != (*innerLayer)["objects"].End(); ++object)
+									{
+										CollectableInfo info;
+										std::string type = (*object)["type"].GetString();
+										std::stringstream degree(type);
+										degree >> info.myDifficulty;
+
+										if ((*object).HasMember("properties"))
+										{
+											for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
+											{
+												if (std::string((*property)["name"].GetString()).compare("BonfireID") == 0)
+												{
+													info.myBonfireID = (*property)["value"].GetInt();
+												}
+												if (std::string((*property)["name"].GetString()).compare("ID") == 0)
+												{
+													info.myID = (*property)["value"].GetInt();
+												}
+											}
+											myCollectableInfo.push_back(info);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
+		levelIndex++;
 	}
+
 
 #ifndef _RETAIL
 	ResetSaveFile();
@@ -347,7 +392,7 @@ void DataManager::AcceptJsonWriter(const std::string aDataPath) const
 	rapidjson::Writer<rapidjson::OStreamWrapper> writer{ osw };
 	mySaveFile.Accept(writer);
 }
-void DataManager::AssignValues(const DataEnum anEnum, const rapidjson::Document &aDoc)
+void DataManager::AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc)
 {
 	switch (anEnum)
 	{

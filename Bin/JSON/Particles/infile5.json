@@ -6,7 +6,7 @@
       "ZIndex": 140,
 
       "EffectTypeIndex": 5,
-      "SpritePath": "Sprites/Particles/ParticleCollectible3Variant2.dds",
+      "SpritePath": "Sprites/Particles/ParticleEnemy1Attack.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
@@ -24,8 +24,8 @@
       "MinSpeed": 30.0,
       "MaxSpeed": 5.0,
 
-      "MinParticleAngularVel": -5.0,
-      "MaxParticleAngularVel": 5.0,
+      "MinParticleAngularVel": 0.0,
+      "MaxParticleAngularVel": 0.0,
 
       "EmitterAngle": 0.0,
 

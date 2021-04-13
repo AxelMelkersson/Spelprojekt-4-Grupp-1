@@ -322,17 +322,17 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		switch (myScreenMovingIndex)
 		{
 		case 0:{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
 			break;
 		}
 		case 1:{
-			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f);
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
 			break;
 		}
 		case 2:{
-			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f);
+			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
 			break;
 		}
@@ -368,31 +368,39 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
 		{
+			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
 			{
 				myMusicVol += 0.05f;
-				myBGDot->SetPositionX(myBGDot->GetPositionX() + myMusicStep);
+				myBGDot->SetPosition(bgDot - v2f(0.0f - myMusicStep, 0));
+				myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 			}
 			else if (mySoundMovingIndex == 1 && mySFXVol < 1.0f)
 			{
 				mySFXVol += 0.05f;
-				myVFXDot->SetPositionX(myVFXDot->GetPositionX() + myVFXStep);
+				myVFXDot->SetPosition(SFXDot - v2f(0.0f - myVFXStep, 0.0f));
 				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
 		{
+			v2f bgDot = { 215.f + (myMusicVol * 40.f), 95.f };
+			v2f SFXDot = { 215.f + (mySFXVol * 40.f), 110.f };
+
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
 			{
 				myMusicVol -= 0.05f;
-				myBGDot->SetPositionX(myBGDot->GetPositionX() - myMusicStep);
+				myBGDot->SetPosition(bgDot + v2f(0.0f - myMusicStep, 0));
+				myAudioManager->GetInstance()->SetMusicVolume(myMusicVol);
 			}
 			else if (mySoundMovingIndex == 1 && mySFXVol > 0.0f)
 			{
 				mySFXVol -= 0.05f;
-				myVFXDot->SetPositionX(myVFXDot->GetPositionX() - myVFXStep);
+				myVFXDot->SetPosition(SFXDot + v2f(0.0f - myVFXStep, 0.0f));
 				myAudioManager->GetInstance()->SetSFXVolume(mySFXVol);
 			}
 		}
@@ -483,11 +491,35 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	mySoundSettings->UpdateUIObjects(aDeltaTime);
 	myBGDot->UpdateUIObjects(aDeltaTime);
 	myVFXDot->UpdateUIObjects(aDeltaTime);
+
 	myResolutions->UpdateUIObjects(aDeltaTime);
 	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
 	if (myIsOpenedFromPause)
 	{
+		my720pHgh->UpdateUIObjects(0);
+		my1080pHgh->UpdateUIObjects(0);
+		my4KHgh->UpdateUIObjects(0);
+
+		if (myScreenMovingIndex == 1)
+		{
+			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+		}
+		else if (myScreenMovingIndex == 2)
+		{
+			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+		}
+		else
+		{
+			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+		}
+
+		myTutorial->Update(0);
+		myTutorial->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
+
+		myCreditsMenu->Update(0);
+		myCreditsMenu->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
+
 		myFireHighlight->Update(aDeltaTime);
 	}
 

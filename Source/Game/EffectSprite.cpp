@@ -32,6 +32,11 @@ void EffectSprite::AddSprite(SpriteComponent* aSprite)
 {
 	mySprite = aSprite;
 	mySprite->SetSpritePath(myPathString);
+	mySprite->SetCeilPosition(myHasCeilPosition);
+
+	if (myReversedImage)
+		mySprite->SetSize({ mySprite->GetSize().x * -1, mySprite->GetSize().y });
+
 	myCurrentColor = myStartColor;
 
 	SetNewColor();
@@ -73,6 +78,16 @@ bool EffectSprite::IsAlive()
 void EffectSprite::SetInactive()
 {
 	myIsAlive = false;
+}
+
+void EffectSprite::SetCeilPosition(const bool aStatement)
+{
+	myHasCeilPosition = aStatement;
+}
+
+void EffectSprite::SetReverseImage()
+{
+	myReversedImage = true;
 }
 
 const void EffectSprite::MoveSprite(const float& aDeltaTime)

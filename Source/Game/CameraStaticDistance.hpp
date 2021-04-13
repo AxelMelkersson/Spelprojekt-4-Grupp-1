@@ -2,6 +2,7 @@
 
 namespace Distance
 {
+	static int myCurrentAreaIndex = -1;
 	static float myStartingCameraPos = {};
 	static float myBackgroundDistanceX = {};
 	static float myCloudDistance = {};

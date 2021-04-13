@@ -21,7 +21,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::ThornDeath,      new AudioClip("Sounds/Effects/ThornDeath.wav",       false, 0.8f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyDeath,      new AudioClip("Sounds/Effects/SpikeDeath.mp3",       false, 0.8f, 1,    AudioLayer::SoundEffect));
 
-	myAudioList.insert_or_assign(AudioList::EnemyNormalIdle, new AudioClip("Sounds/Effects/EnemyIdle.wav",        true,  0.1f, 0.9f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::EnemyNormalIdle, new AudioClip("Sounds/Effects/EnemyIdle.wav",        true,  0.1f, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyKill,       new AudioClip("Sounds/Effects/EnemyKill.wav",        false, 0.1f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyShooting,   new AudioClip("Sounds/Effects/EnemyFire.wav",        false, 0.1f, 1,    AudioLayer::SoundEffect));
 
@@ -46,11 +46,11 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::WalkStoneLeft,   new AudioClip("Sounds/Effects/Step_Stone_Left.wav",  false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
 
 	myAudioList.insert_or_assign(AudioList::LandOnGrassEasy, new AudioClip("Sounds/Effects/LandGrassLight.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LandOnGrassHeavy,new AudioClip("Sounds/Effects/LandGrassHeavy.wav",   false, 0.3f, 0.7f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandOnGrassHeavy,new AudioClip("Sounds/Effects/LandGrassHeavy.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandOnStoneLight,new AudioClip("Sounds/Effects/LandStoneLight.wav",   false, 0.3f, 0.8f,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LandOnStoneHeavy,new AudioClip("Sounds/Effects/LandStoneHeavy.wav",   false, 0.3f, 0.8f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandOnStoneHeavy,new AudioClip("Sounds/Effects/LandStoneHeavy.wav",   false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandBricksLight, new AudioClip("Sounds/Effects/LandBricksLight.wav",  false, 0.7f, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LandBricksHeavy, new AudioClip("Sounds/Effects/LandBricksHeavy.wav",  false, 0.1f, 0.8f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LandBricksHeavy, new AudioClip("Sounds/Effects/LandBricksHeavy.wav",  false, 0.1f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandWoodLight,   new AudioClip("Sounds/Effects/LandWoodLight.wav",    false, 0.4f, 0.8f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandWoodHeavy,   new AudioClip("Sounds/Effects/LandWoodHeavy.wav",    false, 0.2f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::LandGravelLight, new AudioClip("Sounds/Effects/LandGravelLight.wav",  false, 0.4f, 1,    AudioLayer::SoundEffect));
@@ -67,8 +67,8 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::PlayerDeath,     new AudioClip("Sounds/Effects/death.wav",            false, 0.3f, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::ButtonPress,     new AudioClip("Sounds/Effects/ButtonPress.wav",      false, 0.4f, 1,    AudioLayer::SoundEffect));
 
-	myAudioList.insert_or_assign(AudioList::MenuAmbience,    new AudioClip("Sounds/Effects/MenuAmbience.wav",     true,  0.1f, 0.3f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::Main_Menu,       new AudioClip("Sounds/Music/Main_Menu.wav",          true,  0.1f, 0.5f, AudioLayer::Music));
+	myAudioList.insert_or_assign(AudioList::MenuAmbience,    new AudioClip("Sounds/Effects/MenuAmbience.wav",     true, 0.1f, 0.3f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::Main_Menu,       new AudioClip("Sounds/Music/Main_Menu.wav",          true, 0.1f, 0.5f, AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Forest_Theme,    new AudioClip("Sounds/Music/Forest_Theme.wav",       true, 0.1f, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Village_Theme,   new AudioClip("Sounds/Music/Village_Theme.wav",      true, 0.1f, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Castle_Theme,    new AudioClip("Sounds/Music/Castle_Theme.wav",       true, 0.1f, 0.5f,  AudioLayer::Music));

@@ -1,16 +1,4 @@
-{
-       "properties":[
-       {
-        "name":"Area",
-        "type":"int",
-        "value":0
-       }, 
-       {
-        "name":"Particles",
-        "type":"int",
-        "value":0
-       }],
-"compressionlevel":-1,
+{ "compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -181,8 +169,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":48,
-                 "x":-16,
+                 "width":56,
+                 "x":-24,
                  "y":32
                 }, 
                 {
@@ -198,7 +186,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":48,
+                 "width":56,
                  "x":448,
                  "y":48
                 }, 
@@ -600,7 +588,7 @@
                  "y":124
                 }, 
                 {
-                 "height":152,
+                 "height":216,
                  "id":661,
                  "name":"",
                  "rotation":0,
@@ -608,7 +596,29 @@
                  "visible":true,
                  "width":80,
                  "x":96,
-                 "y":0
+                 "y":-64
+                }, 
+                {
+                 "height":8,
+                 "id":667,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":120,
+                 "x":-24,
+                 "y":-64
+                }, 
+                {
+                 "height":8,
+                 "id":668,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":96,
+                 "x":408,
+                 "y":-72
                 }],
          "opacity":1,
          "properties":[
@@ -660,7 +670,7 @@
                          "value":112
                         }],
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":200,
@@ -842,26 +852,26 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":32,
+                 "height":112,
                  "id":650,
                  "name":"",
                  "rotation":0,
                  "type":"1",
                  "visible":true,
-                 "width":27,
+                 "width":8,
                  "x":496,
-                 "y":16
+                 "y":-64
                 }, 
                 {
-                 "height":32,
+                 "height":88,
                  "id":651,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":24,
-                 "x":-40,
-                 "y":0
+                 "width":8,
+                 "x":-24,
+                 "y":-56
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -956,8 +966,19 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":667,
+ "nextobjectid":669,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":2
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":2
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

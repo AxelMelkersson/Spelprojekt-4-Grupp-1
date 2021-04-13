@@ -1,7 +1,7 @@
 {
   "particle": [
     {
-      "EffectType": "CollectibleCollectedParticleEasy",
+      "EffectType": "CollectibleTrailEffectEasy",
 
       "ZIndex": 128,
 
@@ -18,25 +18,25 @@
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.01,
-      "MaxTimeBetweenSpawns": 0.01,
+      "MinTimeBetweenSpawns": 0.99,
+      "MaxTimeBetweenSpawns": 0.99,
 
-      "MinSpeed": 20.0,
-      "MaxSpeed": 10.0,
+      "MinSpeed": 5.0,
+      "MaxSpeed": 1.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 270.0,
+      "EmitterAngle": 0.0,
 
-      "EmitterWidth": 2.0,
-      "EmitterHeigth": 2.0,
+      "EmitterWidth": 0.0,
+      "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 1.5,
-      "MaxParticleLifeTime": 2.0,
+      "MinParticleLifeTime": 3.0,
+      "MaxParticleLifeTime": 4.0,
 
-      "SpawnLifeTime": 0.0,
-      "SpawnEverySecond": 0.0,
+      "SpawnLifeTime": 50.0,
+      "SpawnEverySecond": 0.3,
 
       "Offset": [
         {

@@ -93,6 +93,11 @@ void NormalEnemy::Update(const float& aDeltaTime)
 	{
 		myWayPointComponent->Move(aDeltaTime);
 	}
+
+	if (!myActivatedParticle)
+	{
+		myActivatedParticle = true;
+	}
 	GameObject::Update(aDeltaTime);
 }
 void ShootingEnemy::Update(const float& aDeltaTime)

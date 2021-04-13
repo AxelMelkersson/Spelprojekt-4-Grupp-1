@@ -43,20 +43,14 @@ void Camera::Update(const float& aDeltaTime)
 	if (myIsFollowing)
 	{
 		const v2f& targetPos = GetTargetPosition();
-		SetPosition
-		({
-			myLesserThanViewPortX * Utils::Lerp<float>(myX, targetPos.x - myWorldViewSize.x * 0.5f, myLerp.x * aDeltaTime),
-			myLesserThanViewPortY * Utils::Lerp<float>(myY, targetPos.y - myWorldViewSize.y * 0.5f, myLerp.y * aDeltaTime)
-		});
 
-		if (Utils::Abs(myX - (targetPos.x - myWorldViewSize.x * 0.5f)) <= 0.5f)
+		if ((targetPos - v2f(myX, myY)).LengthSqr() > 1.0f)
 		{
-			myX = myLesserThanViewPortX * (targetPos.x - myWorldViewSize.x * 0.5f);
-		}
-
-		if (Utils::Abs(myY - (targetPos.y - myWorldViewSize.y * 0.5f)) <= 0.5f)
-		{
-			myY = myLesserThanViewPortY * (targetPos.y - myWorldViewSize.y * 0.5f);
+			SetPosition
+			({
+				myLesserThanViewPortX * Utils::Lerp<float>(myX, targetPos.x - myWorldViewSize.x * 0.5f, myLerp.x * aDeltaTime),
+				myLesserThanViewPortY * Utils::Lerp<float>(myY, targetPos.y - myWorldViewSize.y * 0.5f, myLerp.y * aDeltaTime)
+				});
 		}
 
 		SetActive();

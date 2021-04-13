@@ -35,6 +35,7 @@ public:
 
     GameObject* GetPlayer();
     ParticleEffectFactory& GetEffectFactory();
+    Background& GetBackground();
 
 private:
     GameObject* myBlackScreen;
