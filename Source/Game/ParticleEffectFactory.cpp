@@ -392,6 +392,41 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::BonfireIdleParticleHard);
 		break;
 	}
+	case eMessageType::FirefliesParticleOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleOne);
+		break;
+	}
+	case eMessageType::FirefliesParticleTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleTwo);
+		break;
+	}
+	case eMessageType::FirefliesParticleThree:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleThree);
+		break;
+	}
+	case eMessageType::FirefliesParticleStartupOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleStartupOne);
+		break;
+	}
+	case eMessageType::FirefliesParticleStartupTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleStartupTwo);
+		break;
+	}
 	case eMessageType::DustParticleOne:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
@@ -577,6 +612,11 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::DustParticleOne);
 	Subscribe(eMessageType::DustParticleTwo);
 	Subscribe(eMessageType::DustParticleThree);
+	Subscribe(eMessageType::FirefliesParticleStartupOne);
+	Subscribe(eMessageType::FirefliesParticleStartupTwo);
+	Subscribe(eMessageType::FirefliesParticleOne);
+	Subscribe(eMessageType::FirefliesParticleTwo);
+	Subscribe(eMessageType::FirefliesParticleThree);
 	Subscribe(eMessageType::CollectibleCollectedParticleEasy);
 	Subscribe(eMessageType::CollectibleCollectedParticleMedium);
 	Subscribe(eMessageType::CollectibleCollectedParticleHard);
@@ -791,6 +831,31 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
+	case eParticleEffects::FirefliesParticleOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleThree:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleStartupOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleStartupTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
 	case eParticleEffects::DustParticleOne:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
@@ -866,11 +931,11 @@ const void ParticleEffectFactory::StartEffects()
 
 	if (myActiveFireFlies)
 	{
-		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
-		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
-		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::DustParticleThree);
-		ParticleEffect* dustparticleStartupOne = SpawnEffect({boundaries.x * 0.5f, boundaries.y}, eParticleEffects::DustParticleStartupOne);
-		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::DustParticleStartupTwo);
+		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::FirefliesParticleOne);
+		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::FirefliesParticleTwo);
+		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::FirefliesParticleThree);
+		ParticleEffect* dustparticleStartupOne = SpawnEffect({boundaries.x * 0.5f, boundaries.y}, eParticleEffects::FirefliesParticleStartupOne);
+		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::FirefliesParticleStartupTwo);
 
 		dustParticle1->SetHeight(boundaries.y);
 		dustParticle2->SetHeight(boundaries.y);
