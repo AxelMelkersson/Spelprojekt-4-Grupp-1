@@ -19,15 +19,10 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 	GameObject(aLevelScene)
 {
 	myScene = aLevelScene;
-	myCurrentTime = {};
-	myCurrentMTime = {};
-	myCurrentHTime = {};
+	myCurrentTime = 0;
+	myCurrentStayTime = 0;
 	myMaxTime = 4.0f;
 	myStayTime = 1.5f;
-	myCurrentStayTime = {};
-	myCurrentMStayTime = {};
-	myCurrentHStayTime = {};
-	myLevelIndex = 0;
 }
 
 void UIPopUp::InitPopUp()
@@ -41,24 +36,21 @@ void UIPopUp::InitPopUp()
 
 	Config::ourReferenceSize = { 320.f, 180.f };
 
-	myBackgroundE = new UIObject(myScene);
-	myBackgroundM = new UIObject(myScene);
-	myBackgroundH = new UIObject(myScene);
-
-	myFireEasy = new UIObject(myScene);
-	myFireMed = new UIObject(myScene);
-	myFireHard = new UIObject(myScene);
+	myBackground = new UIObject(myScene);
 
 	v2f backPos = { Config::ourReferenceSize.x, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
 	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
 
-	myBackgroundE->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 200);
-	myBackgroundM->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 200);
-	myBackgroundH->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 200);
-	myFireEasy->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
-	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
-	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
+	myFires.push_back(new UIObject(myScene));
+	myFires.push_back(new UIObject(myScene));
+	myFires.push_back(new UIObject(myScene));
+
+	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 200);
+
+	myFires[0]->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
+	myFires[1]->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
+	myFires[2]->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 
 	myCollectibleInfo.push_back(0);
 	myCollectibleInfo.push_back(0);
@@ -84,112 +76,36 @@ void UIPopUp::InitPopUp()
 	myCollectibleString->Init(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
 	myCollectibleString->SetZIndex(201);
-	myCollectibleString2 = new UIText(myScene);
-	myCollectibleString2->Init(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize_48);
-	myCollectibleString2->SetPosition(collectiblePos);
-	myCollectibleString2->SetZIndex(201);
-	myCollectibleString3 = new UIText(myScene);
-	myCollectibleString3->Init(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize_48);
-	myCollectibleString3->SetPosition(collectiblePos);
-	myCollectibleString3->SetZIndex(201);
-
-
-	std::ifstream levelSelectFile("JSON/Menus/LevelSelect/LevelSelect.json");
-	rapidjson::IStreamWrapper levelSelectStream(levelSelectFile);
-
-	rapidjson::Document levelSelect;
-	levelSelect.ParseStream(levelSelectStream);
-
-
-	int bonfireIndex = 0;
-	for (rapidjson::Value::ConstValueIterator iterator = levelSelect["Bonfires"].Begin(); iterator != levelSelect["Bonfires"].End(); ++iterator)
-	{
-		if (DataManager::GetInstance().GetBonfireState(bonfireIndex))
-		{
-			myLevelIndex = bonfireIndex;
-		}
-
-		++bonfireIndex;
-	}
-
 }
 
 
 void UIPopUp::Update(const float& aDeltaTime)
 {
-	if (myEasyActive)
+	if (static_cast<int>(myShowQueue.size()) <= 0)
 	{
-		myCurrentTime += aDeltaTime;
-		SetNewPositions(aDeltaTime);
-		myBackgroundE->UpdateUIObjects(aDeltaTime);
-		myFireEasy->UpdateUIObjects(aDeltaTime);
+		return;
 	}
-	else if (myMedActive)
-	{
-		if (myEasyActive == false && myHardActive == false)
-		{
-			myCurrentMTime += aDeltaTime;
-			SetNewMedPositions(aDeltaTime);
-			myBackgroundM->UpdateUIObjects(aDeltaTime);
-			myFireMed->UpdateUIObjects(aDeltaTime);
-		}
-	}
-	else if (myHardActive)
-	{
-		myCurrentHTime += aDeltaTime;
-		SetNewHardPositions(aDeltaTime);
-		myBackgroundH->UpdateUIObjects(aDeltaTime);
-		myFireHard->UpdateUIObjects(aDeltaTime);
-	}
-	//else
-	//{
-	//	Deactivate();
-	//	myEasyActive = false;
-	//	myMedActive = false;
-	//	myHardActive = false;
-	//}
+
+	myFires[myShowQueue[0]]->SetActive(true);
+	myBackground->SetActive(true);
+	myCollectibleString->Activate();
+
+	myCurrentTime += aDeltaTime;
+	SetNewPositions(aDeltaTime);
+	myBackground->UpdateUIObjects(aDeltaTime);
+	myFires[myShowQueue[0]]->UpdateUIObjects(aDeltaTime);
+
 	if (myCurrentTime > myMaxTime)
 	{
-		Deactivate(ePopUpTypes::Easy);
-	}
-	else if (myCurrentMTime > myMaxTime)
-	{
-		Deactivate(ePopUpTypes::Med);
-	}
-	else if (myCurrentHTime > myMaxTime)
-	{
-		Deactivate(ePopUpTypes::Hard);
+		Deactivate(static_cast<ePopUpTypes>(myShowQueue[0]));
+		myShowQueue.erase(myShowQueue.begin() + 0);
 	}
 
 }
 
 void UIPopUp::Activate(ePopUpTypes aType)
 {
-	switch (aType)
-	{
-	case ePopUpTypes::Easy:
-	{
-		myFireEasy->SetActive(true);
-		myBackgroundE->SetActive(true);
-		myCollectibleString->Activate();
-		myEasyActive = true;
-		break;
-	}
-	case ePopUpTypes::Med:
-	{
-		myFireMed->SetActive(true);
-		myBackgroundM->SetActive(true);
-		myCollectibleString2->Activate();
-		myMedActive = true;
-		break;
-	}
-	case ePopUpTypes::Hard:
-		myFireHard->SetActive(true);
-		myBackgroundH->SetActive(true);
-		myCollectibleString3->Activate();
-		myHardActive = true;
-		break;
-	}
+	myShowQueue.push_back(static_cast<int>(aType));
 
 	UpdateCollectibles();
 }
@@ -198,80 +114,60 @@ void UIPopUp::Notify(const Message& aMessage)
 {
 	switch (aMessage.myMessageType)
 	{
-	case eMessageType::PopUpMessageE:
-	{
-		++myCollectibleCollected[0];
-		Activate(ePopUpTypes::Easy);
-		break;
+		case eMessageType::PopUpMessageE:
+			Activate(ePopUpTypes::Easy);
+			break;
+		case eMessageType::PopUpMessageM:
+			Activate(ePopUpTypes::Med);
+			break;
+		case eMessageType::PopUpMessageH:
+			Activate(ePopUpTypes::Hard);
+			break;
 	}
-	case eMessageType::PopUpMessageM:
-	{
-		++myCollectibleCollected[1];
-		Activate(ePopUpTypes::Med);
-		break;
-	}
-	case eMessageType::PopUpMessageH:
-	{
-		++myCollectibleCollected[2];
-		Activate(ePopUpTypes::Hard);
-		break;
-	}
-
-	}
-
 }
 
 void UIPopUp::Deactivate(ePopUpTypes aType)
 {
+	myCurrentTime = 0.0f;
+	myCurrentStayTime = 0.f;
 
-	switch (aType)
-	{
-	case ePopUpTypes::Easy:
-		myCurrentTime = 0.0f;
-		myCurrentStayTime = 0.f;
-		myIsMaxLeft = false;
-		myFireEasy->SetActive(false);
-		myBackgroundE->SetActive(false);
-		myCollectibleString->Deactivate();
-		myEasyActive = false;
-		break;
-	case ePopUpTypes::Med:
-		myCurrentMTime = 0.0f;
-		myCurrentMStayTime = 0.f;
-		myIsMMaxLeft = false;
-		myFireMed->SetActive(false);
-		myBackgroundM->SetActive(false);
-		myCollectibleString2->Deactivate();
-		myMedActive = false;
-		break;
-	case ePopUpTypes::Hard:
-		myCurrentHTime = 0.0f;
-		myCurrentHStayTime = 0.f;
-		myIsHMaxLeft = false;
-		myFireHard->SetActive(false);
-		myBackgroundH->SetActive(false);
-		myCollectibleString3->Deactivate();
-		myHardActive = false;
-		break;
-	}
+	myIsMaxLeft = false;
+	
+	myBackground->SetActive(false);
+	myCollectibleString->Deactivate();
+
+	v2f backPos = { Config::ourReferenceSize.x, 15.f };
+	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
+	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
+
+	myBackground->SetPosition(backPos);
+	myCollectibleString->SetPosition(collectiblePos);
+
+	myFires[0]->SetActive(false);
+	myFires[1]->SetActive(false);
+	myFires[2]->SetActive(false);
+
+	myFires[0]->SetPosition(firePos);
+	myFires[1]->SetPosition(firePos);
+	myFires[2]->SetPosition(firePos);
 }
 
 void UIPopUp::SetNewPositions(const float& aDeltaTime)
 {
 	Config::ourReferenceSize = { 320.f, 180.f };
 
-	if (myEasyActive)
+	if (static_cast<int>(myShowQueue.size()) > 0)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackgroundE->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
+			if (myBackground->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
 			{
 				myIsMaxLeft = true;
 			}
 			else
 			{
-				myBackgroundE->SetPositionX(myBackgroundE->GetStartPosition().x - 50.f * aDeltaTime);
-				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x - 50.f * aDeltaTime);
+				myBackground->SetPositionX(myBackground->GetStartPosition().x - 50.f * aDeltaTime);
+				myFires[myShowQueue[0]]->SetPositionX(myFires[myShowQueue[0]]->GetStartPosition().x - 50.f * aDeltaTime);
 				myCollectibleString->SetPosition(myCollectibleString->GetPosition() - v2f(50.f * aDeltaTime, 0));
 			}
 		}
@@ -280,68 +176,9 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 			myCurrentStayTime += aDeltaTime;
 			if (myCurrentStayTime > myStayTime)
 			{
-				myBackgroundE->SetPositionX(myBackgroundE->GetStartPosition().x + 50.f * aDeltaTime);
-				myFireEasy->SetPositionX(myFireEasy->GetStartPosition().x + 50.f * aDeltaTime);
+				myBackground->SetPositionX(myBackground->GetStartPosition().x + 50.f * aDeltaTime);
+				myFires[myShowQueue[0]]->SetPositionX(myFires[myShowQueue[0]]->GetStartPosition().x + 50.f * aDeltaTime);
 				myCollectibleString->SetPosition(myCollectibleString->GetPosition() + v2f(50.f * aDeltaTime, 0));
-			}
-		}
-	}
-}
-
-void UIPopUp::SetNewMedPositions(const float& aDeltaTime)
-{
-	Config::ourReferenceSize = { 320.f, 180.f };
-
-	if (myMedActive)
-	{
-		if (myIsMMaxLeft == false)
-		{
-			if (myBackgroundM->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
-			{
-				myIsMMaxLeft = true;
-			}
-			myBackgroundM->SetPositionX(myBackgroundM->GetStartPosition().x - 50.f * aDeltaTime);
-			myFireMed->SetPositionX(myFireMed->GetStartPosition().x - 50.f * aDeltaTime);
-			myCollectibleString2->SetPosition(myCollectibleString2->GetPosition() - v2f(50.f * aDeltaTime, 0));
-		}
-		else if (myIsMMaxLeft == true)
-		{
-			myCurrentMStayTime += aDeltaTime;
-			if (myCurrentMStayTime > myStayTime)
-			{
-				myBackgroundM->SetPositionX(myBackgroundM->GetStartPosition().x + 50.f * aDeltaTime);
-				myFireMed->SetPositionX(myFireMed->GetStartPosition().x + 50.f * aDeltaTime);
-				myCollectibleString2->SetPosition(myCollectibleString2->GetPosition() + v2f(50.f * aDeltaTime, 0));
-			}
-		}
-	}
-}
-
-void UIPopUp::SetNewHardPositions(const float& aDeltaTime)
-{
-	Config::ourReferenceSize = { 320.f, 180.f };
-
-	if (myHardActive)
-	{
-		if (myIsHMaxLeft == false)
-		{
-			if (myBackgroundH->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
-			{
-				myIsHMaxLeft = true;
-			}
-			myBackgroundH->SetPositionX(myBackgroundH->GetStartPosition().x - 50.f * aDeltaTime);
-			myFireHard->SetPositionX(myFireHard->GetStartPosition().x - 50.f * aDeltaTime);
-			myCollectibleString3->SetPosition(myCollectibleString3->GetPosition() - v2f(50.f * aDeltaTime, 0));
-		}
-		else if (myIsHMaxLeft == true)
-		{
-			myCurrentHStayTime += aDeltaTime;
-			if (myCurrentHStayTime > myStayTime)
-			{
-				myBackgroundH->SetPositionX(myBackgroundH->GetPositionX() + 50.f * aDeltaTime);
-				myFireHard->SetPositionX(myFireHard->GetPositionX() + 50.f * aDeltaTime);
-				myCollectibleString3->SetPosition(myCollectibleString3->GetPosition() + v2f(50.f * aDeltaTime, 0));
-
 			}
 		}
 	}
@@ -350,9 +187,33 @@ void UIPopUp::SetNewHardPositions(const float& aDeltaTime)
 
 void UIPopUp::UpdateCollectibles()
 {
+	if (static_cast<int>(myShowQueue.size()) <= 0)
+	{
+		return;
+	}
 
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]));
-	myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]));
-	myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]));
+	myCollectibleInfo.clear();
+	myCollectibleCollected.clear();
 
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
+
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
+
+	for (int j = 0; j < DataManager::GetInstance().GetCollectableCount(); ++j)
+	{
+		CollectableInfo collectibleInfo = DataManager::GetInstance().GetCollectableInfoIndex(j);
+
+		++myCollectibleInfo[collectibleInfo.myDifficulty];
+
+		if (collectibleInfo.myCollectedState)
+		{
+			++myCollectibleCollected[collectibleInfo.myDifficulty];
+		}
+	}
+
+	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myShowQueue[0]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[0]]));
 }

@@ -207,7 +207,7 @@ void Player::Update(const float& aDeltaTime)
 
 	if (myIsSpawning)
 	{
-		if (myAnimationComponent->GetCurrentIndex() >= 11)
+		if (myCurrentAnimationIndex == 13 && myAnimationComponent->GetCurrentIndex() >= 11)
 		{
 			myIsSpawning = false;
 		}
@@ -615,6 +615,11 @@ void Player::AnimationState()
 	{
 		animation->SetAnimation(&myAnimations[1]);
 		myCurrentAnimationIndex = 1;
+	}
+	if (Utils::Abs(myCurrentVelocity.y) > 0 && myHasLanded && myCurrentAnimationIndex == 0)
+	{
+		animation->SetAnimation(&myAnimations[0]);
+		myCurrentAnimationIndex = 0;
 	}
 
 	if (myCurrentAnimationIndex != 2 && myCurrentAnimationIndex != 3 && myCurrentAnimationIndex != 4 && !myHasLanded)
@@ -1082,13 +1087,18 @@ void Player::SpawnAnimation()
 {
 	myAnimationComponent->SetAnimation(&myAnimations[13]);
 	myAnimationComponent->SetNextAnimation(&myAnimations[14]);
+
+	myCurrentAnimationIndex = 13;
 }
 
 void Player::StopSpawn()
 {
-	SetAnimation(0);
-	myCurrentAnimationIndex = 0;
-	myIsSpawning = false;
+	if (myCurrentAnimationIndex != 13 && myIsSpawning)
+	{
+		SetAnimation(0);
+		myCurrentAnimationIndex = 0;
+		myIsSpawning = false;
+	}
 }
 
 #ifdef _DEBUG

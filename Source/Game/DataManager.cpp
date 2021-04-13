@@ -477,6 +477,7 @@ void DataManager::AssignCollectedState()
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
 	}
 }
+#ifndef _RETAIL
 void DataManager::FindCollectibleDuplicates() const
 {
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
@@ -487,9 +488,10 @@ void DataManager::FindCollectibleDuplicates() const
 			{
 				if (myCollectableInfo[i].myID == myCollectableInfo[e].myID)
 				{
-					std::cout << "Collectible ID " << myCollectableInfo[i].myID << " is used more than once. \n";
+					//std::cout << "Collectible ID " << myCollectableInfo[i].myID << " is used more than once. \n";
 				}
 			}
 		}
 	}
 }
+#endif // !_RETAIL

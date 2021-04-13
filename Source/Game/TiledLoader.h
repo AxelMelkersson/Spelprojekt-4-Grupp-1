@@ -72,5 +72,4 @@ private:
 
 	bool myLoadsFromLevelSelect = false;
 	bool myContinued = false;
-	bool myBonfireFound = false;
 };
