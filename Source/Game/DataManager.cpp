@@ -284,35 +284,38 @@ void DataManager::ParseCollectableInfo()
 				{
 					for (auto doorObject = (*layer)["objects"].Begin(); doorObject != (*layer)["objects"].End(); ++doorObject)
 					{
-						if ((*doorObject)["type"] == 2)
+						if ((*doorObject)["type"] == "2")
 						{
-							for (auto innerLayer = myHiddenRooms[levelIndex]["layers"].Begin(); innerLayer != myHiddenRooms[levelIndex]["layers"].End(); ++innerLayer)
+							if (myHiddenRooms.find(static_cast<int>(levelIndex)) != myHiddenRooms.end())
 							{
-								std::string innerName = (*innerLayer)["name"].GetString();
-
-								if (innerName == "Collectables" && (*innerLayer).HasMember("objects"))
+								for (auto innerLayer = myHiddenRooms.at(static_cast<int>(levelIndex))["layers"].Begin(); innerLayer != myHiddenRooms.at(static_cast<int>(levelIndex))["layers"].End(); ++innerLayer)
 								{
-									for (auto object = (*innerLayer)["objects"].Begin(); object != (*innerLayer)["objects"].End(); ++object)
-									{
-										CollectableInfo info;
-										std::string type = (*object)["type"].GetString();
-										std::stringstream degree(type);
-										degree >> info.myDifficulty;
+									std::string innerName = (*innerLayer)["name"].GetString();
 
-										if ((*object).HasMember("properties"))
+									if (innerName == "Collectables" && (*innerLayer).HasMember("objects"))
+									{
+										for (auto object = (*innerLayer)["objects"].Begin(); object != (*innerLayer)["objects"].End(); ++object)
 										{
-											for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
+											CollectableInfo info;
+											std::string type = (*object)["type"].GetString();
+											std::stringstream degree(type);
+											degree >> info.myDifficulty;
+
+											if ((*object).HasMember("properties"))
 											{
-												if (std::string((*property)["name"].GetString()).compare("BonfireID") == 0)
+												for (auto property = (*object)["properties"].Begin(); property != (*object)["properties"].End(); ++property)
 												{
-													info.myBonfireID = (*property)["value"].GetInt();
+													if (std::string((*property)["name"].GetString()).compare("BonfireID") == 0)
+													{
+														info.myBonfireID = (*property)["value"].GetInt();
+													}
+													if (std::string((*property)["name"].GetString()).compare("ID") == 0)
+													{
+														info.myID = (*property)["value"].GetInt();
+													}
 												}
-												if (std::string((*property)["name"].GetString()).compare("ID") == 0)
-												{
-													info.myID = (*property)["value"].GetInt();
-												}
+												myCollectableInfo.push_back(info);
 											}
-											myCollectableInfo.push_back(info);
 										}
 									}
 								}
