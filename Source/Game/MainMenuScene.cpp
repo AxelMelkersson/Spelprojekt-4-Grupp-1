@@ -93,14 +93,14 @@ void MainMenuScene::Update(const float& aDeltaTime)
 
 void MainMenuScene::InitObjects()
 {
-	myBackground = std::make_unique<UIObject>(this);
-	myTitleSprite = std::make_unique<UIObject>(this);
-	myFireHighlight = std::make_unique<UIObject>(this);
-	myNewGameBtn = std::make_unique<UIButton>(this);
-	mySpeedrunModeBtn = std::make_unique<UIButton>(this);
-	myLevelSelectBtn = std::make_unique<UIButton>(this);
-	myOptionsBtn = std::make_unique<UIButton>(this);
-	myExitGameBtn = std::make_unique<UIButton>(this);
+	myBackground = new UIObject(this);
+	myTitleSprite = new UIObject(this);
+	myFireHighlight = new UIObject(this);
+	myNewGameBtn = new UIButton(this);
+	mySpeedrunModeBtn = new UIButton(this);
+	myLevelSelectBtn = new UIButton(this);
+	myOptionsBtn = new UIButton(this);
+	myExitGameBtn = new UIButton(this);
 
 	v2f backgroundPos = { 0.f, 0.f };
 	v2f titleSpritePos = { 101.f, 16.f };
@@ -134,7 +134,7 @@ void MainMenuScene::InitObjects()
 
 	myBackground->Init("Sprites/UI/startMenu/UI_startMenu_Background_320x180px.dds", { 520.f, 265.f }, backgroundPos, 200);
 	myTitleSprite->Init("Sprites/UI/startMenu/UI_startMenu_logotype_A_192x64px.dds", { 192.0f, 64.0f }, titleSpritePos, 201);
-	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, { 200.0f, 70.0f }, 201);
+	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, 8, 8, { 200.0f, 70.0f }, 201);
 
 	myNewGameBtn->Init(playSpritePath, playPos, newGameBtnPos, playSpritePathAnim, playPos.x);
 	myLevelSelectBtn->Init("Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Unmarked_72x16px.dds", { 72.f,16.f }, levelSelectBtnPos, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_Marked_72x16px.dds", 72, "Sprites/UI/startMenu/UI_StartMenu_Text_LevelSelect_80x9px_Locked.dds", myLevelSelectUnlocked);
@@ -147,11 +147,11 @@ void MainMenuScene::InitObjects()
 
 	InitLogoAnimations();
 
-	myButtons.push_back(myNewGameBtn.get());
-	myButtons.push_back(myLevelSelectBtn.get());
-	myButtons.push_back(mySpeedrunModeBtn.get());
-	myButtons.push_back(myOptionsBtn.get());
-	myButtons.push_back(myExitGameBtn.get());
+	myButtons.push_back(myNewGameBtn);
+	myButtons.push_back(myLevelSelectBtn);
+	myButtons.push_back(mySpeedrunModeBtn);
+	myButtons.push_back(myOptionsBtn);
+	myButtons.push_back(myExitGameBtn);
 }
 
 void MainMenuScene::UpdateObjects(const float& aDeltaTime)
@@ -212,6 +212,8 @@ void MainMenuScene::CheckButtonsPress()
 			{
 				CGameWorld::GetInstance()->GetLevelManager().UsedLevelSelect();
 			}
+
+			CGameWorld::GetInstance()->GetLevelManager().Continued();
 
 			//CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);

@@ -37,6 +37,7 @@ ParticleEffect::ParticleEffect(Scene* aLevelScene)
 	myInitBatching = {};
 	mySetZIndex = {};
 	myPauseEffect = false;
+	myBatchActive = {};
 }
 
 ParticleEffect::~ParticleEffect()
@@ -200,10 +201,11 @@ const void ParticleEffect::CheckIfEffectIsDead()
 
 		if (!spritesAreMoving)
 		{
-			if (myBatch != NULL)
+			if (myBatch != NULL && myBatchActive)
 			{
 				delete myBatch;
 				myBatch = nullptr;
+				myBatchActive = false;
 			}
 
 			DeleteComponents();
@@ -281,8 +283,13 @@ const void ParticleEffect::DeleteSprites()
 		mySprites.erase(mySprites.begin() + x);
 	}
 
-	delete myBatch;
-	myBatch = nullptr;
+	if (myBatch != NULL && myBatchActive)
+	{
+		delete myBatch;
+		myBatch = nullptr;
+		myBatchActive = false;
+	}
+
 	DeleteComponents();
 	mySprites.clear();
 }
@@ -293,6 +300,8 @@ const void ParticleEffect::ActivateBatching()
 	myBatch->SetSpritePath(myStats.mySpritePath);
 	myBatch->SetSamplerFilter(ESamplerFilter_Point);
 	myBatch->Init();
+
+	myBatchActive = true;
 }
 
 const void ParticleEffect::SetEffect(ParticleStats aEffect)

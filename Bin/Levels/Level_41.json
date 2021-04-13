@@ -405,8 +405,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":528,
-                 "x":56,
+                 "width":608,
+                 "x":-24,
                  "y":-40
                 }, 
                 {
@@ -660,7 +660,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":5
+                         "value":7
                         }, 
                         {
                          "name":"ID",
@@ -668,7 +668,7 @@
                          "value":111
                         }],
                  "rotation":0,
-                 "type":"1",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":372,
@@ -756,26 +756,26 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":56,
+                 "height":216,
                  "id":512,
                  "name":"",
                  "rotation":0,
                  "type":"1",
                  "visible":true,
-                 "width":32,
+                 "width":8,
                  "x":576,
-                 "y":128
+                 "y":-32
                 }, 
                 {
-                 "height":56,
+                 "height":224,
                  "id":524,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":32,
-                 "x":-48,
-                 "y":136
+                 "width":8,
+                 "x":-24,
+                 "y":-32
                 }],
          "opacity":1,
          "type":"objectgroup",

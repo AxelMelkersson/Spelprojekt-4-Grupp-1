@@ -231,8 +231,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":55,
-                 "x":-23,
+                 "width":56,
+                 "x":-24,
                  "y":200
                 }, 
                 {
@@ -451,7 +451,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":72,
+                 "width":88,
                  "x":368,
                  "y":-27
                 }, 
@@ -748,6 +748,17 @@
                  "width":24,
                  "x":284,
                  "y":220
+                }, 
+                {
+                 "height":8,
+                 "id":377,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":384,
+                 "x":-24,
+                 "y":-48
                 }],
          "opacity":1,
          "properties":[
@@ -791,7 +802,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":5
+                         "value":7
                         }, 
                         {
                          "name":"ID",
@@ -863,26 +874,26 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":40,
+                 "height":72,
                  "id":364,
                  "name":"",
                  "rotation":0,
                  "type":"1",
                  "visible":true,
-                 "width":30,
+                 "width":8,
                  "x":456,
-                 "y":144
+                 "y":112
                 }, 
                 {
-                 "height":40,
+                 "height":240,
                  "id":365,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":32,
-                 "x":-48,
-                 "y":160
+                 "width":8,
+                 "x":-24,
+                 "y":-40
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1025,7 +1036,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":377,
+ "nextobjectid":378,
  "orientation":"orthogonal",
  "properties":[
         {

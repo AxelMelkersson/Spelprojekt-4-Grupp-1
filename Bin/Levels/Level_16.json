@@ -1,16 +1,4 @@
-{
-       "properties":[
-       {
-        "name":"Area",
-        "type":"int",
-        "value":0
-       }, 
-       {
-        "name":"Particles",
-        "type":"int",
-        "value":0
-       }],
-"compressionlevel":-1,
+{ "compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -2350,7 +2338,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":44,
+                 "width":68,
                  "x":916,
                  "y":128
                 }],
@@ -2385,7 +2373,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }, 
                         {
                          "name":"ID",
@@ -2490,7 +2478,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2531,6 +2519,17 @@
  "nextlayerid":19,
  "nextobjectid":457,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":0
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":0
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

@@ -26,6 +26,8 @@ public:
     void SetRelativePositionY(const float aY);
     void SetFontSize(EFontSize aFontSize);
 
+    const Tga2D::Vector2f& GetPosition();
+
     float GetWidth();
 
     const bool& IsActive() const;

@@ -148,7 +148,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":72,
+                 "width":80,
                  "x":464,
                  "y":248
                 }, 
@@ -448,8 +448,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":64,
-                 "x":456,
+                 "width":87,
+                 "x":457,
                  "y":184
                 }, 
                 {
@@ -821,7 +821,7 @@
                  "y":60
                 }, 
                 {
-                 "height":216,
+                 "height":184,
                  "id":750,
                  "name":"",
                  "rotation":0,
@@ -829,7 +829,7 @@
                  "visible":true,
                  "width":8,
                  "x":-8,
-                 "y":-80
+                 "y":-48
                 }, 
                 {
                  "height":48,
@@ -982,8 +982,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":40,
-                 "x":-16,
+                 "width":48,
+                 "x":-24,
                  "y":240
                 }, 
                 {
@@ -1128,8 +1128,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":8,
-                 "x":0,
+                 "width":24,
+                 "x":-16,
                  "y":192
                 }, 
                 {
@@ -1199,6 +1199,17 @@
                  "width":8,
                  "x":276,
                  "y":228
+                }, 
+                {
+                 "height":8,
+                 "id":786,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":360,
+                 "x":-8,
+                 "y":-56
                 }],
          "opacity":1,
          "properties":[
@@ -1242,7 +1253,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":4
+                         "value":5
                         }, 
                         {
                          "name":"ID",
@@ -1250,7 +1261,7 @@
                          "value":113
                         }],
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":304,
@@ -1398,26 +1409,26 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":32,
+                 "height":48,
                  "id":650,
                  "name":"",
                  "rotation":0,
                  "type":"1",
                  "visible":true,
-                 "width":27,
+                 "width":8,
                  "x":536,
-                 "y":216
+                 "y":200
                 }, 
                 {
-                 "height":32,
+                 "height":56,
                  "id":651,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":24,
-                 "x":-40,
-                 "y":208
+                 "width":8,
+                 "x":-24,
+                 "y":184
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1548,7 +1559,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":786,
+ "nextobjectid":787,
  "orientation":"orthogonal",
  "properties":[
         {

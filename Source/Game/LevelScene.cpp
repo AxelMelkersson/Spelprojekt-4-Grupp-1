@@ -63,6 +63,9 @@ void LevelScene::Load()
 
 	AddBlackScreen();
 
+	myPopUp = new UIPopUp(this);
+	myPopUp->InitPopUp();
+
 	myPauseMenu = new PauseMenu(this);
 	myPauseMenu->InitMenu();
 
@@ -78,6 +81,8 @@ void LevelScene::Load()
 
 void LevelScene::Unload()
 {
+	delete myPauseMenu;
+
 	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
@@ -164,6 +169,8 @@ void LevelScene::Update(const float& aDeltaTime)
 	}
 
 	myPauseMenu->Update(aDeltaTime);
+
+	myPopUp->Update(aDeltaTime);
 
 	if (myPauseMenu->IsPauseActive() == false && myPauseMenu->GetOptionsIsActive() == false)
 		Scene::Update(aDeltaTime);

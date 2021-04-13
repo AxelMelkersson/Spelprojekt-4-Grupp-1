@@ -20,6 +20,7 @@ class PauseMenu : Subscriber
 {
 public:
 	PauseMenu(Scene* aLevelScene);
+	~PauseMenu();
 
 	void InitMenu();
 
@@ -40,16 +41,16 @@ private:
 
 	OptionsMenu* myOptionsMenu;
 
-	std::unique_ptr<UIObject> myBackground;
-	std::unique_ptr<UIObject> myBar;
-	std::unique_ptr<UIObject> myFire;
-	std::unique_ptr<UIObject> myFire2;
-	std::unique_ptr<UIObject> myFire3;
-	std::unique_ptr<UIObject> myFireHighlight;
+	UIObject* myBackground;
+	UIObject* myBar;
+	UIObject* myFire;
+	UIObject* myFire2;
+	UIObject* myFire3;
+	UIObject* myFireHighlight;
 	
-	std::unique_ptr<UIObject> myContinueHighlight;
-	std::unique_ptr<UIObject> myLevelSelectHighlight;
-	std::unique_ptr<UIObject> myMainMenuHighlight;
+	UIObject* myContinueHighlight;
+	UIObject* myLevelSelectHighlight;
+	UIObject* myMainMenuHighlight;
 
 	std::vector<UIObject*> myHighlights;
 
@@ -59,11 +60,11 @@ private:
 	std::vector<int> myTotalCollectibleInfo;
 	std::vector<int> myTotalCollectibleInfoCollected;
 
-	std::unique_ptr<UIButton> myContinueBtn;
-	std::unique_ptr<UIButton> myOptionsBtn;
-	std::unique_ptr<UIButton> myMainMenuBtn;
+	UIButton* myContinueBtn;
+	UIButton* myOptionsBtn;
+	UIButton* myMainMenuBtn;
 
-	std::unique_ptr<UIObject> myTitleString;
+	UIObject* myTitleString;
 	UIText* myCollectibleString;
 	UIText* myCollectibleString2;
 	UIText* myCollectibleString3;
@@ -75,7 +76,6 @@ private:
 	bool myMenuActive;
 	bool myIsSpeedrun;
 	bool mySkipOneUpdate;
-	bool myIsOutOfFocus;
 
 	void CheckIndexPress();
 	void ActivateMenu();

@@ -13,7 +13,9 @@ enum class eMessageType
 	SetFocus,
 	TurnedInCollectible,
 	Vibrate,
-
+	PopUpMessageE,
+	PopUpMessageM,
+	PopUpMessageH,
 	PlayerLandedParticle,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
@@ -58,5 +60,4 @@ enum class eMessageType
 	UnstablePlatformParticleOne,
 	UnstablePlatformParticleTwo,
 	UnstableGroundIdleParticle
-
 };

@@ -3,13 +3,15 @@
 #include "../External/Headers/CU/Utilities.h"
 #include "GameWorld.h"
 #include "TextComponent.h"
-#include <assimp\StringUtils.h>
 #include "SpeedrunManager.h"
 #include "SpriteComponent.h"
+#include "Camera.h"
 
 Timer::Timer(Scene* aLevelScene)
 	:
 	GameObject(aLevelScene),
+	myCamera(&aLevelScene->GetCamera()),
+	myStartPosition(),
 	myIsActive(false),
 	myTime(0.0f),
 	myLastTime(0.0f),
@@ -21,19 +23,20 @@ void Timer::Init(const v2f aPos)
 {
 	SpriteComponent* spriteComponent = AddComponent<SpriteComponent>();
 	spriteComponent->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
-	spriteComponent->SetRelativePosition({ 34, 10 });
 	spriteComponent->SetSize(v2f(54.0f, 12.0f));
 
 	TextComponent* textComponent = AddComponent<TextComponent>();
 	textComponent->CreateText("Text/alagard.ttf", EFontSize::EFontSize_36, 0);
 	textComponent->SetRelativePosition(aPos.x, aPos.y);
 	textComponent->Activate();
+	
 	SetZIndex(200);
-
+	myStartPosition = { 34, 10 };
 }
 void Timer::Update(const float& aDeltatime)
 {
 	GetComponent<TextComponent>()->SetText(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetTimeOutput(myTime));
+	GameObject::SetPosition(myCamera->GetPosition() + myStartPosition);
 
 	myTime += CGameWorld::GetInstance()->GetTimer()->GetTotalTime() - myLastTime - myStartTime + myTotalTime;
 	myLastTime = myTime;
