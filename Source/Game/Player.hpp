@@ -133,6 +133,8 @@ private:
 	float mySpringTimer;
 	float myGlideFactor;
 
+	float myResetTimer;
+
 	int myCurrentAnimationIndex;
 	int myDirectionX;
 

@@ -82,6 +82,8 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 
 	myGlideFactor = 0.14f;
 
+	myResetTimer = 1.0f;
+
 	mySpringVelocity = {};
 	myPercentageLeftVelocity = {};
 	mySpringVelocityRetardation = {};
@@ -225,6 +227,7 @@ void Player::Update(const float& aDeltaTime)
 
 	if (myHasDied)
 	{
+		myResetTimer -= aDeltaTime;
 		Kill();
 		CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
 		GetComponent<PhysicsComponent>()->SetVelocity(v2f(0.0f, 0.0f));
@@ -779,7 +782,7 @@ void Player::Kill()
 		AudioManager::GetInstance()->PlayAudio(AudioList::PlayerRespawn);
 		KillReset();
 	}
-	else if (myAnimationComponent->GetIsDisplayedOnce() && myAnimationComponent->GetHasBeenDisplayedOnce())
+	else if (myResetTimer <= 0)
 	{
 		LevelScene* levelScene = dynamic_cast<LevelScene*>(myScene);
 		if (levelScene)

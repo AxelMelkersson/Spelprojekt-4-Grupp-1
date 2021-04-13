@@ -698,7 +698,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":4
+                         "value":7
                         }, 
                         {
                          "name":"ID",
