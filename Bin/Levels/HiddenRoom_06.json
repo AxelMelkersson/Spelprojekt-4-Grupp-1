@@ -177,7 +177,7 @@
                  "y":288
                 }, 
                 {
-                 "height":48,
+                 "height":64,
                  "id":521,
                  "name":"",
                  "rotation":0,
@@ -199,7 +199,7 @@
                  "y":360
                 }, 
                 {
-                 "height":96,
+                 "height":112,
                  "id":549,
                  "name":"",
                  "rotation":0,
@@ -260,7 +260,7 @@
                  "y":96
                 }, 
                 {
-                 "height":184,
+                 "height":200,
                  "id":558,
                  "name":"",
                  "rotation":0,
@@ -387,7 +387,7 @@
                  "y":156
                 }, 
                 {
-                 "height":40,
+                 "height":56,
                  "id":574,
                  "name":"",
                  "rotation":0,
@@ -431,7 +431,7 @@
                  "y":288
                 }, 
                 {
-                 "height":80,
+                 "height":96,
                  "id":578,
                  "name":"",
                  "rotation":0,
@@ -591,7 +591,7 @@
                  "y":0
                 }, 
                 {
-                 "height":256,
+                 "height":271,
                  "id":596,
                  "name":"",
                  "rotation":0,
@@ -698,12 +698,12 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":6
+                         "value":4
                         }, 
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":167
+                         "value":663
                         }],
                  "rotation":0,
                  "type":"2",
