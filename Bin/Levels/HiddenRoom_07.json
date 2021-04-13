@@ -880,7 +880,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":24,
+                 "width":32,
                  "x":712,
                  "y":0
                 }, 
@@ -1530,7 +1530,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":256,
+                 "height":56,
                  "id":512,
                  "name":"",
                  "rotation":0,
@@ -1538,7 +1538,7 @@
                  "visible":true,
                  "width":8,
                  "x":736,
-                 "y":40
+                 "y":240
                 }],
          "opacity":1,
          "type":"objectgroup",
