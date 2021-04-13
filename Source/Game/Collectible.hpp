@@ -50,6 +50,7 @@ private:
 	bool myWasCollectedBefore;
 	bool myWasCollected;
 	bool myWasTurnedIn;
+	bool myWasTurnedInWhenEnteringDoor;
 
 	const unsigned int myID;
 	const unsigned int myBonfireID;
