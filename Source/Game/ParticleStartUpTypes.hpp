@@ -1,6 +1,6 @@
 #pragma once
 
-enum class EffectStartUpTypes
+enum class eEffectStartUpTypes
 {
 	FireFlies,
 	RainForeground_Background,

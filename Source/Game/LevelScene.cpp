@@ -52,7 +52,7 @@ void LevelScene::Load()
 	myIsTransitioning = false;
 
 	myEffectFactory = new ParticleEffectFactory(this);
-	myEffectFactory->StartDustEffects();
+	myEffectFactory->StartFirefliesEffects();
 	//myEffectFactory->StartRainEffects();
 
 	myPlayer = new Player(this);

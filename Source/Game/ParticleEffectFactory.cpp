@@ -534,26 +534,28 @@ void ParticleEffectFactory::StartEffect(const int aIndex)
 	{
 	case eEffectStartUpTypes::FireFlies:
 	{
-
+		myActiveFireFlies = true;
 		break;
 	}
 	case eEffectStartUpTypes::RainForeground_Background:
 	{
-
+		myActiveRain = true;
 		break;
 	}
 	case eEffectStartUpTypes::RainBackground:
 	{
-
+		myActiveRainBackground = true;
 		break;
 	}
 	case eEffectStartUpTypes::RainBackground_Dust:
 	{
-
+		myActiveRainBackgroundDust = true;
 		break;
 	}
 	default:
+	{
 		break;
+	}
 	}
 
 }

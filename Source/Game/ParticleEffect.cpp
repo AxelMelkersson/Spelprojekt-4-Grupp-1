@@ -200,8 +200,12 @@ const void ParticleEffect::CheckIfEffectIsDead()
 
 		if (!spritesAreMoving)
 		{
-			delete myBatch;
-			myBatch = nullptr;
+			if (myBatch != NULL)
+			{
+				delete myBatch;
+				myBatch = nullptr;
+			}
+
 			DeleteComponents();
 			mySprites.clear();
 			myEffectIsDestroyed = true;
