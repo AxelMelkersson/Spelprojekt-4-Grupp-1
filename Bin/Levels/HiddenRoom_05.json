@@ -1,16 +1,11 @@
-{
-       "properties":[
-       {
-        "name":"Area",
-        "type":"int",
-        "value":0
-       }, 
-       {
-        "name":"Particles",
-        "type":"int",
-        "value":0
-       }],
-"compressionlevel":-1,
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":30,
  "infinite":false,
  "layers":[
@@ -334,7 +329,7 @@
                  "y":108
                 }, 
                 {
-                 "height":248,
+                 "height":264,
                  "id":544,
                  "name":"",
                  "rotation":0,
@@ -342,7 +337,7 @@
                  "visible":true,
                  "width":4,
                  "x":324,
-                 "y":0
+                 "y":-16
                 }, 
                 {
                  "height":16,
@@ -354,6 +349,17 @@
                  "width":16,
                  "x":300,
                  "y":92
+                }, 
+                {
+                 "height":16,
+                 "id":546,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":352,
+                 "x":-24,
+                 "y":-32
                 }],
          "opacity":1,
          "properties":[
@@ -469,15 +475,15 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":40,
+                 "height":168,
                  "id":512,
                  "name":"",
                  "rotation":0,
-                 "type":"0",
+                 "type":"2",
                  "visible":true,
-                 "width":32,
-                 "x":-48,
-                 "y":112
+                 "width":8,
+                 "x":-24,
+                 "y":-16
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -572,8 +578,19 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":546,
+ "nextobjectid":547,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":0
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":0
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

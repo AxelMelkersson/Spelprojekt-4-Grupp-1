@@ -373,6 +373,9 @@
     <ClInclude Include="SpeechBubble.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleStartUpTypes.hpp">
+      <Filter>Game Objects\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

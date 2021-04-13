@@ -1,4 +1,11 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":46,
  "infinite":false,
  "layers":[
@@ -142,7 +149,7 @@
                  "y":288
                 }, 
                 {
-                 "height":72,
+                 "height":88,
                  "id":517,
                  "name":"",
                  "rotation":0,
@@ -170,7 +177,7 @@
                  "y":384
                 }, 
                 {
-                 "height":224,
+                 "height":240,
                  "id":594,
                  "name":"",
                  "rotation":0,
@@ -181,7 +188,7 @@
                  "y":144
                 }, 
                 {
-                 "height":64,
+                 "height":80,
                  "id":595,
                  "name":"",
                  "rotation":0,
@@ -209,7 +216,7 @@
                  "y":140
                 }, 
                 {
-                 "height":212,
+                 "height":228,
                  "id":600,
                  "name":"",
                  "properties":[
@@ -237,7 +244,7 @@
                  "y":72
                 }, 
                 {
-                 "height":216,
+                 "height":232,
                  "id":606,
                  "name":"",
                  "rotation":0,
@@ -248,7 +255,7 @@
                  "y":152
                 }, 
                 {
-                 "height":208,
+                 "height":224,
                  "id":607,
                  "name":"",
                  "rotation":0,
@@ -292,7 +299,7 @@
                  "y":72
                 }, 
                 {
-                 "height":72,
+                 "height":88,
                  "id":620,
                  "name":"",
                  "properties":[
@@ -304,7 +311,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":40,
+                 "width":48,
                  "x":696,
                  "y":296
                 }, 
@@ -326,7 +333,7 @@
                  "y":296
                 }, 
                 {
-                 "height":16,
+                 "height":32,
                  "id":622,
                  "name":"",
                  "rotation":0,
@@ -337,7 +344,7 @@
                  "y":352
                 }, 
                 {
-                 "height":16,
+                 "height":32,
                  "id":623,
                  "name":"",
                  "properties":[
@@ -653,7 +660,7 @@
                  "y":348
                 }, 
                 {
-                 "height":12,
+                 "height":28,
                  "id":658,
                  "name":"",
                  "properties":[
@@ -670,7 +677,7 @@
                  "y":356
                 }, 
                 {
-                 "height":12,
+                 "height":28,
                  "id":659,
                  "name":"",
                  "properties":[
@@ -698,7 +705,7 @@
                  "y":216
                 }, 
                 {
-                 "height":144,
+                 "height":160,
                  "id":663,
                  "name":"",
                  "rotation":0,
@@ -1137,15 +1144,15 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":40,
+                 "height":256,
                  "id":512,
                  "name":"",
                  "rotation":0,
-                 "type":"0",
+                 "type":"2",
                  "visible":true,
-                 "width":32,
+                 "width":8,
                  "x":736,
-                 "y":256
+                 "y":40
                 }],
          "opacity":1,
          "type":"objectgroup",

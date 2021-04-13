@@ -575,7 +575,31 @@
          "draworder":"topdown",
          "id":7,
          "name":"Ledges",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":548,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":144
+                }, 
+                {
+                 "height":0,
+                 "id":549,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":288,
+                 "y":144
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -651,7 +675,7 @@
                  "id":512,
                  "name":"",
                  "rotation":0,
-                 "type":"0",
+                 "type":"2",
                  "visible":true,
                  "width":56,
                  "x":344,
@@ -750,7 +774,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":548,
+ "nextobjectid":550,
  "orientation":"orthogonal",
  "properties":[
         {

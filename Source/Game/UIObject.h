@@ -11,7 +11,7 @@ public:
 	UIObject(Scene* aLevelScene);
 	
 	void Init(const std::string aPathString, const v2f aSize, const v2f aPosition, int aZIndex);
-	void InitAnimation(const std::string aPathString, const v2f aSize, const v2f aPosition, int aZIndex);
+	void InitAnimation(const std::string aPathString, const v2f aSize, int aAnimationFrames, int aColumns, const v2f aPosition, int aZIndex);
 
 	void SetPosition(const v2f& aPosition);
 
@@ -22,6 +22,8 @@ public:
 	void Render() override;
 
 	void SetActive(const bool aActiveState);
+
+	const v2f GetStartPosition();
 
 
 private:
