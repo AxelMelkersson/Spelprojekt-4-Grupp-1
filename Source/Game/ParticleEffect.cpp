@@ -281,8 +281,12 @@ const void ParticleEffect::DeleteSprites()
 		mySprites.erase(mySprites.begin() + x);
 	}
 
-	delete myBatch;
-	myBatch = nullptr;
+	if (myBatch != NULL)
+	{
+		delete myBatch;
+		myBatch = nullptr;
+	}
+
 	DeleteComponents();
 	mySprites.clear();
 }
