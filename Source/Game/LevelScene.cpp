@@ -85,11 +85,14 @@ void LevelScene::Unload()
 {
 	delete myPauseMenu;
 
-	AudioManager::GetInstance()->StopAllSounds();
 	AudioManager::GetInstance()->FadeOut(AudioList::Forest_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Finale);
+	AudioManager::GetInstance()->FadeOut(AudioList::Crows);
+	AudioManager::GetInstance()->FadeOut(AudioList::Castle);
+	AudioManager::GetInstance()->FadeOut(AudioList::Wind);
+	AudioManager::GetInstance()->StopAllSounds();
 
 	if (myIsSpeedrun)
 	{
