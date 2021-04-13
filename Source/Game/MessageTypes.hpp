@@ -8,6 +8,7 @@ enum class eMessageType
 	PlayerDeath,
 	PlayerSafeLanded,
 	PlayerReachedBonfire,
+	PlayerEnterDoor,
 
 	KilledFocus,
 	SetFocus,
@@ -16,6 +17,7 @@ enum class eMessageType
 	PopUpMessageE,
 	PopUpMessageM,
 	PopUpMessageH,
+	PopUpNextLevel,
 	PlayerLandedParticle,
 	PlayerBashedPlayerParticle,
 	PlayerBashedSmallParticle,
