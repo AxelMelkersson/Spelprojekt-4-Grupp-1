@@ -78,6 +78,7 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myIsGliding = false;
 	myCheckParticleLanding = true;
 	myIsSpawning = true;
+	mySkipOneUpdate = true;
 
 	myGlideFactor = 0.14f;
 
@@ -211,6 +212,12 @@ void Player::Update(const float& aDeltaTime)
 			myIsSpawning = false;
 		}
 
+		return;
+	}
+
+	if (mySkipOneUpdate)
+	{
+		mySkipOneUpdate = false;
 		return;
 	}
 

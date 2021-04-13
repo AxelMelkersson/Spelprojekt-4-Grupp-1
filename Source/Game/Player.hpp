@@ -153,6 +153,7 @@ private:
 	bool myIsInRangeOfBash;
 	bool myCheckParticleLanding;
 	bool myIsSpawning;
+	bool mySkipOneUpdate;
 
 	PlayerData* myJsonData = new PlayerData();
 
