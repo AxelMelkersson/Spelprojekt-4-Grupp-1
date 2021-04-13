@@ -23,7 +23,7 @@ SpeechBubble::SpeechBubble(Scene* aScene)
 void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 {
 	SetPosition({ aPos.x - 10, aPos.y - 50 });
-	SetZIndex(200);
+	SetZIndex(195);
 
 	ParseText(aBonfireID);
 
@@ -36,7 +36,7 @@ void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 	for (int i = 0; i < myRowNumber; ++i)
 	{
 		TextComponent* textComp = AddComponent<TextComponent>();
-		textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_36, 0);
+		textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_30, 0);
 		textComp->SetRelativePosition(GetPosition().x - 30, GetPosition().y - 50 + i * 10);
 		textComp->SetColor({ 1, 1, 1, myAlpha });
 
