@@ -123,9 +123,17 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 		{
 			mySpawningEffects[i].myTimer = {};
 
-			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			if (mySpawningEffects[i].myEffectType == eParticleEffects::PlayerBashedPlayerParticle)
+			{
+				ParticleEffect* effect = SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+				
+			}
+			else
+			{
+				SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			}
 		}
-		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
+		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer && !mySpawningEffects[i].mySpawningAllTime)
 		{
 			mySpawningEffects[i].myTimer = {};
 

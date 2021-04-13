@@ -27,6 +27,7 @@ public:
 	const void SetHeight(const float anYSize);
 	const void SetOffset(const float aOffset);
 	const void SetGameObject(GameObject* aObject);
+	const void SetNewSpritePath(const std::string aPath);
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
