@@ -53,6 +53,7 @@ private:
 	const unsigned int myID;
 	const unsigned int myBonfireID;
 
+	const void CheckPopUpMessages();
 	const void ActivateTrailEffect();
 	const void ActivateCollectedEffect();
 

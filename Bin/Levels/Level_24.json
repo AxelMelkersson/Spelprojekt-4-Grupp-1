@@ -143,8 +143,8 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":64,
-                 "x":-16,
+                 "width":72,
+                 "x":-24,
                  "y":40
                 }, 
                 {
@@ -863,15 +863,15 @@
                  "y":184
                 }, 
                 {
-                 "height":32,
+                 "height":96,
                  "id":651,
                  "name":"",
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":24,
-                 "x":-40,
-                 "y":8
+                 "width":8,
+                 "x":-24,
+                 "y":-56
                 }],
          "opacity":1,
          "type":"objectgroup",
