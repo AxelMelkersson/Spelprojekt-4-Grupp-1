@@ -23,7 +23,6 @@ void Timer::Init(const v2f aPos)
 {
 	SpriteComponent* spriteComponent = AddComponent<SpriteComponent>();
 	spriteComponent->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
-	//spriteComponent->SetRelativePosition({ 34, 10 });
 	spriteComponent->SetSize(v2f(54.0f, 12.0f));
 
 	TextComponent* textComponent = AddComponent<TextComponent>();
@@ -37,8 +36,6 @@ void Timer::Init(const v2f aPos)
 void Timer::Update(const float& aDeltatime)
 {
 	GetComponent<TextComponent>()->SetText(CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetTimeOutput(myTime));
-
-	//GetComponent<SpriteComponent>()->SetRelativePosition();
 	GameObject::SetPosition(myCamera->GetPosition() + myStartPosition);
 
 	myTime += CGameWorld::GetInstance()->GetTimer()->GetTotalTime() - myLastTime - myStartTime + myTotalTime;
