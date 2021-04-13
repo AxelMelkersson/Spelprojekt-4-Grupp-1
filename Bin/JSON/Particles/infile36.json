@@ -29,11 +29,11 @@
 
       "EmitterAngle": 5.0,
 
-      "EmitterWidth": 150.0,
+      "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 5.0,
-      "MaxParticleLifeTime": 10.0,
+      "MinParticleLifeTime": 45.0,
+      "MaxParticleLifeTime": 55.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,

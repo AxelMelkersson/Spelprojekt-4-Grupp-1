@@ -36,12 +36,19 @@ enum class eParticleEffects
 	BonfireWakeupTopParticleHard,
 	BonfireWakeupExplosionParticleHard,
 	BonfireIdleParticleHard,
+	FirefliesParticleOne,
+	FirefliesParticleTwo,
+	FirefliesParticleThree,
+	FirefliesParticleStartupOne,
+	FirefliesParticleStartupTwo,
+	UnstableGroundParticleTwo,
+	UnstableGroundIdleParticle,
+	EnemyPurpleTrailParticle,
 	DustParticleOne,
 	DustParticleTwo,
 	DustParticleThree,
 	DustParticleStartupOne,
 	DustParticleStartupTwo,
-	UnstableGroundParticleTwo,
-	UnstableGroundIdleParticle,
-	EnemyPurpleTrailParticle
+	RainEffectBackgroundSideParticle,
+	RainEffectForegroundSideParticle
 };

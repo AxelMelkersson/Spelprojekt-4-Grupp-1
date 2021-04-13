@@ -1,42 +1,42 @@
 {
   "particle": [
     {
-      "EffectType": "PlayerBashedPlayerParticle",
+      "EffectType": "DustParticleThree",
 
-      "ZIndex": 100,
+      "ZIndex": 120,
 
-      "EffectTypeIndex": 10,
-      "SpritePath": "Sprites/Particles/ParticleGlowCollectible2.dds",
+      "EffectTypeIndex": 43,
+      "SpritePath": "Sprites/Particles/ParticleJump.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
 
-      "EmitterLifeTime": 0.1,
+      "EmitterLifeTime": 0.0,
 
       "StartScale": 1.0,
       "EndScale": 1.0,
 
       "RotateSprite": 0.0,
 
-      "MinTimeBetweenSpawns": 0.99,
-      "MaxTimeBetweenSpawns": 0.99,
+      "MinTimeBetweenSpawns": 3.0,
+      "MaxTimeBetweenSpawns": 5.0,
 
-      "MinSpeed": 0.0,
-      "MaxSpeed": 0.0,
+      "MinSpeed": 5.0,
+      "MaxSpeed": 8.0,
 
       "MinParticleAngularVel": 0.0,
       "MaxParticleAngularVel": 0.0,
 
-      "EmitterAngle": 0.0,
+      "EmitterAngle": 5.0,
 
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 1.0,
-      "MaxParticleLifeTime": 1.0,
+      "MinParticleLifeTime": 45.0,
+      "MaxParticleLifeTime": 55.0,
 
-      "SpawnLifeTime": 0.4,
-      "SpawnEverySecond": 0.12,
+      "SpawnLifeTime": 0.0,
+      "SpawnEverySecond": 0.0,
 
       "Offset": [
         {
@@ -47,12 +47,12 @@
         }
       ],
 
-      "LockPosition": true,
+      "LockPosition": false,
 
       "LockedAngular": [
         -1.0,
         -1.0,
-        1.0,
+        0.0,
         1.0
       ],
 
@@ -60,7 +60,7 @@
         255.0,
         255.0,
         255.0,
-        0.5
+        0.7
       ],
       "EndColor": [
         255.0,

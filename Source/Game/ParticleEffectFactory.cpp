@@ -28,7 +28,6 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myActiveRainBackgroundDust = {};
 	myStartup = false;
 	myPlayer = {};
-
 }
 
 ParticleEffectFactory::~ParticleEffectFactory()
@@ -321,6 +320,20 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		SpawnEffect(position, eParticleEffects::RainEffectForegroundParticle);
 		break;
 	}
+	case eMessageType::RainEffectBackgroundSideParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::RainEffectBackgroundSideParticle);
+		break;
+	}
+	case eMessageType::RainEffectForegroundSideParticle:
+	{
+		const v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::RainEffectForegroundSideParticle);
+		break;
+	}
 	case eMessageType::RainEffectNextScreenParticle:
 	{
 		v2f position = std::get<v2f>(aMessage.myData);
@@ -390,6 +403,41 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		v2f position = std::get<v2f>(aMessage.myData);
 
 		SpawnEffect(position, eParticleEffects::BonfireIdleParticleHard);
+		break;
+	}
+	case eMessageType::FirefliesParticleOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleOne);
+		break;
+	}
+	case eMessageType::FirefliesParticleTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleTwo);
+		break;
+	}
+	case eMessageType::FirefliesParticleThree:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleThree);
+		break;
+	}
+	case eMessageType::FirefliesParticleStartupOne:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleStartupOne);
+		break;
+	}
+	case eMessageType::FirefliesParticleStartupTwo:
+	{
+		v2f position = std::get<v2f>(aMessage.myData);
+
+		SpawnEffect(position, eParticleEffects::FirefliesParticleStartupTwo);
 		break;
 	}
 	case eMessageType::DustParticleOne:
@@ -560,16 +608,6 @@ void ParticleEffectFactory::StartEffect(const int aIndex)
 
 }
 
-void ParticleEffectFactory::StartAllRainEffects()
-{
-	myActiveRain = true;
-}
-
-void ParticleEffectFactory::StartFirefliesEffects()
-{
-	myActiveFireFlies = true;
-}
-
 const void ParticleEffectFactory::AddSubscribers()
 {
 	Subscribe(eMessageType::DustParticleStartupOne);
@@ -577,6 +615,11 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::DustParticleOne);
 	Subscribe(eMessageType::DustParticleTwo);
 	Subscribe(eMessageType::DustParticleThree);
+	Subscribe(eMessageType::FirefliesParticleStartupOne);
+	Subscribe(eMessageType::FirefliesParticleStartupTwo);
+	Subscribe(eMessageType::FirefliesParticleOne);
+	Subscribe(eMessageType::FirefliesParticleTwo);
+	Subscribe(eMessageType::FirefliesParticleThree);
 	Subscribe(eMessageType::CollectibleCollectedParticleEasy);
 	Subscribe(eMessageType::CollectibleCollectedParticleMedium);
 	Subscribe(eMessageType::CollectibleCollectedParticleHard);
@@ -599,6 +642,8 @@ const void ParticleEffectFactory::AddSubscribers()
 	Subscribe(eMessageType::RainEffectNextScreenParticle);
 	Subscribe(eMessageType::RainEffectForegroundParticle);
 	Subscribe(eMessageType::RainEffectBackgroundParticle);
+	Subscribe(eMessageType::RainEffectBackgroundSideParticle);
+	Subscribe(eMessageType::RainEffectForegroundSideParticle);
 	Subscribe(eMessageType::VelocityLinesParticle);
 	Subscribe(eMessageType::PlayerLedgeLeftGrabbedLegParticle);
 	Subscribe(eMessageType::PlayerLedgeLeftGrabbedHandParticle);
@@ -667,6 +712,15 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}case eParticleEffects::RainEffectForegroundParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::RainEffectBackgroundSideParticle:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}case eParticleEffects::RainEffectForegroundSideParticle:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
@@ -791,6 +845,31 @@ void ParticleEffectFactory::SetEffect(ParticleEffect& aEffect, const eParticleEf
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
 		break;
 	}
+	case eParticleEffects::FirefliesParticleOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleThree:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleStartupOne:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
+	case eParticleEffects::FirefliesParticleStartupTwo:
+	{
+		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
+		break;
+	}
 	case eParticleEffects::DustParticleOne:
 	{
 		aEffect.Init(myEffects[static_cast<int>(aEffectType)]);
@@ -831,19 +910,37 @@ const void ParticleEffectFactory::StartEffects()
 
 	if (myActiveRain)
 	{
-		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
-		ParticleEffect* rainForeground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectForegroundParticle);
+		ParticleEffect* rainBackground = SpawnEffect({boundaries.x * 0.5f, 0.f}, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainForeground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectForegroundParticle);
+		ParticleEffect* rainForegroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectForegroundSideParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
 		ParticleEffect* rainNextScreen = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::RainEffectNextScreenParticle);
 
-		rainBackground->SetWidth(boundaries.x);
-		rainForeground->SetWidth(boundaries.x);
-		rainNextScreen->SetWidth(boundaries.x);
+		rainBackground->SetWidth(boundaries.x * 0.5f);
+		rainForeground->SetWidth(boundaries.x * 0.5f);
+		rainNextScreen->SetWidth(boundaries.x * 0.5f);
+		
+		rainForegroundSide->SetHeight(boundaries.y);
+		rainBackgroundSide->SetHeight(boundaries.y);
 	}
 
 	if (myActiveRainBackground)
 	{
-		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
-		rainBackground->SetWidth(boundaries.x);
+		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
+
+		rainBackground->SetWidth(boundaries.x * 0.5f);
+		rainBackgroundSide->SetHeight(boundaries.y);
+
+		if (boundaries.x > 1500.f)
+		{
+			rainBackground->SetSpawnTime(0.03f, 0.06f);
+		}
+
+		if (boundaries.y > 700.f)
+		{
+			rainBackgroundSide->SetSpawnTime(0.1f, 0.1f);
+		}
 	}
 
 	if (myActiveRainBackgroundDust)
@@ -858,25 +955,37 @@ const void ParticleEffectFactory::StartEffects()
 		dustParticle2->SetHeight(boundaries.y);
 		dustParticle3->SetHeight(boundaries.y);
 		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetWidth(boundaries.x * 0.5f);
 		dustparticleStartupTwo->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetWidth(boundaries.x * 0.5f);
 
-		ParticleEffect* rainBackground = SpawnEffect(boundaries * 0.5f, eParticleEffects::RainEffectBackgroundParticle);
-		rainBackground->SetWidth(boundaries.x);
+		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
+
+		rainBackground->SetWidth(boundaries.x * 0.5f);
+		rainBackgroundSide->SetHeight(boundaries.y);
+
+		if (boundaries.y > 700.f)
+		{
+			rainBackgroundSide->SetSpawnTime(0.1f, 0.1f);
+		}
 	}
 
 	if (myActiveFireFlies)
 	{
-		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::DustParticleOne);
-		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::DustParticleTwo);
-		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::DustParticleThree);
-		ParticleEffect* dustparticleStartupOne = SpawnEffect({boundaries.x * 0.5f, boundaries.y}, eParticleEffects::DustParticleStartupOne);
-		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::DustParticleStartupTwo);
+		ParticleEffect* dustParticle1 = SpawnEffect(boundaries, eParticleEffects::FirefliesParticleOne);
+		ParticleEffect* dustParticle2 = SpawnEffect(boundaries, eParticleEffects::FirefliesParticleTwo);
+		ParticleEffect* dustParticle3 = SpawnEffect({0.f, boundaries.y}, eParticleEffects::FirefliesParticleThree);
+		ParticleEffect* dustparticleStartupOne = SpawnEffect({boundaries.x * 0.5f, boundaries.y}, eParticleEffects::FirefliesParticleStartupOne);
+		ParticleEffect* dustparticleStartupTwo = SpawnEffect({ boundaries.x * 0.5f, boundaries.y }, eParticleEffects::FirefliesParticleStartupTwo);
 
 		dustParticle1->SetHeight(boundaries.y);
 		dustParticle2->SetHeight(boundaries.y);
 		dustParticle3->SetHeight(boundaries.y);
 		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetWidth(boundaries.x * 0.5f);
 		dustparticleStartupTwo->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetWidth(boundaries.x * 0.5f);
 	}
 }
 

@@ -29,6 +29,7 @@ public:
 	const void SetGameObject(GameObject* aObject);
 	const void SetNewPlayerSprite(const int aIndex);
 	const void SetReverseImage();
+	const void SetSpawnTime(const float aMinSpawn, const float aMaxSpawn);
 	
 	const bool GetIsActive();
 	const eParticleEffects GetType() const;
