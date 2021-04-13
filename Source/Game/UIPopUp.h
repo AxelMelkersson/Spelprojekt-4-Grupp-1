@@ -26,46 +26,29 @@ public:
 private:
 	Scene* myScene;
 
-	UIObject* myBackgroundE;
-	UIObject* myBackgroundM;
-	UIObject* myBackgroundH;
+	UIObject* myBackground;
 
-	UIObject* myFireEasy;
-	UIObject* myFireMed;
-	UIObject* myFireHard;
+	std::vector<UIObject*> myFires;
 
 	UIText* myCollectibleString;
-	UIText* myCollectibleString2;
-	UIText* myCollectibleString3;
 
 	std::vector<int> myLevelIndexes;
 	std::vector<UIText*> myLevelCollectibles;
+	
 	std::vector<int> myCollectibleInfo;
 	std::vector<int> myCollectibleCollected;
 
-	bool myEasyActive = false;
-	bool myMedActive = false;
-	bool myHardActive = false;
+	std::vector<int> myShowQueue;
+
 	bool myIsMaxLeft = false;
-	bool myIsMMaxLeft = false;
-	bool myIsHMaxLeft = false;
 
 	float myCurrentTime;
-	float myCurrentMTime;
-	float myCurrentHTime;
 	float myCurrentStayTime;
-	float myCurrentMStayTime;
-	float myCurrentHStayTime;
 
 	float myMaxTime;
 	float myStayTime;
 
-
-	int myLevelIndex;
-
 	void Deactivate(ePopUpTypes aType);
 	void SetNewPositions(const float& aDeltaTime);
-	void SetNewMedPositions(const float& aDeltaTime);
-	void SetNewHardPositions(const float& aDeltaTime);
 	void UpdateCollectibles();
 };
