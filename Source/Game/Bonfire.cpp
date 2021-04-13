@@ -53,6 +53,8 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos) : Ga
 	animation->SetAnimation(&myAnimations[0]);
 	spriteIdle->SetSize(v2f(24.0f, 24.0f));
 
+	spriteActivate->Deactivate();
+
 	if (myHasBeenActivated)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
