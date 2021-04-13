@@ -284,9 +284,12 @@ void DataManager::ParseCollectableInfo()
 				{
 					for (auto doorObject = (*layer)["objects"].Begin(); doorObject != (*layer)["objects"].End(); ++doorObject)
 					{
-						if ((*doorObject)["type"] == 2)
+						if ((*doorObject)["type"] == "2")
 						{
-							for (auto innerLayer = myHiddenRooms[levelIndex]["layers"].Begin(); innerLayer != myHiddenRooms[levelIndex]["layers"].End(); ++innerLayer)
+							assert((*doorObject)["type"].IsString());
+							assert(myHiddenRooms.at(levelIndex)["layers"].IsArray());
+
+							for (auto innerLayer = myHiddenRooms.at(levelIndex)["layers"].Begin(); innerLayer != myHiddenRooms.at(levelIndex)["layers"].End(); ++innerLayer)
 							{
 								std::string innerName = (*innerLayer)["name"].GetString();
 
