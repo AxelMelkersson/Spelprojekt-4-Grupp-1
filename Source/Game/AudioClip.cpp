@@ -101,6 +101,7 @@ void AudioClip::UnMute()
 
 void AudioClip::Stop()
 {
+	if (myIsFading) return;
 	myAudio->Stop();
 	myIsPlaying = false;
 	UnLock();
