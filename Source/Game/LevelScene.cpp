@@ -208,9 +208,12 @@ void LevelScene::DecreaseBlackScreen()
 	myBlackScreen->GetComponent<SpriteComponent>()->SetColor(v4f(1.0f, 1.0f, 1.0f, myBlackScreenOpacity));
 	myBlackScreenOpacity -= CGameWorld::GetInstance()->GetTimer()->GetDeltaTime() * myBlackScreenOpacitySpeed;
 
+	dynamic_cast<Player*>(myPlayer)->StopSpawn();
+
 	if (myBlackScreenOpacity <= 0.0f)
 	{
 		myReachedFullOpacity = false;
+
 		if (myShowPopUp != -1)
 		{
 			switch (myShowPopUp)

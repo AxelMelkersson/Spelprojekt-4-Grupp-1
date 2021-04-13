@@ -222,19 +222,18 @@ void Collectible::ImGuiUpdate()
 
 const void Collectible::CheckPopUpMessages()
 {
-	v2f position = {};
 	if (myType == eCollectibleType::Easy)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, 0), true);
 	}
 	else if (myType == eCollectibleType::Medium)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, 0), true);
 
 	}
 	else if (myType == eCollectibleType::Hard)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, position));
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0), true);
 	}
 }
 
