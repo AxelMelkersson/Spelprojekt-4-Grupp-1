@@ -97,7 +97,6 @@ void NormalEnemy::Update(const float& aDeltaTime)
 	if (!myActivatedParticle)
 	{
 		myActivatedParticle = true;
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::EnemyPurpleTrailParticle, this));
 	}
 	GameObject::Update(aDeltaTime);
 }
