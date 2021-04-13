@@ -208,12 +208,26 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, cons
 		}
 	}
 
+	Player* player = dynamic_cast<Player*>(aPlayer);
+	
+	if(!myBonfireFound)
+	{
+		player->StopSpawn();
+	}
+
 	myLoadsFromLevelSelect = false;
+	myContinued = false;
+	myBonfireFound = false;
 }
 
 void TiledLoader::UsedLevelSelect()
 {
 	myLoadsFromLevelSelect = true;
+}
+
+void TiledLoader::Continued()
+{
+	myContinued = true;
 }
 
 void TiledLoader::ParseBonfires(const std::vector<LoadData> someData, Scene* aScene, Player* aPlayer)
@@ -222,10 +236,13 @@ void TiledLoader::ParseBonfires(const std::vector<LoadData> someData, Scene* aSc
 	{
 		Bonfire* bonfire = new Bonfire(aScene, someData[i].myID, someData[i].myPosition);
 
-		if (myLoadsFromLevelSelect)
+		if (myLoadsFromLevelSelect || myContinued)
 		{
+			aPlayer->SpawnAnimation();
 			aPlayer->SetSpawnPosition(someData[i].myPosition + v2f(0.0f, someData[i].mySize.y - 8.0f));
 			aPlayer->SetPosition(someData[i].myPosition + v2f(0.0f, someData[i].mySize.y - 8.0f));
+			
+			myBonfireFound = true;
 		}
 	}
 }
