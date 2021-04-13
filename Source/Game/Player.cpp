@@ -15,6 +15,8 @@
 #include "SpringObject.h"
 #include "AudioManager.h"
 
+#include "BashableObject.hpp"
+
 #include "Collectible.hpp"
 
 #include "Ledge.h"
@@ -42,6 +44,8 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myBashAbility->AddInputWrapper(world->Input());
 	myBashAbility->AddPlayerRelation(this);
 	myBashAbility->AddTimer(world->GetTimer());
+
+	myBashableObject = nullptr;
 
 	myHasDied = false;
 	myIsOnPlatform = false;
@@ -157,6 +161,11 @@ void Player::InitAnimations()
 	spriteGlide->SetSize(mySize);
 	spriteGlide->Deactivate();
 
+	SpriteComponent* spriteSpawn = AddComponent<SpriteComponent>();
+	spriteSpawn->SetSpritePath("Sprites/Characters/PlayerGlidingLoop.dds");
+	spriteSpawn->SetSize(mySize);
+	spriteSpawn->Deactivate();
+
 	myAnimations[0] = Animation(false, false, false, 0, 74, 74, 0.10f, spriteIdle, 16, 16);
 	myAnimations[1] = Animation(false, false, false, 0, 9, 9, 0.085f, spriteRun, 16, 16);
 	myAnimations[2] = Animation(false, true, false, 0, 6, 6, 0.07f, spriteJump, 16, 16);
@@ -224,6 +233,11 @@ void Player::Update(const float& aDeltaTime)
 		if (!myIsInRangeOfBash)
 		{
 			CGameWorld::GetInstance()->GetTimer()->SetTimeScale(1.0f);
+
+			if (myBashableObject)
+			{
+				myBashableObject->Dehighlight();
+			}
 		}
 
 		myIsInRangeOfBash = false;
@@ -803,6 +817,12 @@ void Player::BashCollision(GameObject* aGameObject, BashComponent* aBashComponen
 
 	if (aBashComponent->GetRadius() * aBashComponent->GetRadius() >= (aGameObject->GetPosition() - GetPosition()).LengthSqr())
 	{
+		myBashableObject = dynamic_cast<BashableObject*>(aGameObject);
+		if (myBashableObject && !myBashAbility->GetIsBashing())
+		{
+			myBashableObject->Highlight();
+		}
+
 		myIsInRangeOfBash = true;
 
 		if (!myInputHandler->IsDashing() && !myBashAbility->GetIsBashing())
