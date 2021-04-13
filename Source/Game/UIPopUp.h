@@ -39,8 +39,8 @@ private:
 
 	std::vector<int> myLevelIndexes;
 	std::vector<UIText*> myLevelCollectibles;
-	std::vector<std::vector<int>> myCollectibleInfo;
-	std::vector<std::vector<int>> myCollectibleCollected;
+	std::vector<int> myCollectibleInfo;
+	std::vector<int> myCollectibleCollected;
 
 	bool myEasyActive = false;
 	bool myMedActive = false;
