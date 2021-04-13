@@ -30,6 +30,7 @@ UIPopUp::UIPopUp(Scene* aLevelScene)
 	myLevelIndex = 0;
 }
 
+
 void UIPopUp::InitPopUp()
 {
 	myCollectibleInfo.clear();
@@ -60,50 +61,26 @@ void UIPopUp::InitPopUp()
 	myFireMed->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 	myFireHard->InitAnimation("Sprites/Objects/Collectible1.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 
-	for (int i = 0; i < 8; ++i)
-	{
-		myCollectibleInfo.push_back(std::vector<int>());
-		myCollectibleCollected.push_back(std::vector<int>());
 
-		for (int difficulty = 0; difficulty < 3; ++difficulty)
-		{
-			myCollectibleInfo[i].push_back(0);
-			myCollectibleCollected[i].push_back(0);
-		}
-	}
-
-	for (int j = 0; j < DataManager::GetInstance().GetCollectableCount(); ++j)
-	{
-		DataManager::GetInstance().GetCollectableInfoIndex(j);
-
-		++myCollectibleInfo[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
-
-		if (DataManager::GetInstance().GetCollectableInfoIndex(j).myCollectedState)
-		{
-			++myCollectibleCollected[DataManager::GetInstance().GetCollectableInfoIndex(j).myBonfireID][DataManager::GetInstance().GetCollectableInfoIndex(j).myDifficulty];
-		}
-	}
-
+	UpdateCollectibles(true);
 	myCollectibleString = std::make_unique<UIText>(myScene);
-	myCollectibleString->Init(std::to_string(myCollectibleCollected[0][0]) + "/" + std::to_string(myCollectibleInfo[0][0]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString->Init(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString->SetPosition(collectiblePos);
 	myCollectibleString->SetZIndex(201);
 	myCollectibleString2 = std::make_unique<UIText>(myScene);
-	myCollectibleString2->Init(std::to_string(myCollectibleCollected[0][1]) + "/" + std::to_string(myCollectibleInfo[0][1]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString2->Init(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString2->SetPosition(collectiblePos);
 	myCollectibleString2->SetZIndex(201);
 	myCollectibleString3 = std::make_unique<UIText>(myScene);
-	myCollectibleString3->Init(std::to_string(myCollectibleCollected[0][2]) + "/" + std::to_string(myCollectibleInfo[0][2]), "Text/Peepo.ttf", EFontSize_48);
+	myCollectibleString3->Init(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]), "Text/Peepo.ttf", EFontSize_48);
 	myCollectibleString3->SetPosition(collectiblePos);
 	myCollectibleString3->SetZIndex(201);
-
 
 	std::ifstream levelSelectFile("JSON/Menus/LevelSelect/LevelSelect.json");
 	rapidjson::IStreamWrapper levelSelectStream(levelSelectFile);
 
 	rapidjson::Document levelSelect;
 	levelSelect.ParseStream(levelSelectStream);
-
 
 	int bonfireIndex = 0;
 	for (rapidjson::Value::ConstValueIterator iterator = levelSelect["Bonfires"].Begin(); iterator != levelSelect["Bonfires"].End(); ++iterator)
@@ -121,12 +98,10 @@ void UIPopUp::InitPopUp()
 
 void UIPopUp::Update(const float& aDeltaTime)
 {
-	UpdateCollectibles();
+	UpdateCollectibles(false);
 	if (myEasyActive)
 	{
-
 		myCurrentTime += aDeltaTime;
-
 		SetNewPositions(aDeltaTime);
 		myBackgroundE->UpdateUIObjects(aDeltaTime);
 		myFireEasy->UpdateUIObjects(aDeltaTime);
@@ -146,7 +121,6 @@ void UIPopUp::Update(const float& aDeltaTime)
 	if (myHardActive)
 	{
 		myCurrentHTime += aDeltaTime;
-		UpdateCollectibles();
 		SetNewHardPositions(aDeltaTime);
 		myBackgroundH->UpdateUIObjects(aDeltaTime);
 		myFireHard->UpdateUIObjects(aDeltaTime);
@@ -353,11 +327,37 @@ void UIPopUp::SetNewHardPositions(const float& aDeltaTime)
 }
 
 
-void UIPopUp::UpdateCollectibles()
+void UIPopUp::UpdateCollectibles(const bool aIniting)
 {
+	myCollectibleInfo.clear();
+	myCollectibleCollected.clear();
 
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][0]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][0]));
-	myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][1]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][1]));
-	myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myLevelIndex][2]) + "/" + std::to_string(myCollectibleInfo[myLevelIndex][2]));
+	DataManager& dataManager = DataManager::GetInstance();
+	int collectiblesInfoSize = dataManager.GetCollectableCount();
 
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
+	myCollectibleInfo.push_back(0);
+
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
+	myCollectibleCollected.push_back(0);
+
+	for (int collectible = 0; collectible < collectiblesInfoSize; ++collectible)
+	{
+		CollectableInfo collectibleInfo = dataManager.GetCollectableInfoIndex(collectible);
+
+		++myCollectibleInfo[collectibleInfo.myDifficulty];
+
+		if (collectibleInfo.myCollectedState)
+		{
+			++myCollectibleCollected[collectibleInfo.myDifficulty];
+		}
+	}
+	if (!aIniting)
+	{
+		myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[0]) + "/" + std::to_string(myCollectibleInfo[0]));
+		myCollectibleString2->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[1]) + "/" + std::to_string(myCollectibleInfo[1]));
+		myCollectibleString3->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[2]) + "/" + std::to_string(myCollectibleInfo[2]));
+	}
 }

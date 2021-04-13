@@ -17,6 +17,7 @@ public:
 	};
 
 	UIPopUp(Scene* aLevelScene);
+
 	void InitPopUp();
 	void Update(const float& aDeltaTime) override;
 	void Activate(ePopUpTypes aType);
@@ -39,8 +40,8 @@ private:
 
 	std::vector<int> myLevelIndexes;
 	std::vector<UIText*> myLevelCollectibles;
-	std::vector<std::vector<int>> myCollectibleInfo;
-	std::vector<std::vector<int>> myCollectibleCollected;
+	std::vector<int> myCollectibleInfo;
+	std::vector<int> myCollectibleCollected;
 
 	bool myEasyActive = false;
 	bool myMedActive = false;
@@ -49,7 +50,6 @@ private:
 	bool myIsMMaxLeft = false;
 	bool myIsHMaxLeft = false;
 
-	float myBackXPos;
 	float myCurrentTime;
 	float myCurrentMTime;
 	float myCurrentHTime;
@@ -67,5 +67,5 @@ private:
 	void SetNewPositions(const float& aDeltaTime);
 	void SetNewMedPositions(const float& aDeltaTime);
 	void SetNewHardPositions(const float& aDeltaTime);
-	void UpdateCollectibles();
+	void UpdateCollectibles(const bool aIniting);
 };
