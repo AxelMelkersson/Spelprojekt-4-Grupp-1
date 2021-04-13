@@ -43,32 +43,32 @@ void OptionsMenu::Init()
 	mySFXVol = myAudioManager->GetInstance()->GetSFXVolume();
 	myInput = CGameWorld::GetInstance()->Input();
 
-	myBackground = std::make_unique<UIObject>(myScene);
-	myBar = std::make_unique<UIObject>(myScene);
-	myTitle = std::make_unique<UIObject>(myScene);
+	myBackground = new UIObject(myScene);
+	myBar = new UIObject(myScene);
+	myTitle = new UIObject(myScene);
 
-	myFireHighlight = std::make_unique<UIObject>(myScene);
-	mySoundBtn = std::make_unique<UIButton>(myScene);
-	myCreditsBtn = std::make_unique<UIButton>(myScene);
-	myTutorialsBtn = std::make_unique<UIButton>(myScene);
-	myBackBtn = std::make_unique<UIButton>(myScene);
-	myResetBtn = std::make_unique<UIButton>(myScene);
-	myScreenBtn = std::make_unique<UIButton>(myScene);
+	myFireHighlight = new UIObject(myScene);
+	mySoundBtn = new UIButton(myScene);
+	myCreditsBtn = new UIButton(myScene);
+	myTutorialsBtn = new UIButton(myScene);
+	myBackBtn = new UIButton(myScene);
+	myResetBtn = new UIButton(myScene);
+	myScreenBtn = new UIButton(myScene);
 
-	mySoundSettings = std::make_unique<UIObject>(myScene);
-	myBGHighlight = std::make_unique<UIObject>(myScene);
-	myVFXHighlight = std::make_unique<UIObject>(myScene);
-	myBGDot = std::make_unique<UIObject>(myScene);
-	myVFXDot = std::make_unique<UIObject>(myScene);
+	mySoundSettings = new UIObject(myScene);
+	myBGHighlight = new UIObject(myScene);
+	myVFXHighlight = new UIObject(myScene);
+	myBGDot = new UIObject(myScene);
+	myVFXDot = new UIObject(myScene);
 
 	myTutorial = new TutorialMenu(myScene);
 	myCreditsMenu = new CreditsMenu(myScene);
 
-	myResolutions = std::make_unique<UIObject>(myScene);
-	my720pHgh = std::make_unique<UIObject>(myScene);
-	my1080pHgh = std::make_unique<UIObject>(myScene);
-	my4KHgh = std::make_unique<UIObject>(myScene);
-	myScreenSizeDot = std::make_unique<UIObject>(myScene);
+	myResolutions = new UIObject(myScene);
+	my720pHgh = new UIObject(myScene);
+	my1080pHgh = new UIObject(myScene);
+	my4KHgh = new UIObject(myScene);
+	myScreenSizeDot = new UIObject(myScene);
 
 	v2f backgroundPos = { 8.f, 8.f };
 	v2f titlePos = { 140.f, 35.f };
@@ -150,19 +150,19 @@ void OptionsMenu::Init()
 		myScreenMovingIndex = 0;
 	}
 
-	myButtons.push_back(myScreenBtn.get());
-	myButtons.push_back(mySoundBtn.get());
-	myButtons.push_back(myCreditsBtn.get());
-	myButtons.push_back(myTutorialsBtn.get());
-	myButtons.push_back(myBackBtn.get());
-	myButtons.push_back(myResetBtn.get());
+	myButtons.push_back(myScreenBtn);
+	myButtons.push_back(mySoundBtn);
+	myButtons.push_back(myCreditsBtn);
+	myButtons.push_back(myTutorialsBtn);
+	myButtons.push_back(myBackBtn);
+	myButtons.push_back(myResetBtn);
 
-	mySoundObjects.push_back(myBGHighlight.get());
-	mySoundObjects.push_back(myVFXHighlight.get());
+	mySoundObjects.push_back(myBGHighlight);
+	mySoundObjects.push_back(myVFXHighlight);
 
-	myResolutionObj.push_back(my720pHgh.get());
-	myResolutionObj.push_back(my1080pHgh.get());
-	myResolutionObj.push_back(my4KHgh.get());
+	myResolutionObj.push_back(my720pHgh);
+	myResolutionObj.push_back(my1080pHgh);
+	myResolutionObj.push_back(my4KHgh);
 }
 void OptionsMenu::Update(const float& aDeltaTime)
 {
