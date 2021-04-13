@@ -923,8 +923,6 @@ const void ParticleEffectFactory::StartEffects()
 		
 		rainForegroundSide->SetHeight(boundaries.y);
 		rainBackgroundSide->SetHeight(boundaries.y);
-
-		
 	}
 
 	if (myActiveRainBackground)
@@ -932,12 +930,17 @@ const void ParticleEffectFactory::StartEffects()
 		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
 		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
 
-		rainBackground->SetWidth(boundaries.x * 0.7f);
+		rainBackground->SetWidth(boundaries.x * 0.5f);
 		rainBackgroundSide->SetHeight(boundaries.y);
 
-		if (boundaries.x > 1500)
+		if (boundaries.x > 1500.f)
 		{
-			rainBackground->SetSpawnTime(0.03f, 0.07f);
+			rainBackground->SetSpawnTime(0.03f, 0.06f);
+		}
+
+		if (boundaries.y > 700.f)
+		{
+			rainBackgroundSide->SetSpawnTime(0.1f, 0.1f);
 		}
 	}
 
@@ -953,13 +956,20 @@ const void ParticleEffectFactory::StartEffects()
 		dustParticle2->SetHeight(boundaries.y);
 		dustParticle3->SetHeight(boundaries.y);
 		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetWidth(boundaries.x * 0.5f);
 		dustparticleStartupTwo->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetWidth(boundaries.x * 0.5f);
 
-		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.6f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
+		ParticleEffect* rainBackground = SpawnEffect({ boundaries.x * 0.5f, 0.f }, eParticleEffects::RainEffectBackgroundParticle);
 		ParticleEffect* rainBackgroundSide = SpawnEffect({ boundaries.x, boundaries.y }, eParticleEffects::RainEffectBackgroundSideParticle);
 
-		rainBackground->SetWidth(boundaries.x * 0.6f);
+		rainBackground->SetWidth(boundaries.x * 0.5f);
 		rainBackgroundSide->SetHeight(boundaries.y);
+
+		if (boundaries.y > 700.f)
+		{
+			rainBackgroundSide->SetSpawnTime(0.1f, 0.1f);
+		}
 	}
 
 	if (myActiveFireFlies)
@@ -974,7 +984,9 @@ const void ParticleEffectFactory::StartEffects()
 		dustParticle2->SetHeight(boundaries.y);
 		dustParticle3->SetHeight(boundaries.y);
 		dustparticleStartupOne->SetHeight(boundaries.y);
+		dustparticleStartupOne->SetWidth(boundaries.x * 0.5f);
 		dustparticleStartupTwo->SetHeight(boundaries.y);
+		dustparticleStartupTwo->SetWidth(boundaries.x * 0.5f);
 	}
 }
 
