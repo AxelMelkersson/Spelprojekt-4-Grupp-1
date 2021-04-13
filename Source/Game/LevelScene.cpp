@@ -211,6 +211,9 @@ void LevelScene::DecreaseBlackScreen()
 	if (myBlackScreenOpacity <= 0.0f)
 	{
 		myReachedFullOpacity = false;
+	
+		dynamic_cast<Player*>(myPlayer)->StopSpawn();
+
 		if (myShowPopUp != -1)
 		{
 			switch (myShowPopUp)
