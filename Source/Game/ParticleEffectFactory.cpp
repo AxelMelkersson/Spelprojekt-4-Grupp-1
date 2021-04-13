@@ -8,6 +8,7 @@
 #include "PostMaster.hpp"
 #include "Random.hpp"
 #include "ColliderComponent.h"
+#include "PhysicsComponent.h"
 
 #include "../External/Headers/rapidjson/document.h"
 #include "../External/Headers/rapidjson/istreamwrapper.h"
@@ -23,6 +24,8 @@ ParticleEffectFactory::ParticleEffectFactory(Scene* aLevelScene)
 	myActiveDust = {};
 	myActiveRain = {};
 	myStartup = false;
+	myPlayer = {};
+
 }
 
 ParticleEffectFactory::~ParticleEffectFactory()
@@ -125,11 +128,23 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 
 			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
 		}
-		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer)
+		else if (mySpawningEffects[i].myTimer >= mySpawningEffects[i].mySpawnEverySecond && mySpawningEffects[i].myTotalTimer <= mySpawningEffects[i].myTotalSpawnTimer && !mySpawningEffects[i].mySpawningAllTime)
 		{
 			mySpawningEffects[i].myTimer = {};
 
-			SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			if (mySpawningEffects[i].myEffectType == eParticleEffects::PlayerBashedPlayerParticle)
+			{
+				ParticleEffect* effect = SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+
+				CheckPlayerSpritePath(effect, i);
+				CheckPlayerSpriteDirection(effect);
+
+				mySpawningEffects[i].mySpawnAmount++;
+			}
+			else
+			{
+				SpawnEffect(mySpawningEffects[i].myGameObject->GetPosition(), mySpawningEffects[i].myEffectType);
+			}
 		}
 
 		if (!mySpawningEffects[i].myGameObject->IsActive() || mySpawningEffects[i].myGameObject->GetShouldBeDestroyed())
@@ -802,4 +817,23 @@ const void ParticleEffectFactory::StartEffects()
 		dustparticleStartupOne->SetHeight(boundaries.y);
 		dustparticleStartupTwo->SetHeight(boundaries.y);
 	}
+}
+
+const void ParticleEffectFactory::CheckPlayerSpriteDirection(ParticleEffect* aEffect)
+{
+	LevelScene* levelScene = dynamic_cast<LevelScene*>(myScene);
+
+	if (levelScene != NULL)
+		myPlayer = dynamic_cast<Player*>(levelScene->GetPlayer());
+
+	if (myPlayer->GetComponent<PhysicsComponent>()->GetVelocityX() < 0)
+		aEffect->SetReverseImage();
+}
+
+const void ParticleEffectFactory::CheckPlayerSpritePath(ParticleEffect* aEffect, const int aIndex)
+{
+	if (mySpawningEffects[aIndex].mySpawnAmount > 2)
+		mySpawningEffects[aIndex].mySpawnAmount = {};
+
+	aEffect->SetNewPlayerSprite(mySpawningEffects[aIndex].mySpawnAmount);
 }

@@ -1524,9 +1524,9 @@
                  "point":true,
                  "properties":[
                         {
-                         "name":"Area",
+                         "name":"BonfireID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }, 
                         {
                          "name":"ID",
@@ -1547,9 +1547,9 @@
                  "point":true,
                  "properties":[
                         {
-                         "name":"Area",
+                         "name":"BonfireID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }, 
                         {
                          "name":"ID",
@@ -1570,9 +1570,9 @@
                  "point":true,
                  "properties":[
                         {
-                         "name":"Area",
+                         "name":"BonfireID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }, 
                         {
                          "name":"ID",

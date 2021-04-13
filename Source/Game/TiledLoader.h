@@ -37,6 +37,7 @@ public:
 	void Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, const bool aIsHiddenRoom);
 
 	void UsedLevelSelect();
+	void Continued();
 
 private:
 	void ParseBonfires(const std::vector<LoadData> someData, Scene*, Player* aPlayer);
@@ -70,4 +71,6 @@ private:
 	int myHRz = 130;
 
 	bool myLoadsFromLevelSelect = false;
+	bool myContinued = false;
+	bool myBonfireFound = false;
 };

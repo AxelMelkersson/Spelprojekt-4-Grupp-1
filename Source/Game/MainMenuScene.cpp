@@ -213,6 +213,8 @@ void MainMenuScene::CheckButtonsPress()
 				CGameWorld::GetInstance()->GetLevelManager().UsedLevelSelect();
 			}
 
+			CGameWorld::GetInstance()->GetLevelManager().Continued();
+
 			//CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
