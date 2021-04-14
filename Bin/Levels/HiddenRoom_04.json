@@ -926,15 +926,15 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":8,
+                 "height":6.71428571428571,
                  "id":512,
                  "name":"",
                  "rotation":0,
                  "type":"3",
                  "visible":true,
-                 "width":56,
-                 "x":344,
-                 "y":248
+                 "width":40,
+                 "x":352,
+                 "y":248.642857142857
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1041,7 +1041,7 @@
         {
          "name":"Area",
          "type":"int",
-         "value":3
+         "value":2
         }, 
         {
          "name":"Particles",

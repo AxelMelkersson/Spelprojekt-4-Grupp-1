@@ -973,7 +973,7 @@
         {
          "name":"Area",
          "type":"int",
-         "value":3
+         "value":2
         }, 
         {
          "name":"Particles",
