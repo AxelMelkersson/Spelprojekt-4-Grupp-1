@@ -162,7 +162,8 @@ const void ParticleEffect::SpawnSprite()
 
 	if (myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectBackgroundParticle) ||
 		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectForegroundParticle) ||
-		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectNextScreenParticle))
+		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::RainEffectNextScreenParticle) ||
+		myStats.myEffectTypeIndex == static_cast<int>(eParticleEffects::PlayerBashedPlayerParticle))
 	{
 		sprite->SetCeilPosition(false);
 	}

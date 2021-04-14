@@ -39,6 +39,7 @@ private:
 	std::vector<int> myCollectibleCollected;
 
 	std::vector<int> myShowQueue;
+	std::vector<std::string> myShowQueueText;
 
 	bool myIsMaxLeft = false;
 

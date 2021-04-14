@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "InputWrapper.h"
 #include "DataManager.h"
+#include "AudioManager.h"
 
 #include <tga2d/error/error_manager.h>
 
@@ -78,6 +79,7 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		myGotOutOfFocusSizeY = myZoomY;
 
 		myTimer->SetTimeScale(0.0f);
+		AudioManager::GetInstance()->MuteEverything();
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::KilledFocus, 0));
 		break;
 	}
@@ -89,6 +91,7 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		UpdateWindowSize(myGotOutOfFocusSizeX, myGotOutOfFocusSizeY);
 
 		myTimer->SetTimeScale(1.0f);
+		AudioManager::GetInstance()->UnMuteEverything();
 		break;
 	}
 		// this message is read when the window is closed

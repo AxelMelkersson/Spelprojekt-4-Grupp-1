@@ -38,7 +38,7 @@ void UIPopUp::InitPopUp()
 
 	myBackground = new UIObject(myScene);
 
-	v2f backPos = { Config::ourReferenceSize.x, 15.f };
+	v2f backPos = { Config::ourReferenceSize.x - 5, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
 	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
 
@@ -46,7 +46,7 @@ void UIPopUp::InitPopUp()
 	myFires.push_back(new UIObject(myScene));
 	myFires.push_back(new UIObject(myScene));
 
-	myBackground->Init("Sprites/UI/popUp/UI_PopUp_84x32px.dds", { 84.0f, 32.0f }, backPos, 200);
+	myBackground->Init("Sprites/UI/popUp/UI_collectiblePickupScreen.dds", { 84.0f, 32.0f }, backPos, 200);
 
 	myFires[0]->InitAnimation("Sprites/Objects/Collectible3.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
 	myFires[1]->InitAnimation("Sprites/Objects/Collectible2.dds", { 16.0f, 16.0f }, 7, 7, firePos, 201);
@@ -86,6 +86,8 @@ void UIPopUp::Update(const float& aDeltaTime)
 		return;
 	}
 
+	myCollectibleString->SetText(myShowQueueText[0]);
+
 	myFires[myShowQueue[0]]->SetActive(true);
 	myBackground->SetActive(true);
 	myCollectibleString->Activate();
@@ -99,6 +101,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 	{
 		Deactivate(static_cast<ePopUpTypes>(myShowQueue[0]));
 		myShowQueue.erase(myShowQueue.begin() + 0);
+		myShowQueueText.erase(myShowQueueText.begin() + 0);
 	}
 
 }
@@ -160,7 +163,7 @@ void UIPopUp::SetNewPositions(const float& aDeltaTime)
 	{
 		if (myIsMaxLeft == false)
 		{
-			if (myBackground->GetStartPosition().x < Config::ourReferenceSize.x - 55.f)
+			if (myBackground->GetStartPosition().x < Config::ourReferenceSize.x - 60.f)
 			{
 				myIsMaxLeft = true;
 			}
@@ -215,5 +218,5 @@ void UIPopUp::UpdateCollectibles()
 		}
 	}
 
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myShowQueue[0]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[0]]));
+	myShowQueueText.push_back(std::to_string(myCollectibleCollected[myShowQueue[static_cast<int>(myShowQueue.size() - 1)]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[static_cast<int>(myShowQueue.size() - 1)]]));
 }

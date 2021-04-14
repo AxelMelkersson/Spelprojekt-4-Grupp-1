@@ -7,6 +7,7 @@
 #include "GameWorld.h"
 #include "InputWrapper.h"
 #include "SpeedrunManager.h"
+#include "CutsceneManager.h"
 
 WinScene::WinScene()
 {
@@ -30,13 +31,9 @@ void WinScene::Load()
 	}
 	UIObject* winText = new UIObject(this);
 	winText->SetActive(true);
-	winText->Init("Sprites/UI/winScene/win.dds", v2f(64.0f, 16.0f), v2f(160.0f, 90.0f), 201);
-	winText->SetPosition(v2f(160.0f, 90.0f));
+	winText->Init("Video/cutscene_ending_320x180px.dds", { 512.f, 256.f }, v2f(0, 0), 201);
 
-	UIObject* enterText = new UIObject(this);
-	enterText->SetActive(true);
-	enterText->Init("Sprites/UI/winScene/enter.dds", v2f(64.0f, 16.0f), v2f(160.0f, 110.0f), 201);
-	enterText->SetPosition(v2f(160.0f, 110.0f));
+	CutsceneManager::GetInstance().PlayVideo(CutsceneType::Outro);
 
 	Scene::Load();
 }
@@ -65,7 +62,7 @@ void WinScene::Update(const float& aDeltaTime)
 
 	GetCamera().SetZoom(zoom);
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ENTERKey))
+	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ENTERKey) || CGameWorld::GetInstance()->Input()->GetController()->IsButtonPressed(Controller::Button::Cross))
 	{
 		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
 	}

@@ -89,7 +89,6 @@ void AudioClip::PlayIfAvailable()
 
 void AudioClip::Mute()
 {
-	//myAudio->Stop(true);
 	myAudio->SetVolume(0);
 }
 
