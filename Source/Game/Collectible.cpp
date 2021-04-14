@@ -168,12 +168,12 @@ void Collectible::TurnIn()
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
+		DataManager::GetInstance().SaveCollectedCollectible(myID);
 		if (!myWasCollectedBefore && !myWasTurnedInWhenEnteringDoor)
 		{
 			CheckPopUpMessages();
 		}
 
-		DataManager::GetInstance().SaveCollectedCollectible(myID);
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::TurnedInCollectible, 0));
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
@@ -224,16 +224,16 @@ const void Collectible::CheckPopUpMessages()
 {
 	if (myType == eCollectibleType::Easy)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, 0), true);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageE, 0));
 	}
 	else if (myType == eCollectibleType::Medium)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, 0), true);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageM, 0));
 
 	}
 	else if (myType == eCollectibleType::Hard)
 	{
-		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0), true);
+		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0));
 	}
 }
 

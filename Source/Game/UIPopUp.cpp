@@ -86,7 +86,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 		return;
 	}
 
-	myCollectibleString->SetText(std::to_string(myCollectibleCollected[myShowQueue[0]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[0]]));
+	myCollectibleString->SetText(myShowQueueText[0]);
 
 	myFires[myShowQueue[0]]->SetActive(true);
 	myBackground->SetActive(true);
@@ -101,6 +101,7 @@ void UIPopUp::Update(const float& aDeltaTime)
 	{
 		Deactivate(static_cast<ePopUpTypes>(myShowQueue[0]));
 		myShowQueue.erase(myShowQueue.begin() + 0);
+		myShowQueueText.erase(myShowQueueText.begin() + 0);
 	}
 
 }
