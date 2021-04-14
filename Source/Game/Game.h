@@ -69,6 +69,8 @@ private:
 	int myMonitorSizeX = 0;
 	int myMonitorSizeY = 0;
 
+	bool myKilledFocus;
+
 #ifndef _RETAIL
 	void InitDebugger();
 	Debugger myDebugger;
