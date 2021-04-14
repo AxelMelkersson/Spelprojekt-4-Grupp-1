@@ -52,6 +52,7 @@ void MainMenuScene::Activate()
 
 	myOptions->DeactivateCredits();
 	myOptions->DeactivateTutorial();
+	myOptions->DeactivateResetGame();
 }
 
 void MainMenuScene::Deactivate()

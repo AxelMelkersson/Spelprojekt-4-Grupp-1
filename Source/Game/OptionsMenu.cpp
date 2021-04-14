@@ -14,6 +14,7 @@
 
 #include "TutorialMenu.h"
 #include "CreditsMenu.h"
+#include "ResetGameMenu.h"
 
 OptionsMenu::OptionsMenu(Scene* aLevelScene) : myCamera(aLevelScene->GetCamera()), myPauseMenu(nullptr)
 {
@@ -34,6 +35,7 @@ OptionsMenu::OptionsMenu(Scene* aLevelScene) : myCamera(aLevelScene->GetCamera()
 	myAudioManager = nullptr;
 	myCreditsMenu = nullptr;
 	myTutorial = nullptr;
+	myResetGame = nullptr;
 }
 
 void OptionsMenu::Init()
@@ -56,8 +58,11 @@ void OptionsMenu::Init()
 	if (!myIsOpenedFromPause)
 	{
 		myResetBtn = new UIButton(myScene);
+		myResetGame = new ResetGameMenu(myScene);
+		myYesBtn = new UIObject(myScene);
+		myNoBtn = new UIObject(myScene);
 	}
-	
+
 	myScreenBtn = new UIButton(myScene);
 
 	mySoundSettings = new UIObject(myScene);
@@ -101,7 +106,7 @@ void OptionsMenu::Init()
 	mySoundBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Unmarked.dds", { 36.0f, 16.0f }, soundPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Marked.dds", 36);
 	myCreditsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Unmarked.dds", { 45.f, 16.f }, creditsPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Marked.dds", 45);
 	myTutorialsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Unmarked.dds", { 48.f, 16.f }, tutorialPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Marked.dds", 48);
-	
+
 	if (myIsOpenedFromPause)
 	{
 		myBackBtn->Init("Sprites/UI/pauseMenu/UI_PauseMenu_Text_Back_29x16px_Unmarked.dds", { 29.f,16.f }, backPos, "Sprites/UI/pauseMenu/UI_PauseMenu_Text_Back_29x16px_Marked.dds", 29);
@@ -110,8 +115,17 @@ void OptionsMenu::Init()
 	{
 		myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
 		myResetBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Unmarked.dds", { 65.f,16.f }, resetPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Marked.dds", 65);
+		
+		//Reset Game
+		myResetGame->SetPosition(v2f(100.0f, 50.0f));
+		myResetGame->SetZIndex(205);
+		myYesBtn->Init("Sprites/UI/optionsMenu/YesBtn.dds", { 65.f, 16.f }, { 100.f, 90.f }, 206);
+		myNoBtn->Init("Sprites/UI/optionsMenu/NoBtn.dds", { 65.f, 16.f }, { 170.f, 90.f }, 206);
+
+		myResetObjects.push_back(myYesBtn);
+		myResetObjects.push_back(myNoBtn);
 	}
-	
+
 
 	//Sound
 	mySoundSettings->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_Unmarked.dds", { 128.f, 32.f }, soundSettingPos, 202);
@@ -127,6 +141,8 @@ void OptionsMenu::Init()
 	//Tutorial
 	myTutorial->SetPosition(v2f(8.0f, 8.0f));
 	myTutorial->SetZIndex(205);
+
+
 
 	//Screen
 	myResolutions->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_All_73x7px_Unmarked.dds", { 128.0f, 8.0f }, resolutionPos, 202);
@@ -192,6 +208,18 @@ void OptionsMenu::Update(const float& aDeltaTime)
 	{
 		myCreditsMenu->Deactivate();
 	}
+	if (myResetGameActive)
+	{
+		myResetGame->Activate();
+		myYesBtn->Activate();
+		myNoBtn->Activate();
+	}
+	else
+	{
+		myResetGame->Deactivate();
+		myYesBtn->Deactivate();
+		myNoBtn->Deactivate();
+	}
 
 	if (myMenuAcitve)
 	{
@@ -224,6 +252,11 @@ void OptionsMenu::DeactivateCredits()
 	myCreditsMenu->Deactivate();
 }
 
+void OptionsMenu::DeactivateResetGame()
+{
+	myResetGame->Deactivate();
+}
+
 void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
 {
 	myIsOpenedFromPause = true;
@@ -239,7 +272,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 	{
 		switch (static_cast<eOptionsMenu>(myMovingIndex))
 		{
-		case eOptionsMenu::Back:{
+		case eOptionsMenu::Back: {
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 			if (myIsOpenedFromPause)
 			{
@@ -253,7 +286,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
-		case eOptionsMenu::Sound:{
+		case eOptionsMenu::Sound: {
 			if (!mySoundSettingsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -272,7 +305,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
-		case eOptionsMenu::ScreenSize:{
+		case eOptionsMenu::ScreenSize: {
 			if (!myScreenSettingsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -285,7 +318,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
-		case eOptionsMenu::Credits:{
+		case eOptionsMenu::Credits: {
 			if (!myCreditsActive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -302,7 +335,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
-		case eOptionsMenu::Tutorial:{
+		case eOptionsMenu::Tutorial: {
 			if (!myTutorialActtive)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
@@ -320,10 +353,16 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			break;
 		}
 		case eOptionsMenu::ResetGame: {
+			if (!myResetGameActive)
+			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
+				myResetGameActive = true;
+				myResetGame->Activate();
+			}
 			DataManager::GetInstance().ResetSaveFile();
 			break;
 		}
-		default:{
+		default: {
 			assert((false) && "myMovingIndex in OptionsMenu::CheckIndexPress does not correlate to eOptionsMenu.");
 			break;
 		}
@@ -334,22 +373,22 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 		switch (myScreenMovingIndex)
 		{
-		case 0:{
+		case 0: {
 			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
 			break;
 		}
-		case 1:{
+		case 1: {
 			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
 			break;
 		}
-		case 2:{
+		case 2: {
 			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f - myCamera.GetPosition().x);
 			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
 			break;
 		}
-		default:{
+		default: {
 			assert((false) && "myScreenMovingIndex in OptionsMenu::CheckIndexPress does not correlate to any option.");
 			break;
 		}
@@ -361,6 +400,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			myResolutionObj[i]->SetActive(false);
 		}
 	}
+
 
 	if (mySoundSettingsActive)
 	{
@@ -436,7 +476,24 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myScreenMovingIndex = 0;
 		}
 	}
-	else if (!mySoundSettingsActive && !myScreenSettingsActive && !myTutorialActtive && !myCreditsActive)
+	else if (myResetGameActive)
+	{
+		if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
+		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
+			myResetMovingIndex--;
+			if (myResetMovingIndex < 0)
+				myResetMovingIndex = myResetObjects.size() - 1;
+		}
+		else if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
+		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
+			myResetMovingIndex++;
+			if (myResetMovingIndex > myResetObjects.size() - 1)
+				myResetMovingIndex = 0;
+		}
+	}
+	else if (!mySoundSettingsActive && !myScreenSettingsActive && !myTutorialActtive && !myCreditsActive && !myResetGameActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -453,6 +510,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMovingIndex = 0;
 		}
 	}
+
 }
 void OptionsMenu::ActivateMenu()
 {
@@ -473,6 +531,12 @@ void OptionsMenu::ActivateMenu()
 	myVFXDot->SetActive(true);
 	myResolutions->SetActive(true);
 	myScreenSizeDot->SetActive(true);
+
+	if (myResetGameActive)
+	{
+		myYesBtn->SetActive(true);
+		myNoBtn->SetActive(true);
+	}
 }
 void OptionsMenu::DeactivateMenu()
 {
@@ -495,6 +559,11 @@ void OptionsMenu::DeactivateMenu()
 	myResolutions->SetActive(false);
 	myScreenSizeDot->SetActive(false);
 	myFireHighlight->SetActive(false);
+	if (!myResetGameActive)
+	{
+		myYesBtn->SetActive(false);
+		myNoBtn->SetActive(false);
+	}
 }
 void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 {
@@ -544,6 +613,13 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 
 	for (auto res : myResolutionObj)
 		res->UpdateUIObjects(true);
+
+	if (myResetGameActive)
+	{
+		myYesBtn->UpdateUIObjects(0);
+		myNoBtn->UpdateUIObjects(0);
+	}
+
 }
 void OptionsMenu::CheckActiveAnimations()
 {
