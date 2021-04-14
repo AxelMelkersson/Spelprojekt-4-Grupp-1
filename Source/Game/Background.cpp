@@ -73,14 +73,18 @@ Background::~Background()
 		float currentPlayerPos = myPlayer->GetPositionX();
 		float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
 
-		if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		if (!myPlayer->GetHasDied())
 		{
-			myCameraDistance->myBackgroundDistanceX += myTotalCameraDistanceX;
+			if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+			{
+				myCameraDistance->myBackgroundDistanceX += myTotalCameraDistanceX;
+			}
+			else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+			{
+				myCameraDistance->myBackgroundDistanceX -= myTotalCameraDistanceX;
+			}
 		}
-		else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
-		{
-			myCameraDistance->myBackgroundDistanceX -= myTotalCameraDistanceX;
-		}
+	
 	}
 
 	if (myCameraDistance->myAreaIndexChanged)
@@ -333,6 +337,8 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 	CheckResetLoop();
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
+
+	std::cout << myCameraDistance->myBackgroundDistanceX << std::endl;
 
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
 
