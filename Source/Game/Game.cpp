@@ -15,6 +15,8 @@
 
 #include "PostMaster.hpp"
 
+#include <shlobj.h>
+
 using namespace std::placeholders;
 
 v2f Config::ourReferenceSize = { 320.f, 180.f };
@@ -158,6 +160,8 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 
 void CGame::InitCallBack()
 {
+	PathMaster();
+
 	myGameWorld.Init();
 
 	HWND handle = GetActiveWindow();
@@ -207,6 +211,38 @@ void CGame::UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight)
 
 	HWND handle = GetActiveWindow();
 	SetWindowPos(handle, 0, posX, posY, myZoomX, myZoomY, 0);
+}
+
+void CGame::PathMaster()
+{
+	wchar_t documentsWide[MAX_PATH];
+	std::string documents = "";
+
+	HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsWide);
+
+	for (wchar_t character : documentsWide)
+	{
+		if (character == 0)
+		{
+			break;
+		}
+
+		documents += static_cast<char>(character);
+	}
+
+	documents += "\\PassOn\\SaveFile.json";
+
+	std::ifstream saveFile;
+	saveFile.open(documents);
+
+	if (!saveFile.is_open())
+	{
+		//CreateFile
+	}
+	else
+	{
+		//Send forth
+	}
 }
 
 #ifndef _RETAIL
