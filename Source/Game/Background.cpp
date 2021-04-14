@@ -18,6 +18,7 @@ Background::Background(Scene* aLevelScene)
 {
 	SetZIndex(0);
 
+	myGetReferences = {};
 	myBackgroundSpeedOneX = {};
 	myBackgroundSpeedTwoX = {};
 	myBackgroundSpeedThreeX = {};
@@ -44,24 +45,24 @@ Background::Background(Scene* aLevelScene)
 
 	assert(&aLevelScene->GetCamera() != NULL);
 	myLevelScene = dynamic_cast<LevelScene*>(aLevelScene);
-	myPlayer = dynamic_cast<Player*>(myLevelScene->GetPlayer());
-	myCamera = &aLevelScene->GetCamera();
 }
 
 Background::~Background()
 {
-	float currentPlayerPos = myPlayer->GetPositionX();
-	float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
-
-	if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+	if (myPlayer != NULL)
 	{
-		Distance::myBackgroundDistanceX += myTotalCameraDistanceX;
-	}
-	else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
-	{
-		Distance::myBackgroundDistanceX -= myTotalCameraDistanceX;
-	}
+		float currentPlayerPos = myPlayer->GetPositionX();
+		float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
 
+		if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		{
+			Distance::myBackgroundDistanceX += myTotalCameraDistanceX;
+		}
+		else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		{
+			Distance::myBackgroundDistanceX -= myTotalCameraDistanceX;
+		}
+	}
 }
 
 void Background::LoadBackground(const int aIndex)
@@ -117,6 +118,7 @@ void Background::LoadBackground(const int aIndex)
 
 void Background::Update(const float& aDeltaTime)
 {
+	CheckReferences();
 	AddStartingCameraPos();
 	UpdateBackground(aDeltaTime);
 }
@@ -301,7 +303,6 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
-	v2f imagePos = {0.f, GetHalfImageSize(myBackgroundSprite2).y };
 
 	myBackgroundSprite2->SetPosition(cameraPosition + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
 
@@ -327,4 +328,15 @@ const v2f Background::GetHalfImageSize(GameObject* aSprite)
 	v2f spriteSize = aSprite->GetComponent<SpriteComponent>()->GetImageSize() / 2.f;
 
 	return spriteSize;
+}
+
+const void Background::CheckReferences()
+{
+	if (!myGetReferences)
+	{
+		myLevelScene = dynamic_cast<LevelScene*>(myLevelScene);
+		myPlayer = dynamic_cast<Player*>(myLevelScene->GetPlayer());
+		myCamera = &myLevelScene->GetCamera();
+		myGetReferences = true;
+	}
 }

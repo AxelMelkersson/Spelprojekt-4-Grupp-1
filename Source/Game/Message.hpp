@@ -1,3 +1,4 @@
+//Author: Axel Melkersson
 #pragma once
 #include "MessageTypes.hpp"
 #include <string>

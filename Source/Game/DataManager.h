@@ -120,6 +120,7 @@ public:
 	void SaveCollectedCollectible(const unsigned int anID);
 	void SaveSFXVolume(const float aVolume);
 	void SaveMusicVolume(const float aVolume);
+	void SaveStartLevel(const unsigned int aLevel);
 
 	// Reset Methods
 	void ResetSaveFile();
@@ -135,6 +136,7 @@ public:
 	const std::array<float, 10> &GetHighScores() const;
 	const float GetSFXVolume() const;
 	const float GetMusicVolume() const;
+	const unsigned int GetStartLevel() const;
 
 	void ParseCollectableInfo();
 

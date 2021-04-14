@@ -28,16 +28,24 @@ void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 	ParseText(aBonfireID);
 
 	SpriteComponent* spriteComp = AddComponent<SpriteComponent>();
-	spriteComp->SetSpritePath("Sprites/UI/popUp/UI_PopUp_84x32px.dds");
-	spriteComp->SetSize({ 160, 64 });
-	spriteComp->SetRelativePosition({ GetPosition().x - 110, GetPosition().y - 130 });
-	spriteComp->SetColor({1, 1, 1, myAlpha });
+	spriteComp->SetSpritePath("Sprites/UI/dialogueScreen/UI_dialogueScreen.dds");
+	spriteComp->SetRelativePosition({ GetPosition().x - 135, GetPosition().y - 121 });
+	spriteComp->SetColor({ 1, 1, 1, myAlpha });
 
 	for (int i = 0; i < myRowNumber; ++i)
 	{
 		TextComponent* textComp = AddComponent<TextComponent>();
-		textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_30, 0);
-		textComp->SetRelativePosition(GetPosition().x - 30, GetPosition().y - 50 + i * 10);
+		
+		if(i == 0)
+		{
+			textComp->CreateText("Text/alagard.ttf", EFontSize::EFontSize_30, 0);
+		}
+		else
+		{
+			textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_24, 0);
+		}
+
+		textComp->SetRelativePosition(GetPosition().x - 30, GetPosition().y - 36 + i * 10);
 		textComp->SetColor({ 1, 1, 1, myAlpha });
 
 		if (i < myText.size())
@@ -53,7 +61,7 @@ void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 }
 
 void SpeechBubble::Update(const float& aDeltaTime)
-{	
+{
 	if (myIsSpeaking)
 	{
 		if (!myHasFadedIn)
@@ -69,7 +77,7 @@ void SpeechBubble::Update(const float& aDeltaTime)
 				Fade(true, aDeltaTime);
 			}
 		}
-		else if(!myHasFadedOut)
+		else if (!myHasFadedOut)
 		{
 			myTimeIHasSpoken += aDeltaTime;
 			if (myTimeIHasSpoken >= mySpeakTime && !myPlayerIsStandingByTheBonfire)
@@ -118,6 +126,10 @@ void SpeechBubble::ParseText(const int aIndex)
 		{
 			for (rapidjson::Value::ConstValueIterator text = (*bonfireText)["text"].Begin(); text != (*bonfireText)["text"].End(); ++text)
 			{
+				if (myText.size() == 1)
+				{
+					myText.push_back("");
+				}
 				myText.push_back((*text).GetString());
 			}
 		}
