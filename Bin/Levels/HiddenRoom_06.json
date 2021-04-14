@@ -859,7 +859,7 @@
                  "type":"3",
                  "visible":true,
                  "width":8,
-                 "x":-24,
+                 "x":-16,
                  "y":208
                 }],
          "opacity":1,
@@ -969,6 +969,17 @@
  "nextlayerid":19,
  "nextobjectid":602,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":3
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":1
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

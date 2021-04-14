@@ -900,6 +900,29 @@
                  "width":0,
                  "x":264,
                  "y":176
+                }, 
+                {
+                 "height":0,
+                 "id":566,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1617
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":272
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1105,7 +1128,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":566,
+ "nextobjectid":567,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -94,8 +94,6 @@ void SpringObject::CreateGroundSpring()
 	sprite->SetSpritePath("Sprites/Objects/Mushroom.dds");
 	sprite->SetSize(mySize);
 
-	sprite->SetCeilPosition(true);
-
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(sprite);
 	myAnimation[0] = Animation(false, true, false, 0, 1, 1, 0.055f, sprite, 16, 16);
