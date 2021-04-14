@@ -22,16 +22,34 @@ Background::Background(Scene* aLevelScene)
 	myBackgroundSpeedOneX = {};
 	myBackgroundSpeedTwoX = {};
 	myBackgroundSpeedThreeX = {};
+	myBackgroundSpeedFourX = {};
+	myBackgroundSpeedFiveX = {};
+	myBackgroundSpeedSixX = {};
+	myBackgroundSpeedSevenX = {};
+
 	myBackgroundSpeedOneY = {};
 	myBackgroundSpeedTwoY = {};
 	myBackgroundSpeedThreeY = {};
-	myBackgroundSpeedSevenX = {};
+	myBackgroundSpeedFourY = {};
+	myBackgroundSpeedFiveY = {};
+	myBackgroundSpeedSixY = {};
 	myBackgroundSpeedSevenY = {};
+
+	myBackgroundSprite1 = {};
+	myBackgroundSprite2 = {};
+	myBackgroundSprite3 = {};
+	myBackgroundSprite4 = {};
+	myBackgroundSprite5 = {};
+	myBackgroundSprite6 = {};
+	myBackgroundSprite7 = {};
+
+	myCamera = {};
+	myPlayer = {};
+
 	myAddedCameraPos = {};
 	myCloudSpeed = {};
 	myTotalCameraDistanceX = {};
 	myStartingPlayerPos = {};
-
 
 	myAddedCameraPosX = {};
 
@@ -329,8 +347,6 @@ const void Background::CheckResetLoop()
 {
 	mySpriteComp7.myMovedSpriteDistanceX = myBackgroundSprite7->GetPosition().x / (mySpriteComp7.myRightSprite->GetImageSize().x);
 
-
-	std::cout << mySpriteComp7.myMovedSpriteDistanceX << std::endl;
 }
 
 
