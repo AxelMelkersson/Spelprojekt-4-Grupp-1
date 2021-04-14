@@ -52,7 +52,12 @@ void OptionsMenu::Init()
 	myCreditsBtn = new UIButton(myScene);
 	myTutorialsBtn = new UIButton(myScene);
 	myBackBtn = new UIButton(myScene);
-	myResetBtn = new UIButton(myScene);
+
+	if (!myIsOpenedFromPause)
+	{
+		myResetBtn = new UIButton(myScene);
+	}
+	
 	myScreenBtn = new UIButton(myScene);
 
 	mySoundSettings = new UIObject(myScene);
@@ -104,9 +109,9 @@ void OptionsMenu::Init()
 	else
 	{
 		myBackBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Unmarked_64x16px.dds", { 64.f,16.f }, backPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_MainMenu_Marked_64x16px.dds", 64);
+		myResetBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Unmarked.dds", { 65.f,16.f }, resetPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Marked.dds", 65);
 	}
 	
-	myResetBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Unmarked.dds", { 65.f,16.f }, resetPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_ResetSave_65x16px_Marked.dds", 65);
 
 	//Sound
 	mySoundSettings->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_Setting_74x26px_Unmarked.dds", { 128.f, 32.f }, soundSettingPos, 202);
@@ -155,7 +160,11 @@ void OptionsMenu::Init()
 	myButtons.push_back(myCreditsBtn);
 	myButtons.push_back(myTutorialsBtn);
 	myButtons.push_back(myBackBtn);
-	myButtons.push_back(myResetBtn);
+
+	if (!myIsOpenedFromPause)
+	{
+		myButtons.push_back(myResetBtn);
+	}
 
 	mySoundObjects.push_back(myBGHighlight);
 	mySoundObjects.push_back(myVFXHighlight);
