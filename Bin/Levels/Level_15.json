@@ -154,7 +154,7 @@
                  "y":184
                 }, 
                 {
-                 "height":8,
+                 "height":24,
                  "id":523,
                  "name":"",
                  "properties":[
@@ -310,7 +310,7 @@
                  "y":204
                 }, 
                 {
-                 "height":24,
+                 "height":40,
                  "id":578,
                  "name":"",
                  "rotation":0,
@@ -937,6 +937,18 @@
                  "width":0,
                  "x":448,
                  "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":611,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":424,
+                 "y":208
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1085,21 +1097,27 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
-         "opacity":1,
-         "properties":[
+         "objects":[
                 {
-                 "name":"Type",
-                 "type":"int",
-                 "value":50
+                 "height":0,
+                 "id":612,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"50",
+                 "visible":true,
+                 "width":0,
+                 "x":104,
+                 "y":14
                 }],
+         "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":611,
+ "nextobjectid":613,
  "orientation":"orthogonal",
  "properties":[
         {
