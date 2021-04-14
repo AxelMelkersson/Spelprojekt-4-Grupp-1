@@ -86,6 +86,8 @@ void UIPopUp::Update(const float& aDeltaTime)
 		return;
 	}
 
+	myCollectibleString->SetText(std::to_string(myCollectibleCollected[myShowQueue[0]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[0]]));
+
 	myFires[myShowQueue[0]]->SetActive(true);
 	myBackground->SetActive(true);
 	myCollectibleString->Activate();
@@ -215,5 +217,5 @@ void UIPopUp::UpdateCollectibles()
 		}
 	}
 
-	myCollectibleString->GetComponent<TextComponent>()->SetText(std::to_string(myCollectibleCollected[myShowQueue[0]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[0]]));
+	myShowQueueText.push_back(std::to_string(myCollectibleCollected[myShowQueue[static_cast<int>(myShowQueue.size() - 1)]]) + "/" + std::to_string(myCollectibleInfo[myShowQueue[static_cast<int>(myShowQueue.size() - 1)]]));
 }
