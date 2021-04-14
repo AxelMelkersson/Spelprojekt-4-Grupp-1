@@ -65,7 +65,7 @@ void WinScene::Update(const float& aDeltaTime)
 
 	GetCamera().SetZoom(zoom);
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ENTERKey))
+	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ENTERKey) || CGameWorld::GetInstance()->Input()->GetController()->IsButtonPressed(Controller::Button::Cross))
 	{
 		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
 	}
