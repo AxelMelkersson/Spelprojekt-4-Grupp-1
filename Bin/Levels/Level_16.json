@@ -2477,10 +2477,22 @@
          "draworder":"topdown",
          "id":7,
          "name":"Ledges",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":462,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":120,
+                 "y":256
+                }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2563,7 +2575,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":462,
+ "nextobjectid":463,
  "orientation":"orthogonal",
  "properties":[
         {
