@@ -969,6 +969,17 @@
  "nextlayerid":19,
  "nextobjectid":602,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":3
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":1
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,
