@@ -35,5 +35,6 @@ private:
 	Tga2D::CVideo* myVideo;
 	std::shared_ptr<InputWrapper> myInput;
 	bool myIsPlaying;
+	CutsceneType myType;
 };
 
