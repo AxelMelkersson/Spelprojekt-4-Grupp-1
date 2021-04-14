@@ -17,6 +17,16 @@ public:
 	void Update(const float& aDeltaTime) override;
 
 private:
+	struct BackgroundSpriteComp
+	{
+		SpriteComponent* mySpriteOne = {};
+		SpriteComponent* mySpriteTwo = {};
+		float mySpriteZoom = {};
+		float myMovedSpriteDistanceX = {};
+		bool myMovedLeftSprite = {};
+		bool myMovedRightSprite = {};
+	};
+
 	Camera* myCamera;
 	Player* myPlayer;
 	LevelScene* myLevelScene;
@@ -28,6 +38,10 @@ private:
 	GameObject* myBackgroundSprite5;
 	GameObject* myBackgroundSprite6;
 	GameObject* myBackgroundSprite7;
+
+	BackgroundSpriteComp mySpriteComp5;
+	BackgroundSpriteComp mySpriteComp6;
+	BackgroundSpriteComp mySpriteComp7;
 
 	v2f myCurrentRenderSize;
 	v2f myStartingCameraPos;
@@ -78,7 +92,7 @@ private:
 	const void AddStartingCameraPos();
 	const void CalculateCameraPositions(const float& aDeltaTime);
 	const void ResetDistanceValues();
-	const void CheckResetLoop(GameObject* aGameObject);
+	const void CheckResetLoop();
 
 	const v2f GetHalfImageSize(GameObject* aSprite);
 	const void CheckReferences();
