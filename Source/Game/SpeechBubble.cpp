@@ -23,20 +23,20 @@ SpeechBubble::SpeechBubble(Scene* aScene)
 void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 {
 	SetPosition({ aPos.x - 10, aPos.y - 50 });
-	SetZIndex(195);
+	SetZIndex(95);
 
 	ParseText(aBonfireID);
 
 	SpriteComponent* spriteComp = AddComponent<SpriteComponent>();
 	spriteComp->SetSpritePath("Sprites/UI/dialogueScreen/UI_dialogueScreen.dds");
-	spriteComp->SetRelativePosition({ GetPosition().x - 135, GetPosition().y - 121 });
+	spriteComp->SetRelativePosition({ GetPosition().x - 140, GetPosition().y - 121 });
 	spriteComp->SetColor({ 1, 1, 1, myAlpha });
 
 	for (int i = 0; i < myRowNumber; ++i)
 	{
 		TextComponent* textComp = AddComponent<TextComponent>();
-		
-		if(i == 0)
+
+		if (i == 0)
 		{
 			textComp->CreateText("Text/alagard.ttf", EFontSize::EFontSize_30, 0);
 		}
@@ -45,7 +45,7 @@ void SpeechBubble::Init(const int aBonfireID, const v2f aPos)
 			textComp->CreateText("Text/Peepo.ttf", EFontSize::EFontSize_24, 0);
 		}
 
-		textComp->SetRelativePosition(GetPosition().x - 30, GetPosition().y - 36 + i * 10);
+		textComp->SetRelativePosition(GetPosition().x - 35, GetPosition().y - 36 + i * 10);
 		textComp->SetColor({ 1, 1, 1, myAlpha });
 
 		if (i < myText.size())
@@ -77,25 +77,25 @@ void SpeechBubble::Update(const float& aDeltaTime)
 				Fade(true, aDeltaTime);
 			}
 		}
-		else if (!myHasFadedOut)
-		{
-			myTimeIHasSpoken += aDeltaTime;
-			if (myTimeIHasSpoken >= mySpeakTime && !myPlayerIsStandingByTheBonfire)
-			{
-				if (myAlpha <= 0.f)
-				{
-					myAlpha = 0.f;
-					myHasFadedOut = true;
-					myHasFadedIn = false;
-					myIsSpeaking = false;
-					myTimeIHasSpoken = 0.f;
-				}
-				else
-				{
-					Fade(false, aDeltaTime);
-				}
-			}
-		}
+		//else if (!myHasFadedOut)
+		//{
+		//	myTimeIHasSpoken += aDeltaTime;
+		//	if (myTimeIHasSpoken >= mySpeakTime && !myPlayerIsStandingByTheBonfire)
+		//	{
+		//		if (myAlpha <= 0.f)
+		//		{
+		//			myAlpha = 0.f;
+		//			myHasFadedOut = true;
+		//			myHasFadedIn = false;
+		//			myIsSpeaking = false;
+		//			myTimeIHasSpoken = 0.f;
+		//		}
+			//	else
+			//	{
+			//		Fade(false, aDeltaTime);
+			//	}
+			//}
+		//}
 	}
 
 	myPlayerIsStandingByTheBonfire = false;
