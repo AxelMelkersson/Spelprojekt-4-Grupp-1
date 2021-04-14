@@ -101,7 +101,14 @@ void BashAbility::UpdateBashVelocity(const float& aDeltaTime)
 			}
 			else
 			{
-				myPlayer->SetNextAnimation(4);
+				if (myPlayer->GetHasLanded())
+				{
+					myPlayer->SetNextAnimation(0);
+				}
+				else
+				{
+					myPlayer->SetNextAnimation(4);
+				}
 			}
 		}
 		
