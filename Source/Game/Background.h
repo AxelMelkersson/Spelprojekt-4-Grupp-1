@@ -67,6 +67,7 @@ private:
 
 	float myStartingCameraX;
 
+	bool myGetReferences;
 	bool myAddedCameraPosX;
 	bool myAddedCameraPos;
 
@@ -80,6 +81,6 @@ private:
 	const void CheckResetLoop(GameObject* aGameObject);
 
 	const v2f GetHalfImageSize(GameObject* aSprite);
-
+	const void CheckReferences();
 };
 
