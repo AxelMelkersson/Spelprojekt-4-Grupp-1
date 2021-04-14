@@ -139,7 +139,7 @@
                         {
                          "name":"Materials",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -217,7 +217,7 @@
                         {
                          "name":"Materials",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -471,7 +471,7 @@
                         {
                          "name":"Materials",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
