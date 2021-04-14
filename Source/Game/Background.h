@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "rapidjson/document.h"
+#include "CameraStaticDistance.hpp"
 
 class Camera;
 class SpriteComponent;
@@ -25,6 +26,7 @@ private:
 		float myMovedSpriteDistanceX = {};
 	};
 
+	Distance* myCameraDistance;
 	Camera* myCamera;
 	Player* myPlayer;
 	LevelScene* myLevelScene;
