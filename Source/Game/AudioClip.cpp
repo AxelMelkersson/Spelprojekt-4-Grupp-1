@@ -6,11 +6,10 @@
 #include "AudioManager.h"
 #include <iostream>
 
-AudioClip::AudioClip(const char* anAudioPath, const bool aIsLooping, const float& aVolume, const float& aMaxVol, AudioLayer aLayer) :
-	myMaxVolume(aMaxVol), myVolProcent(aMaxVol / 100.0f)
+AudioClip::AudioClip(const char* anAudioPath, const bool aIsLooping, const bool& aIsStoppable, const float& aMaxVol, AudioLayer aLayer) :
+	myMaxVolume(aMaxVol), myVolProcent(aMaxVol / 100.0f), myIsStoppable(aIsStoppable)
 {
 	myAudio = new Tga2D::CAudio();
-	myVolume = aVolume;
 	myAudio->Init(anAudioPath, aIsLooping);
 	myLayer = aLayer;
 	myAudio->SetVolume(myVolume);
@@ -101,7 +100,7 @@ void AudioClip::UnMute()
 
 void AudioClip::Stop()
 {
-	if (myIsFading) return;
+	if (myIsFading || !myIsStoppable) return;
 	myAudio->Stop();
 	myIsPlaying = false;
 	UnLock();
