@@ -22,20 +22,34 @@ WinScene::~WinScene()
 
 void WinScene::Load()
 {
+	myFadeTime = 3.0f;
+
 	AudioManager::GetInstance()->FadeIn(AudioList::Main_Menu);
 	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
 	{
-		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->ReportScoreToHighscores();
+		const std::shared_ptr<SpeedrunManager> speedrunManager = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager();
+		const std::string speedrunTime = speedrunManager->GetTimeOutput(speedrunManager->GetScore());
+
+		speedrunManager->ReportScoreToHighscores();
+
+		UIText* winText = new UIText(this);
+		winText->Activate();
+
+		winText->Init("Time: " + speedrunTime, "Text/Peepo.ttf", EFontSize::EFontSize_72, 0);
+
+		winText->SetPosition(v2f(105.0f, 90.0f));
 	}
 	else
 	{
+		myFadeTime = 0.0f;
 		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->Unlock();
-	}
-	UIObject* winText = new UIObject(this);
-	winText->SetActive(true);
-	winText->Init("Video/cutscene_ending_320x180px.dds", { 512.f, 256.f }, v2f(0, 0), 201);
 
-	CutsceneManager::GetInstance().PlayVideo(CutsceneType::Outro);
+		UIObject* winCutscene = new UIObject(this);
+		winCutscene->SetActive(true);
+		winCutscene->Init("Video/cutscene_ending_320x180px.dds", { 512.f, 256.f }, v2f(0, 0), 201);
+
+		CutsceneManager::GetInstance().PlayVideo(CutsceneType::Outro);
+	}
 
 	Scene::Load();
 }
@@ -64,9 +78,13 @@ void WinScene::Update(const float& aDeltaTime)
 
 	GetCamera().SetZoom(zoom);
 
-	if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::ENTERKey) || CGameWorld::GetInstance()->Input()->GetController()->IsButtonPressed(Controller::Button::Cross))
+	if (!CutsceneManager::GetInstance().IsPlaying())
 	{
-		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
+		myFadeTime -= aDeltaTime;
+		if (myFadeTime <= 0)
+		{
+			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
+		}
 	}
 
 	Scene::Update(aDeltaTime);

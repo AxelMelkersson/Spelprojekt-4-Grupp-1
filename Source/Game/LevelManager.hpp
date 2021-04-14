@@ -73,6 +73,8 @@ private:
 
 	bool myLoadingHiddenRoom;
 	bool myLevelTransition;
+
+	bool myHasFinished;
 	//bool myIsSpeedrunMode;
 
 #ifndef _RETAIL
