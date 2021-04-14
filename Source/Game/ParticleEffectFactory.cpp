@@ -119,7 +119,7 @@ void ParticleEffectFactory::Update(const float& aDeltaTime)
 	}
 
 
-	for (int i = mySpawningEffects.size() - 1; i >= 0; i--)
+	for (int i = static_cast<int>(mySpawningEffects.size()) - 1; i >= 0; i--)
 	{
 		mySpawningEffects[i].myTimer += aDeltaTime;
 		mySpawningEffects[i].myTotalTimer += aDeltaTime;
@@ -242,12 +242,6 @@ void ParticleEffectFactory::Notify(const Message& aMessage)
 		GameObject* gameobjectToFollow = aMessage.myEffectObject;
 
 		SpawnEffectFollowObject(gameobjectToFollow, eParticleEffects::BulletEffectTrail);
-		break;
-	}
-	{
-		const v2f position = std::get<v2f>(aMessage.myData);
-
-		SpawnEffect(position, eParticleEffects::BulletEffectHit);
 		break;
 	}
 	case eMessageType::VelocityLinesParticle:
