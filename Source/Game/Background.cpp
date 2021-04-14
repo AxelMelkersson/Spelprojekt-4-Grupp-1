@@ -50,18 +50,20 @@ Background::Background(Scene* aLevelScene)
 
 Background::~Background()
 {
-	float currentPlayerPos = myPlayer->GetPositionX();
-	float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
-
-	if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+	if (myPlayer != NULL)
 	{
-		Distance::myBackgroundDistanceX += myTotalCameraDistanceX;
-	}
-	else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
-	{
-		Distance::myBackgroundDistanceX -= myTotalCameraDistanceX;
-	}
+		float currentPlayerPos = myPlayer->GetPositionX();
+		float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
 
+		if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		{
+			Distance::myBackgroundDistanceX += myTotalCameraDistanceX;
+		}
+		else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		{
+			Distance::myBackgroundDistanceX -= myTotalCameraDistanceX;
+		}
+	}
 }
 
 void Background::LoadBackground(const int aIndex)
