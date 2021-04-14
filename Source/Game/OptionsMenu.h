@@ -12,6 +12,7 @@ class AudioManager;
 class TutorialMenu;
 class PauseMenu;
 class CreditsMenu;
+class ResetGameMenu;
 
 class OptionsMenu
 {
@@ -36,6 +37,7 @@ public:
 
 	void DeactivateTutorial();
 	void DeactivateCredits();
+	void DeactivateResetGame();
 
 	void SetOpenedFromPauseMenu(PauseMenu* aPauseMenu);
 
@@ -65,12 +67,17 @@ private:
 	UIObject* my1080pHgh;
 	UIObject* my4KHgh;
 	UIObject* myScreenSizeDot;
+	UIObject* myYesBtn;
+	UIObject* myNoBtn;
 
 	//Credits
 	CreditsMenu* myCreditsMenu;
 
 	//Tutorial
 	TutorialMenu* myTutorial;
+
+	//ResetGame
+	ResetGameMenu* myResetGame;
 
 	UIButton* myTutorialsBtn;
 	UIButton* myScreenBtn;
@@ -82,16 +89,18 @@ private:
 	std::vector<UIObject*> myResolutionObj;
 	std::vector<UIObject*> mySoundObjects;
 	std::vector<UIButton*> myButtons;
+	std::vector<UIObject*> myResetObjects;
 
 	std::shared_ptr<InputWrapper> myInput;
 
 	int myMovingIndex;
 	int mySoundMovingIndex;
 	int myScreenMovingIndex;
+	int myResetMovingIndex;
 
 	bool myMenuAcitve;
 	bool mySoundSettingsActive = false;
-
+	bool myResetGameActive = false;
 	bool myScreenSettingsActive = false;
 	bool myCreditsActive = false;
 	bool myTutorialActtive = false;

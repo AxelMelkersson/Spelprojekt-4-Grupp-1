@@ -191,6 +191,7 @@
     <ClInclude Include="ParticleStats.hpp" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="CameraStaticDistance.hpp" />
+    <ClInclude Include="ResetGameMenu.h" />
     <ClInclude Include="SpeechBubble.h" />
     <ClInclude Include="SpeedrunManager.h" />
     <ClInclude Include="SpeedrunScene.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PostMaster.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ResetGameMenu.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpeechBubble.cpp" />
     <ClCompile Include="SpeedrunManager.cpp" />

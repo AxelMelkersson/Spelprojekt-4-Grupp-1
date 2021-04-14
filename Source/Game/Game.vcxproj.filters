@@ -376,6 +376,7 @@
     <ClInclude Include="ParticleStartUpTypes.hpp">
       <Filter>Game Objects\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="ResetGameMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -622,5 +623,6 @@
     <ClCompile Include="SpeechBubble.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="ResetGameMenu.cpp" />
   </ItemGroup>
 </Project>

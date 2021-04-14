@@ -98,7 +98,7 @@ void SpringObject::CreateGroundSpring()
 	animation->SetSprite(sprite);
 	myAnimation[0] = Animation(false, true, false, 0, 1, 1, 0.055f, sprite, 16, 16);
 	myAnimation[1] = Animation(false, true, false, 0, 4, 4, 0.055f, sprite, 16, 16);
-	myAnimation[2] = Animation(false, true, false, 4, 13, 13, 0.1f, sprite, 16, 16);
+	myAnimation[2] = Animation(false, true, false, 4, 14, 14, 0.1f, sprite, 16, 16);
 	animation->SetAnimation(&myAnimation[0]);
 	sprite->SetSize(mySize);
 }

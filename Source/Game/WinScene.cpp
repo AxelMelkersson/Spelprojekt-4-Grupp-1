@@ -8,6 +8,7 @@
 #include "InputWrapper.h"
 #include "SpeedrunManager.h"
 #include "CutsceneManager.h"
+#include "AudioManager.h"
 
 WinScene::WinScene()
 {
@@ -21,6 +22,7 @@ WinScene::~WinScene()
 
 void WinScene::Load()
 {
+	AudioManager::GetInstance()->FadeIn(AudioList::Main_Menu);
 	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
 	{
 		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->ReportScoreToHighscores();
