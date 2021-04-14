@@ -105,6 +105,7 @@ public:
 	DataManager(DataManager& aDataManager) = delete;
 	void operator=(const DataManager&) = delete;
 	~DataManager() = default;
+	void Init();
 
 	// Data Struct Methods
 	Data& GetDataStruct(const DataEnum aDataEnum);

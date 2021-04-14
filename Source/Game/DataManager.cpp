@@ -12,6 +12,49 @@
 #include <iostream>
 #endif // !_RETAIL 
 
+void DataManager::Init()
+{
+	//Assign MasterDoc & SaveFile
+	ReadFileIntoDocument("Master.json", myMasterDoc);
+	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
+
+	//Assign LevelDocs
+	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
+	assert(myLevelMasterDoc["FilePathArray"].IsArray());
+	for (size_t i = 0; i < myLevelMasterDoc["FilePathArray"].GetArray().Size(); i++)
+	{
+		myLevelVector.push_back(rapidjson::Document());
+		ReadFileIntoDocument(myLevelMasterDoc["FilePathArray"].GetArray()[i]["FilePath"].GetString(), myLevelVector.back());
+	}
+
+	ReadFileIntoDocument("HiddenRooms/HiddenRooms.json", myHiddenRoomMasterDoc);
+	for (size_t i = 0; i < myHiddenRoomMasterDoc["HiddenRooms"].GetArray().Size(); i++)
+	{
+		const int hiddenRoomKey = myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["LevelIndex"].GetInt();
+
+		myHiddenRooms.insert({ hiddenRoomKey, rapidjson::Document() });
+		ReadFileIntoDocument(myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["FilePath"].GetString(), myHiddenRooms.at(hiddenRoomKey));
+	}
+
+	//Assign PlayerDoc
+	std::string playerDataPath = myMasterDoc["PlayerData"].GetString();
+	rapidjson::Document playerDoc;
+	ReadFileIntoDocument(playerDataPath, playerDoc);
+	//Assign Player Values
+	AssignValues(DataEnum::player, playerDoc);
+
+	//Assign EnemyDoc
+	std::string enemyDataPath = myMasterDoc["EnemyData"].GetString();
+	rapidjson::Document enemyDoc;
+	ReadFileIntoDocument(enemyDataPath, enemyDoc);
+	//Assign Enemy Values
+	AssignValues(DataEnum::enemy, enemyDoc);
+
+#ifndef _RETAIL
+	ResetSaveFile();
+#endif // !_RETAIL
+}
+
 void DataManager::SetDataStruct(const DataEnum aDataEnum)
 {
 	rapidjson::Document tempDoc;
@@ -365,45 +408,7 @@ void DataManager::SetSaveFilePath(const std::string aFilePath)
 // Private Methos
 DataManager::DataManager()
 {
-	//Assign MasterDoc & SaveFile
-	ReadFileIntoDocument("Master.json", myMasterDoc);
-	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
 
-	//Assign LevelDocs
-	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
-	assert(myLevelMasterDoc["FilePathArray"].IsArray());
-	for (size_t i = 0; i < myLevelMasterDoc["FilePathArray"].GetArray().Size(); i++)
-	{
-		myLevelVector.push_back(rapidjson::Document());
-		ReadFileIntoDocument(myLevelMasterDoc["FilePathArray"].GetArray()[i]["FilePath"].GetString(), myLevelVector.back());
-	}
-
-	ReadFileIntoDocument("HiddenRooms/HiddenRooms.json", myHiddenRoomMasterDoc);
-	for (size_t i = 0; i < myHiddenRoomMasterDoc["HiddenRooms"].GetArray().Size(); i++)
-	{
-		const int hiddenRoomKey = myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["LevelIndex"].GetInt();
-
-		myHiddenRooms.insert({ hiddenRoomKey, rapidjson::Document() });
-		ReadFileIntoDocument(myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["FilePath"].GetString(), myHiddenRooms.at(hiddenRoomKey));
-	}
-
-	//Assign PlayerDoc
-	std::string playerDataPath = myMasterDoc["PlayerData"].GetString();
-	rapidjson::Document playerDoc;
-	ReadFileIntoDocument(playerDataPath, playerDoc);
-	//Assign Player Values
-	AssignValues(DataEnum::player, playerDoc);
-
-	//Assign EnemyDoc
-	std::string enemyDataPath = myMasterDoc["EnemyData"].GetString();
-	rapidjson::Document enemyDoc;
-	ReadFileIntoDocument(enemyDataPath, enemyDoc);
-	//Assign Enemy Values
-	AssignValues(DataEnum::enemy, enemyDoc);
-
-#ifndef _RETAIL
-	ResetSaveFile();
-#endif // !_RETAIL
 }
 
 void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc)
