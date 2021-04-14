@@ -84,7 +84,18 @@
          "draworder":"topdown",
          "id":12,
          "name":"HiddenRooms",
-         "objects":[],
+         "objects":[
+                {
+                 "height":28,
+                 "id":569,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":160,
+                 "y":0
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -98,7 +109,7 @@
          "name":"HR",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":40,
          "x":0,
          "y":0
@@ -1150,7 +1161,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":569,
+ "nextobjectid":570,
  "orientation":"orthogonal",
  "properties":[
         {
