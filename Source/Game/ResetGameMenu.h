@@ -15,10 +15,5 @@ public:
     ~ResetGameMenu() = default;
 
 
-
-private:
-    UIButton* myYesBtn;
-    UIButton* myNoBtn;
-    std::vector<UIButton*> myResetButtons;
 };
 
