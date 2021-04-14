@@ -791,7 +791,7 @@
                  "type":"0",
                  "visible":true,
                  "width":8,
-                 "x":-24,
+                 "x":-16,
                  "y":64
                 }],
          "opacity":1,
@@ -915,7 +915,7 @@
                  "type":"3",
                  "visible":true,
                  "width":8,
-                 "x":-24,
+                 "x":-16,
                  "y":104
                 }],
          "opacity":1,
@@ -1035,12 +1035,12 @@
         {
          "name":"Area",
          "type":"int",
-         "value":0
+         "value":2
         }, 
         {
          "name":"Particles",
          "type":"int",
-         "value":0
+         "value":3
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
