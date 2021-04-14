@@ -149,7 +149,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"0",
@@ -183,7 +183,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"0",
@@ -200,7 +200,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"0",
@@ -234,7 +234,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"0",

@@ -2454,18 +2454,6 @@
                  "width":0,
                  "x":600,
                  "y":208
-                }, 
-                {
-                 "height":0,
-                 "id":459,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"54",
-                 "visible":true,
-                 "width":0,
-                 "x":616,
-                 "y":208
                 }],
          "opacity":1,
          "type":"objectgroup",

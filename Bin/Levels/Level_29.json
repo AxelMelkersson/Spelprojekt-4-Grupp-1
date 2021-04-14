@@ -70,12 +70,12 @@
                  "type":"",
                  "visible":true,
                  "width":8,
-                 "x":728,
+                 "x":736,
                  "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -86,7 +86,7 @@
          "name":"HR",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":320,
          "x":0,
          "y":0
@@ -1115,22 +1115,10 @@
                  "width":0,
                  "x":880,
                  "y":712
-                }, 
-                {
-                 "height":0,
-                 "id":537,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"55",
-                 "visible":true,
-                 "width":0,
-                 "x":1064,
-                 "y":56
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

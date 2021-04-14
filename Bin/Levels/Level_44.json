@@ -130,18 +130,6 @@
                  "width":0,
                  "x":456,
                  "y":80
-                }, 
-                {
-                 "height":0,
-                 "id":250,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"56",
-                 "visible":true,
-                 "width":0,
-                 "x":448,
-                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
