@@ -73,14 +73,18 @@ Background::~Background()
 		float currentPlayerPos = myPlayer->GetPositionX();
 		float calculatedPlayerPos = currentPlayerPos - myStartingPlayerPos;
 
-		if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+		if (!myPlayer->GetHasDied())
 		{
-			myCameraDistance->myBackgroundDistanceX += myTotalCameraDistanceX;
+			if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+			{
+				myCameraDistance->myBackgroundDistanceX += myTotalCameraDistanceX;
+			}
+			else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
+			{
+				myCameraDistance->myBackgroundDistanceX -= myTotalCameraDistanceX;
+			}
 		}
-		else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
-		{
-			myCameraDistance->myBackgroundDistanceX -= myTotalCameraDistanceX;
-		}
+	
 	}
 
 	if (myCameraDistance->myAreaIndexChanged)
@@ -323,20 +327,14 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 	v2f cameraPosition = myCamera->GetPosition();
 
-
 	myBackgroundSprite1->SetPosition(cameraPosition + backgroundSpeedOne + GetHalfImageSize(myBackgroundSprite1) + myOffsetBackground1);
 	myBackgroundSprite3->SetPosition(cameraPosition + backgroundSpeedThree + GetHalfImageSize(myBackgroundSprite3) + myOffsetBackground3);
 	myBackgroundSprite4->SetPosition(cameraPosition + backgroundSpeedFour + GetHalfImageSize(myBackgroundSprite4) + myOffsetBackground4);
 	myBackgroundSprite5->SetPosition(cameraPosition + backgroundSpeedFive + v2f({ 0.f, GetHalfImageSize(myBackgroundSprite5).y }) + myOffsetBackground5);
 	myBackgroundSprite6->SetPosition(cameraPosition + backgroundSpeedSix + v2f({0.f, GetHalfImageSize(myBackgroundSprite6).y}) + myOffsetBackground6);
 	myBackgroundSprite7->SetPosition(cameraPosition + backgroundSpeedSeven + v2f({ 0.f, GetHalfImageSize(myBackgroundSprite7).y }) + myOffsetBackground7);
-	//myBackgroundSprite5->SetPosition({ myBackgroundSprite5->GetPositionX() + -40.f * aDeltaTime, GetHalfImageSize(myBackgroundSprite5).y });
-	//myBackgroundSprite6->SetPosition({ myBackgroundSprite6->GetPositionX() + -40.f * aDeltaTime, GetHalfImageSize(myBackgroundSprite6).y });
-	//myBackgroundSprite7->SetPosition({ myBackgroundSprite7->GetPositionX() + -40.f * aDeltaTime, GetHalfImageSize(myBackgroundSprite7).y });
 
 	CheckResetLoop();
-
-	std::cout << *myBackgroundDistanceX << std::endl;
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
