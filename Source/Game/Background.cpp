@@ -338,8 +338,6 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
-	std::cout << myCameraDistance->myBackgroundDistanceX << std::endl;
-
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
 
 	myBackgroundSprite2->SetPosition(cameraPosition + backgroundSpeedTwo + GetHalfImageSize(myBackgroundSprite2) + myOffsetBackground2);
