@@ -19,12 +19,10 @@ public:
 private:
 	struct BackgroundSpriteComp
 	{
-		SpriteComponent* mySpriteOne = {};
-		SpriteComponent* mySpriteTwo = {};
-		float mySpriteZoom = {};
+		SpriteComponent* myRightSprite = {};
+		SpriteComponent* myMiddleSprite = {};
+		SpriteComponent* myLeftSprite = {};
 		float myMovedSpriteDistanceX = {};
-		bool myMovedLeftSprite = {};
-		bool myMovedRightSprite = {};
 	};
 
 	Camera* myCamera;
