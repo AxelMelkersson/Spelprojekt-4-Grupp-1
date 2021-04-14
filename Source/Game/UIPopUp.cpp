@@ -139,7 +139,7 @@ void UIPopUp::Deactivate(ePopUpTypes aType)
 	myBackground->SetActive(false);
 	myCollectibleString->Deactivate();
 
-	v2f backPos = { Config::ourReferenceSize.x, 15.f };
+	v2f backPos = { Config::ourReferenceSize.x - 5.0f, 15.f };
 	v2f firePos = { Config::ourReferenceSize.x + 10.f, Config::ourReferenceSize.y - 150.0f };
 	v2f collectiblePos = { Config::ourReferenceSize.x + 25.f, 35.0f };
 
