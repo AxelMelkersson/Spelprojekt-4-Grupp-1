@@ -1840,7 +1840,7 @@
                          "value":12
                         }],
                  "rotation":0,
-                 "type":"1",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":280,
@@ -1848,7 +1848,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
