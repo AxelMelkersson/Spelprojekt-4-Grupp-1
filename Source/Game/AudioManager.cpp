@@ -99,6 +99,22 @@ void AudioManager::SetComponentVolume(AudioList aSound, const float& aVolume)
 	myLibrary.myAudioList[aSound]->SetComponentVolume(aVolume);
 }
 
+void AudioManager::MuteEverything()
+{
+	for (auto const& [key, val] : myLibrary.myAudioList)
+	{
+		myLibrary.myAudioList[key]->Mute();
+	}
+}
+
+void AudioManager::UnMuteEverything()
+{
+	for (auto const& [key, val] : myLibrary.myAudioList)
+	{
+		myLibrary.myAudioList[key]->UnMute();
+	}
+}
+
 void AudioManager::Fade(const float& aDeltaTime)
 {
 	if (myFades.size() > 0)
