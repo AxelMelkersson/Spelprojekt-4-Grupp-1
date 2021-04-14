@@ -413,6 +413,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":17,
+         "name":"AudioObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":365,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"50",
+                 "visible":true,
+                 "width":0,
+                 "x":16,
+                 "y":32
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":7,
          "name":"Ledges",
          "objects":[
@@ -490,8 +513,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":17,
- "nextobjectid":365,
+ "nextlayerid":18,
+ "nextobjectid":366,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -1,16 +1,4 @@
-{
-       "properties":[
-       {
-        "name":"Area",
-        "type":"int",
-        "value":0
-       }, 
-       {
-        "name":"Particles",
-        "type":"int",
-        "value":0
-       }],
-"compressionlevel":-1,
+{ "compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -667,8 +655,19 @@
                  "id":358,
                  "name":"",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1611
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":144,
@@ -731,6 +730,29 @@
                  "width":0,
                  "x":224,
                  "y":80
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":18,
+         "name":"AudioObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":414,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"50",
+                 "visible":true,
+                 "width":0,
+                 "x":151,
+                 "y":29
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -830,9 +852,20 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":18,
- "nextobjectid":414,
+ "nextlayerid":19,
+ "nextobjectid":415,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":0
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":0
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,
