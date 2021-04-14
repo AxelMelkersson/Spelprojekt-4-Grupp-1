@@ -1651,6 +1651,18 @@
                  "width":0,
                  "x":72,
                  "y":48
+                }, 
+                {
+                 "height":0,
+                 "id":804,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":224
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1811,21 +1823,27 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
-         "opacity":1,
-         "properties":[
+         "objects":[
                 {
-                 "name":"Type",
-                 "type":"int",
-                 "value":51
+                 "height":0,
+                 "id":805,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"51",
+                 "visible":true,
+                 "width":0,
+                 "x":399,
+                 "y":20
                 }],
+         "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":803,
+ "nextobjectid":806,
  "orientation":"orthogonal",
  "properties":[
         {
