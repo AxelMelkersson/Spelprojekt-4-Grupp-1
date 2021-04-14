@@ -223,6 +223,9 @@ void DataManager::ResetBonfires()
 void DataManager::ResetCollectibles()
 {
 	// Clears Array
+	rapidjson::Document presetFile;
+	ReadFileIntoDocument("JSON/PresetSaveFile.json", presetFile);
+
 	mySaveFile["Collectibles"].GetArray().Clear();
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
@@ -254,9 +257,11 @@ void DataManager::ResetCollectibles()
 		jsonObject["Collectible"].AddMember("Difficulty", difficulty, allocator);
 
 		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
+		presetFile["Collectibles"].PushBack(jsonObject, allocator);
 	}
 
 	AcceptJsonWriter(mySaveFilePath);
+	AcceptJsonWriter("JSON/PresetSaveFile.json");
 }
 void DataManager::ResetHighScores()
 {
