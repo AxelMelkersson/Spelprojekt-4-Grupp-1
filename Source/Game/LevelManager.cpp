@@ -24,6 +24,8 @@ LevelManager::LevelManager()
 
 	myLevelTransition = false;
 	myLoadingHiddenRoom = false;
+
+	myHasFinished = false;
 	
 	Subscribe(eMessageType::ResetSaveFile);
 	Subscribe(eMessageType::LoadNext);
@@ -58,7 +60,16 @@ void LevelManager::Update()
 		if (levelScene->GetReachedFullOpacity())
 		{
 			myLevelTransition = false;
-			SingleLoadScene(eScenes::LevelScene);
+
+			if (myHasFinished)
+			{
+				myHasFinished = false;
+				SingleLoadScene(eScenes::WinScene);
+			}
+			else
+			{
+				SingleLoadScene(eScenes::LevelScene);
+			}
 		}
 	}
 
@@ -178,7 +189,8 @@ void LevelManager::Notify(const Message& aMessage)
 		if (myLoadedLevel >= DataManager::GetInstance().GetLevelCount())
 		{
 			myLoadedLevel = DataManager::GetInstance().GetLevelCount() - 1;
-			SingleLoadScene(eScenes::WinScene);
+			myLevelTransition = true;
+			myHasFinished = true;
 			return;
 		}
 
