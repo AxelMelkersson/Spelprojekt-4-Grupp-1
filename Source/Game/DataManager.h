@@ -142,6 +142,7 @@ public:
 
 	// Document Handling methods
 	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
+	void SetSaveFilePath(const std::string aFilePath);
 
 private:
 	DataManager();
@@ -168,4 +169,5 @@ private:
 
 	//SaveFile
 	rapidjson::Document mySaveFile;
+	std::string mySaveFilePath = " ";
 };

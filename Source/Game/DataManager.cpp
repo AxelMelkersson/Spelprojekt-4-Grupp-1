@@ -116,7 +116,7 @@ void DataManager::SaveHighScores(const std::array<float, 10>& someHighscores)
 	{
 		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(someHighscores[i]);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState)
 {
@@ -126,7 +126,7 @@ void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState
 
 	mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].SetBool(aState);
 
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveCollectedCollectible(const unsigned int anID)
 {
@@ -138,22 +138,22 @@ void DataManager::SaveCollectedCollectible(const unsigned int anID)
 			myCollectableInfo[i].myCollectedState = true;
 		}
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveSFXVolume(const float aVolume)
 {
 	mySaveFile["Settings"]["SFXVolume"].SetFloat(aVolume);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveMusicVolume(const float aVolume)
 {
 	mySaveFile["Settings"]["MusicVolume"].SetFloat(aVolume);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveStartLevel(const unsigned int aLevel)
 {
 	mySaveFile["StartLevel"].SetInt(aLevel);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 
 void DataManager::ResetSaveFile()
@@ -163,7 +163,7 @@ void DataManager::ResetSaveFile()
 	
 	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::ResetSaveFile, 0));
 	mySaveFile["StartLevel"].SetInt(0);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::ResetBonfires()
 {
@@ -171,7 +171,7 @@ void DataManager::ResetBonfires()
 	{
 		mySaveFile["Bonfires"].GetArray()[i]["Bonfire"]["IsActive"].SetBool(false);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::ResetCollectibles()
 {
@@ -209,7 +209,7 @@ void DataManager::ResetCollectibles()
 		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
 	}
 
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::ResetHighScores()
 {
@@ -217,7 +217,7 @@ void DataManager::ResetHighScores()
 	{
 		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(0);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 
 const CollectableInfo& DataManager::GetCollectableInfo(const int anID) const
@@ -357,13 +357,17 @@ void DataManager::ParseCollectableInfo()
 #endif // !_RETAIL
 	AssignCollectedState();
 }
+void DataManager::SetSaveFilePath(const std::string aFilePath)
+{
+	mySaveFilePath = aFilePath;
+}
 
 // Private Methos
 DataManager::DataManager()
 {
 	//Assign MasterDoc & SaveFile
 	ReadFileIntoDocument("Master.json", myMasterDoc);
-	ReadFileIntoDocument("JSON/SaveFile.json", mySaveFile);
+	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
 
 	//Assign LevelDocs
 	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
