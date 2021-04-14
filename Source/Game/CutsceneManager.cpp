@@ -19,13 +19,14 @@ void CutsceneManager::PlayVideo(CutsceneType aCutsceneType)
 	myType = aCutsceneType;
 	if (aCutsceneType == CutsceneType::Intro)
 	{
-		myVideo->Init("Video/Opening_Cutscene.mp4", false);
+		myVideo->Init("Video/cutscene_opening.mp4", false);
 		AudioManager::GetInstance()->PlayAudio(AudioList::IntroMusic);
 		AudioManager::GetInstance()->LockAudio(AudioList::BonfireActivated);
 	}
 	else
 	{
-
+		myVideo->Init("Video/cutscene_ending.mp4", false);
+		//AudioManager::GetInstance()->PlayAudio(AudioList::IntroMusic);
 	}
 	myVideo->Play(false);
 	myVideo->GetSprite()->SetSizeRelativeToScreen({ 16.f / 9.f, 1.f });
