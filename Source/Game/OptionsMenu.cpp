@@ -310,6 +310,10 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
+		case eOptionsMenu::ResetGame: {
+			DataManager::GetInstance().ResetSaveFile();
+			break;
+		}
 		default:{
 			assert((false) && "myMovingIndex in OptionsMenu::CheckIndexPress does not correlate to eOptionsMenu.");
 			break;

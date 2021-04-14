@@ -38,7 +38,7 @@ std::wstring BUILD_NAME = L"Retail";
 
 CGame::CGame() : myGameWorld(this), myTimer(new Utils::Timer())
 {
-
+	myKilledFocus = false;
 }
 CGame::~CGame()
 {
@@ -69,6 +69,11 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_KILLFOCUS:
 	{
+		myKilledFocus = true;
+
+		myGameWorld.myInput->GetInput()->ToggleCaptureCursor(false);
+		myGameWorld.Input()->ReleaseCursor();
+
 		myGotOutOfFocusSizeX = myZoomX;
 		myGotOutOfFocusSizeY = myZoomY;
 
@@ -79,6 +84,8 @@ LRESULT CGame::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_SETFOCUS:
 	{
+		myKilledFocus = false;
+
 		UpdateWindowSize(myGotOutOfFocusSizeX, myGotOutOfFocusSizeY);
 
 		myTimer->SetTimeScale(1.0f);
@@ -157,7 +164,11 @@ void CGame::InitCallBack()
 void CGame::UpdateCallBack()
 {
 #ifdef _RETAIL
-	ShowCursor(false);
+	if (!myKilledFocus)
+	{
+		ShowCursor(false);
+		myGameWorld.myInput->GetInput()->ToggleCaptureCursor(true);
+	}
 #endif
 
 	myTimer->Update();

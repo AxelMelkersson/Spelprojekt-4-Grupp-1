@@ -148,7 +148,7 @@
                  "rotation":0,
                  "type":"4",
                  "visible":true,
-                 "width":416,
+                 "width":368,
                  "x":64,
                  "y":204
                 }, 
@@ -232,7 +232,7 @@
                  "y":184
                 }, 
                 {
-                 "height":144,
+                 "height":152,
                  "id":687,
                  "name":"",
                  "rotation":0,
@@ -241,17 +241,6 @@
                  "width":64,
                  "x":432,
                  "y":56
-                }, 
-                {
-                 "height":8,
-                 "id":688,
-                 "name":"",
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":48,
-                 "x":432,
-                 "y":200
                 }, 
                 {
                  "height":8,
@@ -341,7 +330,30 @@
          "draworder":"topdown",
          "id":6,
          "name":"Collectables",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":704,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":639
+                        }],
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":112
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -460,6 +472,18 @@
                  "width":0,
                  "x":312,
                  "y":136
+                }, 
+                {
+                 "height":0,
+                 "id":702,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":24,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -664,21 +688,27 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
-         "opacity":1,
-         "properties":[
+         "objects":[
                 {
-                 "name":"Type",
-                 "type":"int",
-                 "value":51
+                 "height":0,
+                 "id":703,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"51",
+                 "visible":true,
+                 "width":0,
+                 "x":112,
+                 "y":21
                 }],
+         "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":702,
+ "nextobjectid":705,
  "orientation":"orthogonal",
  "properties":[
         {

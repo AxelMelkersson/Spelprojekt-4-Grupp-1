@@ -204,7 +204,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -228,6 +228,12 @@
                  "height":8,
                  "id":902,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -1140,7 +1146,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1157,7 +1163,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1174,7 +1180,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1191,7 +1197,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1208,7 +1214,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1225,7 +1231,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1242,7 +1248,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1259,7 +1265,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1276,7 +1282,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1293,7 +1299,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1310,7 +1316,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1360,7 +1366,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1377,7 +1383,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1394,7 +1400,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1428,7 +1434,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1455,7 +1461,7 @@
                  "y":1360
                 }, 
                 {
-                 "height":888,
+                 "height":872,
                  "id":1106,
                  "name":"",
                  "properties":[
@@ -1469,10 +1475,10 @@
                  "visible":true,
                  "width":112,
                  "x":32,
-                 "y":280
+                 "y":296
                 }, 
                 {
-                 "height":888,
+                 "height":872,
                  "id":1107,
                  "name":"",
                  "properties":[
@@ -1486,7 +1492,7 @@
                  "visible":true,
                  "width":112,
                  "x":176,
-                 "y":280
+                 "y":296
                 }, 
                 {
                  "height":8,
@@ -1711,7 +1717,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1728,7 +1734,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -1888,7 +1894,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1905,7 +1911,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1922,7 +1928,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1939,7 +1945,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1956,7 +1962,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1973,7 +1979,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -1990,7 +1996,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
@@ -2051,7 +2057,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2068,7 +2074,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2085,7 +2091,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2102,7 +2108,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2119,7 +2125,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2136,7 +2142,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -2190,71 +2196,20 @@
                  "y":2032
                 }, 
                 {
-                 "height":16,
-                 "id":1324,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":32,
-                 "x":32,
-                 "y":144
-                }, 
-                {
-                 "height":8,
-                 "id":1325,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":24,
-                 "x":32,
-                 "y":160
-                }, 
-                {
-                 "height":24,
+                 "height":40,
                  "id":1326,
                  "name":"",
                  "properties":[
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":56,
+                 "width":48,
                  "x":32,
-                 "y":256
-                }, 
-                {
-                 "height":24,
-                 "id":1327,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":56,
-                 "x":232,
                  "y":256
                 }, 
                 {
@@ -2270,26 +2225,26 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":32,
+                 "width":8,
                  "x":256,
                  "y":144
                 }, 
                 {
-                 "height":8,
+                 "height":24,
                  "id":1329,
                  "name":"",
                  "properties":[
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
                  "width":24,
                  "x":264,
-                 "y":160
+                 "y":144
                 }, 
                 {
                  "height":16,
@@ -2304,12 +2259,12 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":48,
+                 "width":8,
                  "x":136,
                  "y":192
                 }, 
                 {
-                 "height":8,
+                 "height":16,
                  "id":1331,
                  "name":"",
                  "properties":[
@@ -2321,9 +2276,9 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":32,
-                 "x":144,
-                 "y":208
+                 "width":8,
+                 "x":176,
+                 "y":192
                 }, 
                 {
                  "height":16,
@@ -2452,7 +2407,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"4",
@@ -3055,6 +3010,210 @@
                  "width":56,
                  "x":-24,
                  "y":0
+                }, 
+                {
+                 "height":40,
+                 "id":1638,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":80,
+                 "y":256
+                }, 
+                {
+                 "height":40,
+                 "id":1639,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":232,
+                 "y":256
+                }, 
+                {
+                 "height":40,
+                 "id":1640,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":48,
+                 "x":240,
+                 "y":256
+                }, 
+                {
+                 "height":16,
+                 "id":1641,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":176,
+                 "y":280
+                }, 
+                {
+                 "height":16,
+                 "id":1642,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":136,
+                 "y":280
+                }, 
+                {
+                 "height":16,
+                 "id":1643,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":88,
+                 "y":280
+                }, 
+                {
+                 "height":16,
+                 "id":1644,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":224,
+                 "y":280
+                }, 
+                {
+                 "height":16,
+                 "id":1645,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":184,
+                 "y":280
+                }, 
+                {
+                 "height":16,
+                 "id":1646,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":96,
+                 "y":280
+                }, 
+                {
+                 "height":24,
+                 "id":1647,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":32,
+                 "x":144,
+                 "y":192
+                }, 
+                {
+                 "height":24,
+                 "id":1648,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":24,
+                 "x":32,
+                 "y":144
+                }, 
+                {
+                 "height":16,
+                 "id":1649,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":8,
+                 "x":56,
+                 "y":144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -7111,7 +7270,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":1638,
+ "nextobjectid":1650,
  "orientation":"orthogonal",
  "properties":[
         {

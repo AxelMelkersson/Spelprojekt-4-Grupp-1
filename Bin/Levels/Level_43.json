@@ -798,7 +798,30 @@
          "draworder":"topdown",
          "id":6,
          "name":"Collectables",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":485,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":752
+                        }],
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":0,
+                 "x":392,
+                 "y":48
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -845,6 +868,30 @@
                  "width":0,
                  "x":304,
                  "y":32
+                }, 
+                {
+                 "height":0,
+                 "id":482,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":440,
+                 "y":216
+                }, 
+                {
+                 "height":0,
+                 "id":483,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":456,
+                 "y":216
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1050,21 +1097,27 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
-         "opacity":1,
-         "properties":[
+         "objects":[
                 {
-                 "name":"Type",
-                 "type":"int",
-                 "value":52
+                 "height":0,
+                 "id":484,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"52",
+                 "visible":true,
+                 "width":0,
+                 "x":115,
+                 "y":19
                 }],
+         "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":478,
+ "nextobjectid":486,
  "orientation":"orthogonal",
  "properties":[
         {
