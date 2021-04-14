@@ -154,7 +154,7 @@ void PauseMenu::SelectButton()
 	else if (myMovingIndex == 2)
 	{
 		CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
-		Distance::myBackgroundDistanceX = {};
+		Distance::GetInstance().ResetDistance();
 	}
 }
 

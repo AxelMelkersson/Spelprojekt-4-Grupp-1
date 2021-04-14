@@ -11,7 +11,6 @@
 
 #include "Game.h"
 
-
 Background::Background(Scene* aLevelScene)
 	:
 	GameObject(aLevelScene)
@@ -56,8 +55,10 @@ Background::Background(Scene* aLevelScene)
 
 	myStartingCameraX = -1;
 
-	myCloudDistance = &Distance::myCloudDistance;
-	myBackgroundDistanceX = &Distance::myBackgroundDistanceX;
+	myCameraDistance = &Distance::GetInstance();
+
+	myCloudDistance = &myCameraDistance->myCloudDistance;
+	myBackgroundDistanceX = &myCameraDistance->myBackgroundDistanceX;
 	myStartingCameraPos.x = -1;
 	myStartingCameraPos.y = -1;
 
@@ -74,21 +75,28 @@ Background::~Background()
 
 		if (calculatedPlayerPos > (myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
 		{
-			Distance::myBackgroundDistanceX += myTotalCameraDistanceX;
+			myCameraDistance->myBackgroundDistanceX += myTotalCameraDistanceX;
 		}
 		else if (calculatedPlayerPos < -(myCamera->GetBoundSize().x / 2.f) && myTotalCameraDistanceX != 0)
 		{
-			Distance::myBackgroundDistanceX -= myTotalCameraDistanceX;
+			myCameraDistance->myBackgroundDistanceX -= myTotalCameraDistanceX;
 		}
 	}
+
+	if (myCameraDistance->myAreaIndexChanged)
+	{
+		myCameraDistance->myAreaIndexChanged = false;
+		myCameraDistance->ResetDistance();
+	}
+
 }
 
 void Background::LoadBackground(const int aIndex)
 {
-	if (Distance::myCurrentAreaIndex != aIndex)
+	if (myCameraDistance->myCurrentAreaIndex != aIndex)
 	{
-		Distance::myCurrentAreaIndex = aIndex;
-		Distance::myBackgroundDistanceX = {};
+		myCameraDistance->myCurrentAreaIndex = aIndex;
+		myCameraDistance->myAreaIndexChanged = true;
 	}
 
 
@@ -162,7 +170,7 @@ const void Background::MoveBackground(const float& aDeltaTime)
 {
 	CalculateCameraPositions(aDeltaTime);
 
-	myTotalCameraDistanceX = Distance::myStartingCameraPos + myCamera->GetPositionX();
+	myTotalCameraDistanceX = myCameraDistance->myStartingCameraPos + myCamera->GetPositionX();
 }
 
 const void Background::LoadBackgrounds(Scene* aLevelScene, rapidjson::Document& someDocuments)
@@ -328,6 +336,8 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 	CheckResetLoop();
 
+	std::cout << *myBackgroundDistanceX << std::endl;
+
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
@@ -340,7 +350,7 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 const void Background::ResetDistanceValues()
 {
-	Distance::myBackgroundDistanceX = {};
+	myCameraDistance->myBackgroundDistanceX = {};
 }
 
 const void Background::CheckResetLoop()

@@ -123,14 +123,6 @@ void LevelScene::Deactivate()
 
 void LevelScene::Update(const float& aDeltaTime)
 {
-
-	//if (CGameWorld::GetInstance()->Input()->GetInput()->GetKeyJustDown(Keys::LeftMouseButton))
-	//{
-	//	v2f postition = myPlayer->GetPosition();
-
-	//	myEffectFactory->SpawnEffect(postition, eParticleEffects::RainEffectBackgroundSideParticle);
-	//}
-
 	const float zoomX = CGameWorld::GetInstance()->Game()->GetZoomX();
 	const float zoomY = CGameWorld::GetInstance()->Game()->GetZoomY();
 
