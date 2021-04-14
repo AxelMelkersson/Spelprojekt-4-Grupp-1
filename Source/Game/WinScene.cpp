@@ -41,6 +41,7 @@ void WinScene::Load()
 	}
 	else
 	{
+		myFadeTime = 0.0f;
 		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->Unlock();
 
 		UIObject* winCutscene = new UIObject(this);
