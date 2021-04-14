@@ -546,7 +546,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":1
+                         "value":4
                         }, 
                         {
                          "name":"ID",
@@ -554,11 +554,34 @@
                          "value":133
                         }],
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":64,
                  "y":100
+                }, 
+                {
+                 "height":0,
+                 "id":413,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"BonfireID",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1618
+                        }],
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":152,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -776,7 +799,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":413,
+ "nextobjectid":414,
  "orientation":"orthogonal",
  "properties":[
         {
