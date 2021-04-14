@@ -30,6 +30,9 @@ public:
 	void SetSoundPosition(AudioList aSound, const VECTOR2F& aPosition);
 	void SetComponentVolume(AudioList aSound, const float& aVolume);
 
+	void MuteEverything();
+	void UnMuteEverything();
+
 	void Fade(const float& aDeltaTime);
 
 	void FadeOut(AudioList aSound);
