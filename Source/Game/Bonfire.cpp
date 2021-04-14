@@ -46,7 +46,7 @@ Bonfire::Bonfire(Scene* aScene, const unsigned int anIndex, const v2f aPos) : Ga
 	collider->SetSize(32.0f, 32.0f);
 
 	myAnimations[0] = Animation(false, true, false, 0, 1, 1, 0.1f, spriteIdle, 24, 24);
-	myAnimations[1] = Animation(false, true, false, 0, 10, 10, 0.1f, spriteActivate, 24, 24);
+	myAnimations[1] = Animation(false, false, false, 0, 10, 10, 0.1f, spriteActivate, 24, 24);
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(spriteIdle);
