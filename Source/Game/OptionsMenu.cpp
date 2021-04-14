@@ -209,16 +209,7 @@ void OptionsMenu::Update(const float& aDeltaTime)
 	{
 		myCreditsMenu->Deactivate();
 	}
-	//if (myResetGameActive)
-	//{
-	//	myResetGame->Activate();
 
-	//}
-	//else
-	//{
-	//	myResetGame->Deactivate();
-
-	//}
 
 	if (myMenuAcitve)
 	{
