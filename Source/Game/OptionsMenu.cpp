@@ -60,8 +60,8 @@ void OptionsMenu::Init()
 	{
 		myResetBtn = new UIButton(myScene);
 		myResetGame = new ResetGameMenu(myScene);
-		myYesBtn = new UIObject(myScene);
-		myNoBtn = new UIObject(myScene);
+		myYesBtn = new UIButton(myScene);
+		myNoBtn = new UIButton(myScene);
 	}
 
 	myScreenBtn = new UIButton(myScene);
@@ -120,8 +120,10 @@ void OptionsMenu::Init()
 		//Reset Game
 		myResetGame->SetPosition(v2f(100.0f, 50.0f));
 		myResetGame->SetZIndex(205);
-		myYesBtn->Init("Sprites/UI/optionsMenu/YesBtn.dds", { 65.f, 16.f }, { 100.f, 90.f }, 206);
-		myNoBtn->Init("Sprites/UI/optionsMenu/NoBtn.dds", { 65.f, 16.f }, { 170.f, 90.f }, 206);
+		myYesBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Yes_15x9px_Unmarked.dds", { 16.f, 16.f }, { 145.f, 90.f }, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Yes_15x9px_Marked.dds", 16);
+		myNoBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_No_10x9px_Unmarked.dds", { 16.f, 16.f }, { 175.f, 90.f }, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_No_10x9px_Marked.dds", 16);
+		myYesBtn->SetZIndex(206);
+		myNoBtn->SetZIndex(206);
 
 		myResetObjects.push_back(myYesBtn);
 		myResetObjects.push_back(myNoBtn);
@@ -347,6 +349,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 				myResetGameActive = true;
+				for (auto reset : myResetObjects)
+					reset->SetActive(true);
 				myResetGame->Activate();
 			}
 			break;
@@ -619,11 +623,14 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	for (auto res : myResolutionObj)
 		res->UpdateUIObjects(true);
 
-	if (myResetGameActive)
-	{
-		myYesBtn->UpdateUIObjects(0);
-		myNoBtn->UpdateUIObjects(0);
-	}
+	for (auto reset : myResetObjects)
+		reset->UpdateButton(true);
+
+	//if (myResetGameActive)
+	//{
+	//	myYesBtn->UpdateUIObjects(0);
+	//	myNoBtn->UpdateUIObjects(0);
+	//}
 
 }
 void OptionsMenu::CheckActiveAnimations()
@@ -686,11 +693,13 @@ void OptionsMenu::CheckActiveAnimations()
 		{
 			if (i == myResetMovingIndex)
 			{
-				myResetObjects[i]->SetActive(true);
+				myResetObjects[i]->SetIsHighlightActive(true);
+
 			}
 			else
 			{
-				myResetObjects[i]->SetActive(false);
+				myResetObjects[i]->SetIsHighlightActive(false);
+
 			}
 		}
 	}
