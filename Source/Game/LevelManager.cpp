@@ -19,19 +19,17 @@ LevelManager::LevelManager()
 	myImGuiIsActive = {};
 #endif //RETAIL
 
-	myLoadedLevel = 0;
+	myLoadedLevel = DataManager::GetInstance().GetStartLevel();
 	myLastDoorType = 1;
 
 	myLevelTransition = false;
 	myLoadingHiddenRoom = false;
 	
+	Subscribe(eMessageType::ResetSaveFile);
 	Subscribe(eMessageType::LoadNext);
 	Subscribe(eMessageType::LoadPrevious);
 	Subscribe(eMessageType::LoadHiddenRoom);
 	Subscribe(eMessageType::LoadMainRoom);
-}
-LevelManager::~LevelManager()
-{
 }
 
 void LevelManager::Init(Scene* aMainMenuScene, Scene* aLevelSelect, Scene* aLevelScene, Scene* anIntroLogosScene, Scene* aWinScene, Scene* aSpeedrunScene)
@@ -40,7 +38,6 @@ void LevelManager::Init(Scene* aMainMenuScene, Scene* aLevelSelect, Scene* aLeve
 	myScenes.insert({ eScenes::LevelSelect, aLevelSelect });
 	myScenes.insert({ eScenes::LevelScene, aLevelScene });
 	myScenes.insert({ eScenes::SpeedrunScene, aSpeedrunScene });
-	//myScenes.insert({ eScenes::PauseMenu, aPauseMenuScene });
 	myScenes.insert({ eScenes::IntroLogos, anIntroLogosScene});
 	myScenes.insert({ eScenes::WinScene, aWinScene });
 
@@ -149,6 +146,7 @@ const bool LevelManager::GetIsActive(eScenes aScene)
 void LevelManager::LoadLevel(LevelScene* aLevelScene, GameObject* aPlayer)
 {
 	myTiledLoader->Load(aLevelScene, myLoadedLevel, aPlayer, myLoadingHiddenRoom);
+	DataManager::GetInstance().SaveStartLevel(myLoadedLevel);
 }
 
 void LevelManager::LoadLevel(LevelScene* aLevelScene, const int& aLevelIndex, GameObject* aPlayer)
@@ -215,6 +213,10 @@ void LevelManager::Notify(const Message& aMessage)
 		myLastDoorType = std::get<int>(aMessage.myData);
 
 		myLevelTransition = true;
+	}
+	else if (aMessage.myMessageType == eMessageType::ResetSaveFile)
+	{
+		myLoadedLevel = 0;
 	}
 }
 

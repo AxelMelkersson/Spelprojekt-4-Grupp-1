@@ -12,7 +12,7 @@ class AudioClip
 {
 public:
 	AudioClip() = default;
-	AudioClip(const char* anAudioPath, const bool aIsLooping, const float& aVolume, const float& aMaxVol, AudioLayer aLayer);
+	AudioClip(const char* anAudioPath, const bool aIsLooping, const bool& aIsStoppable, const float& aMaxVol, AudioLayer aLayer);
 	~AudioClip();
 
 	void SetVolume(const float& aVolChange);
@@ -42,6 +42,7 @@ private:
 	float myVolume = 0.0f;
 	const float myMaxVolume;
 	const float myVolProcent;
+	const bool myIsStoppable;
 	bool myCanPlay = true;
 	bool myIsPlaying = false;
 	bool myIsFadingOut = false;
