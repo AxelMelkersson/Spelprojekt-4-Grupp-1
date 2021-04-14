@@ -32,6 +32,8 @@ public:
 	bool IsDashing();
 	bool IsDashingReleased();
 
+	void ReleaseCursor();
+
 	//void CalculateAxis();
 	
 

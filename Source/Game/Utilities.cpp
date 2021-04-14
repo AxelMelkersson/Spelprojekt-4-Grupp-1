@@ -373,19 +373,16 @@ Input& Input::SetMousePosition(const POINT& aPoint)
     return *this;
 }
 
-Input& Input::ToggleCaptureCursor(const bool aIsConsole)
+Input& Input::ToggleCaptureCursor(const bool aIsCapturing)
 {
-    if (myMouseIsCaptured)
+    if (myMouseIsCaptured && !aIsCapturing)
     {
         ClipCursor(nullptr);
+        myMouseIsCaptured = false;
     }
     else
     {
         HWND hWnd = GetActiveWindow();
-        if (aIsConsole)
-        {
-            hWnd = GetConsoleWindow();
-        }
 
         RECT rect;
         GetClientRect(hWnd, &rect);
@@ -406,9 +403,9 @@ Input& Input::ToggleCaptureCursor(const bool aIsConsole)
         rect.bottom = lowerRight.y;
 
         ClipCursor(&rect);
+
+        myMouseIsCaptured = true;
     }
-    
-    myMouseIsCaptured = !myMouseIsCaptured;
 
     return *this;
 }
