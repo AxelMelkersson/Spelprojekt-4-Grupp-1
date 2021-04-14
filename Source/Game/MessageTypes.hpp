@@ -63,5 +63,7 @@ enum class eMessageType
 	DustParticleStartupTwo,
 	UnstablePlatformParticleOne,
 	UnstablePlatformParticleTwo,
-	UnstableGroundIdleParticle
+	UnstableGroundIdleParticle,
+
+	ResetSaveFile
 };

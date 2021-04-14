@@ -6,6 +6,7 @@
 #include <cassert>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
+#include "PostMaster.hpp"
 
 #ifndef _RETAIL
 #include <iostream>
@@ -149,11 +150,20 @@ void DataManager::SaveMusicVolume(const float aVolume)
 	mySaveFile["Settings"]["MusicVolume"].SetFloat(aVolume);
 	AcceptJsonWriter("JSON/SaveFile.json");
 }
+void DataManager::SaveStartLevel(const unsigned int aLevel)
+{
+	mySaveFile["StartLevel"].SetInt(aLevel);
+	AcceptJsonWriter("JSON/SaveFile.json");
+}
 
 void DataManager::ResetSaveFile()
 {
 	ResetCollectibles();
 	ResetBonfires();
+	
+	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::ResetSaveFile, 0));
+	mySaveFile["StartLevel"].SetInt(0);
+	AcceptJsonWriter("JSON/SaveFile.json");
 }
 void DataManager::ResetBonfires()
 {
@@ -161,11 +171,16 @@ void DataManager::ResetBonfires()
 	{
 		mySaveFile["Bonfires"].GetArray()[i]["Bonfire"]["IsActive"].SetBool(false);
 	}
+	AcceptJsonWriter("JSON/SaveFile.json");
 }
 void DataManager::ResetCollectibles()
 {
 	// Clears Array
 	mySaveFile["Collectibles"].GetArray().Clear();
+	for (size_t i = 0; i < myCollectableInfo.size(); i++)
+	{
+		myCollectableInfo[i].myCollectedState = false;
+	}
 
 	// Assigns Value and Pushes Objects.
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
@@ -244,6 +259,10 @@ const float DataManager::GetSFXVolume() const
 const float DataManager::GetMusicVolume() const
 {
 	return mySaveFile["Settings"]["MusicVolume"].GetFloat();
+}
+const unsigned int DataManager::GetStartLevel() const
+{
+	return mySaveFile["StartLevel"].GetInt();
 }
 
 void DataManager::ParseCollectableInfo()
