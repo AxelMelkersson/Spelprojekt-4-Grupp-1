@@ -67,8 +67,8 @@ private:
 	UIObject* my1080pHgh;
 	UIObject* my4KHgh;
 	UIObject* myScreenSizeDot;
-	UIObject* myYesBtn;
-	UIObject* myNoBtn;
+	UIButton* myYesBtn;
+	UIButton* myNoBtn;
 
 	//Credits
 	CreditsMenu* myCreditsMenu;
@@ -89,7 +89,7 @@ private:
 	std::vector<UIObject*> myResolutionObj;
 	std::vector<UIObject*> mySoundObjects;
 	std::vector<UIButton*> myButtons;
-	std::vector<UIObject*> myResetObjects;
+	std::vector<UIButton*> myResetObjects;
 
 	std::shared_ptr<InputWrapper> myInput;
 
