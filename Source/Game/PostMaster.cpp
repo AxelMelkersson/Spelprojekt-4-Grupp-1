@@ -1,3 +1,5 @@
+//Author: Axel Melkersson
+
 #include "stdafx.h"
 #include "PostMaster.hpp"
 #include "Subscriber.hpp"
