@@ -210,12 +210,11 @@ void MainMenuScene::CheckButtonsPress()
 		{
 			if (!DataManager::GetInstance().GetBonfireState(0))
 			{
+				CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
 				CGameWorld::GetInstance()->GetLevelManager().UsedLevelSelect();
 			}
 
 			CGameWorld::GetInstance()->GetLevelManager().Continued();
-
-			//CutsceneManager::GetInstance().PlayVideo(CutsceneType::Intro);
 			AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 			CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
 		}
