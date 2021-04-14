@@ -158,6 +158,10 @@ bool CGame::Init(const std::wstring& aVersion, HWND aHWND)
 
 void CGame::InitCallBack()
 {
+	DataManager::GetInstance().Init();
+
+	myGameWorld.myLevelManager.SetLevelIndex(DataManager::GetInstance().GetStartLevel());
+
 	myGameWorld.Init();
 
 	HWND handle = GetActiveWindow();

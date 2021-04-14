@@ -105,6 +105,7 @@ public:
 	DataManager(DataManager& aDataManager) = delete;
 	void operator=(const DataManager&) = delete;
 	~DataManager() = default;
+	void Init();
 
 	// Data Struct Methods
 	Data& GetDataStruct(const DataEnum aDataEnum);
@@ -142,6 +143,7 @@ public:
 
 	// Document Handling methods
 	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
+	void SetSaveFilePath(const std::string aFilePath);
 
 private:
 	DataManager();
@@ -150,6 +152,8 @@ private:
 	void AcceptJsonWriter(const std::string aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
 	void AssignCollectedState();
+	void SaveFileCreation();
+
 #ifndef _RETAIL
 	void FindCollectibleDuplicates() const;
 #endif // !_RETAIL
@@ -168,4 +172,5 @@ private:
 
 	//SaveFile
 	rapidjson::Document mySaveFile;
+	std::string mySaveFilePath = " ";
 };

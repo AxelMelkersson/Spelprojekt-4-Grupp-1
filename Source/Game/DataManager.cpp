@@ -7,10 +7,57 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
 #include "PostMaster.hpp"
+#include <shlobj.h>
+#include <filesystem>
 
 #ifndef _RETAIL
 #include <iostream>
 #endif // !_RETAIL 
+
+void DataManager::Init()
+{
+	SaveFileCreation();
+
+	//Assign MasterDoc & SaveFile
+	ReadFileIntoDocument("Master.json", myMasterDoc);
+	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
+
+	//Assign LevelDocs
+	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
+	assert(myLevelMasterDoc["FilePathArray"].IsArray());
+	for (size_t i = 0; i < myLevelMasterDoc["FilePathArray"].GetArray().Size(); i++)
+	{
+		myLevelVector.push_back(rapidjson::Document());
+		ReadFileIntoDocument(myLevelMasterDoc["FilePathArray"].GetArray()[i]["FilePath"].GetString(), myLevelVector.back());
+	}
+
+	ReadFileIntoDocument("HiddenRooms/HiddenRooms.json", myHiddenRoomMasterDoc);
+	for (size_t i = 0; i < myHiddenRoomMasterDoc["HiddenRooms"].GetArray().Size(); i++)
+	{
+		const int hiddenRoomKey = myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["LevelIndex"].GetInt();
+
+		myHiddenRooms.insert({ hiddenRoomKey, rapidjson::Document() });
+		ReadFileIntoDocument(myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["FilePath"].GetString(), myHiddenRooms.at(hiddenRoomKey));
+	}
+
+	//Assign PlayerDoc
+	std::string playerDataPath = myMasterDoc["PlayerData"].GetString();
+	rapidjson::Document playerDoc;
+	ReadFileIntoDocument(playerDataPath, playerDoc);
+	//Assign Player Values
+	AssignValues(DataEnum::player, playerDoc);
+
+	//Assign EnemyDoc
+	std::string enemyDataPath = myMasterDoc["EnemyData"].GetString();
+	rapidjson::Document enemyDoc;
+	ReadFileIntoDocument(enemyDataPath, enemyDoc);
+	//Assign Enemy Values
+	AssignValues(DataEnum::enemy, enemyDoc);
+
+#ifndef _RETAIL
+	ResetSaveFile();
+#endif // !_RETAIL
+}
 
 void DataManager::SetDataStruct(const DataEnum aDataEnum)
 {
@@ -116,7 +163,7 @@ void DataManager::SaveHighScores(const std::array<float, 10>& someHighscores)
 	{
 		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(someHighscores[i]);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState)
 {
@@ -126,7 +173,7 @@ void DataManager::SaveBonfireState(const unsigned int anIndex, const bool aState
 
 	mySaveFile["Bonfires"].GetArray()[anIndex]["Bonfire"]["IsActive"].SetBool(aState);
 
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveCollectedCollectible(const unsigned int anID)
 {
@@ -138,22 +185,22 @@ void DataManager::SaveCollectedCollectible(const unsigned int anID)
 			myCollectableInfo[i].myCollectedState = true;
 		}
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveSFXVolume(const float aVolume)
 {
 	mySaveFile["Settings"]["SFXVolume"].SetFloat(aVolume);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveMusicVolume(const float aVolume)
 {
 	mySaveFile["Settings"]["MusicVolume"].SetFloat(aVolume);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::SaveStartLevel(const unsigned int aLevel)
 {
 	mySaveFile["StartLevel"].SetInt(aLevel);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 
 void DataManager::ResetSaveFile()
@@ -163,7 +210,7 @@ void DataManager::ResetSaveFile()
 	
 	PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::ResetSaveFile, 0));
 	mySaveFile["StartLevel"].SetInt(0);
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::ResetBonfires()
 {
@@ -171,11 +218,14 @@ void DataManager::ResetBonfires()
 	{
 		mySaveFile["Bonfires"].GetArray()[i]["Bonfire"]["IsActive"].SetBool(false);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 void DataManager::ResetCollectibles()
 {
 	// Clears Array
+	rapidjson::Document presetFile;
+	ReadFileIntoDocument("JSON/PresetSaveFile.json", presetFile);
+
 	mySaveFile["Collectibles"].GetArray().Clear();
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
@@ -207,9 +257,11 @@ void DataManager::ResetCollectibles()
 		jsonObject["Collectible"].AddMember("Difficulty", difficulty, allocator);
 
 		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
+		presetFile["Collectibles"].PushBack(jsonObject, allocator);
 	}
 
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
+	AcceptJsonWriter("JSON/PresetSaveFile.json");
 }
 void DataManager::ResetHighScores()
 {
@@ -217,7 +269,7 @@ void DataManager::ResetHighScores()
 	{
 		mySaveFile["HighScore"].GetArray()[i]["Score"]["Value"].SetFloat(0);
 	}
-	AcceptJsonWriter("JSON/SaveFile.json");
+	AcceptJsonWriter(mySaveFilePath);
 }
 
 const CollectableInfo& DataManager::GetCollectableInfo(const int anID) const
@@ -357,49 +409,15 @@ void DataManager::ParseCollectableInfo()
 #endif // !_RETAIL
 	AssignCollectedState();
 }
+void DataManager::SetSaveFilePath(const std::string aFilePath)
+{
+	mySaveFilePath = aFilePath;
+}
 
 // Private Methos
 DataManager::DataManager()
 {
-	//Assign MasterDoc & SaveFile
-	ReadFileIntoDocument("Master.json", myMasterDoc);
-	ReadFileIntoDocument("JSON/SaveFile.json", mySaveFile);
 
-	//Assign LevelDocs
-	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
-	assert(myLevelMasterDoc["FilePathArray"].IsArray());
-	for (size_t i = 0; i < myLevelMasterDoc["FilePathArray"].GetArray().Size(); i++)
-	{
-		myLevelVector.push_back(rapidjson::Document());
-		ReadFileIntoDocument(myLevelMasterDoc["FilePathArray"].GetArray()[i]["FilePath"].GetString(), myLevelVector.back());
-	}
-
-	ReadFileIntoDocument("HiddenRooms/HiddenRooms.json", myHiddenRoomMasterDoc);
-	for (size_t i = 0; i < myHiddenRoomMasterDoc["HiddenRooms"].GetArray().Size(); i++)
-	{
-		const int hiddenRoomKey = myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["LevelIndex"].GetInt();
-
-		myHiddenRooms.insert({ hiddenRoomKey, rapidjson::Document() });
-		ReadFileIntoDocument(myHiddenRoomMasterDoc["HiddenRooms"].GetArray()[i]["FilePath"].GetString(), myHiddenRooms.at(hiddenRoomKey));
-	}
-
-	//Assign PlayerDoc
-	std::string playerDataPath = myMasterDoc["PlayerData"].GetString();
-	rapidjson::Document playerDoc;
-	ReadFileIntoDocument(playerDataPath, playerDoc);
-	//Assign Player Values
-	AssignValues(DataEnum::player, playerDoc);
-
-	//Assign EnemyDoc
-	std::string enemyDataPath = myMasterDoc["EnemyData"].GetString();
-	rapidjson::Document enemyDoc;
-	ReadFileIntoDocument(enemyDataPath, enemyDoc);
-	//Assign Enemy Values
-	AssignValues(DataEnum::enemy, enemyDoc);
-
-#ifndef _RETAIL
-	ResetSaveFile();
-#endif // !_RETAIL
 }
 
 void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc)
@@ -496,6 +514,52 @@ void DataManager::AssignCollectedState()
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
 	}
 }
+
+void DataManager::SaveFileCreation()
+{
+	wchar_t documentsWide[MAX_PATH];
+	std::string documents = "";
+
+	HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsWide);
+
+	for (wchar_t character : documentsWide)
+	{
+		if (character == 0)
+		{
+			break;
+		}
+
+		documents += static_cast<char>(character);
+	}
+
+	documents += "\\PassOn";
+
+	std::filesystem::create_directory(documents);
+
+	documents += "\\SaveFile.json";
+
+	std::fstream saveFile(documents);
+
+	if (!saveFile.is_open())
+	{
+		std::fstream presetSaveFile("JSON/PresetSaveFile.json");
+		std::ofstream newSaveFile(documents);
+
+		char character;
+		while (presetSaveFile.get(character))
+		{
+			if (character == ' ')
+			{
+				continue;
+			}
+
+			newSaveFile << character;
+		}
+	}
+
+	SetSaveFilePath(documents);
+}
+
 #ifndef _RETAIL
 void DataManager::FindCollectibleDuplicates() const
 {
