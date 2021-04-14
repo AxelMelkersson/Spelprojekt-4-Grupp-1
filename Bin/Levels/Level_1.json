@@ -1,16 +1,4 @@
-{    
-       "properties":[
-              {
-               "name":"Area",
-               "type":"int",
-               "value":0
-              }, 
-              {
-               "name":"Particles",
-               "type":"int",
-               "value":0
-              }],      
-"compressionlevel":-1,
+{ "compressionlevel":-1,
  "editorsettings":
     {
      "export":
@@ -328,6 +316,18 @@
                  "width":0,
                  "x":168,
                  "y":80
+                }, 
+                {
+                 "height":0,
+                 "id":126,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"55",
+                 "visible":true,
+                 "width":0,
+                 "x":152,
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -437,8 +437,19 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":126,
+ "nextobjectid":127,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"Area",
+         "type":"int",
+         "value":0
+        }, 
+        {
+         "name":"Particles",
+         "type":"int",
+         "value":0
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
  "tileheight":8,

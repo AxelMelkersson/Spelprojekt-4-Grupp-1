@@ -389,10 +389,22 @@
                  "name":"",
                  "point":true,
                  "rotation":0,
-                 "type":"52",
+                 "type":"50",
                  "visible":true,
                  "width":0,
                  "x":176,
+                 "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":183,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"54",
+                 "visible":true,
+                 "width":0,
+                 "x":168,
                  "y":64
                 }],
          "opacity":1,
@@ -538,7 +550,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":183,
+ "nextobjectid":185,
  "orientation":"orthogonal",
  "properties":[
         {
