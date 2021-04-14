@@ -934,7 +934,7 @@
                  "visible":true,
                  "width":56,
                  "x":344,
-                 "y":256
+                 "y":248
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1041,12 +1041,12 @@
         {
          "name":"Area",
          "type":"int",
-         "value":0
+         "value":3
         }, 
         {
          "name":"Particles",
          "type":"int",
-         "value":0
+         "value":2
         }],
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
