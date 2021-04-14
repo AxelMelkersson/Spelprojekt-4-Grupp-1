@@ -136,6 +136,11 @@ bool InputWrapper::IsDashingReleased()
 		return false;
 }
 
+void InputWrapper::ReleaseCursor()
+{
+	myHoldDash = false;
+}
+
 std::shared_ptr<Utils::Input> InputWrapper::GetInput()
 {
 	return myInput;
