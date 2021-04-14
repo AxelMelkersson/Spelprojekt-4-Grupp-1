@@ -19,7 +19,7 @@ LevelManager::LevelManager()
 	myImGuiIsActive = {};
 #endif //RETAIL
 
-	myLoadedLevel = DataManager::GetInstance().GetStartLevel();
+	myLoadedLevel = 0;
 	myLastDoorType = 1;
 
 	myLevelTransition = false;

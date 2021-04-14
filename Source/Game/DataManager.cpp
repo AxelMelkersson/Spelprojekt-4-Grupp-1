@@ -7,6 +7,8 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
 #include "PostMaster.hpp"
+#include <shlobj.h>
+#include <filesystem>
 
 #ifndef _RETAIL
 #include <iostream>
@@ -14,6 +16,8 @@
 
 void DataManager::Init()
 {
+	SaveFileCreation();
+
 	//Assign MasterDoc & SaveFile
 	ReadFileIntoDocument("Master.json", myMasterDoc);
 	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
@@ -505,6 +509,52 @@ void DataManager::AssignCollectedState()
 		myCollectableInfo[i].myCollectedState = mySaveFile["Collectibles"].GetArray()[i]["Collectible"]["BeenCollected"].GetBool();
 	}
 }
+
+void DataManager::SaveFileCreation()
+{
+	wchar_t documentsWide[MAX_PATH];
+	std::string documents = "";
+
+	HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsWide);
+
+	for (wchar_t character : documentsWide)
+	{
+		if (character == 0)
+		{
+			break;
+		}
+
+		documents += static_cast<char>(character);
+	}
+
+	documents += "\\PassOn";
+
+	std::filesystem::create_directory(documents);
+
+	documents += "\\SaveFile.json";
+
+	std::fstream saveFile(documents);
+
+	if (!saveFile.is_open())
+	{
+		std::fstream presetSaveFile("JSON/PresetSaveFile.json");
+		std::ofstream newSaveFile(documents);
+
+		char character;
+		while (presetSaveFile.get(character))
+		{
+			if (character == ' ')
+			{
+				continue;
+			}
+
+			newSaveFile << character;
+		}
+	}
+
+	SetSaveFilePath(documents);
+}
+
 #ifndef _RETAIL
 void DataManager::FindCollectibleDuplicates() const
 {

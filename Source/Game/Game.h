@@ -51,8 +51,6 @@ public:
 
 	void UpdateWindowSize(const uint16_t& aWidth, const uint16_t& aHeight);
 
-	void PathMaster();
-
 private:
 	void InitCallBack();
 	void UpdateCallBack();

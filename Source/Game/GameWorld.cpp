@@ -34,7 +34,6 @@ CGameWorld::CGameWorld(CGame* aGame)
 	myTimer = std::make_unique<Utils::Timer>();
 	myInput = std::make_shared<InputWrapper>();
 	myInput->Init();
-	AudioManager::GetInstance()->Init();
 
 	if (!ourInstance)
 	{
@@ -48,6 +47,7 @@ CGameWorld::~CGameWorld()
 
 void CGameWorld::Init()
 {
+	AudioManager::GetInstance()->Init();
 	myLevelManager.Init(&myMainMenuScene, &myLevelSelect, &myLevelScene, &myIntroLogosScene, &myWinScene, &mySpeedrunScene);
 	myLevelManager.SingleLoadScene(LevelManager::eScenes::IntroLogos);
 
