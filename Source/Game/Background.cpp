@@ -336,8 +336,6 @@ const void Background::CalculateCameraPositions(const float& aDeltaTime)
 
 	CheckResetLoop();
 
-	std::cout << *myBackgroundDistanceX << std::endl;
-
 	*myCloudDistance = *myCloudDistance + (aDeltaTime * myCloudSpeed);
 
 	v2f backgroundSpeedTwo = { *myCloudDistance, 0.f };
