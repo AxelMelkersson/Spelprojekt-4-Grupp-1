@@ -36,7 +36,8 @@ void CutsceneManager::PlayVideo(CutsceneType aCutsceneType)
 void CutsceneManager::Update(const float& aDeltaTime)
 {
 	if (myVideo == nullptr) return;
-	if (myInput->GetInput()->GetKeyJustDown(Keys::SPACEBAR) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross) || myInput->GetController()->IsButtonPressed(Controller::Button::A))
+	if (myInput->GetInput()->GetKeyJustDown(Keys::SPACEBAR) || myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) ||
+		myInput->GetController()->IsButtonPressed(Controller::Button::X) || myInput->GetController()->IsButtonPressed(Controller::Button::A) || myInput->GetController()->IsButtonPressed(Controller::Button::Start))
 	{
 		StopVideo();
 		return;
