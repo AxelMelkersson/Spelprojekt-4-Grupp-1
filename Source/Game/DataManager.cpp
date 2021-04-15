@@ -538,9 +538,13 @@ void DataManager::SaveFileCreation()
 
 	documents += "\\SaveFile.json";
 
-	std::fstream saveFile(documents);
+	std::ifstream saveFile(documents);
 
-	if (!saveFile.is_open())
+	rapidjson::Document saveDocument;
+
+	ReadFileIntoDocument(documents, saveDocument);
+
+	if (!saveFile.is_open() || !saveDocument.HasMember("Bonfires"))
 	{
 		std::fstream presetSaveFile("JSON/PresetSaveFile.json");
 		std::ofstream newSaveFile(documents);
