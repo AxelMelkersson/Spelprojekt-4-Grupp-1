@@ -93,7 +93,7 @@
                         {
                          "name":"ButtonX",
                          "type":"float",
-                         "value":88
+                         "value":92.5
                         }, 
                         {
                          "name":"ButtonY",
@@ -608,7 +608,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":6
+                         "value":5
                         }, 
                         {
                          "name":"ID",
@@ -631,7 +631,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":6
+                         "value":5
                         }, 
                         {
                          "name":"ID",
@@ -932,6 +932,18 @@
                  "width":0,
                  "x":226,
                  "y":20
+                }, 
+                {
+                 "height":0,
+                 "id":629,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"56",
+                 "visible":true,
+                 "width":0,
+                 "x":237,
+                 "y":17
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -940,7 +952,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":629,
+ "nextobjectid":630,
  "orientation":"orthogonal",
  "properties":[
         {

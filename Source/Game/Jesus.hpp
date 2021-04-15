@@ -29,7 +29,7 @@ public:
 	void UpdateImGui();
 
 private:
-	Animation myAnimations[4];
+	Animation myAnimations[3];
 
 	GameObject* myTarget;
 
