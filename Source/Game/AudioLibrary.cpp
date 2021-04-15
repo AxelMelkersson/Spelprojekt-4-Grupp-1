@@ -11,23 +11,23 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::CollectibleDown, new AudioClip("Sounds/Effects/CollectibleDown.wav",   false, false, 0.5f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::CollectibleGone, new AudioClip("Sounds/Effects/CollectibleGone.wav",   false, false, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::CollectableV1,   new AudioClip("Sounds/Effects/Collectible.wav",       false, false, 0.4f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::PlayerRespawn,   new AudioClip("Sounds/Effects/Respawn.wav",           false, false, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::PlayerRespawn,   new AudioClip("Sounds/Effects/Respawn.wav",           false, false, 0.4f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::HoverActivate,   new AudioClip("Sounds/Effects/HoverActivate.wav",     false, true, 0.6f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerHover,     new AudioClip("Sounds/Effects/HoverAbility.wav",      true,  true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerJumpPad,   new AudioClip("Sounds/Effects/spring.wav",            false, true, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::SpikeHit,        new AudioClip("Sounds/Effects/SpikeHit.wav",          false, true, 0.6f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::SpikeHit,        new AudioClip("Sounds/Effects/SpikeHit.wav",          false, true, 0.4f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::SpikeDeath,      new AudioClip("Sounds/Effects/SpikeDeath.mp3",        false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::FallDeath,       new AudioClip("Sounds/Effects/FallDeath.wav",         false, false, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::ThornDeath,      new AudioClip("Sounds/Effects/ThornDeath.wav",        false, true, 0.6f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::ThornDeath,      new AudioClip("Sounds/Effects/ThornDeath.wav",        false, true, 0.2f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyDeath,      new AudioClip("Sounds/Effects/SpikeDeath.mp3",        false, false, 1,    AudioLayer::SoundEffect));
 																													 	 
 	myAudioList.insert_or_assign(AudioList::EnemyNormalIdle, new AudioClip("Sounds/Effects/EnemyIdle.wav",         true,  true, 0.2f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::EnemyKill,       new AudioClip("Sounds/Effects/EnemyKill.wav",         false, false, 0.6f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::EnemyKill,       new AudioClip("Sounds/Effects/EnemyKill.wav",         false, false, 0.4f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyShooting,   new AudioClip("Sounds/Effects/EnemyFire.wav",         false, true, 0.2f,    AudioLayer::SoundEffect));
 																													 	 
 	myAudioList.insert_or_assign(AudioList::GrabLedge,       new AudioClip("Sounds/Effects/GrabLedge.wav",         false, true, 0.4f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::GrabLedge2,      new AudioClip("Sounds/Effects/GrabLedge2.wav",        false, true, 0.4f,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::LeaveLedge,      new AudioClip("Sounds/Effects/LeaveLedge.wav",        false, true, 0.5f,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::LeaveLedge,      new AudioClip("Sounds/Effects/LeaveLedge.wav",        false, true, 0.3f,    AudioLayer::SoundEffect));
 																													 	 
 	myAudioList.insert_or_assign(AudioList::MenuMove,        new AudioClip("Sounds/Effects/MenuMove.wav",          false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::MenuBack,        new AudioClip("Sounds/Effects/MenuBack.wav",          false, true, 1,    AudioLayer::SoundEffect));
@@ -64,7 +64,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::PlayerDoubleJump,new AudioClip("Sounds/Effects/DoubleJump.wav",        false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerJump,      new AudioClip("Sounds/Effects/Jump.wav",              false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::WeakPlatform,    new AudioClip("Sounds/Effects/TemporaryPlatform.wav", false, true, 0.5f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::PlayerDeath,     new AudioClip("Sounds/Effects/death.wav",             false, true, 0.7f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::PlayerDeath,     new AudioClip("Sounds/Effects/death.wav",             false, true, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::ButtonPress,     new AudioClip("Sounds/Effects/ButtonPress.wav",       false, true, 0.1f,    AudioLayer::SoundEffect));
 																												   
 	myAudioList.insert_or_assign(AudioList::MenuAmbience,    new AudioClip("Sounds/Effects/MenuAmbience.wav",      true, true, 0.3f, AudioLayer::SoundEffect));
