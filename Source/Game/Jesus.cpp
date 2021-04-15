@@ -71,18 +71,18 @@ void Jesus::Init(const v2f& aPosition)
 void Jesus::InitAnimations()
 {
 	SpriteComponent* spriteIdle = AddComponent<SpriteComponent>();
-	spriteIdle->SetSpritePath("Sprites/Ghoul/GhoulClose.png");
+	spriteIdle->SetSpritePath("Sprites/Ghoul/GhoulClose.dds");
 	spriteIdle->SetSize(v2f(32.0f, 32.0f));
 
 	spriteIdle->SetForceRender(true);
 
 	SpriteComponent* spriteClose = AddComponent<SpriteComponent>();
-	spriteClose->SetSpritePath("Sprites/Ghoul/GhoulClose.png");
+	spriteClose->SetSpritePath("Sprites/Ghoul/GhoulClose.dds");
 	spriteClose->SetSize(v2f(32.0f, 32.0f));
 	spriteClose->Deactivate();
 
 	SpriteComponent* spriteEat = AddComponent<SpriteComponent>();
-	spriteEat->SetSpritePath("Sprites/Ghoul/GhoulEat.png");
+	spriteEat->SetSpritePath("Sprites/Ghoul/GhoulEat.dds");
 	spriteEat->SetSize(v2f(32.0f, 32.0f));
 	spriteEat->Deactivate();
 
