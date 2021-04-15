@@ -23,6 +23,7 @@ public:
 	void Play();
 	void PlayIfAvailable();
 	void Stop();
+	void ForceStop();
 
 	void Mute();
 	void UnMute();
@@ -47,6 +48,7 @@ private:
 	bool myIsPlaying = false;
 	bool myIsFadingOut = false;
 	bool myIsFading = false;
+	bool myIsMuted = false;
 	AudioLayer myLayer;
 	Tga2D::CAudio* myAudio = nullptr;
 };

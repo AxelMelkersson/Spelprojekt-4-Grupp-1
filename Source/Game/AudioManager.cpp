@@ -172,6 +172,11 @@ void AudioManager::Stop(AudioList aSound)
 	myLibrary.myAudioList[aSound]->Stop();
 }
 
+void AudioManager::ForceStop(AudioList aSound)
+{
+	myLibrary.myAudioList[aSound]->ForceStop();
+}
+
 void AudioManager::StopCurrentMusic()
 {
 	myAudioOut->StopMusic(true);

@@ -38,6 +38,7 @@ void AudioClip::SetVolume(const float& aVolChange)
 
 void AudioClip::SetComponentVolume(const float& aVolChange)
 {
+	if (myIsMuted) return;
 	myVolume = GetVolPercentage(aVolChange) * AudioManager::GetInstance()->GetSFXVolume();
 	if (myVolume < 0)
 	{
@@ -89,17 +90,26 @@ void AudioClip::PlayIfAvailable()
 
 void AudioClip::Mute()
 {
+	myIsMuted = true;
 	myAudio->SetVolume(0);
 }
 
 void AudioClip::UnMute()
 {
+	myIsMuted = false;
 	myAudio->SetVolume(myVolume);
 }
 
 void AudioClip::Stop()
 {
 	if (myIsFading || !myIsStoppable) return;
+	myAudio->Stop();
+	myIsPlaying = false;
+	UnLock();
+}
+
+void AudioClip::ForceStop()
+{
 	myAudio->Stop();
 	myIsPlaying = false;
 	UnLock();
