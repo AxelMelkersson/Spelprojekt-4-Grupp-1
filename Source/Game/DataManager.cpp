@@ -571,7 +571,7 @@ void DataManager::FindCollectibleDuplicates() const
 			{
 				if (myCollectableInfo[i].myID == myCollectableInfo[e].myID)
 				{
-					//std::cout << "Collectible ID " << myCollectableInfo[i].myID << " is used more than once. \n";
+					std::cout << "Collectible ID " << myCollectableInfo[i].myID << " is used more than once. \n";
 				}
 			}
 		}
