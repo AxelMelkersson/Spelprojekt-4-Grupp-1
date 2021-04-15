@@ -9,7 +9,6 @@ class IntroLogosScene : public Scene
 {
 public:
 	IntroLogosScene();
-	~IntroLogosScene();
 
 	void Load() override;
 	void Update(const float &aDeltaTime) override;
