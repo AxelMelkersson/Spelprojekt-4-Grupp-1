@@ -15,10 +15,10 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::HoverActivate,   new AudioClip("Sounds/Effects/HoverActivate.wav",     false, true, 0.6f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerHover,     new AudioClip("Sounds/Effects/HoverAbility.wav",      true,  true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerJumpPad,   new AudioClip("Sounds/Effects/spring.wav",            false, true, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::SpikeHit,        new AudioClip("Sounds/Effects/SpikeHit.wav",          false, true, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::SpikeHit,        new AudioClip("Sounds/Effects/SpikeHit.wav",          false, true, 0.6f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::SpikeDeath,      new AudioClip("Sounds/Effects/SpikeDeath.mp3",        false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::FallDeath,       new AudioClip("Sounds/Effects/FallDeath.wav",         false, false, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::ThornDeath,      new AudioClip("Sounds/Effects/ThornDeath.wav",        false, true, 1,    AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::ThornDeath,      new AudioClip("Sounds/Effects/ThornDeath.wav",        false, true, 0.6f,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::EnemyDeath,      new AudioClip("Sounds/Effects/SpikeDeath.mp3",        false, false, 1,    AudioLayer::SoundEffect));
 																													 	 
 	myAudioList.insert_or_assign(AudioList::EnemyNormalIdle, new AudioClip("Sounds/Effects/EnemyIdle.wav",         true,  true, 0.2f, AudioLayer::SoundEffect));
