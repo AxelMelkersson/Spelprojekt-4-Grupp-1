@@ -71,25 +71,25 @@ void Jesus::Init(const v2f& aPosition)
 void Jesus::InitAnimations()
 {
 	SpriteComponent* spriteIdle = AddComponent<SpriteComponent>();
-	spriteIdle->SetSpritePath("Sprites/JesusEtc/JesusClose.png");
+	spriteIdle->SetSpritePath("Sprites/Ghoul/GhoulClose.png");
 	spriteIdle->SetSize(v2f(32.0f, 32.0f));
 
 	spriteIdle->SetForceRender(true);
 
 	SpriteComponent* spriteClose = AddComponent<SpriteComponent>();
-	spriteClose->SetSpritePath("Sprites/JesusEtc/JesusClose.png");
+	spriteClose->SetSpritePath("Sprites/Ghoul/GhoulClose.png");
 	spriteClose->SetSize(v2f(32.0f, 32.0f));
 	spriteClose->Deactivate();
 
 	SpriteComponent* spriteEat = AddComponent<SpriteComponent>();
-	spriteEat->SetSpritePath("Sprites/JesusEtc/JesusEat.png");
+	spriteEat->SetSpritePath("Sprites/Ghoul/GhoulEat.png");
 	spriteEat->SetSize(v2f(32.0f, 32.0f));
 	spriteEat->Deactivate();
 
 	myAnimations[0] = Animation(false, false, false, 0, 2, 2, 0.5f, spriteIdle, 32, 32);
-	myAnimations[1] = Animation(false, true, false, 0, 4, 4, 0.15f, spriteClose, 32, 32);
-	myAnimations[2] = Animation(false, true, false, 0, 8, 8, 0.08f, spriteEat, 32, 32);
-	myAnimations[3] = Animation(true, true, false, 3, 4, 4, 0.15f, spriteClose, 32, 32);
+	myAnimations[1] = Animation(false, true, false, 0, 3, 3, 0.15f, spriteClose, 32, 32);
+	myAnimations[2] = Animation(false, true, false, 0, 4, 4, 0.08f, spriteEat, 32, 32);
+	myAnimations[3] = Animation(true, true, false, 2, 3, 3, 0.15f, spriteClose, 32, 32);
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(spriteIdle);
