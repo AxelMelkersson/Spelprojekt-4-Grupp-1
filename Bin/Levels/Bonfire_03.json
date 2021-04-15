@@ -120,7 +120,7 @@
                  "rotation":0,
                  "type":"0",
                  "visible":true,
-                 "width":256,
+                 "width":308,
                  "x":36,
                  "y":168
                 }, 
@@ -207,23 +207,6 @@
                  "visible":true,
                  "width":60,
                  "x":-24,
-                 "y":168
-                }, 
-                {
-                 "height":16,
-                 "id":137,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":52,
-                 "x":292,
                  "y":168
                 }, 
                 {
