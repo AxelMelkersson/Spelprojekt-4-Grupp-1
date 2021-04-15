@@ -77,12 +77,14 @@ void IntroLogosScene::Load()
 
 	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)] = myLogo->AddComponent<SpriteComponent>();
 	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->SetSpritePath("Sprites/tgalogo_W.dds");
-	const float sizeFactor = (Config::windowWidth / 3) / (mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->GetImageSize().x);
+	const float sizeFactor = (Config::windowWidth / 3.0f) / (1024.0f);
 	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->SetSize(mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->GetSize() * sizeFactor);
 	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->Deactivate();
 
 	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)] = myLogo->AddComponent<SpriteComponent>();
-	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->SetSpritePath("Sprites/Tommy.dds");
+	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->SetSpritePath("Sprites/Logo/CompanyLogo.dds");
+	const float sizeFactorGroup = Config::windowWidth / 1920.0f;
+	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->SetSize(mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->GetSize() * sizeFactorGroup);
 	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->Deactivate();
 
 	Scene::Load();
