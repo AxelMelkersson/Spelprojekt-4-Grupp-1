@@ -11,6 +11,7 @@
 #include "UIObject.h"
 #include "UIButton.h"
 #include "UIText.h"
+#include "AudioManager.h"
 
 #include "SpeedrunManager.h"
 #include "EFontsSizes.hpp"
@@ -152,12 +153,14 @@ void SpeedrunScene::CheckButtonPress()
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myMovingIndex--;
 			if (myMovingIndex < 0)
 				myMovingIndex = myButtons.size() - 1;
 		}
 		else if (myInput->GetInput()->GetKeyJustDown(Keys::DOWNARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadDown))
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			myMovingIndex++;
 			if (myMovingIndex > myButtons.size() - 1)
 				myMovingIndex = 0;
@@ -167,9 +170,9 @@ void SpeedrunScene::CheckButtonPress()
 		if (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross))
 		{
 
-
 			if (myMovingIndex == static_cast<int>(eSpeedRunButton::StartGame))
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
 				CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsSpeedrun(true);
 				CGameWorld::GetInstance()->GetLevelManager().SetLevelIndex(0);
 				CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
@@ -178,6 +181,7 @@ void SpeedrunScene::CheckButtonPress()
 			}
 			else if (myMovingIndex == static_cast<int>(eSpeedRunButton::MainMenu))
 			{
+				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 				CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
 				myIsInMenu = false;
 			}

@@ -7,7 +7,6 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::SuperBash,       new AudioClip("Sounds/Effects/BashFast.wav",          false, true, 0.8f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BashRelease,     new AudioClip("Sounds/Effects/PushfromBash.wav",      false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::BonfireActivated,new AudioClip("Sounds/Effects/BonfireActivated.wav",  false, true, 1,    AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::BonfireGust,     new AudioClip("Sounds/Effects/BonfireWhoosh.wav",     false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::CollectibleDown, new AudioClip("Sounds/Effects/CollectibleDown.wav",   false, false, 0.5f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::CollectibleGone, new AudioClip("Sounds/Effects/CollectibleGone.wav",   false, false, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::CollectableV1,   new AudioClip("Sounds/Effects/Collectible.wav",       false, false, 0.4f, AudioLayer::SoundEffect));
@@ -58,7 +57,7 @@ AudioLibrary::AudioLibrary()
 
 	myAudioList.insert_or_assign(AudioList::MovingPlatform,  new AudioClip("Sounds/Effects/MovingPlatform.wav",    true,  true, 0.15f,AudioLayer::SoundEffect));
 	 
-	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom2.wav",        false, true, 1,AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom.wav",        false, true, 0.9f,AudioLayer::SoundEffect));
  
 	myAudioList.insert_or_assign(AudioList::BashCharge,      new AudioClip("Sounds/Effects/Bash.wav",              false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerDoubleJump,new AudioClip("Sounds/Effects/DoubleJump.wav",        false, true, 1,    AudioLayer::SoundEffect));
@@ -77,7 +76,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::IntroMusic,      new AudioClip("Sounds/Music/Intro_Music.wav",         false,true, 0.5f, AudioLayer::Music));
 
 	myAudioList.insert_or_assign(AudioList::Wind,            new AudioClip("Sounds/Effects/Atmosphere_Cicadas.wav",true, true, 0.3f, AudioLayer::SoundEffect));
-	myAudioList.insert_or_assign(AudioList::Crows,           new AudioClip("Sounds/Effects/Atmosphere_Village.wav",true, true, 0.3f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::Crows,           new AudioClip("Sounds/Effects/Atmosphere_Village.wav",true, true, 0.06f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::Castle,          new AudioClip("Sounds/Effects/Atmosphere_Spook.wav",  true, true, 0.3f, AudioLayer::SoundEffect));
 
 }
