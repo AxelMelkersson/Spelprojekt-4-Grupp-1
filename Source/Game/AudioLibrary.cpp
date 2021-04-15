@@ -58,7 +58,7 @@ AudioLibrary::AudioLibrary()
 
 	myAudioList.insert_or_assign(AudioList::MovingPlatform,  new AudioClip("Sounds/Effects/MovingPlatform.wav",    true,  true, 0.15f,AudioLayer::SoundEffect));
 	 
-	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom.wav",        false, true, 0.15f,AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom2.wav",        false, true, 1,AudioLayer::SoundEffect));
  
 	myAudioList.insert_or_assign(AudioList::BashCharge,      new AudioClip("Sounds/Effects/Bash.wav",              false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerDoubleJump,new AudioClip("Sounds/Effects/DoubleJump.wav",        false, true, 1,    AudioLayer::SoundEffect));
@@ -73,6 +73,7 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::Village_Theme,   new AudioClip("Sounds/Music/Village_Theme.wav",       true, true, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Castle_Theme,    new AudioClip("Sounds/Music/Castle_Theme.wav",        true, true, 0.5f,  AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::Finale,          new AudioClip("Sounds/Music/Final_Theme.wav",         true, true, 0.5f,  AudioLayer::Music));
+	myAudioList.insert_or_assign(AudioList::HiddenRoom1,     new AudioClip("Sounds/Music/Hidden_Room.wav",         false,true, 0.5f, AudioLayer::Music));
 	myAudioList.insert_or_assign(AudioList::IntroMusic,      new AudioClip("Sounds/Music/Intro_Music.wav",         false,true, 0.5f, AudioLayer::Music));
 
 	myAudioList.insert_or_assign(AudioList::Wind,            new AudioClip("Sounds/Effects/Atmosphere_Cicadas.wav",true, true, 0.3f, AudioLayer::SoundEffect));

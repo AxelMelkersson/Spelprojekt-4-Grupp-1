@@ -340,7 +340,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":4
+                         "value":3
                         }, 
                         {
                          "name":"ID",
@@ -700,6 +700,18 @@
                  "width":0,
                  "x":112,
                  "y":21
+                }, 
+                {
+                 "height":0,
+                 "id":705,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"55",
+                 "visible":true,
+                 "width":0,
+                 "x":127,
+                 "y":21
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -708,7 +720,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":705,
+ "nextobjectid":706,
  "orientation":"orthogonal",
  "properties":[
         {
