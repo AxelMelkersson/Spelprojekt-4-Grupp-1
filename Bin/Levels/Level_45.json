@@ -2962,7 +2962,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":1
+                         "value":7
                         }, 
                         {
                          "name":"ID",
@@ -2985,7 +2985,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":1
+                         "value":7
                         }, 
                         {
                          "name":"ID",
@@ -3008,7 +3008,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":1
+                         "value":7
                         }, 
                         {
                          "name":"ID",
