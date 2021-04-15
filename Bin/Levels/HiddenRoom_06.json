@@ -698,7 +698,7 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":7
+                         "value":6
                         }, 
                         {
                          "name":"ID",
@@ -953,7 +953,31 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":602,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"57",
+                 "visible":true,
+                 "width":0,
+                 "x":401,
+                 "y":17
+                }, 
+                {
+                 "height":0,
+                 "id":603,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"56",
+                 "visible":true,
+                 "width":0,
+                 "x":425,
+                 "y":14
+                }],
          "opacity":1,
          "properties":[
                 {
@@ -967,7 +991,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":602,
+ "nextobjectid":604,
  "orientation":"orthogonal",
  "properties":[
         {
