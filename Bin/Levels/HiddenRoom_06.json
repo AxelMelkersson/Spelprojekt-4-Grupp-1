@@ -580,7 +580,7 @@
                  "y":40
                 }, 
                 {
-                 "height":88,
+                 "height":224,
                  "id":595,
                  "name":"",
                  "rotation":0,
@@ -588,7 +588,7 @@
                  "visible":true,
                  "width":24,
                  "x":696,
-                 "y":0
+                 "y":-136
                 }, 
                 {
                  "height":271,
