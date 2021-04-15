@@ -791,7 +791,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":72,
+                 "height":160,
                  "id":160,
                  "name":"",
                  "rotation":0,
@@ -799,7 +799,7 @@
                  "visible":true,
                  "width":8,
                  "x":656,
-                 "y":72
+                 "y":-16
                 }, 
                 {
                  "height":32,
