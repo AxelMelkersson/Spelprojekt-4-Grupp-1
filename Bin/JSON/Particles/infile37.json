@@ -1,7 +1,7 @@
 {
   "particle": [
     {
-      "EffectType": "DustParticleStartupTwo",
+      "EffectType": "FireflyParticleStartupTwo",
 
       "ZIndex": 120,
 
