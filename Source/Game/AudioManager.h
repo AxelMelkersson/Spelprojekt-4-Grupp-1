@@ -45,6 +45,7 @@ public:
 	void PlayIfAvailable(AudioList aSound);
 
 	void Stop(AudioList aSound);
+	void ForceStop(AudioList aSound);
 
 	void StopAllSounds(bool anAndMusic = false);
 
