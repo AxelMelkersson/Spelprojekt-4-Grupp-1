@@ -115,7 +115,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -132,7 +132,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -183,7 +183,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -200,7 +200,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -211,7 +211,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
