@@ -58,7 +58,7 @@ AudioLibrary::AudioLibrary()
 
 	myAudioList.insert_or_assign(AudioList::MovingPlatform,  new AudioClip("Sounds/Effects/MovingPlatform.wav",    true,  true, 0.15f,AudioLayer::SoundEffect));
 	 
-	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom.wav",        false, true, 0.15f,AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::HiddenRoomUnlock,new AudioClip("Sounds/Effects/HiddenRoom2.wav",        false, true, 1,AudioLayer::SoundEffect));
  
 	myAudioList.insert_or_assign(AudioList::BashCharge,      new AudioClip("Sounds/Effects/Bash.wav",              false, true, 1,    AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerDoubleJump,new AudioClip("Sounds/Effects/DoubleJump.wav",        false, true, 1,    AudioLayer::SoundEffect));
