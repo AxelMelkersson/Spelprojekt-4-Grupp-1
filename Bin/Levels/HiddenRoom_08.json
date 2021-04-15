@@ -728,6 +728,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":21,
+         "name":"AudioObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":582,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"57",
+                 "visible":true,
+                 "width":0,
+                 "x":80,
+                 "y":120
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":20,
          "name":"Enemies",
          "objects":[
@@ -977,8 +1000,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":21,
- "nextobjectid":582,
+ "nextlayerid":22,
+ "nextobjectid":583,
  "orientation":"orthogonal",
  "properties":[
         {

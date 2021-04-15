@@ -7,8 +7,8 @@
 
 enum class eIntroLogo
 {
-	Tga2D_logo, // Temporär som test
-	de_e_nice, // Temporär som test
+	tga_logo,
+	group_logo,
 
 	enum_intro_logo_size
 };
@@ -21,11 +21,7 @@ IntroLogosScene::IntroLogosScene()
 	}
 	myLogo = nullptr;
 	myTimeSinceInited = 0.0f;
-	myTotalLogoTime = 2.0f;
-}
-IntroLogosScene::~IntroLogosScene()
-{
-
+	myTotalLogoTime = 5.0f;
 }
 
 void IntroLogosScene::Update(const float &aDeltaTime)
@@ -53,18 +49,18 @@ void IntroLogosScene::DisplayLogo(const float aTime)
 	{
 	case 0:
 	{
-		if (!(mySpriteVector[timeInt]->IsActive()))
+		if (!(mySpriteVector[0]->IsActive()))
 		{
-			mySpriteVector[timeInt]->Activate();
+			mySpriteVector[0]->Activate();
 		}
 	}
 	break;
-	case 1:
+	case 3:
 	{
-		if (!(mySpriteVector[timeInt]->IsActive()))
+		if (!(mySpriteVector[1]->IsActive()))
 		{
-			mySpriteVector[timeInt - 1]->Deactivate();
-			mySpriteVector[timeInt]->Activate();
+			mySpriteVector[0]->Deactivate();
+			mySpriteVector[1]->Activate();
 		}
 	}
 	break;
@@ -79,13 +75,15 @@ void IntroLogosScene::Load()
 	myLogo->SetPivot({ 0.5f, 0.5f });
 	myLogo->SetPosition({ static_cast<float>(Config::windowWidth) / 2.0f, static_cast<float>(Config::windowHeight) / 2.0f });
 
-	mySpriteVector[static_cast<size_t>(eIntroLogo::Tga2D_logo)] = myLogo->AddComponent<SpriteComponent>();
-	mySpriteVector[static_cast<size_t>(eIntroLogo::Tga2D_logo)]->SetSpritePath("Sprites/tga_logo.dds");
-	mySpriteVector[static_cast<size_t>(eIntroLogo::Tga2D_logo)]->Deactivate();
+	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)] = myLogo->AddComponent<SpriteComponent>();
+	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->SetSpritePath("Sprites/tgalogo_W.dds");
+	const float sizeFactor = (Config::windowWidth / 3) / (mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->GetImageSize().x);
+	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->SetSize(mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->GetSize() * sizeFactor);
+	mySpriteVector[static_cast<size_t>(eIntroLogo::tga_logo)]->Deactivate();
 
-	mySpriteVector[static_cast<size_t>(eIntroLogo::de_e_nice)] = myLogo->AddComponent<SpriteComponent>();
-	mySpriteVector[static_cast<size_t>(eIntroLogo::de_e_nice)]->SetSpritePath("Sprites/w.png");
-	mySpriteVector[static_cast<size_t>(eIntroLogo::de_e_nice)]->Deactivate();
+	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)] = myLogo->AddComponent<SpriteComponent>();
+	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->SetSpritePath("Sprites/Tommy.dds");
+	mySpriteVector[static_cast<size_t>(eIntroLogo::group_logo)]->Deactivate();
 
 	Scene::Load();
 }
