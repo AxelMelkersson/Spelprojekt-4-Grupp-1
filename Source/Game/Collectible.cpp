@@ -164,7 +164,8 @@ void Collectible::TurnIn()
 {
 	if (!myWasTurnedIn)
 	{
-		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleDown);
+		AudioManager::GetInstance()->ForceStop(AudioList::CollectibleDown);
+		AudioManager::GetInstance()->PlayIfAvailable(AudioList::CollectibleDown);
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[1]);
 		myWasTurnedIn = true;
 
@@ -178,6 +179,7 @@ void Collectible::TurnIn()
 	}
 	else if (GetComponent<AnimationComponent>()->GetIsDisplayedOnce() && GetComponent<AnimationComponent>()->GetHasBeenDisplayedOnce())
 	{
+		AudioManager::GetInstance()->ForceStop(AudioList::CollectibleGone);
 		AudioManager::GetInstance()->PlayAudio(AudioList::CollectibleGone);
 		ActivateCollectedEffect();
 		Destroy();
