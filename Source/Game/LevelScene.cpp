@@ -87,6 +87,7 @@ void LevelScene::Unload()
 	AudioManager::GetInstance()->FadeOut(AudioList::Village_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle_Theme);
 	AudioManager::GetInstance()->FadeOut(AudioList::Finale);
+	AudioManager::GetInstance()->FadeOut(AudioList::HiddenRoom1);
 	AudioManager::GetInstance()->FadeOut(AudioList::Crows);
 	AudioManager::GetInstance()->FadeOut(AudioList::Castle);
 	AudioManager::GetInstance()->FadeOut(AudioList::Wind);
