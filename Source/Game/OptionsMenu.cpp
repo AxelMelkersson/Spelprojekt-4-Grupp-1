@@ -415,6 +415,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		{
 		case 0:
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
 			DataManager::GetInstance().ResetSaveFile();
 			myResetGameActive = false;
 			myResetGame->Deactivate();
@@ -424,6 +425,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		case 1:
 		{
+			AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
 			myResetGameActive = false;
 			myResetGame->Deactivate();
 			for (auto reset : myResetObjects)

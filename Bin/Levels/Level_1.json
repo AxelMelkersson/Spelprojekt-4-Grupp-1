@@ -194,40 +194,6 @@
                 }, 
                 {
                  "height":16,
-                 "id":118,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":24,
-                 "x":320,
-                 "y":0
-                }, 
-                {
-                 "height":32,
-                 "id":120,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"0",
-                 "visible":true,
-                 "width":24,
-                 "x":-24,
-                 "y":0
-                }, 
-                {
-                 "height":16,
                  "id":121,
                  "name":"",
                  "properties":[
@@ -387,7 +353,7 @@
          "name":"Doors",
          "objects":[
                 {
-                 "height":136,
+                 "height":200,
                  "id":115,
                  "name":"",
                  "rotation":0,
@@ -395,10 +361,10 @@
                  "visible":true,
                  "width":8,
                  "x":-24,
-                 "y":32
+                 "y":-32
                 }, 
                 {
-                 "height":136,
+                 "height":176,
                  "id":116,
                  "name":"",
                  "rotation":0,
@@ -406,7 +372,7 @@
                  "visible":true,
                  "width":8,
                  "x":336,
-                 "y":16
+                 "y":-24
                 }],
          "opacity":1,
          "type":"objectgroup",
