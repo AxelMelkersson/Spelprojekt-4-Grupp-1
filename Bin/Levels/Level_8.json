@@ -113,7 +113,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":0
                         }],
@@ -130,7 +130,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":1
                         }],
@@ -147,7 +147,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -164,7 +164,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -258,7 +258,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -286,7 +286,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":0
                         }],
@@ -358,7 +358,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -375,7 +375,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -409,7 +409,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":0
                         }],

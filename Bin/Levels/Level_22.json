@@ -124,7 +124,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":1
                         }],
@@ -141,7 +141,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":7
                         }],
@@ -158,7 +158,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":3
                         }],
@@ -175,7 +175,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":3
                         }],
@@ -192,7 +192,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":3
                         }],
@@ -248,7 +248,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":1
                         }],
@@ -265,7 +265,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":1
                         }],

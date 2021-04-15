@@ -137,7 +137,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":4
                         }],
@@ -191,6 +191,12 @@
                  "height":1,
                  "id":542,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -215,7 +221,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":4
                         }],
@@ -230,6 +236,12 @@
                  "height":88,
                  "id":555,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -241,6 +253,12 @@
                  "height":80,
                  "id":556,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -276,7 +294,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":2
                         }],
@@ -291,6 +309,12 @@
                  "height":4,
                  "id":563,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -302,6 +326,12 @@
                  "height":56,
                  "id":564,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -313,6 +343,12 @@
                  "height":40,
                  "id":565,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -324,6 +360,12 @@
                  "height":4,
                  "id":566,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -335,6 +377,12 @@
                  "height":7,
                  "id":567,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -346,6 +394,12 @@
                  "height":4,
                  "id":568,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -357,6 +411,12 @@
                  "height":64,
                  "id":569,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -368,6 +428,12 @@
                  "height":8,
                  "id":570,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -379,6 +445,12 @@
                  "height":4,
                  "id":571,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -390,6 +462,12 @@
                  "height":56,
                  "id":574,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -401,6 +479,12 @@
                  "height":4,
                  "id":575,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -412,6 +496,12 @@
                  "height":4,
                  "id":576,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -423,6 +513,12 @@
                  "height":12,
                  "id":577,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":7
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -456,6 +552,12 @@
                  "height":72,
                  "id":585,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
@@ -469,7 +571,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":4
                         }],
@@ -484,6 +586,12 @@
                  "height":4,
                  "id":587,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -495,6 +603,12 @@
                  "height":48,
                  "id":588,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -605,6 +719,12 @@
                  "height":16,
                  "id":597,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -616,6 +736,12 @@
                  "height":4,
                  "id":598,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -627,6 +753,12 @@
                  "height":4,
                  "id":599,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
@@ -638,6 +770,12 @@
                  "height":72,
                  "id":600,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Material",
+                         "type":"int",
+                         "value":6
+                        }],
                  "rotation":0,
                  "type":"4",
                  "visible":true,
