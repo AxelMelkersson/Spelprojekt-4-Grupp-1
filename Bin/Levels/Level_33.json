@@ -809,12 +809,12 @@
                         {
                          "name":"BonfireID",
                          "type":"int",
-                         "value":0
+                         "value":5
                         }, 
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":4
+                         "value":1903
                         }],
                  "rotation":0,
                  "type":"0",
