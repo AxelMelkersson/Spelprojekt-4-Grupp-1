@@ -74,7 +74,6 @@ public:
 	const bool& GetIsBashing();
 
 	void Kill();
-	void Eaten();
 
 	void KillReset();
 	void Respawn();

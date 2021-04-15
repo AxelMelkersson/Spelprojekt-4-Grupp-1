@@ -794,11 +794,6 @@ void Player::Kill()
 	}
 }
 
-void Player::Eaten()
-{
-	KillReset();
-}
-
 void Player::KillReset()
 {
 	myScene->GetCamera().Shake(

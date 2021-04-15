@@ -89,7 +89,6 @@ void Jesus::InitAnimations()
 	myAnimations[0] = Animation(false, false, false, 0, 2, 2, 0.5f, spriteIdle, 32, 32);
 	myAnimations[1] = Animation(false, true, false, 0, 3, 3, 0.15f, spriteClose, 32, 32);
 	myAnimations[2] = Animation(false, true, false, 0, 4, 4, 0.08f, spriteEat, 32, 32);
-	myAnimations[3] = Animation(true, true, false, 2, 3, 3, 0.15f, spriteClose, 32, 32);
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(spriteIdle);
@@ -184,9 +183,8 @@ void Jesus::OnCollision(GameObject* aGameObject)
 	if (player && !myEatTarget)
 	{
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2]);
-		GetComponent<AnimationComponent>()->SetNextAnimation(&myAnimations[3]);
 		myEatTarget = true;
-		player->Eaten();
+		player->Kill();
 	}
 }
 
