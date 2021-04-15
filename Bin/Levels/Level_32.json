@@ -253,7 +253,7 @@
                  "name":"D\u00f6dlig",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":6
                         }],
