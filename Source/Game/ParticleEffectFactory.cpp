@@ -961,6 +961,11 @@ const void ParticleEffectFactory::StartEffects()
 
 		if (boundaries.y > 700.f)
 		{
+			dustParticle1->SetSpawnTime(2.5f, 2.5f);
+			dustParticle2->SetSpawnTime(2.5f, 2.5f);
+			dustParticle3->SetSpawnTime(2.5f, 2.5f);
+			dustparticleStartupOne->SetSpawnTime(0.01f, 0.01f);
+			dustparticleStartupTwo->SetSpawnTime(0.01f, 0.01f);
 			rainBackgroundSide->SetSpawnTime(0.1f, 0.1f);
 		}
 	}

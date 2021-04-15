@@ -1,7 +1,7 @@
 {
   "particle": [
     {
-      "EffectType": "DustParticleTwo",
+      "EffectType": "FireflyParticleTwo",
 
       "ZIndex": 120,
 
@@ -32,8 +32,8 @@
       "EmitterWidth": 0.0,
       "EmitterHeigth": 0.0,
 
-      "MinParticleLifeTime": 15.0,
-      "MaxParticleLifeTime": 20.0,
+      "MinParticleLifeTime": 25.0,
+      "MaxParticleLifeTime": 45.0,
 
       "SpawnLifeTime": 0.0,
       "SpawnEverySecond": 0.0,

@@ -258,6 +258,22 @@ void OptionsMenu::SetOpenedFromPauseMenu(PauseMenu* aPauseMenu)
 // Private Methods
 void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 {
+	if (myInput->GetInput()->GetKeyJustDown(Keys::ESCKey) || myInput->GetController()->IsButtonHoldDown(Controller::Button::Start))
+	{
+		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+		if (myIsOpenedFromPause)
+		{
+			SetActive(false);
+			myPauseMenu->SetActiveMenu(true);
+		}
+		else
+		{
+			CGameWorld::GetInstance()->GetLevelManager().ReloadScene(LevelManager::eScenes::MainMenu);
+		}
+
+		return;
+	}
+
 	bool entered = myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross);
 
 	if (entered && myScreenSettingsActive == false && myResetGameActive == false)
