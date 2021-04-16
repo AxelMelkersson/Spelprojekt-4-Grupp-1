@@ -538,23 +538,11 @@ void DataManager::SaveFileCreation()
 
 	documents += "\\SaveFile.json";
 
-	std::fstream saveFile(documents);
+	std::ifstream saveFile(documents);
 
 	if (!saveFile.is_open())
 	{
-		std::fstream presetSaveFile("JSON/PresetSaveFile.json");
-		std::ofstream newSaveFile(documents);
-
-		char character;
-		while (presetSaveFile.get(character))
-		{
-			if (character == ' ')
-			{
-				continue;
-			}
-
-			newSaveFile << character;
-		}
+		std::filesystem::copy_file("JSON/PresetSaveFile.json", documents, std::filesystem::copy_options::overwrite_existing);
 	}
 
 	SetSaveFilePath(documents);
