@@ -1,5 +1,6 @@
 #pragma once
 #include "rapidjson/document.h"
+#include <filesystem>
 #include <map>
 
 enum class DataEnum
@@ -142,17 +143,24 @@ public:
 	void ParseCollectableInfo();
 
 	// Document Handling methods
-	void ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc);
-	void SetSaveFilePath(const std::string aFilePath);
+	void ReadFileIntoDocument(const std::filesystem::path aFilePath, rapidjson::Document& anOutDoc);
+	void SetSaveFilePath(const std::filesystem::path aFilePath);
 
 private:
 	DataManager();
 
 	// Document Handling methods
-	void AcceptJsonWriter(const std::string aDataPath) const;
+	void AcceptJsonWriter(const std::filesystem::path aDataPath) const;
 	void AssignValues(const DataEnum anEnum, const rapidjson::Document& aDoc);
 	void AssignCollectedState();
 	void SaveFileCreation();
+
+	void CreateSaveFile(const std::filesystem::path aFilePath);
+	void CreateBonfireObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator);
+	void CreateCollectiblesObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator);
+	void CreateHighScoreObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator);
+	void CreateSettingsObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator);
+	void CreateStartLevelObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator);
 
 #ifndef _RETAIL
 	void FindCollectibleDuplicates() const;
@@ -172,5 +180,5 @@ private:
 
 	//SaveFile
 	rapidjson::Document mySaveFile;
-	std::string mySaveFilePath = " ";
+	std::filesystem::path mySaveFilePath = "";
 };

@@ -8,7 +8,6 @@
 #include <rapidjson/writer.h>
 #include "PostMaster.hpp"
 #include <shlobj.h>
-#include <filesystem>
 
 #ifndef _RETAIL
 #include <iostream>
@@ -18,9 +17,9 @@ void DataManager::Init()
 {
 	SaveFileCreation();
 
-	//Assign MasterDoc & SaveFile
-	ReadFileIntoDocument("Master.json", myMasterDoc);
+	//Assign MasterDoc
 	ReadFileIntoDocument(mySaveFilePath, mySaveFile);
+	ReadFileIntoDocument("Master.json", myMasterDoc);
 
 	//Assign LevelDocs
 	ReadFileIntoDocument("Levels/LevelMaster.json", myLevelMasterDoc);
@@ -53,10 +52,6 @@ void DataManager::Init()
 	ReadFileIntoDocument(enemyDataPath, enemyDoc);
 	//Assign Enemy Values
 	AssignValues(DataEnum::enemy, enemyDoc);
-
-#ifndef _RETAIL
-	ResetSaveFile();
-#endif // !_RETAIL
 }
 
 void DataManager::SetDataStruct(const DataEnum aDataEnum)
@@ -223,9 +218,6 @@ void DataManager::ResetBonfires()
 void DataManager::ResetCollectibles()
 {
 	// Clears Array
-	rapidjson::Document presetFile;
-	ReadFileIntoDocument("JSON/PresetSaveFile.json", presetFile);
-
 	mySaveFile["Collectibles"].GetArray().Clear();
 	for (size_t i = 0; i < myCollectableInfo.size(); i++)
 	{
@@ -257,11 +249,9 @@ void DataManager::ResetCollectibles()
 		jsonObject["Collectible"].AddMember("Difficulty", difficulty, allocator);
 
 		mySaveFile["Collectibles"].PushBack(jsonObject, allocator);
-		presetFile["Collectibles"].PushBack(jsonObject, allocator);
 	}
 
 	AcceptJsonWriter(mySaveFilePath);
-	AcceptJsonWriter("JSON/PresetSaveFile.json");
 }
 void DataManager::ResetHighScores()
 {
@@ -403,13 +393,13 @@ void DataManager::ParseCollectableInfo()
 		levelIndex++;
 	}
 
-#ifndef _RETAIL
-	ResetSaveFile();
-	FindCollectibleDuplicates();
-#endif // !_RETAIL
+	if (myCollectableInfo.size() != mySaveFile["Collectibles"].GetArray().Size())
+	{
+		ResetCollectibles();
+	}
 	AssignCollectedState();
 }
-void DataManager::SetSaveFilePath(const std::string aFilePath)
+void DataManager::SetSaveFilePath(const std::filesystem::path aFilePath)
 {
 	mySaveFilePath = aFilePath;
 }
@@ -420,7 +410,7 @@ DataManager::DataManager()
 
 }
 
-void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::Document& anOutDoc)
+void DataManager::ReadFileIntoDocument(const std::filesystem::path aFilePath, rapidjson::Document& anOutDoc)
 {
 	std::ifstream dataFile(aFilePath);
 	std::ostringstream outStringStream;
@@ -429,7 +419,7 @@ void DataManager::ReadFileIntoDocument(const std::string aFilePath, rapidjson::D
 	anOutDoc.Parse(outString.c_str());
 	dataFile.close();
 }
-void DataManager::AcceptJsonWriter(const std::string aDataPath) const
+void DataManager::AcceptJsonWriter(const std::filesystem::path aDataPath) const
 {
 	std::ofstream ofs{ aDataPath };
 	rapidjson::OStreamWrapper osw{ ofs };
@@ -517,35 +507,109 @@ void DataManager::AssignCollectedState()
 
 void DataManager::SaveFileCreation()
 {
-	wchar_t documentsWide[MAX_PATH];
-	std::string documents = "";
+	TCHAR documentsWide[MAX_PATH];
 
-	HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsWide);
-
-	for (wchar_t character : documentsWide)
+	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsWide)))
 	{
-		if (character == 0)
+		std::filesystem::path documents = documentsWide;
+		documents.append("Pass On");
+
+		std::filesystem::create_directories(documents);
+		std::filesystem::path saveFile = documents;
+		saveFile.append("SaveFile.json");
+
+		std::ifstream mainFile(saveFile);
+
+		SetSaveFilePath(saveFile);
+
+		if (!mainFile.is_open())
 		{
-			break;
+			std::ofstream realSaveFile(saveFile);
+			CreateSaveFile(saveFile);
+			realSaveFile.close();
 		}
-
-		documents += static_cast<char>(character);
 	}
+}
 
-	documents += "\\PassOn";
+void DataManager::CreateSaveFile(const std::filesystem::path aFilePath)
+{
+	ReadFileIntoDocument(aFilePath, mySaveFile);
+	mySaveFile.SetObject();
 
-	std::filesystem::create_directory(documents);
+	rapidjson::Document::AllocatorType& allocator = mySaveFile.GetAllocator();
 
-	documents += "\\SaveFile.json";
+	CreateBonfireObj(aFilePath, allocator);
+	CreateCollectiblesObj(aFilePath, allocator);
+	CreateHighScoreObj(aFilePath, allocator);
+	CreateSettingsObj(aFilePath, allocator);
+	CreateStartLevelObj(aFilePath, allocator);
+}
+void DataManager::CreateBonfireObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator)
+{
+	rapidjson::Value bonfireArray(rapidjson::Type::kArrayType);
+	mySaveFile.AddMember("Bonfires", bonfireArray, anAllocator);
 
-	std::ifstream saveFile(documents);
-
-	if (!saveFile.is_open())
+	for (size_t i = 0; i < 8; i++)
 	{
-		std::filesystem::copy_file("JSON/PresetSaveFile.json", documents, std::filesystem::copy_options::overwrite_existing);
-	}
+		rapidjson::Value jsonObject(rapidjson::Type::kObjectType);
+		rapidjson::Value bonfire(rapidjson::Type::kObjectType);
 
-	SetSaveFilePath(documents);
+		rapidjson::Value activatedState(rapidjson::Type::kFalseType);
+		bonfire.AddMember("IsActive", activatedState, anAllocator);
+
+		jsonObject.AddMember("Bonfire", bonfire, anAllocator);
+		mySaveFile["Bonfires"].PushBack(jsonObject, anAllocator);
+	}
+	AcceptJsonWriter(aFilePath);
+}
+void DataManager::CreateCollectiblesObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator)
+{
+	rapidjson::Value collectibleArray(rapidjson::Type::kArrayType);
+	mySaveFile.AddMember("Collectibles", collectibleArray, anAllocator);
+
+	AcceptJsonWriter(aFilePath);
+}
+void DataManager::CreateHighScoreObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator)
+{
+	rapidjson::Value highScoreArray(rapidjson::Type::kArrayType);
+	mySaveFile.AddMember("HighScore", highScoreArray, anAllocator);
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		rapidjson::Value jsonObject(rapidjson::Type::kObjectType);
+		rapidjson::Value score(rapidjson::Type::kObjectType);
+		rapidjson::Value value(rapidjson::Type::kNumberType);
+		value.SetFloat(0.0f);
+		score.AddMember("Value", value, anAllocator);
+
+		jsonObject.AddMember("Score", score, anAllocator);
+
+		mySaveFile["HighScore"].PushBack(jsonObject, anAllocator);
+	}
+	AcceptJsonWriter(aFilePath);
+}
+void DataManager::CreateSettingsObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator)
+{
+	rapidjson::Value settingsObject(rapidjson::Type::kObjectType);
+
+	rapidjson::Value SFXVolume(rapidjson::Type::kNumberType);
+	SFXVolume.SetFloat(0.2f);
+	rapidjson::Value musicVolume(rapidjson::Type::kNumberType);
+	musicVolume.SetFloat(0.2f);
+
+	settingsObject.AddMember("SFXVolume", SFXVolume, anAllocator);
+	settingsObject.AddMember("MusicVolume", musicVolume, anAllocator);
+
+	mySaveFile.AddMember("Settings", settingsObject, anAllocator);
+	AcceptJsonWriter(aFilePath);
+}
+void DataManager::CreateStartLevelObj(const std::filesystem::path aFilePath, rapidjson::Document::AllocatorType& anAllocator)
+{
+	rapidjson::Value startLevelInt(rapidjson::Type::kNumberType);
+	startLevelInt.SetInt(0);
+
+	mySaveFile.AddMember("StartLevel", startLevelInt, anAllocator);
+	AcceptJsonWriter(aFilePath);
 }
 
 #ifndef _RETAIL
