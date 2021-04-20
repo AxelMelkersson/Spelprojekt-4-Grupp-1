@@ -397,7 +397,7 @@ void TiledLoader::ParsePlatforms(const std::vector<LoadData> someData, Scene* aS
 			platformFactory.CreateUnstablePlatform(aScene, someData[i].myPosition, someData[i].mySize, someData[i].mySize, 0.5f, 2.0f);
 			break;
 		case 3:
-			platformFactory.CreateDestructiblePlatform(aScene, someData[i].myPosition, someData[i].mySize, someData[i].mySize);
+			//platformFactory.CreateDestructiblePlatform(aScene, someData[i].myPosition, someData[i].mySize, someData[i].mySize);
 			break;
 		case 4:
 			platformFactory.CreateDeadlyPlatform(aScene, someData[i].myPosition, someData[i].mySize, someData[i].mySize, someData[i].myPlatformMaterial);
@@ -440,9 +440,7 @@ void TiledLoader::ParseButtons(const std::vector<LoadData> someData, Scene* aSce
 	{
 		if (someData[i].myType == 3)
 		{
-			Door* myDoor = new Door(aScene);
-			myDoor->Init(someData[i].myPosition);
-			myDoor->AddButton(someData[i].myButtonPosition);
+
 		}
 		else
 		{
