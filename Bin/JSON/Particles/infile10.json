@@ -6,7 +6,7 @@
       "ZIndex": 100,
 
       "EffectTypeIndex": 10,
-      "SpritePath": "Sprites/Particles/ParticleGlowCollectible2.dds",
+      "SpritePath": "Sprites/Particles/PlayerBashFade1.dds",
 
       "PauseTimer": 0.0,
       "PauseSeconds": 0.0,
