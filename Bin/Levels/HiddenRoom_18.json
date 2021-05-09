@@ -1,4 +1,11 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":30,
  "infinite":false,
  "layers":[
@@ -108,7 +115,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"0",
@@ -596,7 +603,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"0",
@@ -796,7 +803,31 @@
          "draworder":"topdown",
          "id":18,
          "name":"AudioObjects",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":628,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"57",
+                 "visible":true,
+                 "width":0,
+                 "x":192,
+                 "y":24
+                }, 
+                {
+                 "height":0,
+                 "id":629,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"54",
+                 "visible":true,
+                 "width":0,
+                 "x":208,
+                 "y":24
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -804,13 +835,13 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":628,
+ "nextobjectid":630,
  "orientation":"orthogonal",
  "properties":[
         {
          "name":"Area",
          "type":"int",
-         "value":1
+         "value":0
         }, 
         {
          "name":"Particles",
