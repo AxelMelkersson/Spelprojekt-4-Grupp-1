@@ -2176,7 +2176,7 @@
                  "visible":true,
                  "width":0,
                  "x":144,
-                 "y":144
+                 "y":156
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2210,7 +2210,7 @@
                  "visible":true,
                  "width":0,
                  "x":144,
-                 "y":112
+                 "y":124
                 }],
          "opacity":1,
          "type":"objectgroup",
