@@ -34,7 +34,7 @@ public:
 	void ImGuiUpdate();
 
 private:
-	Animation myAnimations[2];
+	Animation myAnimations[3];
 
 	v2f mySpawnPosition;
 	v2f myTargetPosition;
@@ -45,12 +45,15 @@ private:
 	float myIdleMovementSpeed;
 	float myIdleMovementDistance;
 	float myTimeOffset;
+	float myFlashTime;
+	int myFlashFrameIndex;
 
 	eCollectibleType myType;
 	bool myWasCollectedBefore;
 	bool myWasCollected;
 	bool myWasTurnedIn;
 	bool myWasTurnedInWhenEnteringDoor;
+	bool myFlashing;
 
 	const unsigned int myID;
 	const unsigned int myBonfireID;
