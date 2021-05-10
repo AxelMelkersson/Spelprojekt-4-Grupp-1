@@ -34,7 +34,7 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myWasTurnedInWhenEnteringDoor(false),
 	myID(anID),
 	myBonfireID(aBonfireID),
-	myFlashTime(0.1f),
+	myFlashTime(0.15f),
 	myFlashing(false),
 	myFlashFrameIndex(0)
 {
