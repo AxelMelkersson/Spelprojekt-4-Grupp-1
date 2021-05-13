@@ -168,7 +168,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":2
                         }],
@@ -243,7 +243,7 @@
                         {
                          "name":"Material",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"0",
@@ -303,7 +303,7 @@
                  "y":60
                 }, 
                 {
-                 "height":56,
+                 "height":8,
                  "id":630,
                  "name":"",
                  "properties":[
@@ -684,7 +684,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":6
                         }],
@@ -840,6 +840,17 @@
                  "width":16,
                  "x":80,
                  "y":128
+                }, 
+                {
+                 "height":48,
+                 "id":690,
+                 "name":"",
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":24,
+                 "x":72,
+                 "y":208
                 }],
          "opacity":1,
          "properties":[
@@ -1217,7 +1228,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":690,
+ "nextobjectid":691,
  "orientation":"orthogonal",
  "properties":[
         {

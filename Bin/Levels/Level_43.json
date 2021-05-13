@@ -63,7 +63,7 @@
          "name":"HiddenRooms",
          "objects":[
                 {
-                 "height":32,
+                 "height":24,
                  "id":439,
                  "name":"",
                  "rotation":0,
@@ -255,21 +255,15 @@
                  "y":176
                 }, 
                 {
-                 "height":8,
+                 "height":24,
                  "id":424,
                  "name":"",
-                 "properties":[
-                        {
-                         "name":"Material",
-                         "type":"int",
-                         "value":2
-                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
                  "width":16,
                  "x":312,
-                 "y":0
+                 "y":-16
                 }, 
                 {
                  "height":86,
@@ -543,7 +537,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":6
                         }],
@@ -611,7 +605,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":6
                         }],
@@ -831,7 +825,7 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"Materials",
+                         "name":"Material",
                          "type":"int",
                          "value":6
                         }],
@@ -943,18 +937,6 @@
          "id":7,
          "name":"Ledges",
          "objects":[
-                {
-                 "height":0,
-                 "id":422,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":312,
-                 "y":0
-                }, 
                 {
                  "height":0,
                  "id":466,
