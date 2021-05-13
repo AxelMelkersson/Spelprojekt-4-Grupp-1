@@ -163,12 +163,6 @@
                  "height":8,
                  "id":520,
                  "name":"",
-                 "properties":[
-                        {
-                         "name":"Materials",
-                         "type":"int",
-                         "value":2
-                        }],
                  "rotation":0,
                  "type":"0",
                  "visible":true,
