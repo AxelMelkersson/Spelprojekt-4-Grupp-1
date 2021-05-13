@@ -33,7 +33,10 @@ Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsi
 	myWasTurnedIn(false),
 	myWasTurnedInWhenEnteringDoor(false),
 	myID(anID),
-	myBonfireID(aBonfireID)
+	myBonfireID(aBonfireID),
+	myFlashTime(0.15f),
+	myFlashing(false),
+	myFlashFrameIndex(0)
 {
 	Subscribe(eMessageType::PlayerSafeLanded);
 	Subscribe(eMessageType::PlayerDeath);
@@ -53,22 +56,26 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 
 	std::string spritePath;
 	std::string spritePickupPath;
-
+	std::string whiteSpritePath;
 	switch (aType)
 	{
-		case eCollectibleType::Easy:
-			spritePath = "Sprites/Objects/Collectible3.dds";
-			spritePickupPath = "Sprites/Objects/Collectible3Pickup.dds";
-			break;
-		case eCollectibleType::Medium:
-			spritePath = "Sprites/Objects/Collectible2.dds";
-			spritePickupPath = "Sprites/Objects/Collectible2Pickup.dds";
-			break;
-		case eCollectibleType::Hard:
-			spritePath = "Sprites/Objects/Collectible1.dds";
-			spritePickupPath = "Sprites/Objects/Collectible1Pickup.dds";
-			break;
+	case eCollectibleType::Easy: {
+		spritePath = "Sprites/Objects/Collectible3.dds";
+		spritePickupPath = "Sprites/Objects/Collectible3Pickup.dds";
+		break;
 	}
+	case eCollectibleType::Medium: {
+		spritePath = "Sprites/Objects/Collectible2.dds";
+		spritePickupPath = "Sprites/Objects/Collectible2Pickup.dds";
+		break;
+	}
+	case eCollectibleType::Hard: {
+		spritePath = "Sprites/Objects/Collectible1.dds";
+		spritePickupPath = "Sprites/Objects/Collectible1Pickup.dds";
+		break;
+	}
+	}
+	whiteSpritePath = "Sprites/Objects/CollectibleWhite.dds";
 
 	SpriteComponent* spriteIdle = AddComponent<SpriteComponent>();
 	spriteIdle->SetSpritePath(spritePath);
@@ -79,16 +86,23 @@ void Collectible::Init(const v2f& aPosition, eCollectibleType aType)
 	spritePickup->SetSize(v2f(16.0f, 16.0f));
 	spritePickup->Deactivate();
 
+	SpriteComponent* whiteSprite = AddComponent<SpriteComponent>();
+	whiteSprite->SetSpritePath(whiteSpritePath);
+	whiteSprite->SetSize(v2f(16.0f, 16.0f));
+	whiteSprite->Deactivate();
+
 	if (DataManager::GetInstance().GetCollectableInfo(myID).myCollectedState)
 	{
-		spriteIdle->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
-		spritePickup->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.5f));
+		spriteIdle->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.3f));
+		spritePickup->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.3f));
+		whiteSprite->SetColor(v4f(1.0f, 1.0f, 1.0f, 0.3f));
 
 		myWasCollectedBefore = true;
 	}
 
 	myAnimations[0] = Animation(false, false, false, 0, 7, 7, 0.14f, spriteIdle, 16, 16);
 	myAnimations[1] = Animation(false, true, false, 0, 8, 8, 0.09f, spritePickup, 16, 16);
+	myAnimations[2] = Animation(false, false, false, 0, 7, 7, 0.14f, whiteSprite, 16, 16);
 
 	AnimationComponent* animation = AddComponent<AnimationComponent>();
 	animation->SetSprite(spriteIdle);
@@ -127,6 +141,22 @@ void Collectible::Update(const float& aDeltaTime)
 	myTransform.myPosition.x = Utils::Lerp(myTransform.myPosition.x, myTargetPosition.x, mySpeed * aDeltaTime);
 	myTransform.myPosition.y = Utils::Lerp(myTransform.myPosition.y, myTargetPosition.y + offset, mySpeed * aDeltaTime);
 
+	if (myFlashing)
+	{
+		myFlashTime -= aDeltaTime;
+		if (GetComponent<AnimationComponent>()->GetCurrentIndex() != myFlashFrameIndex)
+		{
+			GetComponent<AnimationComponent>()->SetUpdateTime(0.14f);
+			myAnimations[2].myUpdateTime = 0.14f;
+		}
+		if (myFlashTime <= 0)
+		{
+			myAnimations[2].myUpdateTime = 0.14f;
+			myFlashFrameIndex = GetComponent<AnimationComponent>()->GetCurrentIndex();
+			GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[0], myFlashFrameIndex);
+			myFlashing = false;
+		}
+	}
 	if (myWasTurnedIn)
 	{
 		TurnIn();
@@ -137,7 +167,7 @@ void Collectible::Update(const float& aDeltaTime)
 #endif // DEBUG
 
 	GameObject::Update(aDeltaTime);
-}
+	}
 
 void Collectible::OnCollision(GameObject* aGameObject)
 {
@@ -150,6 +180,11 @@ void Collectible::OnCollision(GameObject* aGameObject)
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
 			ActivateTrailEffect();
+
+			myFlashing = true;
+			myFlashFrameIndex = GetComponent<AnimationComponent>()->GetCurrentIndex();
+			myAnimations[2].myUpdateTime = GetComponent<AnimationComponent>()->GetTimer();
+			GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2], myFlashFrameIndex);
 		}
 	}
 }

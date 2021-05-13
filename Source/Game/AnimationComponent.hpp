@@ -23,16 +23,18 @@ public:
 	void Update(Transform& aTransform, GameObject& aGameObject) override;
 
 	void SetAnimation(Animation* aAnimation);
+	void SetAnimation(Animation* aAnimation, const unsigned int aFrame);
 
 	void SetNextAnimation(Animation* aAnimation);
 
+	void SetUpdateTime(const float anUpdateTime);
+
 	void ContinueToNextAnimation();
 
+	const int GetCurrentIndex() const;
+	const float GetTimer() const;
 	bool GetIsDisplayedOnce();
 	bool GetHasBeenDisplayedOnce();
-
-	const int GetCurrentIndex();
-
 	bool GetHasEnded();
 
 private:

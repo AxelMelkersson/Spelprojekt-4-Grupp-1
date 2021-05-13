@@ -24,20 +24,20 @@
       "SpeedThreeY": 0.002
     },
     {
-      "SpeedFourX": 0.02,
-      "SpeedFourY": 0.02
+      "SpeedFourX": 0.01,
+      "SpeedFourY": 0.01
     },
     {
-      "SpeedFiveX": 0.02,
-      "SpeedFiveY": 0.02
+      "SpeedFiveX": 0.06,
+      "SpeedFiveY": 0.06
     },
     {
-      "SpeedSixX": 0.05,
-      "SpeedSixY": 0.05
+      "SpeedSixX": 0.12,
+      "SpeedSixY": 0.12
     },
     {
-      "SpeedSevenX": 0.1,
-      "SpeedSevenY": 0.1
+      "SpeedSevenX": 0.2,
+      "SpeedSevenY": 0.2
     }
   ],
   "Cloud": [
