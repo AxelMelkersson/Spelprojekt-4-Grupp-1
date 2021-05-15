@@ -62,6 +62,7 @@ private:
 	std::unique_ptr<Tga2D::AudioOut> myAudioOut;
 	std::vector<AudioComponent*> myPlatformComponents;
 	std::vector<AudioComponent*> myEnemyComponents;
+	std::vector<AudioComponent*> myGhostComponents;
 	std::vector<AudioList> myFades;
 	float myMusicVolume = 0.2;
 	float mySFXVolume = 0.5;
