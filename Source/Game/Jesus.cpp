@@ -5,8 +5,6 @@
 #include "AnimationComponent.hpp"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
-#include "AudioComponent.h"
-#include "AudioManager.h"
 
 #include "../External/Headers/CU/Utilities.h"
 
@@ -32,7 +30,7 @@ Jesus::Jesus(Scene* aLevelScene)
 
 Jesus::~Jesus()
 {
-	AudioManager::GetInstance()->Stop(AudioList::GhostAtmosphere);
+
 }
 
 void Jesus::Init(const v2f& aPosition)
@@ -68,10 +66,6 @@ void Jesus::Init(const v2f& aPosition)
 	collider->SetSize(2.0f, 6.0f);
 
 	GameObject::Init();
-
-	AudioComponent* audio = AddComponent<AudioComponent>();
-	audio->AddAudio(AudioList::GhostAtmosphere);
-	audio->SetRadius(250);
 }
 
 void Jesus::InitAnimations()
@@ -191,8 +185,6 @@ void Jesus::OnCollision(GameObject* aGameObject)
 		GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2]);
 		myEatTarget = true;
 		player->Kill();
-		AudioManager::GetInstance()->PlayAudio(AudioList::GhostAttack);
-		AudioManager::GetInstance()->PlayAudio(AudioList::GhostVoice);
 	}
 }
 

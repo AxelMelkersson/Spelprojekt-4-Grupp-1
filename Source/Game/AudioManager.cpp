@@ -215,10 +215,6 @@ void AudioManager::AddComponentToListen(AudioComponent* aComponent)
 		PlayIfAvailable(AudioList::EnemyNormalIdle);
 		myEnemyComponents.push_back(aComponent);
 		break;
-	case AudioList::GhostAtmosphere:
-		PlayIfAvailable(AudioList::GhostAtmosphere);
-		myGhostComponents.push_back(aComponent);
-		break;
 	}
 	//myComponentVolumes.Enqueue(aComponent->myVolume);
 }
@@ -240,14 +236,6 @@ void AudioManager::ComponentUpdate()
 	if (myEnemyComponents.size() > 0)
 	{
 		SetComponentVolume(myEnemyComponents[0]->myAudio, myEnemyComponents[0]->myVolume);
-	}
-	if (myGhostComponents.size() > 1)
-	{
-		std::sort(myGhostComponents.begin(), myGhostComponents.end(), CompareVolumes);
-	}
-	if (myGhostComponents.size() > 0)
-	{
-		SetComponentVolume(myGhostComponents[0]->myAudio, myGhostComponents[0]->myVolume);
 	}
 }
 
@@ -281,20 +269,6 @@ void AudioManager::RemoveomponentToListen(AudioComponent* aComponent)
 		if (myEnemyComponents.size() == 0)
 		{
 			Stop(AudioList::EnemyNormalIdle);
-		}
-		break;
-	case AudioList::GhostAtmosphere:
-		for (int i = 0; i < myGhostComponents.size(); ++i)
-		{
-			if (myGhostComponents[i] == aComponent)
-			{
-				myGhostComponents.erase(myGhostComponents.begin() + i);
-				break;
-			}
-		}
-		if (myGhostComponents.size() == 0)
-		{
-			Stop(AudioList::GhostAtmosphere);
 		}
 		break;
 	}
