@@ -48,7 +48,6 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myBashableObject = nullptr;
 
 	myHasDied = false;
-	myIsOnPlatform = false;
 
 	SetZIndex(101);
 	SetPosition({ 20.0f, 10.0f });
@@ -92,11 +91,6 @@ Player::Player(LevelScene* aLevelScene) : GameObject(aLevelScene)
 	myLedgeSoundIndex = {};
 
 	myIsInRangeOfBash = false;
-}
-
-Player::~Player()
-{
-
 }
 
 void Player::InitAnimations()
@@ -275,15 +269,8 @@ void Player::Update(const float& aDeltaTime)
 
 	AnimationState();
 
-	/*
-	if (myTransform.myPosition.y + mySize.y > myScene->GetCamera().GetBounds().y + myScene->GetCamera().GetBoundSize().y)
-	{
-		Kill();
-	}
-	*/
-
 #ifdef _DEBUG
-	ImGuiUpdate();
+	//ImGuiUpdate();
 #endif //DEBUG
 }
 void Player::UpdateCoyoteTime(const float& aDeltaTime)

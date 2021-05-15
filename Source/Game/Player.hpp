@@ -22,7 +22,6 @@ class Player : public GameObject
 {
 public:
 	Player(LevelScene* aLevelScene);
-	~Player();
 
 	void InitAnimations();
 	void InitCollider();
@@ -149,7 +148,6 @@ private:
 	bool myGrabbedLedge;
 	bool myIsLerpingToPosition;
 	bool myHasDied;
-	bool myIsOnPlatform;
 	bool myIsGliding;
 	bool myIsInRangeOfBash;
 	bool myCheckParticleLanding;
