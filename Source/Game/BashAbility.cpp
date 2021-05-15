@@ -6,12 +6,8 @@
 #include "LevelScene.h"
 #include "AudioManager.h"
 #include "PostMaster.hpp"
-#include <iostream>
 
-
-BashAbility::BashAbility(LevelScene* aLevelScene)
-	:
-	GameObject(aLevelScene)
+BashAbility::BashAbility(LevelScene* aLevelScene) : GameObject(aLevelScene)
 {
 	myDashAbilityActive = {};
 	myDashSpeed = {};
@@ -33,10 +29,6 @@ BashAbility::BashAbility(LevelScene* aLevelScene)
 	myDashShakeDuration = 0.5f;
 	myDashShakeIntensity = 0.5f;
 	myDashShakeDropOff = 0.5f;
-}
-
-BashAbility::~BashAbility()
-{
 }
 
 void BashAbility::Init()

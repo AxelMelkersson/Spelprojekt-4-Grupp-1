@@ -16,6 +16,7 @@
 
 #include "GameWorld.h"
 #include "AudioManager.h"
+#include "DataManager.h"
 #include "Random.hpp"
 
 Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsigned int aBonfireID)
@@ -273,8 +274,6 @@ const void Collectible::CheckPopUpMessages()
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0));
 	}
 }
-
-
 
 const void Collectible::ActivateTrailEffect()
 {

@@ -14,7 +14,6 @@ class BashAbility : public GameObject
 {
 public:
 	BashAbility(LevelScene* aLevelScene);
-	~BashAbility();
 
 	void Init();
 
