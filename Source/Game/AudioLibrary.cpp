@@ -65,6 +65,10 @@ AudioLibrary::AudioLibrary()
 	myAudioList.insert_or_assign(AudioList::WeakPlatform,    new AudioClip("Sounds/Effects/TemporaryPlatform.wav", false, true, 0.5f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::PlayerDeath,     new AudioClip("Sounds/Effects/death.wav",             false, true, 0.4f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::ButtonPress,     new AudioClip("Sounds/Effects/ButtonPress.wav",       false, true, 0.1f,    AudioLayer::SoundEffect));
+
+	myAudioList.insert_or_assign(AudioList::GhostAtmosphere, new AudioClip("Sounds/Effects/Ghost_Atmosphere.wav",  true, true,  0.9f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::GhostAttack,     new AudioClip("Sounds/Effects/Ghost_Attack.wav",      false, false, 0.4f, AudioLayer::SoundEffect));
+	myAudioList.insert_or_assign(AudioList::GhostVoice,      new AudioClip("Sounds/Effects/Ghost_Voice.wav",       false, false, 0.4f, AudioLayer::SoundEffect));
 																												   
 	myAudioList.insert_or_assign(AudioList::MenuAmbience,    new AudioClip("Sounds/Effects/MenuAmbience.wav",      true, true, 0.3f, AudioLayer::SoundEffect));
 	myAudioList.insert_or_assign(AudioList::Main_Menu,       new AudioClip("Sounds/Music/Main_Menu.wav",           true, true, 0.5f, AudioLayer::Music));
