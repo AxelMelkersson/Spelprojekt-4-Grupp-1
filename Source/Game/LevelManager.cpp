@@ -116,7 +116,6 @@ void LevelManager::SingleLoadScene(eScenes aScene)
 
 	AdditiveLoadScene(aScene);
 }
-
 void LevelManager::AdditiveLoadScene(eScenes aScene)
 {
 	if (!myScenes[aScene]->IsLoaded())
@@ -125,7 +124,6 @@ void LevelManager::AdditiveLoadScene(eScenes aScene)
 		myScenes[aScene]->Activate();
 	}
 }
-
 void LevelManager::UnloadScene(eScenes aScene)
 {
 	if (myScenes[aScene]->IsLoaded())
@@ -133,13 +131,11 @@ void LevelManager::UnloadScene(eScenes aScene)
 		myScenes[aScene]->Unload();
 	}
 }
-
 void LevelManager::ReloadScene(eScenes aScene)
 {
 	UnloadScene(aScene);
 	AdditiveLoadScene(aScene);
 }
-
 void LevelManager::UnloadAllScenes()
 {
 	for (int scene = 0; scene < static_cast<int>(eScenes::Count); ++scene)

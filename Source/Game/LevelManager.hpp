@@ -6,10 +6,8 @@
 
 class Scene;
 class LevelScene;
-
 class TiledLoader;
 class SpeedrunManager;
-
 class GameObject;
 
 class LevelManager : public Subscriber
@@ -23,7 +21,6 @@ public:
 		IntroLogos,
 		WinScene,
 		SpeedrunScene,
-		//PauseMenu,
 		Count
 	};
 
@@ -32,11 +29,6 @@ public:
 	void Init(Scene* aMainMenuScene, Scene* aLevelSelect, Scene* aLevelScene, Scene* anIntroLogosScene, Scene* aWinScene, Scene* aSpeedrunScene);
 
 	void Update();
-
-#ifndef _RETAIL
-	void ImGuiUpdate();
-	void ToggleImGui();
-#endif //RETAIL
 
 	void SingleLoadScene(eScenes aScene);
 	void AdditiveLoadScene(eScenes aScene);
@@ -62,20 +54,22 @@ public:
 
 	const int& GetDoorType();
 
+#ifndef _RETAIL
+	void ImGuiUpdate();
+	void ToggleImGui();
+#endif //RETAIL
+
 private:
 	std::map<eScenes, Scene*> myScenes;
 	std::shared_ptr<TiledLoader> myTiledLoader;
 	std::shared_ptr<SpeedrunManager> mySpeedrunManager;
 
 	int myLastDoorType;
-
 	int myLoadedLevel;
 
 	bool myLoadingHiddenRoom;
 	bool myLevelTransition;
-
 	bool myHasFinished;
-	//bool myIsSpeedrunMode;
 
 #ifndef _RETAIL
 	bool myImGuiIsActive;
