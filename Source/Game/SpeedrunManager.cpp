@@ -80,6 +80,11 @@ std::array<float, 10> SpeedrunManager::GetHighscores()
 	return myHighScores;
 }
 
+float SpeedrunManager::GetBestHighscore()
+{
+	return myHighScores[0];
+}
+
 std::string SpeedrunManager::GetTimeOutput(float aTime) const
 {
 	int intMin = aTime / 60;

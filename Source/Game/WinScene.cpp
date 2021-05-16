@@ -35,7 +35,20 @@ void WinScene::Load()
 		UIText* winText = new UIText(this);
 		winText->Activate();
 
-		winText->Init("Time: " + speedrunTime, "Text/Peepo.ttf", EFontSize::EFontSize_72, 0);
+		std::string text;
+		float score = speedrunManager->GetScore();
+		float bestHighscore = speedrunManager->GetBestHighscore();
+
+		if (score < bestHighscore || bestHighscore < 0.02)
+		{
+			text = "<<< New Highscore: " + speedrunTime + " >>>";
+		}
+		else
+		{
+			text = "Time: " + speedrunTime;
+		}
+
+		winText->Init(text, "Text/Peepo.ttf", EFontSize::EFontSize_72, 0);
 
 		winText->SetPosition(v2f(105.0f, 90.0f));
 	}
