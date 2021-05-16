@@ -232,3 +232,7 @@ const int& LevelManager::GetDoorType()
 {
 	return myLastDoorType;
 }
+const int LevelManager::GetLevelIndex() const
+{
+	return myLoadedLevel;
+}

@@ -5,6 +5,7 @@
 
 SpeedrunManager::SpeedrunManager() :
 	myIsSpeedrun(false),
+	myIsAlreadyInRun(false),
 	myCurrentScore(0.f)
 {
 	myIsUnlocked = DataManager::GetInstance().GetBonfireState(7);
@@ -29,16 +30,20 @@ void SpeedrunManager::SetIsSpeedrun(const bool aIsSpeedrun)
 	if (myIsSpeedrun == false)
 	{
 		myCurrentScore = 0;
+		myIsAlreadyInRun = false;
 	}
 }
 bool SpeedrunManager::GetIsSpeedrun()
 {
 	return myIsSpeedrun;
 }
-
 bool SpeedrunManager::GetIsUnlocked()
 {
 	return myIsUnlocked;
+}
+float SpeedrunManager::GetScore()
+{
+	return myCurrentScore;
 }
 
 void SpeedrunManager::Unlock()
@@ -46,10 +51,6 @@ void SpeedrunManager::Unlock()
 	myIsUnlocked = true;
 }
 
-float SpeedrunManager::GetScore()
-{
-	return myCurrentScore;
-}
 void SpeedrunManager::SetScore(const float aScore)
 {
 	myCurrentScore = aScore;
@@ -108,4 +109,11 @@ std::string SpeedrunManager::GetTimeOutput(float aTime) const
 
 	return printTime;
 }
-
+const bool SpeedrunManager::GetIsAlreadyInRun() const
+{
+	return myIsAlreadyInRun;
+}
+void SpeedrunManager::SetIsAlreadyInRun(const bool aState)
+{
+	myIsAlreadyInRun = aState;
+}

@@ -19,10 +19,13 @@ public:
 	std::array<float, 10> GetHighscores();
 
 	std::string GetTimeOutput(float aTime) const;
+	const bool GetIsAlreadyInRun() const;
+	void SetIsAlreadyInRun(const bool aState);
 
 private:
 	bool myIsSpeedrun;
 	bool myIsUnlocked;
+	bool myIsAlreadyInRun;
 	float myCurrentScore;
 	std::array<float, 10> myHighScores;
 };

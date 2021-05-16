@@ -30,11 +30,6 @@ LevelSelect::LevelSelect()
 	myInput = nullptr;
 }
 
-LevelSelect::~LevelSelect()
-{
-
-}
-
 void LevelSelect::Load()
 {
 	myLevelButtons.clear();

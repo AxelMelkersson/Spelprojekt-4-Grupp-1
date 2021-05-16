@@ -10,7 +10,6 @@ class LevelSelect : public Scene
 {
 public:
 	LevelSelect();
-	~LevelSelect();
 
 	void Load() override;
 

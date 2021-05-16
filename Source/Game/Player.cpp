@@ -25,6 +25,7 @@
 #include "DataManager.h"
 #include "AudioManager.h"
 #include "LevelManager.hpp"
+#include "SpeedrunManager.h"
 
 #include "PostMaster.hpp"
 
@@ -421,6 +422,17 @@ void Player::SetNextAnimation(const int& aAnimationIndex)
 }
 void Player::SetSpawnPosition(const v2f& aSpawnPosition)
 {
+	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun())
+	{
+		int end = 0;
+	}
+	if (CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0)
+	{
+		//mySpawnPosition = { 0.5f, 0.5f };
+		int end = 0;
+	}
+
+
 	mySpawnPosition = aSpawnPosition;
 }
 

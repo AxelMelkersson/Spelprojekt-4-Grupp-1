@@ -28,9 +28,23 @@
 
 typedef rapidjson::Value::ConstValueIterator iterator;
 
-void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, const bool aIsHiddenRoom)
+void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, bool aIsHiddenRoom)
 {
+	if (myLoadsFromLevelSelect)
+	{
+		aIsHiddenRoom = false;
+	}
+	if (CGameWorld::GetInstance()->GetLevelManager().GetDoorType() != 2)
+	{
+		aIsHiddenRoom = false;
+	}
+	//if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun() &&
+	//	(CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0))
+	//{
+	//	aIsHiddenRoom = false;
+	//}
 	const rapidjson::Document& levelDoc = DataManager::GetInstance().GetLevel(aLevelIndex, aIsHiddenRoom);
+
 	std::vector<LoadData> loadData;
 	std::vector<HiddenArea*> hiddenRoomsData;
 
@@ -80,7 +94,7 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, cons
 							{
 								data.myWaypoints = (*property)["value"].GetString();
 							}
-							
+
 							if (std::string((*property)["name"].GetString()).compare("Speed") == 0)
 							{
 								data.mySpeed = (*property)["value"].GetFloat();
@@ -173,7 +187,7 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, cons
 				loadData.clear();
 			}
 			else
-			{					 
+			{
 				int z;
 				std::string layerName = (*layer)["name"].GetString();
 
@@ -183,7 +197,7 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, cons
 				}
 				else if (layerName == "BG2")
 				{
-				 z = myBG2z;
+					z = myBG2z;
 				}
 				else if (layerName == "FG1")
 				{
@@ -246,7 +260,7 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 	for (int i = 0; i < someData.size(); ++i)
 	{
 		LevelDoor* door = new LevelDoor(aScene);
-		
+
 		bool doorFound = false;
 
 		v2f doorOffset = v2f(0.0f, 0.0f);
@@ -275,7 +289,17 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 			}
 		}
 
-		if (doorFound)
+		if ((
+			CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun() &&
+			CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0) &&
+			!CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun())
+		{
+			aPlayer->SpawnAnimation();
+			aPlayer->SetSpawnPosition({ 160.0f, 152.0f });
+			aPlayer->SetPosition({ 160.0f, 152.0f });
+			CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsAlreadyInRun(true);
+		}
+		else if (doorFound)
 		{
 			aPlayer->SetSpawnPosition(someData[i].myPosition + doorOffset);
 			aPlayer->SetPosition(someData[i].myPosition + doorOffset);

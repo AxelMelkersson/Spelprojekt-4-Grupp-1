@@ -34,7 +34,7 @@ struct TileLayerData
 class TiledLoader
 {
 public:
-	void Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, const bool aIsHiddenRoom);
+	void Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, bool aIsHiddenRoom);
 
 	void UsedLevelSelect();
 	void Continued();

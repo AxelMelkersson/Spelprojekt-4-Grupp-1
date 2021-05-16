@@ -54,6 +54,8 @@ public:
 
 	const int& GetDoorType();
 
+	const int GetLevelIndex() const;
+
 #ifndef _RETAIL
 	void ImGuiUpdate();
 	void ToggleImGui();
