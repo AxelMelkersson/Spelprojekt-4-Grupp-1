@@ -12,14 +12,7 @@
 
 #include "PostMaster.hpp"
 
-Platform::Platform(Scene* aScene)
-	:
-	GameObject(aScene)
-{
-
-}
-
-Platform::~Platform()
+Platform::Platform(Scene* aScene) : GameObject(aScene)
 {
 
 }
@@ -64,7 +57,7 @@ void Platform::OnCollision(GameObject* aGameObject)
 	{
 		player->PlayFootSteps(myMaterial);
 		player->SetPlatformVelocity(v2f(0.0f, 0.0f));
-		if (player->GetHasLanded())
+		if (player->GetHasLanded() && (player->GetPositionY() <= myTransform.myPosition.y))
 		{
 			PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PlayerSafeLanded, 0));
 		}

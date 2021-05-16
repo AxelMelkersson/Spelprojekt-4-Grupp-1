@@ -22,7 +22,6 @@ Scene::Scene()
 {
 	ourScenes.push_back(this);
 }
-
 Scene::~Scene()
 {
 	for (size_t index = 0U; index < ourScenes.size(); ++index)

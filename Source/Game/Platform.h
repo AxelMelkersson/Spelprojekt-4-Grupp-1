@@ -8,16 +8,7 @@ class Scene;
 class Platform : public GameObject
 {
 public:
-	enum class ePlatformType
-	{
-		Static,
-		Moving,
-		Unstable,
-		Destructible
-	};
-
 	Platform(Scene* aScene);
-	~Platform();
 
 	virtual void Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& aPosition, const bool& aIsOneway);
 	virtual void Init(const v2f& aSize, const v2f& aSpriteSize, const v2f& aPosition, const bool& aIsOneway, const int& aMaterialIndex); // Temp
