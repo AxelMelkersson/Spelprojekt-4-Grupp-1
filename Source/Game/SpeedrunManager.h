@@ -17,6 +17,7 @@ public:
 	void ReportScoreToHighscores();
 
 	std::array<float, 10> GetHighscores();
+	float GetBestHighscore();
 
 	std::string GetTimeOutput(float aTime) const;
 	const bool GetIsAlreadyInRun() const;
