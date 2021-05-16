@@ -16,6 +16,7 @@
 
 #include "GameWorld.h"
 #include "AudioManager.h"
+#include "DataManager.h"
 #include "Random.hpp"
 
 Collectible::Collectible(Scene* aLevelScene, const unsigned int anID, const unsigned int aBonfireID)
@@ -167,16 +168,15 @@ void Collectible::Update(const float& aDeltaTime)
 #endif // DEBUG
 
 	GameObject::Update(aDeltaTime);
-	}
+}
 
 void Collectible::OnCollision(GameObject* aGameObject)
 {
-	if (!myWasCollected && !myWasTurnedIn)
+	Player* player = dynamic_cast<Player*>(aGameObject);
+	if (player)
 	{
-		Player* player = dynamic_cast<Player*>(aGameObject);
-		if (player)
+		if (!myWasCollected && !myWasTurnedIn)
 		{
-			myWasCollected = true;
 			myTarget = aGameObject;
 			AudioManager::GetInstance()->PlayAudio(AudioList::CollectableV1);
 			ActivateTrailEffect();
@@ -186,6 +186,7 @@ void Collectible::OnCollision(GameObject* aGameObject)
 			myAnimations[2].myUpdateTime = GetComponent<AnimationComponent>()->GetTimer();
 			GetComponent<AnimationComponent>()->SetAnimation(&myAnimations[2], myFlashFrameIndex);
 		}
+		myWasCollected = true;
 	}
 }
 void Collectible::Reset()
@@ -225,7 +226,7 @@ void Collectible::Notify(const Message& aMessage)
 {
 	if (aMessage.myMessageType == eMessageType::PlayerSafeLanded)
 	{
-		if (myWasCollected)
+		if (myWasCollected && !myFlashing)
 		{
 			TurnIn();
 		}
@@ -273,8 +274,6 @@ const void Collectible::CheckPopUpMessages()
 		PostMaster::GetInstance().ReceiveMessage(Message(eMessageType::PopUpMessageH, 0));
 	}
 }
-
-
 
 const void Collectible::ActivateTrailEffect()
 {

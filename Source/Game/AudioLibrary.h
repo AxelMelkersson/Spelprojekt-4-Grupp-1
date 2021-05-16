@@ -19,7 +19,7 @@ enum class AudioList
 
 	Main_Menu, Forest_Theme, Village_Theme, Castle_Theme, Finale, Wind, Crows, Castle, HiddenRoom1,
 
-	CollectibleDown, CollectibleGone, HoverActivate, EnemyKill, SuperBash, IntroMusic
+	CollectibleDown, CollectibleGone, HoverActivate, EnemyKill, SuperBash, IntroMusic, GhostAttack, GhostAtmosphere, GhostVoice
 };
 
 enum class AudioLayer
