@@ -146,7 +146,6 @@ void SpeedrunScene::Update(const float& aDeltaTime)
 
 }
 
-
 void SpeedrunScene::CheckButtonPress()
 {
 	if (myIsInMenu)
@@ -166,10 +165,8 @@ void SpeedrunScene::CheckButtonPress()
 				myMovingIndex = 0;
 		}
 
-
 		if (myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross))
 		{
-
 			if (myMovingIndex == static_cast<int>(eSpeedRunButton::StartGame))
 			{
 				AudioManager::GetInstance()->PlayAudio(AudioList::MenuStart);
@@ -177,7 +174,6 @@ void SpeedrunScene::CheckButtonPress()
 				CGameWorld::GetInstance()->GetLevelManager().SetLevelIndex(0);
 				CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::LevelScene);
 				myIsInMenu = false;
-
 			}
 			else if (myMovingIndex == static_cast<int>(eSpeedRunButton::MainMenu))
 			{
@@ -185,8 +181,6 @@ void SpeedrunScene::CheckButtonPress()
 				CGameWorld::GetInstance()->GetLevelManager().SingleLoadScene(LevelManager::eScenes::MainMenu);
 				myIsInMenu = false;
 			}
-
-
 		}
 	}
 }

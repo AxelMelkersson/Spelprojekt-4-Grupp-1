@@ -38,11 +38,12 @@ void TiledLoader::Load(Scene* aScene, int aLevelIndex, GameObject* aPlayer, bool
 	{
 		aIsHiddenRoom = false;
 	}
-	//if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun() &&
-	//	(CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0))
-	//{
-	//	aIsHiddenRoom = false;
-	//}
+	if (CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun() &&
+		(!CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun()) &&
+		(CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0))
+	{
+		aIsHiddenRoom = false;
+	}
 	const rapidjson::Document& levelDoc = DataManager::GetInstance().GetLevel(aLevelIndex, aIsHiddenRoom);
 
 	std::vector<LoadData> loadData;
@@ -289,17 +290,7 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 			}
 		}
 
-		if ((
-			CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun() &&
-			CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0) &&
-			!CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun())
-		{
-			aPlayer->SpawnAnimation();
-			aPlayer->SetSpawnPosition({ 160.0f, 152.0f });
-			aPlayer->SetPosition({ 160.0f, 152.0f });
-			CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsAlreadyInRun(true);
-		}
-		else if (doorFound)
+		if (doorFound)
 		{
 			aPlayer->SetSpawnPosition(someData[i].myPosition + doorOffset);
 			aPlayer->SetPosition(someData[i].myPosition + doorOffset);
@@ -307,6 +298,17 @@ void TiledLoader::ParseDoors(const std::vector<LoadData> someData, Scene* aScene
 
 		door->Init(static_cast<LevelDoor::eDoorType>(someData[i].myType), someData[i].mySize);
 		door->SetPosition(someData[i].myPosition);
+	}
+
+	if ((
+		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsSpeedrun() &&
+		CGameWorld::GetInstance()->GetLevelManager().GetLevelIndex() == 0) &&
+		!CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->GetIsAlreadyInRun())
+	{
+		aPlayer->SpawnAnimation();
+		aPlayer->SetSpawnPosition({ 160.0f, 152.0f });
+		aPlayer->SetPosition({ 160.0f, 152.0f });
+		CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager()->SetIsAlreadyInRun(true);
 	}
 }
 
