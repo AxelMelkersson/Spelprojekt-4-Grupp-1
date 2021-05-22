@@ -1,6 +1,7 @@
 // Basics
 #include "stdafx.h"
 #include "GameWorld.h"
+#include "tga2d/sprite/sprite.h"
 
 // Core
 #include "Game.h"
@@ -50,8 +51,6 @@ void CGameWorld::Init()
 	AudioManager::GetInstance()->Init();
 	myLevelManager.Init(&myMainMenuScene, &myLevelSelect, &myLevelScene, &myIntroLogosScene, &myWinScene, &mySpeedrunScene);
 	myLevelManager.SingleLoadScene(LevelManager::eScenes::IntroLogos);
-
-	//myLevelManager.SingleLoadScene(LevelManager::eScenes::MainMenu);
 }
 
 void CGameWorld::Update()

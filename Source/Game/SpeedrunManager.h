@@ -29,5 +29,5 @@ private:
 	bool myIsAlreadyInRun;
 	float myCurrentScore;
 	std::array<float, 10> myHighScores;
-};
 
+};
