@@ -39,7 +39,7 @@ void WinScene::Load()
 
 		if (score < bestHighscore || bestHighscore < 0.02)
 		{
-			text = "<<< New Highscore: " + speedrunTime + " >>>";
+			text = "New Highscore: " + speedrunTime;
 		}
 		else
 		{
@@ -50,11 +50,11 @@ void WinScene::Load()
 
 		if (score < bestHighscore || bestHighscore < 0.02)
 		{
-			winText->SetPosition(v2f(38.0f, 90.0f));
+			winText->SetPosition({ 70.0f, 100.0f });
 		}
 		else
 		{
-			winText->SetPosition(v2f(106.0f, 90.0f));
+			winText->SetPosition({ 100.0f, 100.0f });
 		}
 		speedrunManager->ReportScoreToHighscores();
 	}

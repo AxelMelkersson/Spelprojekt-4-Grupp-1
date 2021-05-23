@@ -96,6 +96,11 @@ void TextComponent::SetRelativePositionY(const float aY)
 	myPixelPosition.y = aY;
 }
 
+void TextComponent::SetNOTRelativePosition(const float anX, const float aY)
+{
+	myText->SetPosition({ anX, aY });
+}
+
 void TextComponent::SetFontSize(EFontSize aFontSize)
 {
 	if (myText == nullptr) return;
@@ -105,6 +110,11 @@ void TextComponent::SetFontSize(EFontSize aFontSize)
 float TextComponent::GetWidth()
 {
 	return myText->GetWidth();
+}
+
+float TextComponent::GetHeight()
+{
+	return myText->GetHeight();
 }
 
 void TextComponent::UpdateTransform(Transform& aTransform, GameObject& aGameObject)

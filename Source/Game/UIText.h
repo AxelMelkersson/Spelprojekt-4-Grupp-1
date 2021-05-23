@@ -16,11 +16,14 @@ public:
 	void Init(const std::string aTextString, const char* aPathAndName = "Text/alagard.ttf", EFontSize aFontSize = EFontSize::EFontSize_72, unsigned char aBorderSize = 0);
 
 	void SetPosition(const v2f aPosition);
+	void SetTga2dPosition(const v2f aPosition);
 
 	const v2f GetPosition();
 
 	void SetText(const std::string& aTextString);
 
+	float GetWidth();
+	float GetHeight();
 
 private:
 	TextComponent* myText;

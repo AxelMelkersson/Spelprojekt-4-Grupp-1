@@ -25,6 +25,11 @@ void UIText::SetPosition(const v2f aPosition)
 	myText->SetRelativePosition(aPosition.x, aPosition.y);
 }
 
+void UIText::SetTga2dPosition(const v2f aPosition)
+{
+	myText->SetNOTRelativePosition(aPosition.x, aPosition.y);
+}
+
 const v2f UIText::GetPosition()
 {
 	const v2f position = v2f(myText->GetPosition().x, myText->GetPosition().y);
@@ -35,4 +40,14 @@ void UIText::SetText(const std::string& aTextString)
 {
 	if (myText == nullptr)  return;
 	myText->SetText(aTextString);
+}
+
+float UIText::GetWidth()
+{
+	return myText->GetWidth();
+}
+
+float UIText::GetHeight()
+{
+	return myText->GetHeight();
 }

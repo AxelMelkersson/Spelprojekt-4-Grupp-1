@@ -24,11 +24,13 @@ public:
     void SetRelativePosition(const float anX, const float aY);
     void SetRelativePositionX(const float anX);
     void SetRelativePositionY(const float aY);
+    void SetNOTRelativePosition(const float anX, const float aY);
     void SetFontSize(EFontSize aFontSize);
 
     const Tga2D::Vector2f& GetPosition();
 
     float GetWidth();
+    float GetHeight();
 
     const bool& IsActive() const;
     TextComponent& Activate();
