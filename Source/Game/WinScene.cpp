@@ -30,8 +30,6 @@ void WinScene::Load()
 		const std::shared_ptr<SpeedrunManager> speedrunManager = CGameWorld::GetInstance()->GetLevelManager().GetSpeedrunManager();
 		const std::string speedrunTime = speedrunManager->GetTimeOutput(speedrunManager->GetScore());
 
-		speedrunManager->ReportScoreToHighscores();
-
 		UIText* winText = new UIText(this);
 		winText->Activate();
 
@@ -50,7 +48,15 @@ void WinScene::Load()
 
 		winText->Init(text, "Text/Peepo.ttf", EFontSize::EFontSize_72, 0);
 
-		winText->SetPosition(v2f(105.0f, 90.0f));
+		if (score < bestHighscore || bestHighscore < 0.02)
+		{
+			winText->SetPosition(v2f(38.0f, 90.0f));
+		}
+		else
+		{
+			winText->SetPosition(v2f(106.0f, 90.0f));
+		}
+		speedrunManager->ReportScoreToHighscores();
 	}
 	else
 	{
