@@ -19,7 +19,7 @@ class OptionsMenu
 public:
 	enum class eOptionsMenu
 	{
-		ScreenSize,
+		//ScreenSize,
 		Sound,
 		Credits,
 		Tutorial,
@@ -62,11 +62,11 @@ private:
 	UIObject* myVFXHighlight;
 	UIObject* myBGDot;
 	UIObject* myVFXDot;
-	UIObject* myResolutions;
-	UIObject* my720pHgh;
-	UIObject* my1080pHgh;
-	UIObject* my4KHgh;
-	UIObject* myScreenSizeDot;
+	//UIObject* myResolutions;
+	//UIObject* my720pHgh;
+	//UIObject* my1080pHgh;
+	//UIObject* my4KHgh;
+	//UIObject* myScreenSizeDot;
 	UIButton* myYesBtn;
 	UIButton* myNoBtn;
 
@@ -80,13 +80,13 @@ private:
 	ResetGameMenu* myResetGame;
 
 	UIButton* myTutorialsBtn;
-	UIButton* myScreenBtn;
+	//UIButton* myScreenBtn;
 	UIButton* mySoundBtn;
 	UIButton* myCreditsBtn;
 	UIButton* myBackBtn;
 	UIButton* myResetBtn;
 
-	std::vector<UIObject*> myResolutionObj;
+	//std::vector<UIObject*> myResolutionObj;
 	std::vector<UIObject*> mySoundObjects;
 	std::vector<UIButton*> myButtons;
 	std::vector<UIButton*> myResetObjects;
@@ -95,13 +95,13 @@ private:
 
 	int myMovingIndex;
 	int mySoundMovingIndex;
-	int myScreenMovingIndex;
+	//int myScreenMovingIndex;
 	int myResetMovingIndex;
 
 	bool myMenuAcitve;
 	bool mySoundSettingsActive = false;
 	bool myResetGameActive = false;
-	bool myScreenSettingsActive = false;
+	//bool myScreenSettingsActive = false;
 	bool myCreditsActive = false;
 	bool myTutorialActtive = false;
 	bool mySubMenuActive = false;

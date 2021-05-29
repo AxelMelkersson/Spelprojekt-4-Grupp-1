@@ -22,7 +22,7 @@ OptionsMenu::OptionsMenu(Scene* aLevelScene) : myCamera(aLevelScene->GetCamera()
 
 	myMovingIndex = 0;
 	mySoundMovingIndex = 0;
-	myScreenMovingIndex = 0;
+	//myScreenMovingIndex = 0;
 	myResetMovingIndex = 1;
 
 	myMusicVol = 0.0f;
@@ -64,7 +64,7 @@ void OptionsMenu::Init()
 		myNoBtn = new UIButton(myScene);
 	}
 
-	myScreenBtn = new UIButton(myScene);
+	//myScreenBtn = new UIButton(myScene);
 
 	mySoundSettings = new UIObject(myScene);
 	myBGHighlight = new UIObject(myScene);
@@ -75,25 +75,25 @@ void OptionsMenu::Init()
 	myTutorial = new TutorialMenu(myScene);
 	myCreditsMenu = new CreditsMenu(myScene);
 
-	myResolutions = new UIObject(myScene);
-	my720pHgh = new UIObject(myScene);
-	my1080pHgh = new UIObject(myScene);
-	my4KHgh = new UIObject(myScene);
-	myScreenSizeDot = new UIObject(myScene);
+	//myResolutions = new UIObject(myScene);
+	//my720pHgh = new UIObject(myScene);
+	//my1080pHgh = new UIObject(myScene);
+	//my4KHgh = new UIObject(myScene);
+	//myScreenSizeDot = new UIObject(myScene);
 
 	v2f backgroundPos = { 8.f, 8.f };
 	v2f titlePos = { 140.f, 35.f };
 	v2f barPos = { 30.0f, 60.0f };
-	v2f screenPos = { 140.f, 70.f };
-	v2f soundPos = { 140.f, 90.f };
-	v2f creditsPos = { 140.f, 110.f };
-	v2f tutorialPos = { 140.f, 130.f };
-	v2f backPos = { 140.f, 150.f };
+	//v2f screenPos = { 140.f, 70.f };
+	v2f soundPos = { 140.f, 80.f };
+	v2f creditsPos = { 140.f, 100.f };
+	v2f tutorialPos = { 140.f, 120.f };
+	v2f backPos = { 140.f, 140.f };
 	v2f resetPos = { 30.f, 160.f };
-	v2f soundSettingPos = { 215.f, 90.f };
-	v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.5f };
-	v2f SFXDot = { 215.f + (mySFXVol * 74.f), 114.5f };
-	v2f resolutionPos = { 215, 73.f };
+	v2f soundSettingPos = { 215.f, 80.f };
+	v2f bgDot = { 215.f + (myMusicVol * 74.f), 87.5f };
+	v2f SFXDot = { 215.f + (mySFXVol * 74.f), 104.5f };
+	//v2f resolutionPos = { 215, 73.f };
 	v2f creditScreenPos = { 120.f, 50.f };
 
 	//Misc
@@ -103,7 +103,7 @@ void OptionsMenu::Init()
 
 	//Buttons
 	myFireHighlight->InitAnimation("Sprites/UI/pauseMenu/UI_PauseMenu_Flame_16x16px.dds", { 16.0f, 16.0f }, 8, 8, { 200.0f, 70.0f }, 202);
-	myScreenBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_66x16px_Unmarked.dds", { 66.f, 16.f }, screenPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_66x16px_Marked.dds", 66);
+	//myScreenBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_66x16px_Unmarked.dds", { 66.f, 16.f }, screenPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_66x16px_Marked.dds", 66);
 	mySoundBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Unmarked.dds", { 36.0f, 16.0f }, soundPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Sound_36x16px_Marked.dds", 36);
 	myCreditsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Unmarked.dds", { 45.f, 16.f }, creditsPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Credits_45x10px_Marked.dds", 45);
 	myTutorialsBtn->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Unmarked.dds", { 48.f, 16.f }, tutorialPos, "Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Tutorials_48x10px_Marked.dds", 48);
@@ -148,33 +148,33 @@ void OptionsMenu::Init()
 
 
 	//Screen
-	myResolutions->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_All_73x7px_Unmarked.dds", { 128.0f, 8.0f }, resolutionPos, 202);
-	my720pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_720p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
-	my1080pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_1080p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
-	my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
-	myScreenSizeDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_73x7px_Marked.dds", { 8.f, 8.f }, resolutionPos, 204);
+	//myResolutions->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_All_73x7px_Unmarked.dds", { 128.0f, 8.0f }, resolutionPos, 202);
+	//my720pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_720p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
+	//my1080pHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_1080p_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
+	//my4KHgh->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_4k_73x7pxMarked.dds", { 128.0f, 8.0f }, resolutionPos, 203);
+	//myScreenSizeDot->Init("Sprites/UI/optionsMenu/UI_OptionsMenu_Text_Screensize_Resolutions_73x7px_Marked.dds", { 8.f, 8.f }, resolutionPos, 204);
 
-	my720pHgh->UpdateUIObjects(0);
-	my1080pHgh->UpdateUIObjects(0);
-	my4KHgh->UpdateUIObjects(0);
+	//my720pHgh->UpdateUIObjects(0);
+	//my1080pHgh->UpdateUIObjects(0);
+	//my4KHgh->UpdateUIObjects(0);
 
-	if (CGameWorld::GetInstance()->Game()->GetZoomY() > 720)
-	{
-		myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
-		myScreenMovingIndex = 1;
-	}
-	else if (CGameWorld::GetInstance()->Game()->GetZoomY() > 1080)
-	{
-		myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
-		myScreenMovingIndex = 2;
-	}
-	else
-	{
-		myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
-		myScreenMovingIndex = 0;
-	}
+	//if (CGameWorld::GetInstance()->Game()->GetZoomY() > 720)
+	//{
+	//	myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+	//	myScreenMovingIndex = 1;
+	//}
+	//else if (CGameWorld::GetInstance()->Game()->GetZoomY() > 1080)
+	//{
+	//	myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+	//	myScreenMovingIndex = 2;
+	//}
+	//else
+	//{
+	//	myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+	//	myScreenMovingIndex = 0;
+	//}
 
-	myButtons.push_back(myScreenBtn);
+	//myButtons.push_back(myScreenBtn);
 	myButtons.push_back(mySoundBtn);
 	myButtons.push_back(myCreditsBtn);
 	myButtons.push_back(myTutorialsBtn);
@@ -188,9 +188,9 @@ void OptionsMenu::Init()
 	mySoundObjects.push_back(myBGHighlight);
 	mySoundObjects.push_back(myVFXHighlight);
 
-	myResolutionObj.push_back(my720pHgh);
-	myResolutionObj.push_back(my1080pHgh);
-	myResolutionObj.push_back(my4KHgh);
+	//myResolutionObj.push_back(my720pHgh);
+	//myResolutionObj.push_back(my1080pHgh);
+	//myResolutionObj.push_back(my4KHgh);
 }
 void OptionsMenu::Update(const float& aDeltaTime)
 {
@@ -276,7 +276,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 	bool entered = myInput->GetInput()->GetKeyJustDown(Keys::ENTERKey) || myInput->GetController()->IsButtonPressed(Controller::Button::Cross);
 
-	if (entered && myScreenSettingsActive == false && myResetGameActive == false)
+	if (entered && /*myScreenSettingsActive == false &&*/ myResetGameActive == false)
 	{
 		switch (static_cast<eOptionsMenu>(myMovingIndex))
 		{
@@ -313,19 +313,19 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 			break;
 		}
-		case eOptionsMenu::ScreenSize: {
-			if (!myScreenSettingsActive)
-			{
-				AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
-				myScreenSettingsActive = true;
-			}
-			else
-			{
-				AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
-				myScreenSettingsActive = false;
-			}
-			break;
-		}
+		//case eOptionsMenu::ScreenSize: {
+		//	if (!myScreenSettingsActive)
+		//	{
+		//		AudioManager::GetInstance()->PlayAudio(AudioList::MenuSelect);
+		//		myScreenSettingsActive = true;
+		//	}
+		//	else
+		//	{
+		//		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+		//		myScreenSettingsActive = false;
+		//	}
+		//	break;
+		//}
 		case eOptionsMenu::Credits: {
 			if (!myCreditsActive)
 			{
@@ -377,38 +377,38 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		}
 	}
-	else if (myScreenSettingsActive == true && entered)
-	{
-		AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
-		switch (myScreenMovingIndex)
-		{
-		case 0: {
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() - myCamera.GetPosition().x);
-			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
-			break;
-		}
-		case 1: {
-			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f - myCamera.GetPosition().x);
-			CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
-			break;
-		}
-		case 2: {
-			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f - myCamera.GetPosition().x);
-			CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
-			break;
-		}
-		default: {
-			assert((false) && "myScreenMovingIndex in OptionsMenu::CheckIndexPress does not correlate to any option.");
-			break;
-		}
-		}
-		myScreenSettingsActive = false;
-
-		for (int i = 0; i < myResolutionObj.size(); i++)
-		{
-			myResolutionObj[i]->SetActive(false);
-		}
-	}
+	//else if (myScreenSettingsActive == true && entered)
+	//{
+	//	AudioManager::GetInstance()->PlayAudio(AudioList::MenuBack);
+	//	switch (myScreenMovingIndex)
+	//	{
+	//	case 0: {
+	//		myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX() - myCamera.GetPosition().x);
+	//		CGameWorld::GetInstance()->Game()->UpdateWindowSize(1280, 720);
+	//		break;
+	//	}
+	//	case 1: {
+	//		myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.f - myCamera.GetPosition().x);
+	//		CGameWorld::GetInstance()->Game()->UpdateWindowSize(1920, 1080);
+	//		break;
+	//	}
+	//	case 2: {
+	//		myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.f - myCamera.GetPosition().x);
+	//		CGameWorld::GetInstance()->Game()->UpdateWindowSize(3840, 2160);
+	//		break;
+	//	}
+	//	default: {
+	//		assert((false) && "myScreenMovingIndex in OptionsMenu::CheckIndexPress does not correlate to any option.");
+	//		break;
+	//	}
+	//	}
+	//	myScreenSettingsActive = false;
+	//
+	//	for (int i = 0; i < myResolutionObj.size(); i++)
+	//	{
+	//		myResolutionObj[i]->SetActive(false);
+	//	}
+	//}
 	else if (myResetGameActive == true && entered)
 	{
 		switch (myResetMovingIndex)
@@ -436,7 +436,6 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 	}
 
-
 	if (mySoundSettingsActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
@@ -456,8 +455,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 
 		if (myInput->GetInput()->GetKeyDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonHoldDown(Controller::Button::DPadRight))
 		{
-			v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.5f };
-			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 114.5f };
+			v2f bgDot = { 215.f + (myMusicVol * 74.f), 87.5f };
+			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 104.5f };
 
 			//AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol < 1.0f)
@@ -475,8 +474,8 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 		}
 		else if (myInput->GetInput()->GetKeyDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonHoldDown(Controller::Button::DPadLeft))
 		{
-			v2f bgDot = { 215.f + (myMusicVol * 74.f), 97.5f };
-			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 114.5f };
+			v2f bgDot = { 215.f + (myMusicVol * 74.f), 87.5f };
+			v2f SFXDot = { 215.f + (mySFXVol * 74.f), 104.5f };
 
 			//AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
 			if (mySoundMovingIndex == 0 && myMusicVol > 0.0f)
@@ -493,24 +492,23 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 			}
 		}
 	}
-
-	else if (myScreenSettingsActive)
-	{
-		if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
-		{
-			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
-			myScreenMovingIndex--;
-			if (myScreenMovingIndex < 0)
-				myScreenMovingIndex = myResolutionObj.size() - 1;
-		}
-		else if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
-		{
-			AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
-			myScreenMovingIndex++;
-			if (myScreenMovingIndex > myResolutionObj.size() - 1)
-				myScreenMovingIndex = 0;
-		}
-	}
+	//else if (myScreenSettingsActive)
+	//{
+	//	if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
+	//	{
+	//		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
+	//		myScreenMovingIndex--;
+	//		if (myScreenMovingIndex < 0)
+	//			myScreenMovingIndex = myResolutionObj.size() - 1;
+	//	}
+	//	else if (myInput->GetInput()->GetKeyJustDown(Keys::RIGHTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadRight))
+	//	{
+	//		AudioManager::GetInstance()->PlayAudio(AudioList::MenuMove);
+	//		myScreenMovingIndex++;
+	//		if (myScreenMovingIndex > myResolutionObj.size() - 1)
+	//			myScreenMovingIndex = 0;
+	//	}
+	//}
 	else if (myResetGameActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::LEFTARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadLeft))
@@ -528,7 +526,7 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myResetMovingIndex = 0;
 		}
 	}
-	else if (!mySoundSettingsActive && !myScreenSettingsActive && !myTutorialActtive && !myCreditsActive && !myResetGameActive)
+	else if (!mySoundSettingsActive && /*!myScreenSettingsActive &&*/ !myTutorialActtive && !myCreditsActive && !myResetGameActive)
 	{
 		if (myInput->GetInput()->GetKeyJustDown(Keys::UPARROWKey) || myInput->GetController()->IsButtonPressed(Controller::Button::DPadUp))
 		{
@@ -545,7 +543,6 @@ void OptionsMenu::CheckIndexPress(const float& aDeltaTime)
 				myMovingIndex = 0;
 		}
 	}
-
 }
 void OptionsMenu::ActivateMenu()
 {
@@ -564,8 +561,8 @@ void OptionsMenu::ActivateMenu()
 	mySoundSettings->SetActive(true);
 	myBGDot->SetActive(true);
 	myVFXDot->SetActive(true);
-	myResolutions->SetActive(true);
-	myScreenSizeDot->SetActive(true);
+	//myResolutions->SetActive(true);
+	//myScreenSizeDot->SetActive(true);
 }
 void OptionsMenu::DeactivateMenu()
 {
@@ -575,8 +572,8 @@ void OptionsMenu::DeactivateMenu()
 	for (auto objects : mySoundObjects)
 		objects->SetActive(false);
 
-	for (auto res : myResolutionObj)
-		res->SetActive(false);
+	//for (auto res : myResolutionObj)
+	//	res->SetActive(false);
 
 	for (auto reset : myResetObjects)
 		reset->SetActive(false);
@@ -588,8 +585,8 @@ void OptionsMenu::DeactivateMenu()
 	mySoundSettings->SetActive(false);
 	myBGDot->SetActive(false);
 	myVFXDot->SetActive(false);
-	myResolutions->SetActive(false);
-	myScreenSizeDot->SetActive(false);
+	//myResolutions->SetActive(false);
+	//myScreenSizeDot->SetActive(false);
 	myFireHighlight->SetActive(false);
 }
 void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
@@ -601,27 +598,27 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	myBGDot->UpdateUIObjects(aDeltaTime);
 	myVFXDot->UpdateUIObjects(aDeltaTime);
 
-	myResolutions->UpdateUIObjects(aDeltaTime);
-	myScreenSizeDot->UpdateUIObjects(aDeltaTime);
+	//myResolutions->UpdateUIObjects(aDeltaTime);
+	//myScreenSizeDot->UpdateUIObjects(aDeltaTime);
 
 	if (myIsOpenedFromPause)
 	{
-		my720pHgh->UpdateUIObjects(0);
-		my1080pHgh->UpdateUIObjects(0);
-		my4KHgh->UpdateUIObjects(0);
+		//my720pHgh->UpdateUIObjects(0);
+		//my1080pHgh->UpdateUIObjects(0);
+		//my4KHgh->UpdateUIObjects(0);
 
-		if (myScreenMovingIndex == 1)
-		{
-			myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
-		}
-		else if (myScreenMovingIndex == 2)
-		{
-			myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
-		}
-		else
-		{
-			myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
-		}
+		//if (myScreenMovingIndex == 1)
+		//{
+		//	myScreenSizeDot->SetPositionX(my1080pHgh->GetPositionX() + 27.0f);
+		//}
+		//else if (myScreenMovingIndex == 2)
+		//{
+		//	myScreenSizeDot->SetPositionX(my4KHgh->GetPositionX() + 58.0f);
+		//}
+		//else
+		//{
+		//	myScreenSizeDot->SetPositionX(my720pHgh->GetPositionX());
+		//}
 
 		myTutorial->Update(0);
 		myTutorial->SetPosition(myCamera.GetPosition() + v2f(8.0f, 8.0f));
@@ -638,8 +635,8 @@ void OptionsMenu::UpdateUIElements(const float& aDeltaTime)
 	for (auto objects : mySoundObjects)
 		objects->UpdateUIObjects(true);
 
-	for (auto res : myResolutionObj)
-		res->UpdateUIObjects(true);
+	//for (auto res : myResolutionObj)
+	//	res->UpdateUIObjects(true);
 
 	for (auto reset : myResetObjects)
 		reset->UpdateButton(true);
@@ -681,25 +678,25 @@ void OptionsMenu::CheckActiveAnimations()
 			}
 		}
 	}
-	if (myScreenSettingsActive == true)
-	{
-		InactivateHighlight();
-		for (int i = 0; i < myButtons.size(); i++)
-		{
-			myButtons[i]->SetIsHighlightActive(false);
-		}
-		for (int i = 0; i < myResolutionObj.size(); i++)
-		{
-			if (i == myScreenMovingIndex)
-			{
-				myResolutionObj[i]->SetActive(true);
-			}
-			else
-			{
-				myResolutionObj[i]->SetActive(false);
-			}
-		}
-	}
+	//if (myScreenSettingsActive == true)
+	//{
+	//	InactivateHighlight();
+	//	for (int i = 0; i < myButtons.size(); i++)
+	//	{
+	//		myButtons[i]->SetIsHighlightActive(false);
+	//	}
+	//	for (int i = 0; i < myResolutionObj.size(); i++)
+	//	{
+	//		if (i == myScreenMovingIndex)
+	//		{
+	//			myResolutionObj[i]->SetActive(true);
+	//		}
+	//		else
+	//		{
+	//			myResolutionObj[i]->SetActive(false);
+	//		}
+	//	}
+	//}
 	if (myCreditsActive == true || myTutorialActtive == true)
 	{
 		InactivateHighlight();
